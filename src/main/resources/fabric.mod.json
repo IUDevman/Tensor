@@ -14,7 +14,7 @@
   },
 
   "license": "GPL-3.0",
-  "icon": "assets/modid/icon.png",
+  "icon": "assets/tensor/logo.png",
 
   "environment": "*",
   "entrypoints": {
