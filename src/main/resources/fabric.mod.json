@@ -1,29 +1,29 @@
 {
   "schemaVersion": 1,
-  "id": "modid",
+  "id": "tensor",
   "version": "${version}",
 
-  "name": "Example Mod",
-  "description": "This is an example description! Tell everyone what your mod is about!",
+  "name": "Tensor",
+  "description": "1.16.5 utility mod for anarchy-related servers using Fabric.",
   "authors": [
-    "Me!"
+    "Go_Hoosiers"
   ],
   "contact": {
-    "homepage": "https://fabricmc.net/",
-    "sources": "https://github.com/FabricMC/fabric-example-mod"
+    "homepage": "https://insert-discord.here",
+    "sources": "https://github.com/IUDevman/Tensor"
   },
 
-  "license": "CC0-1.0",
+  "license": "GPL-3.0",
   "icon": "assets/modid/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "net.fabricmc.example.ExampleMod"
+      "dev.tensor.Tensor"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "tensor.mixins.json"
   ],
 
   "depends": {
