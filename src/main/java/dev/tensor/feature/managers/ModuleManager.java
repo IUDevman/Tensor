@@ -31,11 +31,11 @@ public enum ModuleManager implements Manager {
     }
 
     public void addModule(Module module) {
-        moduleClassLinkedHashMap.put(module.getClass(), module);
-        moduleNameLinkedHashMap.put(module.getName().toLowerCase(Locale.ROOT), module);
+        this.moduleClassLinkedHashMap.put(module.getClass(), module);
+        this.moduleNameLinkedHashMap.put(module.getName().toLowerCase(Locale.ROOT), module);
     }
 
     public Collection<Module> getModules() {
-        return moduleClassLinkedHashMap.values();
+        return this.moduleClassLinkedHashMap.values();
     }
 }

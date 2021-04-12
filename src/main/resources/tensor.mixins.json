@@ -4,9 +4,8 @@
   "package": "dev.tensor.backend.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "GameRendererMixin",
     "MinecraftClientMixin"
-  ],
-  "client": [
   ],
   "injectors": {
     "defaultRequire": 1
