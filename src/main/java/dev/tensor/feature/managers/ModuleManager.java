@@ -18,8 +18,6 @@ public enum ModuleManager implements Manager {
 
     INSTANCE;
 
-    private final String modulePath = "dev.tensor.feature.modules";
-
     private final LinkedHashMap<Class<? extends Module>, Module> moduleClassLinkedHashMap = new LinkedHashMap<>();
     private final LinkedHashMap<String, Module> moduleNameLinkedHashMap = new LinkedHashMap<>();
 
@@ -27,7 +25,7 @@ public enum ModuleManager implements Manager {
     public void load() {
         Tensor.LOGGER.info("ModuleManager");
 
-        ClassUtil.findClassesForPath(modulePath).forEach(aClass -> {
+        ClassUtil.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 
             if (Module.class.isAssignableFrom(aClass)) {
                 try {

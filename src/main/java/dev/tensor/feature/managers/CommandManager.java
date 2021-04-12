@@ -16,15 +16,13 @@ public enum CommandManager implements Manager {
 
     INSTANCE;
 
-    private final String commandPath = "dev.tensor.feature.commands";
-
     private final ArrayList<Command> commandArrayList = new ArrayList<>();
 
     @Override
     public void load() {
         Tensor.LOGGER.info("CommandManager");
 
-        ClassUtil.findClassesForPath(commandPath).forEach(aClass -> {
+        ClassUtil.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 
             if (Command.class.isAssignableFrom(aClass)) {
                 try {
