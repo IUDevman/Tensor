@@ -38,7 +38,7 @@ public enum EventManager implements Manager {
         if (getPlayer() == null || getWorld() == null) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onRender2D(); //todo: set up 2d render functions
+            if (module.isEnabled()) module.onRender2D();
         });
     });
 
@@ -48,7 +48,7 @@ public enum EventManager implements Manager {
         if (getPlayer() == null || getWorld() == null) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onRender3D(); //todo: set up 3d render functions
+            if (module.isEnabled()) module.onRender3D();
         });
     });
 }

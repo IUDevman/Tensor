@@ -2,6 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
+import dev.tensor.imp.Wrapper;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(MinecraftClient.class)
-public final class MinecraftClientMixin {
+public final class MinecraftClientMixin implements Wrapper {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
     public void tick(CallbackInfo callbackInfo) {
