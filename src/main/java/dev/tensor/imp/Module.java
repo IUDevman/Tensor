@@ -91,4 +91,20 @@ public abstract class Module implements Wrapper {
     public void onTick() {
 
     }
+
+    public void onRender2D() {
+
+    }
+
+    public void onRender3D() {
+
+    }
+
+    protected void onEnable() {
+
+    }
+
+    protected void onDisable() {
+
+    }
 }

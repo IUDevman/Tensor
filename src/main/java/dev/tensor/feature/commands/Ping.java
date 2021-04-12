@@ -7,7 +7,7 @@ import dev.tensor.imp.Command;
  * @since 04-12-2021
  */
 
-public class Ping implements Command {
+public final class Ping implements Command {
 
     @Override
     public String getName() {

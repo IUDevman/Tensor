@@ -7,6 +7,6 @@ import dev.tensor.imp.Event;
  * @since 04-12-2021
  */
 
-public final class ClientTickEvent extends Event {
+public final class Client2DRenderEvent extends Event {
 
 }
