@@ -1,6 +1,6 @@
 package dev.tensor.misc.imp;
 
-import java.awt.*;
+import java.awt.Color;
 
 /**
  * @author IUDevman

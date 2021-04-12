@@ -1,9 +1,9 @@
 package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
-import dev.tensor.feature.modules.FullBright;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
+import dev.tensor.misc.util.ClassUtil;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -27,7 +27,18 @@ public enum ModuleManager implements Manager {
     public void load() {
         Tensor.LOGGER.info("ModuleManager");
 
-        addModule(new FullBright());
+        ClassUtil.findClassesForPath(modulePath).forEach(aClass -> {
+
+            if (Module.class.isAssignableFrom(aClass)) {
+                try {
+                    Module module = (Module) aClass.newInstance();
+                    addModule(module);
+
+                } catch (IllegalAccessException | InstantiationException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 
     public void addModule(Module module) {

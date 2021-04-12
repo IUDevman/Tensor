@@ -11,14 +11,14 @@ import dev.tensor.misc.imp.Module;
 @Module.Info(name = "FullBright", category = Category.Render, enabled = true)
 public final class FullBright extends Module {
 
-    private double oldFloat = -1;
+    private double oldSetting = -1;
 
     public void onEnable() {
-        oldFloat = getMinecraft().options.gamma;
+        oldSetting = getMinecraft().options.gamma;
     }
 
     public void onDisable() {
-        if (oldFloat != -1) getMinecraft().options.gamma = oldFloat;
+        if (oldSetting != -1) getMinecraft().options.gamma = oldSetting;
     }
 
     public void onTick() {
