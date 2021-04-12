@@ -7,6 +7,6 @@ import me.zero.alpine.type.Cancellable;
  * @since 04-12-2021
  */
 
-public class Event extends Cancellable implements Wrapper {
+public abstract class Event extends Cancellable implements Wrapper {
 
 }
