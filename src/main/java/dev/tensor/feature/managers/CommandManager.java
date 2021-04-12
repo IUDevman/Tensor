@@ -12,6 +12,8 @@ public enum CommandManager implements Manager {
 
     INSTANCE;
 
+    private final String commandPath = "dev.tensor.feature.commands";
+
     @Override
     public void load() {
         Tensor.LOGGER.info("CommandManager");

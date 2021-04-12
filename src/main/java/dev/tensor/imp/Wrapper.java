@@ -22,4 +22,8 @@ public interface Wrapper {
     default ClientWorld getWorld() {
         return getMinecraft().world;
     }
+
+    default boolean isNull() {
+        return getMinecraft() == null || getWorld() == null;
+    }
 }

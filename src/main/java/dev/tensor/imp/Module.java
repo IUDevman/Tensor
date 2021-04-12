@@ -58,6 +58,9 @@ public abstract class Module implements Wrapper {
 
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
+
+        if (enabled) enable();
+        else disable();
     }
 
     public boolean isDrawn() {
@@ -88,6 +91,22 @@ public abstract class Module implements Wrapper {
         this.keyBinding = new KeyBinding(name, InputUtil.Type.KEYSYM, keyBinding, Tensor.MOD_NAME);
     }
 
+    public void enable() {
+        onEnable();
+    }
+
+    public void disable() {
+        onDisable();
+    }
+
+    protected void onEnable() {
+
+    }
+
+    protected void onDisable() {
+
+    }
+
     public void onTick() {
 
     }
@@ -97,14 +116,6 @@ public abstract class Module implements Wrapper {
     }
 
     public void onRender3D() {
-
-    }
-
-    protected void onEnable() {
-
-    }
-
-    protected void onDisable() {
 
     }
 }

@@ -25,7 +25,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventHandler
     private final Listener<ClientTickEvent> clientTickEventListener = new Listener<>(event -> {
-        if (getPlayer() == null || getWorld() == null) return;
+        if (isNull()) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) module.onTick();
@@ -35,7 +35,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventHandler
     private final Listener<Client2DRenderEvent> client2DRenderEventListener = new Listener<>(event -> {
-        if (getPlayer() == null || getWorld() == null) return;
+        if (isNull()) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) module.onRender2D();
@@ -45,7 +45,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventHandler
     private final Listener<Client3DRenderEvent> client3DRenderEventListener = new Listener<>(event -> {
-        if (getPlayer() == null || getWorld() == null) return;
+        if (isNull()) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) module.onRender3D();
