@@ -2,24 +2,57 @@ package dev.tensor.misc.imp.settings;
 
 import dev.tensor.misc.imp.Setting;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
-
 /**
  * @author IUDevman
  * @since 04-12-2021
  */
 
-@Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.FIELD)
-public @interface NumberSetting {
-    Setting setting();
+public class NumberSetting implements Setting<Double> {
 
-    double min();
+    private final String name;
+    private double value;
+    private final double min;
+    private final double max;
+    private final double step;
+    private final int decimal;
 
-    double max();
+    public NumberSetting(String name, double value, double min, double max, double step, int decimal) {
+        this.name = name;
+        this.value = value;
+        this.min = min;
+        this.max = max;
+        this.step = step;
+        this.decimal = decimal;
+    }
 
-    int decimals() default 0;
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public Double getValue() {
+        return this.value;
+    }
+
+    @Override
+    public void setValue(Double value) {
+        this.value = value;
+    }
+
+    public double getMin() {
+        return this.min;
+    }
+
+    public double getMax() {
+        return this.max;
+    }
+
+    public double getStep() {
+        return this.step;
+    }
+
+    public int getDecimal() {
+        return this.decimal;
+    }
 }

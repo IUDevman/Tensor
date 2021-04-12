@@ -7,12 +7,12 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public class BooleanSetting implements Setting<Boolean> {
+public class EnumSetting implements Setting<Enum<?>> {
 
     private final String name;
-    private boolean value;
+    private Enum<?> value;
 
-    public BooleanSetting(String name, boolean value) {
+    public EnumSetting(String name, Enum<?> value) {
         this.name = name;
         this.value = value;
     }
@@ -23,12 +23,12 @@ public class BooleanSetting implements Setting<Boolean> {
     }
 
     @Override
-    public Boolean getValue() {
+    public Enum<?> getValue() {
         return this.value;
     }
 
     @Override
-    public void setValue(Boolean value) {
+    public void setValue(Enum<?> value) {
         this.value = value;
     }
 }

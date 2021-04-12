@@ -2,8 +2,7 @@ package dev.tensor.feature.modules;
 
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import dev.tensor.misc.imp.Setting;
-import dev.tensor.misc.imp.settings.StringSetting;
+import dev.tensor.misc.imp.settings.EnumSetting;
 import net.minecraft.potion.Potions;
 
 /**
@@ -14,8 +13,7 @@ import net.minecraft.potion.Potions;
 @Module.Info(name = "FullBright", category = Category.Render, enabled = true)
 public final class FullBright extends Module {
 
-    @StringSetting(setting = @Setting(name = "Type"), values = {"Gamma", "Potion"})
-    public String value = "Gamma";
+    public EnumSetting type = new EnumSetting("Type", Type.Potion);
 
     private double oldSetting = -1;
 
@@ -30,8 +28,8 @@ public final class FullBright extends Module {
     }
 
     public void onTick() {
-        switch (value) {
-            case "Potion": {
+        switch ((Type) type.getValue()) {
+            case Potion: {
                 Potions.NIGHT_VISION.getEffects().forEach(statusEffectInstance -> getPlayer().applyStatusEffect(statusEffectInstance));
                 break;
             }
@@ -42,5 +40,10 @@ public final class FullBright extends Module {
                 break;
             }
         }
+    }
+
+    public enum Type {
+        Potion,
+        Gamma
     }
 }
