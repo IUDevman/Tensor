@@ -11,7 +11,7 @@ import org.apache.logging.log4j.Logger;
  * @since 04-12-2021
  */
 
-public class Tensor implements ModInitializer {
+public final class Tensor implements ModInitializer {
 
     public static final String MOD_NAME = "Tensor";
     public static final String MOD_VERSION = "0.1.0";
