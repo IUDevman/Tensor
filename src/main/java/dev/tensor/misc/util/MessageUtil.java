@@ -1,7 +1,7 @@
-package dev.tensor.util;
+package dev.tensor.misc.util;
 
 import dev.tensor.Tensor;
-import dev.tensor.imp.Wrapper;
+import dev.tensor.misc.imp.Wrapper;
 
 /**
  * @author IUDevman

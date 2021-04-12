@@ -1,4 +1,4 @@
-package dev.tensor.imp;
+package dev.tensor.misc.imp;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.network.ClientPlayerEntity;

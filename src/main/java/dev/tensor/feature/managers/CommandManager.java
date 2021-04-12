@@ -2,8 +2,8 @@ package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
 import dev.tensor.feature.commands.Ping;
-import dev.tensor.imp.Command;
-import dev.tensor.imp.Manager;
+import dev.tensor.misc.imp.Command;
+import dev.tensor.misc.imp.Manager;
 
 import java.util.ArrayList;
 

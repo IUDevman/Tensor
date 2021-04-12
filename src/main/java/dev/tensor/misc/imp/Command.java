@@ -1,4 +1,4 @@
-package dev.tensor.imp;
+package dev.tensor.misc.imp;
 
 /**
  * @author IUDevman

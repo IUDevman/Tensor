@@ -2,8 +2,8 @@ package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
 import dev.tensor.feature.modules.FullBright;
-import dev.tensor.imp.Manager;
-import dev.tensor.imp.Module;
+import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.Module;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;

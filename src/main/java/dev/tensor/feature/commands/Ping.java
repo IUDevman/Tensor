@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.imp.Command;
+import dev.tensor.misc.imp.Command;
 
 /**
  * @author IUDevman

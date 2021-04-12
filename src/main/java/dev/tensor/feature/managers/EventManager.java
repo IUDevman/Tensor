@@ -4,7 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.events.Client2DRenderEvent;
 import dev.tensor.backend.events.Client3DRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
-import dev.tensor.imp.Manager;
+import dev.tensor.misc.imp.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 

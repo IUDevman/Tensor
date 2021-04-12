@@ -1,7 +1,7 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.imp.Category;
-import dev.tensor.imp.Module;
+import dev.tensor.misc.imp.Category;
+import dev.tensor.misc.imp.Module;
 
 /**
  * @author IUDevman

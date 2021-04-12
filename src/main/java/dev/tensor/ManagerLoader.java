@@ -3,7 +3,7 @@ package dev.tensor;
 import dev.tensor.feature.managers.CommandManager;
 import dev.tensor.feature.managers.EventManager;
 import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.imp.Manager;
+import dev.tensor.misc.imp.Manager;
 
 import java.util.ArrayList;
 

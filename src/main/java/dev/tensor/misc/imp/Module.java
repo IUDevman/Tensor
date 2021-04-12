@@ -1,4 +1,4 @@
-package dev.tensor.imp;
+package dev.tensor.misc.imp;
 
 import dev.tensor.Tensor;
 import net.minecraft.client.options.KeyBinding;

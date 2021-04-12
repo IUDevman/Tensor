@@ -1,6 +1,6 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.imp.Event;
+import dev.tensor.misc.imp.Event;
 
 /**
  * @author IUDevman
