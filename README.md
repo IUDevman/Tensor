@@ -1,2 +1,1 @@
-# Tensor
-1.16.5 utility mod for anarchy-related servers using Fabric.
+![logo](https://github.com/IUDevman/Tensor/blob/main/src/main/resources/assets/tensor/logo.png)
