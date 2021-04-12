@@ -8,12 +8,12 @@ import dev.tensor.imp.Manager;
  * @since 04-12-2021
  */
 
-public enum ModuleManager implements Manager {
+public enum EventManager implements Manager {
 
     INSTANCE;
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("ModuleManager");
+        Tensor.LOGGER.info("EventManager");
     }
 }

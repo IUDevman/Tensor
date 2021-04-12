@@ -1,6 +1,7 @@
 plugins {
 	id 'fabric-loom' version '0.6-SNAPSHOT'
 	id 'maven-publish'
+	id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -11,6 +12,10 @@ version = project.mod_version
 group = project.maven_group
 
 repositories {
+	maven {
+		name = "jitpack.io"
+		url = "https://jitpack.io"
+	}
 }
 
 dependencies {
@@ -18,6 +23,7 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+	compile "com.github.ZeroMemes:Alpine:1.5"
 }
 
 processResources {
@@ -46,3 +52,16 @@ jar {
 		rename { "${it}_${project.archivesBaseName}"}
 	}
 }
+
+shadowJar {
+	dependencies {
+		include 'com.github.ZeroMemes:Alpine'
+	}
+}
+
+remapJar {
+	dependsOn(shadowJar)
+	input.set(shadowJar.archiveFile)
+}
+
+build.dependsOn(shadowJar)

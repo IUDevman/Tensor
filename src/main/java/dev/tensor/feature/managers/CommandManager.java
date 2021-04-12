@@ -1,5 +1,6 @@
 package dev.tensor.feature.managers;
 
+import dev.tensor.Tensor;
 import dev.tensor.imp.Manager;
 
 /**
@@ -13,6 +14,6 @@ public enum CommandManager implements Manager {
 
     @Override
     public void load() {
-
+        Tensor.LOGGER.info("CommandManager");
     }
 }
