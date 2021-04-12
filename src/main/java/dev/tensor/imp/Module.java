@@ -6,4 +6,14 @@ package dev.tensor.imp;
  */
 
 public abstract class Module implements Wrapper {
+
+    private boolean enabled = false;
+
+    public boolean isEnabled() {
+        return this.enabled;
+    }
+
+    public void onTick() {
+
+    }
 }
