@@ -1,4 +1,4 @@
-package dev.tensor.misc.imp.settings;
+package dev.tensor.misc.imp;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
