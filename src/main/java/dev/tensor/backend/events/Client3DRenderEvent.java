@@ -7,7 +7,6 @@ import dev.tensor.imp.Event;
  * @since 04-12-2021
  */
 
-
 public final class Client3DRenderEvent extends Event {
 
 }
