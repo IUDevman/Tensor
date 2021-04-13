@@ -6,6 +6,7 @@ import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.util.ClassUtil;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * @author IUDevman
@@ -15,6 +16,8 @@ import java.util.ArrayList;
 public enum CommandManager implements Manager {
 
     INSTANCE;
+
+    private String prefix = "-";
 
     private final ArrayList<Command> commandArrayList = new ArrayList<>();
 
@@ -42,5 +45,20 @@ public enum CommandManager implements Manager {
 
     public ArrayList<Command> getCommands() {
         return this.commandArrayList;
+    }
+
+    public String getPrefix() {
+        return this.prefix;
+    }
+
+    public void dispatchCommands(String message) {
+        String[] splitMessage = message.split("\\s");
+
+        getCommands().forEach(command -> Arrays.stream(command.getAliases()).forEach(alias -> {
+            if (splitMessage[0].equalsIgnoreCase(alias)) {
+
+                command.onCommand(message.replace(alias, "").split("\\s"));
+            }
+        }));
     }
 }
