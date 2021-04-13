@@ -22,7 +22,7 @@ public enum CommandManager implements Manager {
     public void load() {
         Tensor.LOGGER.info("CommandManager");
 
-        ClassUtil.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
+        ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 
             if (Command.class.isAssignableFrom(aClass)) {
                 try {

@@ -1,8 +1,11 @@
 package dev.tensor.misc.imp;
 
 import dev.tensor.Tensor;
+import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
 import java.lang.annotation.ElementType;
@@ -91,12 +94,14 @@ public abstract class Module implements Wrapper {
         this.keyBinding = new KeyBinding(name, InputUtil.Type.KEYSYM, keyBinding, Tensor.MOD_NAME);
     }
 
-    public void enable() {
+    private void enable() {
         onEnable();
+        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(TextColor.fromFormatting(Formatting.GREEN) + getName() + " ENABLED!", true, true);
     }
 
-    public void disable() {
+    private void disable() {
         onDisable();
+        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(TextColor.fromFormatting(Formatting.RED) + getName() + " DISABLED!", true, true);
     }
 
     protected void onEnable() {

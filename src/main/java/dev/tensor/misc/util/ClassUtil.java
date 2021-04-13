@@ -17,11 +17,13 @@ import java.util.zip.ZipInputStream;
  * @since 04-06-2021
  */
 
-public final class ClassUtil {
+public enum ClassUtil {
 
-    private static final boolean debug = false;
+    INSTANCE;
 
-    public static ArrayList<Class<?>> findClassesForPath(String path) {
+    private final boolean debug = false;
+
+    public ArrayList<Class<?>> findClassesForPath(String path) {
         if (debug) Tensor.LOGGER.info("Loading classes from " + path + " ...");
 
         final ArrayList<Class<?>> foundClasses = new ArrayList<>();

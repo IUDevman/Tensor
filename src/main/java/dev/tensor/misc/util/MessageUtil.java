@@ -2,21 +2,28 @@ package dev.tensor.misc.util;
 
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Wrapper;
+import net.minecraft.text.LiteralText;
+import net.minecraft.text.TextColor;
+import net.minecraft.util.Formatting;
 
 /**
  * @author IUDevman
  * @since 04-12-2021
  */
 
-public final class MessageUtil implements Wrapper {
+public enum MessageUtil implements Wrapper {
 
-    private static final String prefix = "[" + Tensor.MOD_NAME + "]";
+    INSTANCE;
 
-    public static void sendChatMessage() {
+    private final String clientPrefix = "[" + Tensor.MOD_NAME + "]";
+
+    public void sendChatMessage(String message, boolean nullCheck) {
 
     }
 
-    public static void sendClientMessage(boolean prefix) {
+    public void sendClientMessage(String message, boolean prefix, boolean nullCheck) {
+        if (nullCheck && isNull()) return;
 
+        getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + TextColor.fromFormatting(Formatting.GRAY) + message));
     }
 }

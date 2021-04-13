@@ -27,7 +27,7 @@ public enum ModuleManager implements Manager {
     public void load() {
         Tensor.LOGGER.info("ModuleManager");
 
-        ClassUtil.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
+        ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 
             if (Module.class.isAssignableFrom(aClass)) {
                 try {

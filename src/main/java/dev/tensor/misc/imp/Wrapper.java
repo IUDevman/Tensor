@@ -1,6 +1,7 @@
 package dev.tensor.misc.imp;
 
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
 
@@ -25,5 +26,9 @@ public interface Wrapper {
 
     default boolean isNull() {
         return getMinecraft() == null || getWorld() == null;
+    }
+
+    default ChatHud getChatHud() {
+        return getMinecraft().inGameHud.getChatHud();
     }
 }
