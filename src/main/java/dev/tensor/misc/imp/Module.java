@@ -1,5 +1,6 @@
 package dev.tensor.misc.imp;
 
+import dev.tensor.Tensor;
 import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
@@ -91,12 +92,14 @@ public abstract class Module implements Wrapper {
     public void enable() {
         this.enabled = true;
         onEnable();
+        Tensor.EVENT_BUS.subscribe(this);
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.GREEN + getName() + " ENABLED!", true, true);
     }
 
     public void disable() {
         this.enabled = false;
         onDisable();
+        Tensor.EVENT_BUS.unsubscribe(this);
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.RED + getName() + " DISABLED!", true, true);
     }
 
