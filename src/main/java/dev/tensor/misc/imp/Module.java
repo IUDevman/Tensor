@@ -56,8 +56,6 @@ public abstract class Module implements Wrapper {
     }
 
     public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-
         if (enabled) enable();
         else disable();
     }
@@ -91,11 +89,13 @@ public abstract class Module implements Wrapper {
     }
 
     public void enable() {
+        this.enabled = true;
         onEnable();
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.GREEN + getName() + " ENABLED!", true, true);
     }
 
     public void disable() {
+        this.enabled = false;
         onDisable();
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.RED + getName() + " DISABLED!", true, true);
     }
