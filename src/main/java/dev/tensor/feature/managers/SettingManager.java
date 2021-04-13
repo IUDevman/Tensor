@@ -24,21 +24,18 @@ public enum SettingManager implements Manager {
     public void load() {
         Tensor.LOGGER.info("SettingManager");
 
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
-            Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
-                if (Setting.class.isAssignableFrom(field.getType())) {
+        ModuleManager.INSTANCE.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
+            if (Setting.class.isAssignableFrom(field.getType())) {
 
-                    try {
-                        Setting<?> setting = (Setting<?>) field.get(module);
-                        moduleSettingHashMap.put(module, setting);
-                        Tensor.LOGGER.info(setting.getName());
+                try {
+                    Setting<?> setting = (Setting<?>) field.get(module);
+                    moduleSettingHashMap.put(module, setting);
 
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    }
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
                 }
-            });
-        });
+            }
+        }));
     }
 
     public Collection<Setting<?>> getSettings() {
