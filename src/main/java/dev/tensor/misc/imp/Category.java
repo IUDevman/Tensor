@@ -13,6 +13,7 @@ public enum Category {
     Player(Color.ORANGE),
     Render(Color.GREEN),
     Misc(Color.YELLOW),
+    HUD(Color.MAGENTA),
     Client(Color.WHITE);
 
     Category(Color color) {

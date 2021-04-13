@@ -1,10 +1,6 @@
 package dev.tensor.misc.imp;
 
-import dev.tensor.Tensor;
 import dev.tensor.misc.util.MessageUtil;
-import net.minecraft.client.options.KeyBinding;
-import net.minecraft.client.util.InputUtil;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -45,7 +41,7 @@ public abstract class Module implements Wrapper {
     private boolean enabled = getInfo().enabled();
     private boolean drawn = getInfo().drawn();
     private boolean messages = getInfo().messages();
-    private KeyBinding keyBinding = new KeyBinding(name, InputUtil.Type.KEYSYM, getInfo().bind(), Tensor.MOD_NAME);
+    private int bind = getInfo().bind();
 
     public String getName() {
         return this.name;
@@ -82,26 +78,26 @@ public abstract class Module implements Wrapper {
         this.messages = messages;
     }
 
-    public KeyBinding getKeyBinding() {
-        return this.keyBinding;
+    public int getBind() {
+        return this.bind;
     }
 
-    public void setKeyBinding(KeyBinding keyBinding) {
-        this.keyBinding = keyBinding;
+    public void setBind(int bind) {
+        this.bind = bind;
     }
 
-    public void setKeyBinding(int keyBinding) {
-        this.keyBinding = new KeyBinding(name, InputUtil.Type.KEYSYM, keyBinding, Tensor.MOD_NAME);
+    public void toggle() {
+        setEnabled(!isEnabled());
     }
 
     private void enable() {
         onEnable();
-        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(TextColor.fromFormatting(Formatting.GREEN) + getName() + " ENABLED!", true, true);
+        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.GREEN + getName() + " ENABLED!", true, true);
     }
 
     private void disable() {
         onDisable();
-        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(TextColor.fromFormatting(Formatting.RED) + getName() + " DISABLED!", true, true);
+        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.RED + getName() + " DISABLED!", true, true);
     }
 
     protected void onEnable() {

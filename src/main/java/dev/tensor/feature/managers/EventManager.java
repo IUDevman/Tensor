@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.events.Client2DRenderEvent;
 import dev.tensor.backend.events.Client3DRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
+import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.imp.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -49,6 +50,16 @@ public enum EventManager implements Manager {
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) module.onRender3D();
+        });
+    });
+
+    @SuppressWarnings("unused")
+    @EventHandler
+    private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
+        if (isNull()) return;
+
+        ModuleManager.INSTANCE.getModules().forEach(module -> {
+            if (module.getBind() == event.getBind()) module.toggle();
         });
     });
 }

@@ -4,13 +4,14 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.EnumSetting;
 import net.minecraft.potion.Potions;
+import org.lwjgl.glfw.GLFW;
 
 /**
  * @author IUDevman
  * @since 04-12-2021
  */
 
-@Module.Info(name = "FullBright", category = Category.Render, enabled = true)
+@Module.Info(name = "FullBright", category = Category.Render, bind = GLFW.GLFW_KEY_F, messages = true)
 public final class FullBright extends Module {
 
     public EnumSetting type = new EnumSetting("Type", Type.Potion);

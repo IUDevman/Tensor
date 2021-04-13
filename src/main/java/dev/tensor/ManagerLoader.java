@@ -18,10 +18,10 @@ public final class ManagerLoader {
     private static final ArrayList<Manager> managers = new ArrayList<>();
 
     public static void load() {
-        loadManager(EventManager.INSTANCE);
         loadManager(CommandManager.INSTANCE);
         loadManager(ModuleManager.INSTANCE);
         loadManager(SettingManager.INSTANCE);
+        loadManager(EventManager.INSTANCE);
     }
 
     private static void loadManager(Manager manager) {

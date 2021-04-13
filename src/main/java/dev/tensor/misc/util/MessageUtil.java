@@ -3,7 +3,6 @@ package dev.tensor.misc.util;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.text.LiteralText;
-import net.minecraft.text.TextColor;
 import net.minecraft.util.Formatting;
 
 /**
@@ -15,7 +14,7 @@ public enum MessageUtil implements Wrapper {
 
     INSTANCE;
 
-    private final String clientPrefix = "[" + Tensor.MOD_NAME + "]";
+    private final String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.MOD_NAME + Formatting.DARK_GRAY + "]";
 
     public void sendChatMessage(String message, boolean nullCheck) {
 
@@ -24,6 +23,6 @@ public enum MessageUtil implements Wrapper {
     public void sendClientMessage(String message, boolean prefix, boolean nullCheck) {
         if (nullCheck && isNull()) return;
 
-        getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + TextColor.fromFormatting(Formatting.GRAY) + message));
+        getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
     }
 }
