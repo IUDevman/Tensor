@@ -33,10 +33,13 @@ public final class FullBright extends Module {
                 Potions.NIGHT_VISION.getEffects().forEach(statusEffectInstance -> getPlayer().applyStatusEffect(statusEffectInstance));
                 break;
             }
-            default: {
+            case Gamma: {
                 if (getMinecraft().options.gamma < 100) {
                     getMinecraft().options.gamma++;
                 }
+                break;
+            }
+            default: {
                 break;
             }
         }

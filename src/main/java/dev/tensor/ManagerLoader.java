@@ -3,6 +3,7 @@ package dev.tensor;
 import dev.tensor.feature.managers.CommandManager;
 import dev.tensor.feature.managers.EventManager;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.managers.SettingManager;
 import dev.tensor.misc.imp.Manager;
 
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public final class ManagerLoader {
         loadManager(EventManager.INSTANCE);
         loadManager(CommandManager.INSTANCE);
         loadManager(ModuleManager.INSTANCE);
+        loadManager(SettingManager.INSTANCE);
     }
 
     private static void loadManager(Manager manager) {
