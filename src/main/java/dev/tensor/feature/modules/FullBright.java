@@ -35,9 +35,7 @@ public final class FullBright extends Module {
                 break;
             }
             case Gamma: {
-                if (getMinecraft().options.gamma < 100) {
-                    getMinecraft().options.gamma++;
-                }
+                getMinecraft().options.gamma = 100;
                 break;
             }
             default: {
