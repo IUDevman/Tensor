@@ -13,7 +13,7 @@ import net.minecraft.text.LiteralText;
 
 public final class ClickGui extends Screen implements Wrapper {
 
-    protected ClickGui() {
+    public ClickGui() {
         super(new LiteralText(Tensor.MOD_NAME + " ClickGui"));
     }
 

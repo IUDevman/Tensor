@@ -90,12 +90,12 @@ public abstract class Module implements Wrapper {
         setEnabled(!isEnabled());
     }
 
-    private void enable() {
+    public void enable() {
         onEnable();
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.GREEN + getName() + " ENABLED!", true, true);
     }
 
-    private void disable() {
+    public void disable() {
         onDisable();
         if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.RED + getName() + " DISABLED!", true, true);
     }
