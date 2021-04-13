@@ -5,9 +5,10 @@ import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.Setting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 /**
  * @author IUDevman
@@ -18,18 +19,18 @@ public enum SettingManager implements Manager {
 
     INSTANCE;
 
-    private final HashMap<Module, Setting<?>> moduleSettingHashMap = new HashMap<>();
+    private final LinkedHashMap<Module, Setting<?>> moduleSettingLinkedHashMap = new LinkedHashMap<>();
 
     @Override
     public void load() {
         Tensor.LOGGER.info("SettingManager");
 
         ModuleManager.INSTANCE.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
-            if (Setting.class.isAssignableFrom(field.getType())) {
 
+            if (Setting.class.isAssignableFrom(field.getType())) {
                 try {
                     Setting<?> setting = (Setting<?>) field.get(module);
-                    moduleSettingHashMap.put(module, setting);
+                    moduleSettingLinkedHashMap.put(module, setting);
 
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
@@ -39,6 +40,16 @@ public enum SettingManager implements Manager {
     }
 
     public Collection<Setting<?>> getSettings() {
-        return moduleSettingHashMap.values();
+        return moduleSettingLinkedHashMap.values();
+    }
+
+    public ArrayList<Setting<?>> getSettingsForModule(Module module) {
+        final ArrayList<Setting<?>> settings = new ArrayList<>();
+
+        moduleSettingLinkedHashMap.forEach((module1, setting) -> {
+            if (module1.equals(module)) settings.add(setting);
+        });
+
+        return settings;
     }
 }
