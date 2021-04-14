@@ -4,7 +4,7 @@ import dev.tensor.misc.imp.Setting;
 
 import java.awt.*;
 
-public class ColorSetting implements Setting<Color> {
+public final class ColorSetting implements Setting<Color> {
 
     private final String name;
     private Color value;

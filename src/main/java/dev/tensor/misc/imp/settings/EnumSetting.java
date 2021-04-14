@@ -7,7 +7,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public class EnumSetting implements Setting<Enum<?>> {
+public final class EnumSetting implements Setting<Enum<?>> {
 
     private final String name;
     private Enum<?> value;

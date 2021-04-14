@@ -7,7 +7,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public class BooleanSetting implements Setting<Boolean> {
+public final class BooleanSetting implements Setting<Boolean> {
 
     private final String name;
     private boolean value;

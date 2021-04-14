@@ -7,7 +7,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public class NumberSetting implements Setting<Double> {
+public final class NumberSetting implements Setting<Double> {
 
     private final String name;
     private double value;
