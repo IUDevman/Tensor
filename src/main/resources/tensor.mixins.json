@@ -4,6 +4,7 @@
   "package": "dev.tensor.backend.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "BackgroundRendererMixin",
     "ClientConnectionMixin",
     "GameRendererMixin",
     "KeyBindingMixin",
