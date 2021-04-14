@@ -8,12 +8,10 @@ public class ColorSetting implements Setting<Color> {
 
     private final String name;
     private Color value;
-    private int opacity;
 
-    public ColorSetting(String name, Color value, int opacity) {
+    public ColorSetting(String name, Color value) {
         this.name = name;
         this.value = value;
-        this.opacity = opacity;
     }
 
     @Override
@@ -31,11 +29,7 @@ public class ColorSetting implements Setting<Color> {
         this.value = value;
     }
 
-    public int getOpacity() {
-        return this.opacity;
-    }
-
     public void setOpacity(int opacity) {
-        this.opacity = opacity;
+        setValue(new Color(getValue().getRed(), getValue().getGreen(), getValue().getBlue(), opacity)); //todo: double check if this works
     }
 }
