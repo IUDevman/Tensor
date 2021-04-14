@@ -7,6 +7,6 @@ import dev.tensor.misc.imp.Event;
  * @since 04-14-2021
  */
 
-public class ApplyFogEvent extends Event {
+public final class ApplyFogEvent extends Event {
 
 }

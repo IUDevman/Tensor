@@ -8,7 +8,8 @@
     "ClientConnectionMixin",
     "GameRendererMixin",
     "KeyBindingMixin",
-    "MinecraftClientMixin"
+    "MinecraftClientMixin",
+    "RenderTickCounterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
