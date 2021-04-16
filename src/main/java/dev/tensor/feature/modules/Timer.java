@@ -16,7 +16,7 @@ import org.lwjgl.glfw.GLFW;
 @Module.Info(name = "Timer", category = Category.Player, bind = GLFW.GLFW_KEY_K, messages = true)
 public final class Timer extends Module {
 
-    public NumberSetting multiplier = new NumberSetting("Multiplier", 2.0, 0.1, 20.0, 0.1, 1);
+    public final NumberSetting multiplier = new NumberSetting("Multiplier", 2.0, 0.1, 20.0, 0.1, 1);
 
     @SuppressWarnings("unused")
     @EventHandler

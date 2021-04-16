@@ -21,6 +21,7 @@ public enum ClassUtil {
 
     INSTANCE;
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final boolean debug = false;
 
     public ArrayList<Class<?>> findClassesForPath(String path) {

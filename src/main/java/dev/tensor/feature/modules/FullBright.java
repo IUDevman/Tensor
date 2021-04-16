@@ -14,7 +14,7 @@ import org.lwjgl.glfw.GLFW;
 @Module.Info(name = "FullBright", category = Category.Render, bind = GLFW.GLFW_KEY_F, messages = true)
 public final class FullBright extends Module {
 
-    public EnumSetting type = new EnumSetting("Type", Type.Potion);
+    public final EnumSetting type = new EnumSetting("Type", Type.Potion);
 
     private double oldSetting = -1;
 

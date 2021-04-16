@@ -17,7 +17,9 @@ public enum MessageUtil implements Wrapper {
     private final String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.MOD_NAME + Formatting.DARK_GRAY + "]";
 
     public void sendChatMessage(String message, boolean nullCheck) {
+        if (nullCheck && isNull()) return;
 
+        getPlayer().sendChatMessage(message);
     }
 
     public void sendClientMessage(String message, boolean prefix, boolean nullCheck) {

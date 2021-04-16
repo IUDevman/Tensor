@@ -47,10 +47,6 @@ public enum CommandManager implements Manager {
         return this.commandArrayList;
     }
 
-    public String getPrefix() {
-        return this.prefix;
-    }
-
     public void dispatchCommands(String message) {
         String[] splitMessage = message.split("\\s");
 
@@ -60,5 +56,15 @@ public enum CommandManager implements Manager {
                 command.onCommand(message.replace(alias, "").split("\\s"));
             }
         }));
+    }
+
+    public String getPrefix() {
+        return this.prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        if (prefix.length() > 1) return;
+
+        this.prefix = prefix;
     }
 }

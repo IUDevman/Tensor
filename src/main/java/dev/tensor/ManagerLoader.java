@@ -15,6 +15,7 @@ import java.util.ArrayList;
 
 public final class ManagerLoader {
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     private static final ArrayList<Manager> managers = new ArrayList<>();
 
     public static void load() {

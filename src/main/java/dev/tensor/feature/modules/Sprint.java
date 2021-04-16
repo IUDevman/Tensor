@@ -13,9 +13,9 @@ import org.lwjgl.glfw.GLFW;
 @Module.Info(name = "Sprint", category = Category.Movement, bind = GLFW.GLFW_KEY_U, messages = true)
 public final class Sprint extends Module {
 
-    public BooleanSetting stationary = new BooleanSetting("Stationary", false);
-    public BooleanSetting reverse = new BooleanSetting("Reverse", true);
-    public BooleanSetting sideways = new BooleanSetting("Sideways", true);
+    public final BooleanSetting stationary = new BooleanSetting("Stationary", false);
+    public final BooleanSetting reverse = new BooleanSetting("Reverse", true);
+    public final BooleanSetting sideways = new BooleanSetting("Sideways", true);
 
     public void onDisable() {
         getPlayer().setSprinting(false);
