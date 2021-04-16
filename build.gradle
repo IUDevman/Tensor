@@ -22,8 +22,8 @@ dependencies {
 	mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
 	modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-	compile "com.github.ZeroMemes:Alpine:1.5"
-	include "com.github.ZeroMemes:Alpine:1.5"
+	compile "com.github.ZeroMemes:Alpine:1.9"
+	include "com.github.ZeroMemes:Alpine:1.9"
 	compile "net.jodah:typetools:0.5.0"
 	include "net.jodah:typetools:0.5.0"
 }

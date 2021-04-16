@@ -1,6 +1,6 @@
 package dev.tensor.misc.imp;
 
-import me.zero.alpine.type.Cancellable;
+import me.zero.alpine.event.type.Cancellable;
 
 /**
  * @author IUDevman

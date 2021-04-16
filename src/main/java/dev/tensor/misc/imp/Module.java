@@ -2,6 +2,7 @@ package dev.tensor.misc.imp;
 
 import dev.tensor.Tensor;
 import dev.tensor.misc.util.MessageUtil;
+import me.zero.alpine.listener.Listenable;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -15,7 +16,7 @@ import java.lang.annotation.Target;
  * @since 04-12-2021
  */
 
-public abstract class Module implements Wrapper {
+public abstract class Module implements Wrapper, Listenable {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
