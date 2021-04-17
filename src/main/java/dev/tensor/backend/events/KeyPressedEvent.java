@@ -3,7 +3,7 @@ package dev.tensor.backend.events;
 import dev.tensor.misc.imp.Event;
 
 /**
- * @author Hoosiers
+ * @author IUDevman
  * @since 04-13-2021
  */
 

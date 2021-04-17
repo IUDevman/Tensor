@@ -4,6 +4,11 @@ import dev.tensor.misc.imp.Setting;
 
 import java.awt.*;
 
+/**
+ * @author IUDevman
+ * @since 04-15-2021
+ */
+
 public final class ColorSetting implements Setting<Color>, com.lukflug.panelstudio.settings.ColorSetting {
 
     private final String name;
