@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 public final class Tensor implements ModInitializer {
 
     public static final String MOD_NAME = "Tensor";
-    public static final String MOD_VERSION = "0.1.0";
+    public static final String MOD_VERSION = "0.1.0-SNAPSHOT";
 
     public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public static final EventBus EVENT_BUS = new EventManager();

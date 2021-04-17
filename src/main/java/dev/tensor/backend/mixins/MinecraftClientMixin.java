@@ -8,6 +8,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * @author IUDevman
@@ -16,6 +17,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(MinecraftClient.class)
 public final class MinecraftClientMixin implements Wrapper {
+
+    @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)
+    public void getWindowTitle(CallbackInfoReturnable<String> cir) {
+        cir.setReturnValue(Tensor.MOD_NAME + " " + Tensor.MOD_VERSION + " (" + cir.getReturnValue() + ")");
+    }
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
     public void tick(CallbackInfo callbackInfo) {
