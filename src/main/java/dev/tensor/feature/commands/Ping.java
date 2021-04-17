@@ -8,7 +8,7 @@ import dev.tensor.misc.util.MessageUtil;
  * @since 04-12-2021
  */
 
-final class Ping implements Command {
+public final class Ping implements Command {
 
     @Override
     public String getName() {
