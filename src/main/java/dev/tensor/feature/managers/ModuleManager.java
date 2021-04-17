@@ -53,7 +53,7 @@ public enum ModuleManager implements Manager {
     public ArrayList<Module> getModulesInCategory(Category category) {
         final ArrayList<Module> modules = new ArrayList<>();
 
-        moduleClassLinkedHashMap.forEach((aClass, module) -> {
+        this.moduleClassLinkedHashMap.forEach((aClass, module) -> {
             if (module.getCategory().equals(category)) modules.add(module);
         });
 
@@ -62,11 +62,11 @@ public enum ModuleManager implements Manager {
 
     @SuppressWarnings("unchecked")
     public <T extends Module> T getModule(Class<T> tClass) {
-        return (T) moduleClassLinkedHashMap.get(tClass);
+        return (T) this.moduleClassLinkedHashMap.get(tClass);
     }
 
     public Module getModule(String name) {
         if (name == null) return null;
-        return moduleNameLinkedHashMap.get(name.toLowerCase(Locale.ROOT));
+        return this.moduleNameLinkedHashMap.get(name.toLowerCase(Locale.ROOT));
     }
 }
