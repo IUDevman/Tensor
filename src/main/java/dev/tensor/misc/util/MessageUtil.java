@@ -1,6 +1,7 @@
 package dev.tensor.misc.util;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.mixins.accessors.ChatHudAccessor;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
@@ -26,5 +27,11 @@ public enum MessageUtil implements Wrapper {
         if (nullCheck && isNull()) return;
 
         getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
+    }
+
+    public void sendReplaceableClientMessage(String message, int id, boolean prefix, boolean nullCheck) {
+        if (nullCheck && isNull()) return;
+
+        ((ChatHudAccessor) getChatHud()).addReplaceable(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message), id);
     }
 }

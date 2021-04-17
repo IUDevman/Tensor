@@ -9,7 +9,8 @@
     "GameRendererMixin",
     "KeyBindingMixin",
     "MinecraftClientMixin",
-    "RenderTickCounterMixin"
+    "RenderTickCounterMixin",
+    "accessors.ChatHudAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

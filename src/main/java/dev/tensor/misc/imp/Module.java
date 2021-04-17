@@ -94,14 +94,14 @@ public abstract class Module implements Wrapper, Listenable {
         this.enabled = true;
         onEnable();
         Tensor.EVENT_BUS.subscribe(this);
-        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.GREEN + getName() + " ENABLED!", true, true);
+        if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true, true);
     }
 
     public void disable() {
         this.enabled = false;
         onDisable();
         Tensor.EVENT_BUS.unsubscribe(this);
-        if (isMessages()) MessageUtil.INSTANCE.sendClientMessage(Formatting.RED + getName() + " DISABLED!", true, true);
+        if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true, true);
     }
 
     protected void onEnable() {
