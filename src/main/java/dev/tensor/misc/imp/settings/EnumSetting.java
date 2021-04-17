@@ -7,7 +7,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public final class EnumSetting implements Setting<Enum<?>> {
+public final class EnumSetting implements Setting<Enum<?>>, com.lukflug.panelstudio.settings.EnumSetting {
 
     private final String name;
     private Enum<?> value;
@@ -30,5 +30,20 @@ public final class EnumSetting implements Setting<Enum<?>> {
     @Override
     public void setValue(Enum<?> value) {
         this.value = value;
+    }
+
+    @Override
+    public void increment() {
+        Enum<?>[] array = getValue().getDeclaringClass().getEnumConstants();
+        int index = getValue().ordinal() + 1;
+
+        if (index >= array.length) index = 0;
+
+        setValue(array[index]);
+    }
+
+    @Override
+    public String getValueName() {
+        return getValue().name();
     }
 }

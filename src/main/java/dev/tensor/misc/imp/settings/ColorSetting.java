@@ -4,7 +4,7 @@ import dev.tensor.misc.imp.Setting;
 
 import java.awt.*;
 
-public final class ColorSetting implements Setting<Color> {
+public final class ColorSetting implements Setting<Color>, com.lukflug.panelstudio.settings.ColorSetting {
 
     private final String name;
     private Color value;
@@ -29,7 +29,18 @@ public final class ColorSetting implements Setting<Color> {
         this.value = value;
     }
 
-    public void setOpacity(int opacity) {
-        setValue(new Color(getValue().getRed(), getValue().getGreen(), getValue().getBlue(), opacity)); //todo: double check if this works
+    @Override
+    public Color getColor() {
+        return getValue();
+    }
+
+    @Override
+    public boolean getRainbow() {
+        return false;
+    }
+
+    @Override
+    public void setRainbow(boolean rainbow) {
+        //this will be empty for now until we add rainbow
     }
 }

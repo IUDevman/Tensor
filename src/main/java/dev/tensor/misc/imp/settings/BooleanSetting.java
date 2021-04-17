@@ -1,5 +1,6 @@
 package dev.tensor.misc.imp.settings;
 
+import com.lukflug.panelstudio.settings.Toggleable;
 import dev.tensor.misc.imp.Setting;
 
 /**
@@ -7,7 +8,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public final class BooleanSetting implements Setting<Boolean> {
+public final class BooleanSetting implements Setting<Boolean>, Toggleable {
 
     private final String name;
     private boolean value;
@@ -30,5 +31,15 @@ public final class BooleanSetting implements Setting<Boolean> {
     @Override
     public void setValue(Boolean value) {
         this.value = value;
+    }
+
+    @Override
+    public void toggle() {
+        setValue(!getValue());
+    }
+
+    @Override
+    public boolean isOn() {
+        return getValue();
     }
 }
