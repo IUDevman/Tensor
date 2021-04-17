@@ -35,6 +35,12 @@ public final class Toggle implements Command {
 
     @Override
     public void onCommand(String[] message) {
+
+        if (message == null || message.length < 2) {
+            MessageUtil.INSTANCE.sendClientMessage("No module inputted!", true, true);
+            return;
+        }
+
         String moduleName = message[1];
 
         Module module = ModuleManager.INSTANCE.getModule(moduleName);

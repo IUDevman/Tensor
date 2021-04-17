@@ -53,7 +53,7 @@ public enum CommandManager implements Manager {
         getCommands().forEach(command -> Arrays.stream(command.getAliases()).forEach(alias -> {
             if (splitMessage[0].equalsIgnoreCase(alias)) {
 
-                command.onCommand(message.replace(alias, "").split("\\s"));
+                command.onCommand(splitMessage);
             }
         }));
     }
