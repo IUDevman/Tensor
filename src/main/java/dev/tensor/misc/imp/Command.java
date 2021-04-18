@@ -9,6 +9,8 @@ public interface Command extends Wrapper {
 
     String getName();
 
+    String getMarker();
+
     String getSyntax();
 
     String[] getAliases();

@@ -17,6 +17,11 @@ public final class Ping implements Command {
     }
 
     @Override
+    public String getMarker() {
+        return "(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") ";
+    }
+
+    @Override
     public String getSyntax() {
         return "{alias}";
     }
@@ -37,6 +42,6 @@ public final class Ping implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        MessageUtil.INSTANCE.sendClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Pong", true, true);
+        MessageUtil.INSTANCE.sendClientMessage(this.getMarker() + "Pong", true, true);
     }
 }

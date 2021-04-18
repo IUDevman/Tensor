@@ -19,6 +19,11 @@ public final class Messages implements Command {
     }
 
     @Override
+    public String getMarker() {
+        return "(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") ";
+    }
+
+    @Override
     public String getSyntax() {
         return "{alias} [module]";
     }
@@ -42,7 +47,7 @@ public final class Messages implements Command {
     public void onCommand(String[] message) {
 
         if (message == null || message.length < 2) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") No module inputted!", this.getID(), true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "No module inputted!", this.getID(), true, true);
             return;
         }
 
@@ -51,13 +56,13 @@ public final class Messages implements Command {
         Module module = ModuleManager.INSTANCE.getModule(moduleName);
 
         if (module == null) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Invalid module (" + Formatting.YELLOW + moduleName + Formatting.GRAY + ")!", this.getID(), true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Invalid module (" + Formatting.YELLOW + moduleName + Formatting.GRAY + ")!", this.getID(), true, true);
             return;
         }
 
         module.setMessages(!module.isMessages());
 
         String value = module.isMessages() ? Formatting.GREEN + "true" : Formatting.RED + "false";
-        MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Toggled messages: " + module.getName() + " (" + value + Formatting.GRAY + ")!", this.getID(), true, true);
+        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Toggled messages: " + module.getName() + " (" + value + Formatting.GRAY + ")!", this.getID(), true, true);
     }
 }

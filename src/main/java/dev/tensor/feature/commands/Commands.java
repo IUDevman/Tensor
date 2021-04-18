@@ -20,6 +20,11 @@ public final class Commands implements Command {
     }
 
     @Override
+    public String getMarker() {
+        return "(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") ";
+    }
+
+    @Override
     public String getSyntax() {
         return "{alias}";
     }
@@ -41,7 +46,7 @@ public final class Commands implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        MessageUtil.INSTANCE.sendClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Available Commands:", true, true);
+        MessageUtil.INSTANCE.sendClientMessage(this.getMarker() + "Available Commands:", true, true);
 
         CommandManager.INSTANCE.getCommands().forEach(command -> {
             String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);

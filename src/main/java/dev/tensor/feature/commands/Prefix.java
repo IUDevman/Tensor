@@ -18,6 +18,11 @@ public final class Prefix implements Command {
     }
 
     @Override
+    public String getMarker() {
+        return "(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") ";
+    }
+
+    @Override
     public String getSyntax() {
         return "{alias} [char]";
     }
@@ -41,18 +46,18 @@ public final class Prefix implements Command {
     public void onCommand(String[] message) {
 
         if (message == null || message.length < 2) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") No prefix inputted!", this.getID(), true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "No prefix inputted!", this.getID(), true, true);
             return;
         }
 
         String prefix = message[1];
 
         if (prefix.length() > 1) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
             return;
         }
 
         CommandManager.INSTANCE.setPrefix(prefix);
-        MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY +")!", this.getID(), true, true);
+        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY +")!", this.getID(), true, true);
     }
 }
