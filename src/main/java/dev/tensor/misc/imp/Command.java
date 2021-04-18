@@ -13,5 +13,7 @@ public interface Command extends Wrapper {
 
     String[] getAliases();
 
+    int getID();
+
     void onCommand(String[] message);
 }

@@ -34,10 +34,15 @@ public final class Toggle implements Command {
     }
 
     @Override
+    public int getID() {
+        return 667;
+    }
+
+    @Override
     public void onCommand(String[] message) {
 
         if (message == null || message.length < 2) {
-            MessageUtil.INSTANCE.sendClientMessage("No module inputted!", true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") No module inputted!", this.getID(), true, true);
             return;
         }
 
@@ -46,13 +51,13 @@ public final class Toggle implements Command {
         Module module = ModuleManager.INSTANCE.getModule(moduleName);
 
         if (module == null) {
-            MessageUtil.INSTANCE.sendClientMessage("Invalid Module (" + Formatting.YELLOW + moduleName + Formatting.GRAY + ")!", true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Invalid module (" + Formatting.YELLOW + moduleName + Formatting.GRAY + ")!", this.getID(), true, true);
             return;
         }
 
         module.toggle();
 
         String value = module.isEnabled() ? Formatting.GREEN + "true" : Formatting.RED + "false";
-        MessageUtil.INSTANCE.sendClientMessage("Toggled " + module.getName() + " (" + value + Formatting.GRAY + ")!", true, true);
+        MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Toggled: " + module.getName() + " (" + value + Formatting.GRAY + ")!", this.getID(), true, true);
     }
 }

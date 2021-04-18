@@ -33,21 +33,26 @@ public final class Prefix implements Command {
     }
 
     @Override
+    public int getID() {
+        return 668;
+    }
+
+    @Override
     public void onCommand(String[] message) {
 
         if (message == null || message.length < 2) {
-            MessageUtil.INSTANCE.sendClientMessage("No prefix inputted!", true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") No prefix inputted!", this.getID(), true, true);
             return;
         }
 
         String prefix = message[1];
 
         if (prefix.length() > 1) {
-            MessageUtil.INSTANCE.sendClientMessage("Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
             return;
         }
 
         CommandManager.INSTANCE.setPrefix(prefix);
-        MessageUtil.INSTANCE.sendClientMessage("Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY +")!", true, true);
+        MessageUtil.INSTANCE.sendReplaceableClientMessage("(" + Formatting.YELLOW + this.getName() + Formatting.GRAY + ") Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY +")!", this.getID(), true, true);
     }
 }
