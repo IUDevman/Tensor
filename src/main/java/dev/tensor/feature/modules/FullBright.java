@@ -3,7 +3,8 @@ package dev.tensor.feature.modules;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.EnumSetting;
-import net.minecraft.potion.Potions;
+import net.minecraft.entity.effect.StatusEffectInstance;
+import net.minecraft.entity.effect.StatusEffects;
 import org.lwjgl.glfw.GLFW;
 
 /**
@@ -25,13 +26,13 @@ public final class FullBright extends Module {
     public void onDisable() {
         if (oldSetting != -1) getMinecraft().options.gamma = oldSetting;
 
-        Potions.NIGHT_VISION.getEffects().forEach(statusEffectInstance -> getPlayer().removeStatusEffect(statusEffectInstance.getEffectType()));
+        getPlayer().removeStatusEffect(StatusEffects.NIGHT_VISION);
     }
 
     public void onTick() {
         switch ((Type) type.getValue()) {
             case Potion: {
-                Potions.NIGHT_VISION.getEffects().forEach(statusEffectInstance -> getPlayer().applyStatusEffect(statusEffectInstance));
+                getPlayer().applyStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1000));
                 break;
             }
             case Gamma: {
@@ -39,6 +40,7 @@ public final class FullBright extends Module {
                 break;
             }
             default: {
+                //todo: add a mode to fill the lighting table with a value of 1
                 break;
             }
         }
@@ -46,6 +48,6 @@ public final class FullBright extends Module {
 
     public enum Type {
         Potion,
-        Gamma
+        Gamma,
     }
 }
