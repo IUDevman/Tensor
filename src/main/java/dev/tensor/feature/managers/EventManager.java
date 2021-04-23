@@ -70,7 +70,7 @@ public enum EventManager implements Manager {
 
             ChatMessageC2SPacket chatMessageC2SPacket = (ChatMessageC2SPacket) event.getPacket();
 
-            if (chatMessageC2SPacket.getChatMessage().contains(CommandManager.INSTANCE.getPrefix())) {
+            if (chatMessageC2SPacket.getChatMessage().startsWith(CommandManager.INSTANCE.getPrefix())) {
                 event.cancel();
                 CommandManager.INSTANCE.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
             }
