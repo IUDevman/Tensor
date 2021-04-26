@@ -1,6 +1,6 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.misc.gui.TensorGUI;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -22,8 +22,6 @@ public final class ClickGui extends Module {
             return;
         }
 
-        TensorGUI tensorGUI = new TensorGUI();
-
-        tensorGUI.enterGUI();
+        Tensor.INSTANCE.GUI.enterGUI();
     }
 }

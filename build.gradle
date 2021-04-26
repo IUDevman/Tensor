@@ -30,8 +30,8 @@ dependencies {
 	include "com.github.ZeroMemes:Alpine:1.9"
 	compile "net.jodah:typetools:0.5.0"
 	include "net.jodah:typetools:0.5.0"
-	compile "com.lukflug:panelstudio:0.1.8"
-	include "com.lukflug:panelstudio:0.1.8"
+	compile "com.lukflug:panelstudio:0.1.11"
+	include "com.lukflug:panelstudio:0.1.11"
 	compile "com.lukflug:panelstudio-mc16:0.1.9"
 	include "com.lukflug:panelstudio-mc16:0.1.9"
 }
