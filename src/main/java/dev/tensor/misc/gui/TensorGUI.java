@@ -7,6 +7,7 @@ import com.lukflug.panelstudio.SettingsAnimation;
 import com.lukflug.panelstudio.mc16.MinecraftGUI;
 import com.lukflug.panelstudio.settings.*;
 import com.lukflug.panelstudio.theme.FixedDescription;
+import com.lukflug.panelstudio.theme.SettingsColorScheme;
 import com.lukflug.panelstudio.theme.Theme;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.managers.SettingManager;
@@ -55,7 +56,7 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
         }
     };
 
-    private final Theme theme = new TensorTheme();
+    private final Theme theme = new TensorTheme(new SettingsColorScheme(clickGui.activeColor, clickGui.inactiveColor, clickGui.backgroundColor, clickGui.outlineColor, clickGui.fontColor, clickGui.opacity));
 
     private final ClickGUI clickGUI = new ClickGUI(guiInterface, new FixedDescription(new Point(0, 0)));
 

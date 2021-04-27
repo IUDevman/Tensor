@@ -15,11 +15,13 @@ import java.awt.*;
 
 public final class TensorTheme implements Theme {
 
+    protected final ColorScheme colorScheme;
     protected final Renderer componentRenderer;
     protected final Renderer containerRenderer;
     protected final Renderer panelRenderer;
 
-    public TensorTheme() {
+    public TensorTheme(ColorScheme colorScheme) {
+        this.colorScheme = colorScheme;
         panelRenderer = new ComponentRenderer(0);
         containerRenderer = new ComponentRenderer(1);
         componentRenderer = new ComponentRenderer(2);
@@ -41,7 +43,7 @@ public final class TensorTheme implements Theme {
     }
 
 
-    protected static final class ComponentRenderer extends RendererBase {
+    protected final class ComponentRenderer extends RendererBase {
 
         protected final int level;
 
@@ -151,7 +153,7 @@ public final class TensorTheme implements Theme {
 
         @Override
         public ColorScheme getDefaultColorScheme() {
-            return null;
+            return TensorTheme.this.colorScheme;
         }
     }
 }
