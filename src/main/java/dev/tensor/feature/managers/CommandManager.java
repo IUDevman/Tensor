@@ -4,9 +4,12 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.util.ClassUtil;
+import dev.tensor.misc.util.MessageUtil;
+import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author IUDevman
@@ -50,12 +53,19 @@ public enum CommandManager implements Manager {
     public void dispatchCommands(String message) {
         String[] splitMessage = message.split("\\s");
 
+        AtomicBoolean foundMessage = new AtomicBoolean(false);
+
         getCommands().forEach(command -> Arrays.stream(command.getAliases()).forEach(alias -> {
             if (splitMessage[0].equalsIgnoreCase(alias)) {
 
+                foundMessage.set(true);
                 command.onCommand(splitMessage);
             }
         }));
+
+        if (!foundMessage.get()) {
+            MessageUtil.INSTANCE.sendClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", true, true);
+        }
     }
 
     public String getPrefix() {
