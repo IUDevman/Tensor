@@ -60,6 +60,8 @@ public enum ConfigManager implements Manager {
                 SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
                     JsonElement jsonElement = settingObject.get(objectSetting.getName());
 
+                    if (jsonElement == null) return;
+
                     if (objectSetting.getValue() instanceof Boolean) {
                         objectSetting.setValue(jsonElement.getAsBoolean());
                     } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
@@ -82,6 +84,7 @@ public enum ConfigManager implements Manager {
 
             try {
                 Path path = Paths.get(modulePath + module.getName() + ".json");
+                registerFile(path);
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
@@ -98,10 +101,9 @@ public enum ConfigManager implements Manager {
                 SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
                     if (objectSetting.getValue() instanceof Color) {
                         settingObject.add(objectSetting.getName(), new JsonPrimitive(((Color) objectSetting.getValue()).getRGB()));
-                        return;
+                    } else {
+                        settingObject.add(objectSetting.getName(), new JsonPrimitive(objectSetting.getValue().toString()));
                     }
-
-                    settingObject.add(objectSetting.getName(), new JsonPrimitive(objectSetting.getValue().toString()));
                 });
 
                 mainObject.add("Settings", settingObject);
@@ -114,5 +116,11 @@ public enum ConfigManager implements Manager {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void registerFile(Path path) throws IOException {
+        if (Files.exists(path)) Files.delete(path);
+
+        Files.createFile(path);
     }
 }
