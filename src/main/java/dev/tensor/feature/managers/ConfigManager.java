@@ -4,6 +4,7 @@ import com.google.gson.*;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Manager;
 
+import java.awt.*;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -63,7 +64,11 @@ public enum ConfigManager implements Manager {
                         objectSetting.setValue(jsonElement.getAsBoolean());
                     } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
                         objectSetting.setValue(jsonElement.getAsDouble());
-                    } //todo: enum and color values
+                    } else if (objectSetting.getValue() instanceof Enum) {
+
+                    } else if (objectSetting.getValue() instanceof Color) {
+                        objectSetting.setValue(new Color(jsonElement.getAsInt()));
+                    }
                 });
 
             } catch (IOException e) {
@@ -90,7 +95,14 @@ public enum ConfigManager implements Manager {
 
                 JsonObject settingObject = new JsonObject();
 
-                SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> settingObject.add(objectSetting.getName(), new JsonPrimitive(objectSetting.getValue().toString())));
+                SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
+                    if (objectSetting.getValue() instanceof Color) {
+                        settingObject.add(objectSetting.getName(), new JsonPrimitive(((Color) objectSetting.getValue()).getRGB()));
+                        return;
+                    }
+
+                    settingObject.add(objectSetting.getName(), new JsonPrimitive(objectSetting.getValue().toString()));
+                });
 
                 mainObject.add("Settings", settingObject);
 
