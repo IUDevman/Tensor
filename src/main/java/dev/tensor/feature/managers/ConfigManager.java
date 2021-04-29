@@ -69,13 +69,17 @@ public enum ConfigManager implements Manager {
                     } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
                         objectSetting.setValue(jsonElement.getAsDouble());
                     } else if (objectSetting.getValue() instanceof Enum) {
+                        int count = 0;
                         while (!objectSetting.getValue().toString().equals(jsonElement.getAsString())) {
                             Enum<?>[] array = ((Enum<?>) objectSetting.getValue()).getDeclaringClass().getEnumConstants();
                             int index = ((Enum<?>) objectSetting.getValue()).ordinal() + 1;
 
                             if (index >= array.length) index = 0;
 
+                            if (count > array.length) return;
+
                             objectSetting.setValue(array[index]);
+                            count ++;
                         }
                     } else if (objectSetting.getValue() instanceof Color) {
                         objectSetting.setValue(new Color(jsonElement.getAsInt()));
