@@ -67,9 +67,14 @@ public final class Bind implements Command {
 
         String bindName = message[2].toLowerCase(Locale.ROOT);
 
-        int keyCode = InputUtil.fromTranslationKey("key.keyboard." + bindName).getCode();
+        try {
+            int keyCode = InputUtil.fromTranslationKey("key.keyboard." + bindName).getCode();
 
-        module.setBind(keyCode);
-        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set bind for: " + module.getName() + " (" + Formatting.GREEN + bindName + Formatting.GRAY + ")!", this.getID(), true, true);
+            module.setBind(keyCode);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set bind for: " + module.getName() + " (" + Formatting.GREEN + bindName + Formatting.GRAY + ")!", this.getID(), true, true);
+
+        } catch (IllegalArgumentException ignored) {
+            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Invalid bind (" + Formatting.YELLOW + bindName + Formatting.GRAY + ")!", this.getID(), true, true);
+        }
     }
 }
