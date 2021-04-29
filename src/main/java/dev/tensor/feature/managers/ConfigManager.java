@@ -3,8 +3,6 @@ package dev.tensor.feature.managers;
 import com.google.gson.*;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Manager;
-import dev.tensor.misc.imp.Setting;
-import dev.tensor.misc.imp.settings.EnumSetting;
 
 import java.awt.*;
 import java.io.*;
