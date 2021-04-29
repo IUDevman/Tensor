@@ -3,6 +3,8 @@ package dev.tensor.feature.managers;
 import com.google.gson.*;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.Setting;
+import dev.tensor.misc.imp.settings.EnumSetting;
 
 import java.awt.*;
 import java.io.*;
@@ -67,7 +69,14 @@ public enum ConfigManager implements Manager {
                     } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
                         objectSetting.setValue(jsonElement.getAsDouble());
                     } else if (objectSetting.getValue() instanceof Enum) {
+                        while (!objectSetting.getValue().toString().equals(jsonElement.getAsString())) {
+                            Enum<?>[] array = ((Enum<?>) objectSetting.getValue()).getDeclaringClass().getEnumConstants();
+                            int index = ((Enum<?>) objectSetting.getValue()).ordinal() + 1;
 
+                            if (index >= array.length) index = 0;
+
+                            objectSetting.setValue(array[index]);
+                        }
                     } else if (objectSetting.getValue() instanceof Color) {
                         objectSetting.setValue(new Color(jsonElement.getAsInt()));
                     }
