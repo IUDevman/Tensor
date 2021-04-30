@@ -28,9 +28,8 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
 
     private final ClickGui clickGui = ModuleManager.INSTANCE.getModule(ClickGui.class);
 
-    private final Toggleable toggleable = new SimpleToggleable(false);
-
     private final GUIInterface guiInterface = new GUIInterface(true) {
+
         @Override
         protected String getResourcePrefix() {
             return "tensor:gui/";
@@ -40,7 +39,7 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
         public void drawString(Point pos, String string, Color color) {
             if (matrixStack == null) return;
             end();
-            getMinecraft().textRenderer.drawWithShadow(matrixStack, string, pos.x + 2, pos.y + 2, color.getRGB());
+            getMinecraft().textRenderer.draw(matrixStack, string, pos.x + 2, pos.y + 2, color.getRGB());
             begin();
         }
 
@@ -55,12 +54,13 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
         }
     };
 
-    private final Theme theme = new TensorTheme(new SettingsColorScheme(clickGui.activeColor, clickGui.inactiveColor, clickGui.backgroundColor, clickGui.outlineColor, clickGui.fontColor, clickGui.opacity));
-
     private final ClickGUI clickGUI = new ClickGUI(guiInterface, new FixedDescription(new Point(0, 0)));
 
     public TensorGUI() {
-    	int width=100;
+        Theme theme = new TensorTheme(new SettingsColorScheme(clickGui.activeColor, clickGui.inactiveColor, clickGui.backgroundColor, clickGui.outlineColor, clickGui.fontColor, clickGui.opacity));
+        Toggleable toggleable = new SimpleToggleable(false);
+
+        int width = 100;
         int posX = 10;
 
         for (Category category : Category.values()) {
