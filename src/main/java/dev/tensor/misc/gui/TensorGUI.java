@@ -31,7 +31,6 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
     private final Toggleable toggleable = new SimpleToggleable(false);
 
     private final GUIInterface guiInterface = new GUIInterface(true) {
-
         @Override
         protected String getResourcePrefix() {
             return "tensor:gui/";
@@ -61,6 +60,7 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
     private final ClickGUI clickGUI = new ClickGUI(guiInterface, new FixedDescription(new Point(0, 0)));
 
     public TensorGUI() {
+    	int width=100;
         int posX = 10;
 
         for (Category category : Category.values()) {
