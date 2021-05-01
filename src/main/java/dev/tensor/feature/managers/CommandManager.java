@@ -64,7 +64,7 @@ public enum CommandManager implements Manager {
         }));
 
         if (!foundMessage.get()) {
-            MessageUtil.INSTANCE.sendClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", true, true);
+            MessageUtil.INSTANCE.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true, true);
         }
     }
 
