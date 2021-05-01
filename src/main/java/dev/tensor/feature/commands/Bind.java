@@ -6,6 +6,7 @@ import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Formatting;
+import org.lwjgl.glfw.GLFW;
 
 import java.util.Locale;
 
@@ -28,7 +29,7 @@ public final class Bind implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module] [key]";
+        return "{alias} [module] [key/none]";
     }
 
     @Override
@@ -68,7 +69,11 @@ public final class Bind implements Command {
         String bindName = message[2].toLowerCase(Locale.ROOT);
 
         try {
-            int keyCode = InputUtil.fromTranslationKey("key.keyboard." + bindName).getCode();
+            int keyCode = GLFW.GLFW_KEY_UNKNOWN;
+
+            if (!bindName.equalsIgnoreCase("none")) {
+                keyCode = InputUtil.fromTranslationKey("key.keyboard." + bindName).getCode();
+            }
 
             module.setBind(keyCode);
             MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set bind for: " + module.getName() + " (" + Formatting.GREEN + bindName + Formatting.GRAY + ")!", this.getID(), true, true);
