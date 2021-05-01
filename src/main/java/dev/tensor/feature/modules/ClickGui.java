@@ -5,7 +5,6 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.ColorSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
-import org.lwjgl.glfw.GLFW;
 
 import java.awt.*;
 
@@ -14,7 +13,7 @@ import java.awt.*;
  * @since 04-23-2021
  */
 
-@Module.Info(name = "ClickGui", category = Category.Client, bind = GLFW.GLFW_KEY_P)
+@Module.Info(name = "ClickGui", category = Category.Client)
 public final class ClickGui extends Module {
 
     public final NumberSetting scrollSpeed = new NumberSetting("Scroll Speed", 10, 1, 20, 0);

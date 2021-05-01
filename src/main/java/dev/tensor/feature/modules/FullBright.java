@@ -5,14 +5,13 @@ import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.EnumSetting;
 import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.effect.StatusEffects;
-import org.lwjgl.glfw.GLFW;
 
 /**
  * @author IUDevman
  * @since 04-12-2021
  */
 
-@Module.Info(name = "FullBright", category = Category.Render, bind = GLFW.GLFW_KEY_F, messages = true)
+@Module.Info(name = "FullBright", category = Category.Render)
 public final class FullBright extends Module {
 
     public final EnumSetting type = new EnumSetting("Type", Type.Potion);

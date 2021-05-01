@@ -3,14 +3,13 @@ package dev.tensor.feature.modules;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
-import org.lwjgl.glfw.GLFW;
 
 /**
  * @author IUDevman
  * @since 04-14-2021
  */
 
-@Module.Info(name = "Sprint", category = Category.Movement, bind = GLFW.GLFW_KEY_U, messages = true)
+@Module.Info(name = "Sprint", category = Category.Movement)
 public final class Sprint extends Module {
 
     public final BooleanSetting stationary = new BooleanSetting("Stationary", false);
