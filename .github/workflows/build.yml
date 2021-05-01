@@ -21,4 +21,6 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artifacts
-          path: build/libs/
+          path: |
+            build/libs/*-SNAPSHOT.jar
+            build/libs/*-RELEASE.jar
