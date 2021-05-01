@@ -25,7 +25,7 @@ public enum ClassUtil {
     private final boolean debug = false;
 
     public ArrayList<Class<?>> findClassesForPath(String path) {
-        if (debug) Tensor.LOGGER.info("Loading classes from " + path + " ...");
+        if (debug) Tensor.INSTANCE.LOGGER.info("Loading classes from " + path + " ...");
 
         final ArrayList<Class<?>> foundClasses = new ArrayList<>();
         String resource = Objects.requireNonNull(ClassUtil.class.getClassLoader().getResource(path.replace(".", "/"))).getPath();
@@ -44,7 +44,7 @@ public enum ClassUtil {
                         try {
                             Class<?> clazz = Class.forName(name.substring(0, name.length() - 6).replace("/", "."));
                             foundClasses.add(clazz);
-                            if (debug) Tensor.LOGGER.info("Loaded " + clazz.getName() + "!");
+                            if (debug) Tensor.INSTANCE.LOGGER.info("Loaded " + clazz.getName() + "!");
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -71,7 +71,7 @@ public enum ClassUtil {
 
                                 if (className.endsWith(".class")) {
                                     foundClasses.add(Class.forName(path + "." + className.substring(0, className.length() - 6)));
-                                    if (debug) Tensor.LOGGER.info("Loaded " + className + "!");
+                                    if (debug) Tensor.INSTANCE.LOGGER.info("Loaded " + className + "!");
                                 }
                             }
                         }

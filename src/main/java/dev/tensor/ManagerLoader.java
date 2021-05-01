@@ -25,7 +25,7 @@ public final class ManagerLoader {
 
     private static void loadManager(Manager manager) {
         managers.add(manager);
-        Tensor.EVENT_BUS.subscribe(manager);
+        Tensor.INSTANCE.EVENT_BUS.subscribe(manager);
         manager.load();
     }
 }

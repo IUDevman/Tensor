@@ -20,11 +20,11 @@ public final class GameRendererMixin implements Wrapper {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
     public void render(CallbackInfo callbackInfo) {
-        Tensor.EVENT_BUS.post(new Client2DRenderEvent());
+        Tensor.INSTANCE.EVENT_BUS.post(new Client2DRenderEvent());
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
     public void renderHand(CallbackInfo callbackInfo) {
-        Tensor.EVENT_BUS.post(new Client3DRenderEvent());
+        Tensor.INSTANCE.EVENT_BUS.post(new Client3DRenderEvent());
     }
 }

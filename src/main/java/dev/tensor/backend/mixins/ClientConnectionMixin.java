@@ -24,7 +24,7 @@ public final class ClientConnectionMixin implements Wrapper {
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
         PacketSendEvent packetSendEvent = new PacketSendEvent(packet);
 
-        Tensor.EVENT_BUS.post(packetSendEvent);
+        Tensor.INSTANCE.EVENT_BUS.post(packetSendEvent);
 
         if (packetSendEvent.isCancelled()) callbackInfo.cancel();
     }

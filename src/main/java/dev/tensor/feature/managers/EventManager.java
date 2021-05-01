@@ -18,7 +18,7 @@ public enum EventManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("EventManager");
+        Tensor.INSTANCE.LOGGER.info("EventManager");
     }
 
     @SuppressWarnings("unused")

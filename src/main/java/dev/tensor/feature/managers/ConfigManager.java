@@ -25,7 +25,7 @@ public enum ConfigManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("ConfigManager");
+        Tensor.INSTANCE.LOGGER.info("ConfigManager");
 
         try {
             if (!Files.exists(Paths.get(mainPath))) {

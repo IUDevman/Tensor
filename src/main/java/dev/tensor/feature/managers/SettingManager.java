@@ -23,7 +23,7 @@ public enum SettingManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("SettingManager");
+        Tensor.INSTANCE.LOGGER.info("SettingManager");
 
         ModuleManager.INSTANCE.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
 

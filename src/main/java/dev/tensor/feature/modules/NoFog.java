@@ -14,7 +14,7 @@ import me.zero.alpine.listener.Listener;
 @Module.Info(name = "NoFog", category = Category.Render)
 public final class NoFog extends Module {
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
+    @SuppressWarnings({"unused", "CodeBlock2Expr", "Convert2MethodRef"})
     @EventHandler
     private final Listener<ApplyFogEvent> applyFogEventListener = new Listener<>(event -> {
         event.cancel();

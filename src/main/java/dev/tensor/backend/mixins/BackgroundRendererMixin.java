@@ -22,7 +22,7 @@ public final class BackgroundRendererMixin implements Wrapper {
     private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo callbackInfo) {
         ApplyFogEvent applyFogEvent = new ApplyFogEvent();
 
-        Tensor.EVENT_BUS.post(applyFogEvent);
+        Tensor.INSTANCE.EVENT_BUS.post(applyFogEvent);
 
         if (applyFogEvent.isCancelled()) callbackInfo.cancel();
     }

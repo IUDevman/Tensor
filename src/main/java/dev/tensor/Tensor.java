@@ -20,11 +20,11 @@ public final class Tensor implements ModInitializer {
         INSTANCE = this;
     }
 
-    public static final String MOD_NAME = "Tensor";
-    public static final String MOD_VERSION = "0.1.0-SNAPSHOT";
+    public final String MOD_NAME = "Tensor";
+    public final String MOD_VERSION = "0.1.0-SNAPSHOT";
 
-    public static final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-    public static final EventBus EVENT_BUS = new EventManager();
+    public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+    public final EventBus EVENT_BUS = new EventManager();
 
     @Override
     public void onInitialize() {

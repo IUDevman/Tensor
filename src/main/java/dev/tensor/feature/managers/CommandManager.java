@@ -26,7 +26,7 @@ public enum CommandManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("CommandManager");
+        Tensor.INSTANCE.LOGGER.info("CommandManager");
 
         ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 

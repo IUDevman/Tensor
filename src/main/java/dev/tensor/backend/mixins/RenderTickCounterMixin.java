@@ -25,7 +25,7 @@ public final class RenderTickCounterMixin implements Wrapper {
     public void beginRenderTick(long timeMillis, CallbackInfoReturnable<Integer> cir) {
         BeginRenderTickEvent beginRenderTickEvent = new BeginRenderTickEvent();
 
-        Tensor.EVENT_BUS.post(beginRenderTickEvent);
+        Tensor.INSTANCE.EVENT_BUS.post(beginRenderTickEvent);
 
         if (beginRenderTickEvent.getMultiplier() != 1.00) lastFrameDuration *= beginRenderTickEvent.getMultiplier();
     }

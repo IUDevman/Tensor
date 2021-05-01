@@ -25,7 +25,7 @@ public enum ModuleManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.LOGGER.info("ModuleManager");
+        Tensor.INSTANCE.LOGGER.info("ModuleManager");
 
         ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 

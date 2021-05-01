@@ -21,12 +21,12 @@ public final class MinecraftClientMixin implements Wrapper {
 
     @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)
     public void getWindowTitle(CallbackInfoReturnable<String> cir) {
-        cir.setReturnValue(Tensor.MOD_NAME + " " + Tensor.MOD_VERSION + " (" + cir.getReturnValue() + ")");
+        cir.setReturnValue(Tensor.INSTANCE.MOD_NAME + " " + Tensor.INSTANCE.MOD_VERSION + " (" + cir.getReturnValue() + ")");
     }
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
     public void tick(CallbackInfo callbackInfo) {
-        Tensor.EVENT_BUS.post(new ClientTickEvent());
+        Tensor.INSTANCE.EVENT_BUS.post(new ClientTickEvent());
     }
 
     @Inject(method = "stop", at = @At("HEAD"))

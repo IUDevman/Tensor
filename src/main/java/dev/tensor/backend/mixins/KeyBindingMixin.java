@@ -20,6 +20,6 @@ public final class KeyBindingMixin implements Wrapper {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))
     private static void onKeyPressed(InputUtil.Key key, CallbackInfo callbackInfo) {
-        Tensor.EVENT_BUS.post(new KeyPressedEvent(key.getCode()));
+        Tensor.INSTANCE.EVENT_BUS.post(new KeyPressedEvent(key.getCode()));
     }
 }
