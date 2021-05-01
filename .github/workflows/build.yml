@@ -13,6 +13,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+      - name: cache gradle projects
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*','**/gradle-wrapper.properties') }}
+          restore-keys: |
+            ${{ runner.os }}-gradle-
       - name: make gradle wrapper executable
         run: chmod +x ./gradlew
       - name: build
@@ -21,4 +30,10 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: Artifacts
-          path: build/libs/
+          path: |
+            build/libs/*-SNAPSHOT.jar
+            build/libs/*-RELEASE.jar
+      - name: cleanup gradle cache
+        run: |
+          rm -rf ~/.gradle/caches/modules-2/modules-2.lock
+          rm -rf ~/.gradle/caches/modules-2/gc.properties
