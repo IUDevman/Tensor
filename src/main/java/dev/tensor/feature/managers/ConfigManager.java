@@ -36,6 +36,8 @@ public enum ConfigManager implements Manager {
                 Files.createDirectories(Paths.get(modulePath));
             }
 
+            loadPrefix();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,7 +92,26 @@ public enum ConfigManager implements Manager {
         });
     }
 
+    private void loadPrefix() throws IOException {
+        Path path = Paths.get(mainPath + "Prefix.json");
+
+        if (!Files.exists(path)) return;
+
+        InputStream inputStream = Files.newInputStream(path);
+        JsonObject mainObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+
+        CommandManager.INSTANCE.setPrefix(mainObject.get("Prefix").getAsString());
+    }
+
     public void save() {
+
+        try {
+            savePrefix();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         ModuleManager.INSTANCE.getModules().forEach(module -> {
 
             try {
@@ -127,6 +148,21 @@ public enum ConfigManager implements Manager {
                 e.printStackTrace();
             }
         });
+    }
+
+    private void savePrefix() throws IOException {
+        Path path = Paths.get(mainPath + "Prefix.json");
+        registerFile(path);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
+
+        JsonObject mainObject = new JsonObject();
+        mainObject.add("Prefix", new JsonPrimitive(CommandManager.INSTANCE.getPrefix()));
+
+        String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
+        outputStreamWriter.write(jsonString);
+        outputStreamWriter.close();
     }
 
     private void registerFile(Path path) throws IOException {
