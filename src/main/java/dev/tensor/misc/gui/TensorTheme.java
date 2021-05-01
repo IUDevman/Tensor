@@ -71,7 +71,7 @@ public final class TensorTheme implements Theme {
 
                 context.getInterface().fillRect(context.getRect(), overlayColor, overlayColor, overlayColor, overlayColor);
                 Point stringPos = new Point(context.getRect().getLocation());
-                stringPos.translate(level == 2 ? 0 : context.getSize().width / 2 - context.getInterface().getFontWidth(text) / 2, level == 0 ? 2 : 1);
+                stringPos.translate(0, 2);
 
                 String string;
 
@@ -81,7 +81,7 @@ public final class TensorTheme implements Theme {
                     string = text + Formatting.GRAY + " (" + Formatting.RED + "false" + Formatting.GRAY + ")";
                 }
 
-                context.getInterface().drawString(stringPos, string, level == 1 && active ? getMainColor(focus, true) : getFontColor(focus));
+                context.getInterface().drawString(stringPos, string, active ? getMainColor(focus, true) : getFontColor(focus));
 
             } else super.renderTitle(context, text, focus, active);
         }

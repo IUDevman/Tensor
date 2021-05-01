@@ -17,13 +17,13 @@ import java.awt.*;
 @Module.Info(name = "ClickGui", category = Category.Client, bind = GLFW.GLFW_KEY_P)
 public final class ClickGui extends Module {
 
-    public final NumberSetting scrollSpeed = new NumberSetting("Scroll Speed", 10, 1, 20, 1, 0);
-    public final NumberSetting animationSpeed = new NumberSetting("Animation Speed", 200, 0, 1000, 10, 0);
-    public final NumberSetting opacity = new NumberSetting("Opacity", 155, 0, 255, 1, 0);
-    public final ColorSetting activeColor = new ColorSetting("Active Color", new Color(0, 255, 0, 255));
-    public final ColorSetting inactiveColor = new ColorSetting("Inactive Color", new Color(255, 0, 0, 255));
-    public final ColorSetting outlineColor = new ColorSetting("Outline Color", new Color(88, 88, 88, 255));
-    public final ColorSetting backgroundColor = new ColorSetting("Background Color", new Color(195, 195, 195, 255));
+    public final NumberSetting scrollSpeed = new NumberSetting("Scroll Speed", 10, 1, 20, 0);
+    public final NumberSetting animationSpeed = new NumberSetting("Animation Speed", 200, 0, 1000, 0);
+    public final NumberSetting opacity = new NumberSetting("Opacity", 155, 0, 255, 0);
+    public final ColorSetting enabledColor = new ColorSetting("Enabled Color", new Color(0, 255, 0, 255));
+    public final ColorSetting disabledColor = new ColorSetting("Disabled Color", new Color(255, 0, 0, 255));
+    public final ColorSetting categoryColor = new ColorSetting("Category Color", new Color(88, 88, 88, 255));
+    public final ColorSetting buttonColor = new ColorSetting("Button Color", new Color(195, 195, 195, 255));
     public final ColorSetting fontColor = new ColorSetting("Font Color", new Color(255, 255, 255, 255));
 
     public void onEnable() {

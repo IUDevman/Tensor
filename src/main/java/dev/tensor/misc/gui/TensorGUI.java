@@ -57,7 +57,7 @@ public final class TensorGUI extends MinecraftGUI implements Wrapper {
     private final ClickGUI clickGUI = new ClickGUI(guiInterface, new FixedDescription(new Point(0, 0)));
 
     public TensorGUI() {
-        Theme theme = new TensorTheme(new SettingsColorScheme(clickGui.activeColor, clickGui.inactiveColor, clickGui.backgroundColor, clickGui.outlineColor, clickGui.fontColor, clickGui.opacity));
+        Theme theme = new TensorTheme(new SettingsColorScheme(clickGui.enabledColor, clickGui.disabledColor, clickGui.buttonColor, clickGui.categoryColor, clickGui.fontColor, clickGui.opacity));
         Toggleable toggleable = new SimpleToggleable(false);
 
         int width = 100;

@@ -13,15 +13,13 @@ public final class NumberSetting implements Setting<Double>, com.lukflug.panelst
     private double value;
     private final double min;
     private final double max;
-    private final double step;
     private final int decimal;
 
-    public NumberSetting(String name, double value, double min, double max, double step, int decimal) {
+    public NumberSetting(String name, double value, double min, double max, int decimal) {
         this.name = name;
         this.value = value;
         this.min = min;
         this.max = max;
-        this.step = step;
         this.decimal = decimal;
     }
 
@@ -63,9 +61,5 @@ public final class NumberSetting implements Setting<Double>, com.lukflug.panelst
     @Override
     public int getPrecision() {
         return this.decimal;
-    }
-
-    public double getStep() {
-        return this.step;
     }
 }

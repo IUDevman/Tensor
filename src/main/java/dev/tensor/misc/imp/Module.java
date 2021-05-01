@@ -110,7 +110,7 @@ public abstract class Module implements Wrapper, Listenable, Toggleable, Keybind
 
     @Override
     public String getKeyName() {
-        return InputUtil.Type.KEYSYM.createFromCode(this.getBind()).getTranslationKey();
+        return InputUtil.Type.KEYSYM.createFromCode(this.getBind()).getTranslationKey().replace("key.keyboard.", "");
     }
 
     public void enable() {
