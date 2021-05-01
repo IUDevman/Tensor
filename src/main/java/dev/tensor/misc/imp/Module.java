@@ -1,8 +1,11 @@
 package dev.tensor.misc.imp;
 
+import com.lukflug.panelstudio.settings.KeybindSetting;
+import com.lukflug.panelstudio.settings.Toggleable;
 import dev.tensor.Tensor;
 import dev.tensor.misc.util.MessageUtil;
 import me.zero.alpine.listener.Listenable;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -16,7 +19,7 @@ import java.lang.annotation.Target;
  * @since 04-12-2021
  */
 
-public abstract class Module implements Wrapper, Listenable {
+public abstract class Module implements Wrapper, Listenable, Toggleable, KeybindSetting {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
@@ -90,17 +93,37 @@ public abstract class Module implements Wrapper, Listenable {
         setEnabled(!isEnabled());
     }
 
+    @Override
+    public boolean isOn() {
+        return this.isEnabled();
+    }
+
+    @Override
+    public int getKey() {
+        return this.getBind();
+    }
+
+    @Override
+    public void setKey(int key) {
+        this.setBind(key);
+    }
+
+    @Override
+    public String getKeyName() {
+        return InputUtil.Type.KEYSYM.createFromCode(this.getBind()).getTranslationKey().replace("key.keyboard.", "");
+    }
+
     public void enable() {
         this.enabled = true;
-        onEnable();
         Tensor.EVENT_BUS.subscribe(this);
+        onEnable();
         if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true, true);
     }
 
     public void disable() {
         this.enabled = false;
-        onDisable();
         Tensor.EVENT_BUS.unsubscribe(this);
+        onDisable();
         if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true, true);
     }
 

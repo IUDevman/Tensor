@@ -77,7 +77,7 @@ public enum ConfigManager implements Manager {
                             if (count > array.length) return;
 
                             objectSetting.setValue(array[index]);
-                            count ++;
+                            count++;
                         }
                     } else if (objectSetting.getValue() instanceof Color) {
                         objectSetting.setValue(new Color(jsonElement.getAsInt()));
