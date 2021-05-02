@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
-import dev.tensor.backend.events.PacketSendEvent;
+import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Wrapper;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -22,10 +22,10 @@ public final class ClientConnectionMixin implements Wrapper {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
-        PacketSendEvent packetSendEvent = new PacketSendEvent(packet);
+        PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
-        Tensor.INSTANCE.EVENT_BUS.post(packetSendEvent);
+        Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
 
-        if (packetSendEvent.isCancelled()) callbackInfo.cancel();
+        if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 }

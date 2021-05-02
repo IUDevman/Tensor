@@ -36,16 +36,15 @@ public final class FullBright extends Module {
         switch ((Type) type.getValue()) {
             case Potion: {
                 getPlayer().applyStatusEffect(new StatusEffectInstance(StatusEffects.NIGHT_VISION, 1000));
+                if (oldSetting != -1) getMinecraft().options.gamma = oldSetting;
                 break;
             }
             case Gamma: {
                 getMinecraft().options.gamma = 100;
+                getPlayer().removeStatusEffect(StatusEffects.NIGHT_VISION);
                 break;
             }
-            default: {
-                //todo: add a mode to fill the lighting table with a value of 1
-                break;
-            }
+            default: break;
         }
     }
 

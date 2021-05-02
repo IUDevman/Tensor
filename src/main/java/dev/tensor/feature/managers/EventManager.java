@@ -33,21 +33,23 @@ public enum EventManager implements Manager {
 
     @SuppressWarnings("unused")
     @EventHandler
-    private final Listener<Client2DRenderEvent> client2DRenderEventListener = new Listener<>(event -> {
+    private final Listener<ClientRenderEvent> clientRenderEventListener = new Listener<>(event -> {
         if (isNull()) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onRender2D();
-        });
-    });
-
-    @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<Client3DRenderEvent> client3DRenderEventListener = new Listener<>(event -> {
-        if (isNull()) return;
-
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onRender3D();
+            if (module.isEnabled()) {
+                switch (event.getType()) {
+                    case World: {
+                        module.onRender3D();
+                        break;
+                    }
+                    case HUD: {
+                        module.onRender2D();
+                        break;
+                    }
+                    default: break;
+                }
+            }
         });
     });
 
@@ -63,8 +65,8 @@ public enum EventManager implements Manager {
 
     @SuppressWarnings("unused")
     @EventHandler
-    private final Listener<PacketSendEvent> packetSendEventListener = new Listener<>(event -> {
-        if (isNull()) return;
+    private final Listener<PacketEvent> packetSendEventListener = new Listener<>(event -> {
+        if (isNull() || !event.getType().equals(PacketEvent.Type.Send)) return;
 
         if (event.getPacket() instanceof ChatMessageC2SPacket) {
 

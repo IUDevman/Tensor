@@ -1,8 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
-import dev.tensor.backend.events.Client2DRenderEvent;
-import dev.tensor.backend.events.Client3DRenderEvent;
+import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.GameRenderer;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,11 +19,11 @@ public final class GameRendererMixin implements Wrapper {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
     public void render(CallbackInfo callbackInfo) {
-        Tensor.INSTANCE.EVENT_BUS.post(new Client2DRenderEvent());
+        Tensor.INSTANCE.EVENT_BUS.post(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
     public void renderHand(CallbackInfo callbackInfo) {
-        Tensor.INSTANCE.EVENT_BUS.post(new Client3DRenderEvent());
+        Tensor.INSTANCE.EVENT_BUS.post(new ClientRenderEvent(ClientRenderEvent.Type.World));
     }
 }

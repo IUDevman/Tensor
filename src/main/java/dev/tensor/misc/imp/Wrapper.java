@@ -5,6 +5,7 @@ import net.minecraft.client.gui.hud.ChatHud;
 import net.minecraft.client.network.ClientPlayNetworkHandler;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
+import net.minecraft.entity.player.PlayerInventory;
 
 /**
  * @author IUDevman
@@ -27,6 +28,10 @@ public interface Wrapper {
 
     default ClientPlayNetworkHandler getNetwork() {
         return getPlayer().networkHandler;
+    }
+
+    default PlayerInventory getInventory() {
+        return getPlayer().inventory;
     }
 
     default ChatHud getChatHud() {

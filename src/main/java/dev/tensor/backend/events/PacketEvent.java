@@ -8,15 +8,26 @@ import net.minecraft.network.Packet;
  * @since 04-13-2021
  */
 
-public class PacketSendEvent extends Event {
+public class PacketEvent extends Event {
 
+    private final Type type;
     private final Packet<?> packet;
 
-    public PacketSendEvent(Packet<?> packet) {
+    public PacketEvent(Type type, Packet<?> packet) {
+        this.type = type;
         this.packet = packet;
+    }
+
+    public Type getType() {
+        return this.type;
     }
 
     public Packet<?> getPacket() {
         return this.packet;
+    }
+
+    public enum Type {
+        Send,
+        Receive
     }
 }
