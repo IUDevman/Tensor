@@ -13,7 +13,7 @@
     "sources": "https://github.com/IUDevman/Tensor"
   },
 
-  "license": "GPL-3.0",
+  "license": "ARR",
   "icon": "assets/tensor/logo.png",
 
   "environment": "*",
