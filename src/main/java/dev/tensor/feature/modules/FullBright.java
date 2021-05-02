@@ -19,14 +19,10 @@ public final class FullBright extends Module {
     private double oldSetting = -1;
 
     public void onEnable() {
-        if (isNull()) return;
-
         oldSetting = getMinecraft().options.gamma;
     }
 
     public void onDisable() {
-        if (isNull()) return;
-
         if (oldSetting != -1) getMinecraft().options.gamma = oldSetting;
 
         getPlayer().removeStatusEffect(StatusEffects.NIGHT_VISION);

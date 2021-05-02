@@ -116,15 +116,19 @@ public abstract class Module implements Wrapper, Listenable, Toggleable, Keybind
     public void enable() {
         this.enabled = true;
         Tensor.INSTANCE.EVENT_BUS.subscribe(this);
-        onEnable();
-        if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true, true);
+        if (!isNull()) {
+            onEnable();
+            if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true, true);
+        }
     }
 
     public void disable() {
         this.enabled = false;
         Tensor.INSTANCE.EVENT_BUS.unsubscribe(this);
-        onDisable();
-        if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true, true);
+        if (!isNull()) {
+            onDisable();
+            if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true, true);
+        }
     }
 
     protected void onEnable() {

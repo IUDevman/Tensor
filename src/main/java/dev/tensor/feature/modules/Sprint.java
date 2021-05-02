@@ -18,8 +18,6 @@ public final class Sprint extends Module {
     public final BooleanSetting liquids = new BooleanSetting("Liquids", false);
 
     public void onDisable() {
-        if (isNull()) return;
-
         getPlayer().setSprinting(false);
     }
 

@@ -26,8 +26,7 @@ public final class ClickGui extends Module {
     public final ColorSetting fontColor = new ColorSetting("Font Color", new Color(255, 255, 255, 255));
 
     public void onEnable() {
-        if (!isNull()) Tensor.INSTANCE.GUI.enterGUI();
-
+        Tensor.INSTANCE.GUI.enterGUI();
         disable();
     }
 }
