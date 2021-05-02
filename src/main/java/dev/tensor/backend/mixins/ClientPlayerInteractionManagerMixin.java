@@ -2,6 +2,8 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.BlockInteractEvent;
+import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Reach;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.util.math.BlockPos;
@@ -27,5 +29,12 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
     @Inject(method = "breakBlock", at = @At("HEAD"))
     public void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         Tensor.INSTANCE.EVENT_BUS.post(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
+    }
+
+    @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
+    public void getReachDistance(CallbackInfoReturnable<Float> cir) {
+        Reach reach = ModuleManager.INSTANCE.getModule(Reach.class);
+
+        if (reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
     }
 }
