@@ -27,21 +27,25 @@ public final class AutoTool extends Module {
     @EventHandler
     private final Listener<BlockInteractEvent> blockEventListener = new Listener<>(event -> {
 
-        if (event.getType().equals(BlockInteractEvent.Type.Damage)) {
-            final int toolSlot = InventoryUtil.INSTANCE.findBestTool(getWorld().getBlockState(event.getBlockPos()));
+        switch (event.getType()) {
+            case Break: {
+                if (swapBack.getValue() && blockPosIntegerHashMap.containsKey(event.getBlockPos()) && getInventory().selectedSlot != blockPosIntegerHashMap.get(event.getBlockPos())) {
+                    InventoryUtil.INSTANCE.swap(blockPosIntegerHashMap.get(event.getBlockPos()));
+                }
 
-            if (toolSlot != -1) {
-                blockPosIntegerHashMap.put(event.getBlockPos(), blockPosIntegerHashMap.getOrDefault(event.getBlockPos(), getInventory().selectedSlot));
-                InventoryUtil.INSTANCE.swap(toolSlot);
+                if (blockPosIntegerHashMap.size() >= 10) blockPosIntegerHashMap.clear();
+                break;
             }
+            case Damage: {
+                final int toolSlot = InventoryUtil.INSTANCE.findBestTool(getWorld().getBlockState(event.getBlockPos()));
 
-        } else if (event.getType().equals(BlockInteractEvent.Type.Break)) {
-
-            if (swapBack.getValue() && blockPosIntegerHashMap.containsKey(event.getBlockPos()) && getInventory().selectedSlot != blockPosIntegerHashMap.get(event.getBlockPos())) {
-                InventoryUtil.INSTANCE.swap(blockPosIntegerHashMap.get(event.getBlockPos()));
+                if (toolSlot != -1) {
+                    blockPosIntegerHashMap.put(event.getBlockPos(), blockPosIntegerHashMap.getOrDefault(event.getBlockPos(), getInventory().selectedSlot));
+                    InventoryUtil.INSTANCE.swap(toolSlot);
+                }
+                break;
             }
-
-            if (blockPosIntegerHashMap.size() >= 10) blockPosIntegerHashMap.clear();
+            default: break;
         }
     });
 }
