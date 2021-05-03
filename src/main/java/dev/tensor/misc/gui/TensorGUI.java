@@ -1,7 +1,9 @@
 package dev.tensor.misc.gui;
 
+import dev.tensor.Tensor;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.misc.imp.Category;
+import dev.tensor.misc.imp.Wrapper;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public final class TensorGUI extends Screen {
+public final class TensorGUI extends Screen implements Wrapper {
 
     private final ArrayList<CategoryButton> categoryButtons = new ArrayList<>();
     private final ArrayList<ModuleButton> moduleButtons = new ArrayList<>();
@@ -21,7 +23,7 @@ public final class TensorGUI extends Screen {
     private final NumberSetting x = new NumberSetting("X", 100, 0, 1000, 0);
     private final NumberSetting y = new NumberSetting("Y", 100, 0, 1000, 0);
 
-    private final int guiWidth = 328;
+    private final int guiWidth = 388;
 
     public TensorGUI() {
         super(new LiteralText("Tensor GUI"));
@@ -65,8 +67,15 @@ public final class TensorGUI extends Screen {
             }
         });
 
-        //DrawableHelper.fill(matrixStack, this.x.getValue() - 2, this.y.getValue() - 2, this.x.getValue() + );
-        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() - 2, this.y.getValue().intValue() -2, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue(), new Color(30, 30, 200, 200).getRGB());
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //c-m line
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 20, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + 22, new Color(62, 11, 10, 200).getRGB()); //name bottom line
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() - 2, this.y.getValue().intValue() -2, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue(), new Color(62, 11, 10, 200).getRGB()); //top
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() - 2, this.y.getValue().intValue() + guiHeight.get(), this.x.getValue().intValue() + guiWidth + 2, this.y.getValue().intValue() + guiHeight.get() + 2, new Color(62, 11, 10, 200).getRGB()); //bottom
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() - 2, this.y.getValue().intValue(), this.x.getValue().intValue(), this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //left
+        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() - 2, this.x.getValue().intValue() + guiWidth + 2, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //right
+
+        String name = Tensor.INSTANCE.MOD_NAME + " (" + Tensor.INSTANCE.MOD_VERSION + ")";
+        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, name, this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override
