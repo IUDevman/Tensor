@@ -1,35 +1,34 @@
 package dev.tensor.misc.gui;
 
-import dev.tensor.misc.imp.Category;
+import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
 
-public final class CategoryButton implements Element {
+public final class ModuleButton implements Element {
 
-    private final Category category;
+    private final Module module;
     private final NumberSetting x;
     private final NumberSetting y;
     private int posX;
     private int posY;
-    private boolean selected = false;
 
-    public CategoryButton(Category category, NumberSetting x, NumberSetting y, int posX, int posY) {
-        this.category = category;
+    public ModuleButton(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
+        this.module = module;
         this.x = x;
         this.y = y;
         this.posX = posX;
         this.posY = posY;
     }
 
-    public Category getCategory() {
-        return this.category;
+    public Module getModule() {
+        return this.module;
     }
 
     public String getName() {
-        return this.getCategory().name();
+        return this.getModule().getName();
     }
 
     public int getPosX() {
@@ -48,22 +47,14 @@ public final class CategoryButton implements Element {
         this.posY = posY;
     }
 
-    public boolean isSelected() {
-        return this.selected;
-    }
-
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
-
     @Override
     public int getWidth() {
-        return 60;
+        return 120;
     }
 
     @Override
     public int getHeight() {
-        return 40;
+        return 20;
     }
 
     @Override
