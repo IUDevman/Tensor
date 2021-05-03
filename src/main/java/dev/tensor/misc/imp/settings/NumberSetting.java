@@ -7,7 +7,7 @@ import dev.tensor.misc.imp.Setting;
  * @since 04-12-2021
  */
 
-public final class NumberSetting implements Setting<Double>, com.lukflug.panelstudio.settings.NumberSetting {
+public final class NumberSetting implements Setting<Double> {
 
     private final String name;
     private double value;
@@ -38,28 +38,15 @@ public final class NumberSetting implements Setting<Double>, com.lukflug.panelst
         this.value = value;
     }
 
-    @Override
-    public double getNumber() {
-        return getValue();
-    }
-
-    @Override
-    public void setNumber(double value) {
-        setValue(value);
-    }
-
-    @Override
-    public double getMaximumValue() {
-        return this.max;
-    }
-
-    @Override
-    public double getMinimumValue() {
+    public double getMin() {
         return this.min;
     }
 
-    @Override
-    public int getPrecision() {
+    public double getMax() {
+        return this.max;
+    }
+
+    public int getDecimal() {
         return this.decimal;
     }
 }

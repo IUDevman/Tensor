@@ -1,11 +1,8 @@
 package dev.tensor.misc.imp;
 
-import com.lukflug.panelstudio.settings.KeybindSetting;
-import com.lukflug.panelstudio.settings.Toggleable;
 import dev.tensor.Tensor;
 import dev.tensor.misc.util.MessageUtil;
 import me.zero.alpine.listener.Listenable;
-import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -19,7 +16,7 @@ import java.lang.annotation.Target;
  * @since 04-12-2021
  */
 
-public abstract class Module implements Wrapper, Listenable, Toggleable, KeybindSetting {
+public abstract class Module implements Wrapper, Listenable {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
@@ -91,26 +88,6 @@ public abstract class Module implements Wrapper, Listenable, Toggleable, Keybind
 
     public void toggle() {
         setEnabled(!isEnabled());
-    }
-
-    @Override
-    public boolean isOn() {
-        return this.isEnabled();
-    }
-
-    @Override
-    public int getKey() {
-        return this.getBind();
-    }
-
-    @Override
-    public void setKey(int key) {
-        this.setBind(key);
-    }
-
-    @Override
-    public String getKeyName() {
-        return InputUtil.Type.KEYSYM.createFromCode(this.getBind()).getTranslationKey().replace("key.keyboard.", "");
     }
 
     public void enable() {
