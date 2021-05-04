@@ -3,6 +3,10 @@ package dev.tensor.feature.managers;
 import com.google.gson.*;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.settings.BooleanSetting;
+import dev.tensor.misc.imp.settings.ColorSetting;
+import dev.tensor.misc.imp.settings.EnumSetting;
+import dev.tensor.misc.imp.settings.NumberSetting;
 
 import java.awt.*;
 import java.io.*;
@@ -64,11 +68,11 @@ public enum ConfigManager implements Manager {
 
                     if (jsonElement == null) return;
 
-                    if (objectSetting.getValue() instanceof Boolean) {
-                        objectSetting.setValue(jsonElement.getAsBoolean());
-                    } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
-                        objectSetting.setValue(jsonElement.getAsDouble());
-                    } else if (objectSetting.getValue() instanceof Enum) {
+                    if (objectSetting instanceof BooleanSetting) {
+                        ((BooleanSetting) objectSetting).setValue(jsonElement.getAsBoolean());
+                    } else if (objectSetting instanceof NumberSetting) {
+                        ((NumberSetting) objectSetting).setValue(jsonElement.getAsDouble());
+                    } else if (objectSetting instanceof EnumSetting) {
                         int count = 0;
                         while (!objectSetting.getValue().toString().equals(jsonElement.getAsString())) {
                             Enum<?>[] array = ((Enum<?>) objectSetting.getValue()).getDeclaringClass().getEnumConstants();
@@ -78,11 +82,11 @@ public enum ConfigManager implements Manager {
 
                             if (count > array.length) return;
 
-                            objectSetting.setValue(array[index]);
+                            ((EnumSetting) objectSetting).setValue(array[index]);
                             count++;
                         }
-                    } else if (objectSetting.getValue() instanceof Color) {
-                        objectSetting.setValue(new Color(jsonElement.getAsInt()));
+                    } else if (objectSetting instanceof ColorSetting) {
+                        ((ColorSetting) objectSetting).setValue(new Color(jsonElement.getAsInt()));
                     }
                 });
 

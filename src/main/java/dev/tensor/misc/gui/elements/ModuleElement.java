@@ -7,6 +7,7 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * @author IUDevman
@@ -16,6 +17,7 @@ import java.awt.*;
 public final class ModuleElement implements Element {
 
     private PropertyElement propertyElement;
+    private final ArrayList<SettingElement> settingElements = new ArrayList<>();
 
     private final Module module;
     private final NumberSetting x;
@@ -44,8 +46,16 @@ public final class ModuleElement implements Element {
         return this.propertyElement;
     }
 
-    public void addPropertyElement(PropertyElement propertyElement) {
+    public void setPropertyElement(PropertyElement propertyElement) {
         this.propertyElement = propertyElement;
+    }
+
+    public ArrayList<SettingElement> getSettingElements() {
+        return this.settingElements;
+    }
+
+    public void addSettingElement(SettingElement settingElement) {
+        this.settingElements.add(settingElement);
     }
 
     public boolean isViewed() {

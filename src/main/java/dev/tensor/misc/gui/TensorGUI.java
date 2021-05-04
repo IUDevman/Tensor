@@ -2,11 +2,19 @@ package dev.tensor.misc.gui;
 
 import dev.tensor.Tensor;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.managers.SettingManager;
 import dev.tensor.misc.gui.elements.CategoryElement;
 import dev.tensor.misc.gui.elements.ModuleElement;
 import dev.tensor.misc.gui.elements.PropertyElement;
+import dev.tensor.misc.gui.elements.settings.BooleanElement;
+import dev.tensor.misc.gui.elements.settings.ColorElement;
+import dev.tensor.misc.gui.elements.settings.EnumElement;
+import dev.tensor.misc.gui.elements.settings.NumberElement;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.settings.BooleanSetting;
+import dev.tensor.misc.imp.settings.ColorSetting;
+import dev.tensor.misc.imp.settings.EnumSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
@@ -54,8 +62,34 @@ public final class TensorGUI extends Screen implements Wrapper {
 
                 if (categoryElement.getModuleElements().size() == 1) moduleElement.setViewed(true);
 
-                PropertyElement propertyElement = new PropertyElement(module, x, y, 184, 22);
-                moduleElement.addPropertyElement(propertyElement);
+                final AtomicInteger settingY = new AtomicInteger(22);
+
+                PropertyElement propertyElement = new PropertyElement(module, x, y, 184, settingY.get());
+                moduleElement.setPropertyElement(propertyElement);
+                settingY.getAndAdd(propertyElement.getHeight());
+
+                SettingManager.INSTANCE.getSettingsForModule(module).forEach(setting -> {
+                    if (setting instanceof BooleanSetting) {
+                        BooleanElement booleanElement = new BooleanElement((BooleanSetting) setting, x, y, 184, settingY.get());
+                        moduleElement.addSettingElement(booleanElement);
+                        settingY.getAndAdd(booleanElement.getHeight());
+
+                    } else if (setting instanceof NumberSetting) {
+                        NumberElement numberElement = new NumberElement((NumberSetting) setting, x, y, 184, settingY.get());
+                        moduleElement.addSettingElement(numberElement);
+                        settingY.getAndAdd(numberElement.getHeight());
+
+                    } else if (setting instanceof EnumSetting) {
+                        EnumElement enumElement = new EnumElement((EnumSetting) setting, x, y, 184, settingY.get());
+                        moduleElement.addSettingElement(enumElement);
+                        settingY.getAndAdd(enumElement.getHeight());
+
+                    } else if (setting instanceof ColorSetting) {
+                        ColorElement colorElement = new ColorElement((ColorSetting) setting, x, y, 184, settingY.get());
+                        moduleElement.addSettingElement(colorElement);
+                        settingY.getAndAdd(categoryElement.getHeight());
+                    }
+                });
             });
         });
     }
@@ -79,6 +113,11 @@ public final class TensorGUI extends Screen implements Wrapper {
                         PropertyElement propertyElement = moduleElement.getPropertyElement();
                         propertyElement.render(matrixStack, propertyElement.getPosX(), propertyElement.getPosY());
                         settingHeight.getAndAdd(propertyElement.getHeight());
+
+                        moduleElement.getSettingElements().forEach(settingElement -> {
+                            settingElement.render(matrixStack, settingElement.getPosX(), settingElement.getPosY());
+                            settingHeight.getAndAdd(settingElement.getHeight());
+                        });
                     }
                 });
             }
