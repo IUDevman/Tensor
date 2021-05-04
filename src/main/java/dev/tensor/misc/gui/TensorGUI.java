@@ -201,11 +201,13 @@ public final class TensorGUI extends Screen implements Wrapper {
             int scrollSpeed = scroll > 0 ? -10 : 10;
 
             if (isHovered(this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
+                //if (shouldScroll(true)) return true;
                 handleScroll(this.mScrollY, scrollSpeed);
                 return true;
             }
 
             if (isHovered(this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + this.guiWidth, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
+                //if (shouldScroll(false)) return true;
                 handleScroll(this.sScrollY, scrollSpeed);
                 return true;
             }
@@ -250,5 +252,26 @@ public final class TensorGUI extends Screen implements Wrapper {
     private void handleScroll(NumberSetting numberSetting, int scrollSpeed) {
         if (numberSetting.getValue() > -10 && scrollSpeed > 0) return;
         numberSetting.setValue(numberSetting.getValue() + scrollSpeed);
+    }
+
+    private boolean shouldScroll(boolean module) {
+        AtomicInteger moduleLength = new AtomicInteger(0);
+        AtomicInteger settingLength = new AtomicInteger(0);
+
+        this.categoryElements.forEach(categoryElement -> {
+            if (categoryElement.isSelected()) {
+                categoryElement.getModuleElements().forEach(moduleElement -> {
+                    moduleLength.getAndAdd(moduleElement.getHeight());
+
+                    if (!module && moduleElement.isViewed()) {
+                        settingLength.getAndAdd(moduleElement.getPropertyElement().getHeight());
+
+                        moduleElement.getSettingElements().forEach(settingElement -> settingLength.getAndAdd(settingElement.getHeight()));
+                    }
+                });
+            }
+        });
+
+        return module ? (moduleLength.get() <= this.guiHeight - 22) : (settingLength.get() <= this.guiHeight - 22);
     }
 }
