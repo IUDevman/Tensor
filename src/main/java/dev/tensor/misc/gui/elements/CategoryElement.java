@@ -21,8 +21,8 @@ public final class CategoryElement implements Element {
     private final Category category;
     private final NumberSetting x;
     private final NumberSetting y;
-    private int posX;
-    private int posY;
+    private final int posX;
+    private final int posY;
     private boolean selected = false;
 
     public CategoryElement(Category category, NumberSetting x, NumberSetting y, int posX, int posY) {
@@ -73,18 +73,8 @@ public final class CategoryElement implements Element {
     }
 
     @Override
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    @Override
     public int getPosY() {
         return this.y.getValue().intValue() + this.posY;
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        this.posY = posY;
     }
 
     @Override

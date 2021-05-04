@@ -13,8 +13,8 @@ public final class EnumElement extends SettingElement {
 
     private final EnumSetting enumSetting;
 
-    public EnumElement(EnumSetting enumSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(x, y, posX, posY);
+    public EnumElement(EnumSetting enumSetting, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
+        super(x, y, scrollY, posX, posY);
         this.enumSetting = enumSetting;
     }
 
@@ -38,18 +38,8 @@ public final class EnumElement extends SettingElement {
     }
 
     @Override
-    public void setPosX(int posX) {
-        setXPos(posX);
-    }
-
-    @Override
     public int getPosY() {
-        return getY().getValue().intValue() + getYPos();
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        setYPos(posY);
+        return getY().getValue().intValue() + getScrollY().getValue().intValue() + getYPos();
     }
 
     @Override

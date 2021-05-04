@@ -7,12 +7,14 @@ public abstract class SettingElement implements Element {
 
     private final NumberSetting x;
     private final NumberSetting y;
-    private int posX;
-    private int posY;
+    private final NumberSetting scrollY;
+    private final int posX;
+    private final int posY;
 
-    public SettingElement(NumberSetting x, NumberSetting y, int posX, int posY) {
+    public SettingElement(NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         this.x = x;
         this.y = y;
+        this.scrollY = scrollY;
         this.posX = posX;
         this.posY = posY;
     }
@@ -25,19 +27,15 @@ public abstract class SettingElement implements Element {
         return this.y;
     }
 
+    public NumberSetting getScrollY() {
+        return this.scrollY;
+    }
+
     public int getXPos() {
         return this.posX;
     }
 
-    public void setXPos(int posX) {
-        this.posX = posX;
-    }
-
     public int getYPos() {
         return this.posY;
-    }
-
-    public void setYPos(int posY) {
-        this.posY = posY;
     }
 }

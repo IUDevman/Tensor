@@ -38,6 +38,8 @@ public final class TensorGUI extends Screen implements Wrapper {
 
     private final NumberSetting x = new NumberSetting("X", 100, 0, 1000, 0);
     private final NumberSetting y = new NumberSetting("Y", 100, 0, 1000, 0);
+    private final NumberSetting mScrollY = new NumberSetting("Module Scroll Y", 0, -1000, 1000, 0);
+    private final NumberSetting sScrollY = new NumberSetting("Setting Scroll Y", 0, -1000, 1000, 0);
 
     @SuppressWarnings("FieldCanBeLocal")
     private final int guiWidth = 388;
@@ -57,7 +59,7 @@ public final class TensorGUI extends Screen implements Wrapper {
             final AtomicInteger moduleY = new AtomicInteger(22);
 
             ModuleManager.INSTANCE.getModulesInCategory(category).forEach(module -> {
-                ModuleElement moduleElement = new ModuleElement(module, x, y, 62, moduleY.get());
+                ModuleElement moduleElement = new ModuleElement(module, x, y, mScrollY, 62, moduleY.get());
                 categoryElement.addModuleElement(moduleElement);
                 moduleY.getAndAdd(moduleElement.getHeight());
 
@@ -65,28 +67,28 @@ public final class TensorGUI extends Screen implements Wrapper {
 
                 final AtomicInteger settingY = new AtomicInteger(22);
 
-                PropertyElement propertyElement = new PropertyElement(module, x, y, 184, settingY.get());
+                PropertyElement propertyElement = new PropertyElement(module, x, y, sScrollY, 184, settingY.get());
                 moduleElement.setPropertyElement(propertyElement);
                 settingY.getAndAdd(propertyElement.getHeight());
 
                 SettingManager.INSTANCE.getSettingsForModule(module).forEach(setting -> {
                     if (setting instanceof BooleanSetting) {
-                        BooleanElement booleanElement = new BooleanElement((BooleanSetting) setting, x, y, 184, settingY.get());
+                        BooleanElement booleanElement = new BooleanElement((BooleanSetting) setting, x, y, sScrollY, 184, settingY.get());
                         moduleElement.addSettingElement(booleanElement);
                         settingY.getAndAdd(booleanElement.getHeight());
 
                     } else if (setting instanceof NumberSetting) {
-                        NumberElement numberElement = new NumberElement((NumberSetting) setting, x, y, 184, settingY.get());
+                        NumberElement numberElement = new NumberElement((NumberSetting) setting, x, y, sScrollY, 184, settingY.get());
                         moduleElement.addSettingElement(numberElement);
                         settingY.getAndAdd(numberElement.getHeight());
 
                     } else if (setting instanceof EnumSetting) {
-                        EnumElement enumElement = new EnumElement((EnumSetting) setting, x, y, 184, settingY.get());
+                        EnumElement enumElement = new EnumElement((EnumSetting) setting, x, y, sScrollY, 184, settingY.get());
                         moduleElement.addSettingElement(enumElement);
                         settingY.getAndAdd(enumElement.getHeight());
 
                     } else if (setting instanceof ColorSetting) {
-                        ColorElement colorElement = new ColorElement((ColorSetting) setting, x, y, 184, settingY.get());
+                        ColorElement colorElement = new ColorElement((ColorSetting) setting, x, y, sScrollY, 184, settingY.get());
                         moduleElement.addSettingElement(colorElement);
                         settingY.getAndAdd(categoryElement.getHeight());
                     }

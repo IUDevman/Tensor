@@ -18,13 +18,15 @@ public final class PropertyElement implements Element {
     private final Module module;
     private final NumberSetting x;
     private final NumberSetting y;
+    private final NumberSetting scrollY;
     private int posX;
     private int posY;
     
-    public PropertyElement(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
+    public PropertyElement(Module module, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         this.module = module;
         this.x = x;
         this.y = y;
+        this.scrollY = scrollY;
         this.posX = posX;
         this.posY = posY;
     }
@@ -45,18 +47,8 @@ public final class PropertyElement implements Element {
     }
 
     @Override
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    @Override
     public int getPosY() {
-        return this.y.getValue().intValue() + this.posY;
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        this.posY = posY;
+        return this.y.getValue().intValue() + this.scrollY.getValue().intValue() + this.posY;
     }
 
     @Override

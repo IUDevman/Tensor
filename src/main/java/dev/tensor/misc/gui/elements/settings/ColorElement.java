@@ -12,8 +12,8 @@ public final class ColorElement extends SettingElement {
 
     private final ColorSetting colorSetting;
 
-    public ColorElement(ColorSetting colorSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(x, y, posX, posY);
+    public ColorElement(ColorSetting colorSetting, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
+        super(x, y, scrollY, posX, posY);
         this.colorSetting = colorSetting;
     }
 
@@ -37,18 +37,8 @@ public final class ColorElement extends SettingElement {
     }
 
     @Override
-    public void setPosX(int posX) {
-        setXPos(posX);
-    }
-
-    @Override
     public int getPosY() {
-        return getY().getValue().intValue() + getYPos();
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        setYPos(posY);
+        return getY().getValue().intValue() + getScrollY().getValue().intValue() + getYPos();
     }
 
     @Override

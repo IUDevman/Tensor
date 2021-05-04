@@ -16,11 +16,7 @@ public interface Element extends Wrapper {
 
     int getPosX();
 
-    void setPosX(int posX);
-
     int getPosY();
-
-    void setPosY(int posY);
 
     void render(MatrixStack matrixStack, int x, int y);
 

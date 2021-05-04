@@ -22,14 +22,16 @@ public final class ModuleElement implements Element {
     private final Module module;
     private final NumberSetting x;
     private final NumberSetting y;
-    private int posX;
-    private int posY;
+    private final NumberSetting scrollY;
+    private final int posX;
+    private final int posY;
     private boolean viewed = false;
 
-    public ModuleElement(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
+    public ModuleElement(Module module, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         this.module = module;
         this.x = x;
         this.y = y;
+        this.scrollY = scrollY;
         this.posX = posX;
         this.posY = posY;
     }
@@ -82,18 +84,8 @@ public final class ModuleElement implements Element {
     }
 
     @Override
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    @Override
     public int getPosY() {
-        return this.y.getValue().intValue() + this.posY;
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        this.posY = posY;
+        return this.y.getValue().intValue() + this.scrollY.getValue().intValue() + this.posY;
     }
 
     @Override

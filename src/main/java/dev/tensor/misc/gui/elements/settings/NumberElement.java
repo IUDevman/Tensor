@@ -15,8 +15,8 @@ public final class NumberElement extends SettingElement {
     private final NumberSetting numberSetting;
     private boolean isListening = false;
 
-    public NumberElement(NumberSetting numberSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(x, y, posX, posY);
+    public NumberElement(NumberSetting numberSetting, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
+        super(x, y, scrollY, posX, posY);
         this.numberSetting = numberSetting;
     }
 
@@ -40,18 +40,8 @@ public final class NumberElement extends SettingElement {
     }
 
     @Override
-    public void setPosX(int posX) {
-        setXPos(posX);
-    }
-
-    @Override
     public int getPosY() {
-        return getY().getValue().intValue() + getYPos();
-    }
-
-    @Override
-    public void setPosY(int posY) {
-        setYPos(posY);
+        return getY().getValue().intValue() + getScrollY().getValue().intValue() + getYPos();
     }
 
     @Override
