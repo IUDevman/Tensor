@@ -129,16 +129,8 @@ public final class TensorGUI extends Screen implements Wrapper {
 
         this.guiHeight = guiHeight.get();
 
-        if (this.mScrollY.getValue().intValue() > 0) {
-            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + this.mScrollY.getValue().intValue() + 22, new Color(0, 0, 0, 150).getRGB());
-        }
-
         if (moduleHeight.get() + this.mScrollY.getValue().intValue() < guiHeight.get()) {
             DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + this.mScrollY.getValue().intValue() + moduleHeight.get(), this.x.getValue().intValue() + 182, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB());
-        }
-
-        if (this.sScrollY.getValue().intValue() > 0) {
-            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + this.sScrollY.getValue().intValue() + 22, new Color(0, 0, 0, 150).getRGB());
         }
 
         if (settingHeight.get() + this.sScrollY.getValue().intValue() < guiHeight.get()) {
@@ -171,6 +163,9 @@ public final class TensorGUI extends Screen implements Wrapper {
                 }
 
                 if (categoryElement.isSelected()) {
+
+                    if (mouseY < this.y.getValue().intValue() + 22 || mouseY > this.y.getValue().intValue() + this.guiHeight) return;
+
                     categoryElement.getModuleElements().forEach(moduleElement -> {
                         if (isHovered(moduleElement, mouseX, mouseY)) {
                             moduleElement.onClick(mouseX, mouseY);
