@@ -1,19 +1,16 @@
 package dev.tensor.misc.gui.elements;
 
 import dev.tensor.misc.gui.Element;
-import dev.tensor.misc.imp.Setting;
 import dev.tensor.misc.imp.settings.NumberSetting;
 
 public abstract class SettingElement implements Element {
 
-    private final Setting<?> setting;
     private final NumberSetting x;
     private final NumberSetting y;
     private int posX;
     private int posY;
 
-    public SettingElement(Setting<?> setting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        this.setting = setting;
+    public SettingElement(NumberSetting x, NumberSetting y, int posX, int posY) {
         this.x = x;
         this.y = y;
         this.posX = posX;

@@ -39,6 +39,7 @@ public final class TensorGUI extends Screen implements Wrapper {
     private final NumberSetting x = new NumberSetting("X", 100, 0, 1000, 0);
     private final NumberSetting y = new NumberSetting("Y", 100, 0, 1000, 0);
 
+    @SuppressWarnings("FieldCanBeLocal")
     private final int guiWidth = 388;
 
     public TensorGUI() {

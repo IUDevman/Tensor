@@ -10,8 +10,15 @@ import java.awt.*;
 
 public final class ColorElement extends SettingElement {
 
+    private final ColorSetting colorSetting;
+
     public ColorElement(ColorSetting colorSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(colorSetting, x, y, posX, posY);
+        super(x, y, posX, posY);
+        this.colorSetting = colorSetting;
+    }
+
+    public ColorSetting getColorSetting() {
+        return this.colorSetting;
     }
 
     @Override

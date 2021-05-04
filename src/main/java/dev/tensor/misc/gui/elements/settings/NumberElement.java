@@ -13,9 +13,10 @@ import java.math.RoundingMode;
 public final class NumberElement extends SettingElement {
 
     private final NumberSetting numberSetting;
+    private boolean isListening = false;
 
     public NumberElement(NumberSetting numberSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(numberSetting, x, y, posX, posY);
+        super(x, y, posX, posY);
         this.numberSetting = numberSetting;
     }
 

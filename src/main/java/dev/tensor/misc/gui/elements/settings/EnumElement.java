@@ -14,7 +14,7 @@ public final class EnumElement extends SettingElement {
     private final EnumSetting enumSetting;
 
     public EnumElement(EnumSetting enumSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(enumSetting, x, y, posX, posY);
+        super(x, y, posX, posY);
         this.enumSetting = enumSetting;
     }
 

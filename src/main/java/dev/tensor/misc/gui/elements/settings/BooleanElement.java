@@ -14,7 +14,7 @@ public final class BooleanElement extends SettingElement {
     private final BooleanSetting booleanSetting;
 
     public BooleanElement(BooleanSetting booleanSetting, NumberSetting x, NumberSetting y, int posX, int posY) {
-        super(booleanSetting, x, y, posX, posY);
+        super(x, y, posX, posY);
         this.booleanSetting = booleanSetting;
     }
 
