@@ -10,6 +10,11 @@ import java.awt.*;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
+/**
+ * @author IUDevman
+ * @since 05-03-2021
+ */
+
 public final class NumberElement extends SettingElement {
 
     private final NumberSetting numberSetting;

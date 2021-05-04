@@ -9,6 +9,11 @@ import net.minecraft.util.Formatting;
 
 import java.awt.*;
 
+/**
+ * @author IUDevman
+ * @since 05-03-2021
+ */
+
 public final class BooleanElement extends SettingElement {
 
     private final BooleanSetting booleanSetting;

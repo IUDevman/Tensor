@@ -41,7 +41,6 @@ public final class TensorGUI extends Screen implements Wrapper {
     private final NumberSetting mScrollY = new NumberSetting("Module Scroll Y", 0, -1000, 1000, 0);
     private final NumberSetting sScrollY = new NumberSetting("Setting Scroll Y", 0, -1000, 1000, 0);
 
-    @SuppressWarnings("FieldCanBeLocal")
     private final int guiWidth = 388;
     private int guiHeight = 0;
 

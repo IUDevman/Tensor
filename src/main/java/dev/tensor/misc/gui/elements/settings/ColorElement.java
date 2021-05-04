@@ -8,6 +8,11 @@ import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
 
+/**
+ * @author IUDevman
+ * @since 05-03-2021
+ */
+
 public final class ColorElement extends SettingElement {
 
     private final ColorSetting colorSetting;

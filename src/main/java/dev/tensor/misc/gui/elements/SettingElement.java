@@ -3,6 +3,11 @@ package dev.tensor.misc.gui.elements;
 import dev.tensor.misc.gui.Element;
 import dev.tensor.misc.imp.settings.NumberSetting;
 
+/**
+ * @author IUDevman
+ * @since 05-04-2021
+ */
+
 public abstract class SettingElement implements Element {
 
     private final NumberSetting x;
