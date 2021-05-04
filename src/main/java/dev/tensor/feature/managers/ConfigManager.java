@@ -14,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * @author IUDevman
@@ -73,18 +74,14 @@ public enum ConfigManager implements Manager {
                     } else if (objectSetting instanceof NumberSetting) {
                         ((NumberSetting) objectSetting).setValue(jsonElement.getAsDouble());
                     } else if (objectSetting instanceof EnumSetting) {
-                        int count = 0;
-                        while (!objectSetting.getValue().toString().equals(jsonElement.getAsString())) {
-                            Enum<?>[] array = ((Enum<?>) objectSetting.getValue()).getDeclaringClass().getEnumConstants();
-                            int index = ((Enum<?>) objectSetting.getValue()).ordinal() + 1;
+                        Enum<?>[] array = ((EnumSetting) objectSetting).getValue().getDeclaringClass().getEnumConstants();
 
-                            if (index >= array.length) index = 0;
+                        Arrays.stream(array).forEach(anEnum -> {
+                            if (anEnum.name().equalsIgnoreCase(jsonElement.getAsString())) {
+                                ((EnumSetting) objectSetting).setValue(anEnum);
+                            }
+                        });
 
-                            if (count > array.length) return;
-
-                            ((EnumSetting) objectSetting).setValue(array[index]);
-                            count++;
-                        }
                     } else if (objectSetting instanceof ColorSetting) {
                         ((ColorSetting) objectSetting).setValue(new Color(jsonElement.getAsInt()));
                     }
