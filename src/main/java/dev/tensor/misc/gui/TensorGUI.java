@@ -220,6 +220,12 @@ public final class TensorGUI extends Screen implements Wrapper {
         return false;
     }
 
+    @Override
+    public void onClose() {
+        resetScroll(true);
+        super.onClose();
+    }
+
     private boolean isHovered(Element element, double mouseX, double mouseY) {
        return isHovered(element.getPosX(), element.getPosY(), element.getPosX() + element.getWidth(), element.getPosY() + element.getHeight(), mouseX, mouseY);
     }
