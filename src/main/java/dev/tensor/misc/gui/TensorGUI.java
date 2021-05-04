@@ -43,6 +43,7 @@ public final class TensorGUI extends Screen implements Wrapper {
 
     @SuppressWarnings("FieldCanBeLocal")
     private final int guiWidth = 388;
+    private int guiHeight = 0;
 
     public TensorGUI() {
         super(new LiteralText("Tensor GUI"));
@@ -126,12 +127,22 @@ public final class TensorGUI extends Screen implements Wrapper {
             }
         });
 
-        if (moduleHeight.get() < guiHeight.get()) {
-            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + moduleHeight.get(), this.x.getValue().intValue() + 182, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB());
+        this.guiHeight = guiHeight.get();
+
+        if (this.mScrollY.getValue().intValue() > 0) {
+            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + this.mScrollY.getValue().intValue() + 22, new Color(0, 0, 0, 150).getRGB());
         }
 
-        if (settingHeight.get() < guiHeight.get()) {
-            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + settingHeight.get(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB()); //setting fill
+        if (moduleHeight.get() + this.mScrollY.getValue().intValue() < guiHeight.get()) {
+            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + this.mScrollY.getValue().intValue() + moduleHeight.get(), this.x.getValue().intValue() + 182, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB());
+        }
+
+        if (this.sScrollY.getValue().intValue() > 0) {
+            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + this.sScrollY.getValue().intValue() + 22, new Color(0, 0, 0, 150).getRGB());
+        }
+
+        if (settingHeight.get() + this.sScrollY.getValue().intValue() < guiHeight.get()) {
+            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + this.sScrollY.getValue().intValue() + settingHeight.get(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB()); //setting fill
         }
 
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //c-m line
@@ -188,6 +199,27 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     @Override
+    public boolean mouseScrolled(double mouseX, double mouseY, double scroll) {
+        if (!super.mouseScrolled(mouseX, mouseY, scroll)) {
+            if (scroll == 0) return true;
+
+            int scrollSpeed = scroll > 0 ? -10 : 10;
+
+            if (isHovered(this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
+                handleScroll(this.mScrollY, scrollSpeed);
+                return true;
+            }
+
+            if (isHovered(this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + this.guiWidth, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
+                handleScroll(this.sScrollY, scrollSpeed);
+                return true;
+            }
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean isPauseScreen() {
         return false;
     }
@@ -202,14 +234,26 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     private void triggerHovered(CategoryElement categoryElement) {
+        resetScroll(true);
         this.categoryElements.forEach(categoryElement1 -> {
             if (!categoryElement1.equals(categoryElement)) categoryElement1.setSelected(false);
         });
     }
 
     private void triggerView(ModuleElement moduleElement, CategoryElement categoryElement) {
+        resetScroll(false);
         categoryElement.getModuleElements().forEach(moduleElement1 -> {
             if (!moduleElement1.equals(moduleElement)) moduleElement1.setViewed(false);
         });
+    }
+
+    private void resetScroll(boolean category) {
+        if (category) this.mScrollY.setValue(0.0);
+        this.sScrollY.setValue(0.0);
+    }
+
+    private void handleScroll(NumberSetting numberSetting, int scrollSpeed) {
+        if (numberSetting.getValue() > -10 && scrollSpeed > 0) return;
+        numberSetting.setValue(numberSetting.getValue() + scrollSpeed);
     }
 }
