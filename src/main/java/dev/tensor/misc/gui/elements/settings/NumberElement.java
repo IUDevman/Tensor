@@ -47,4 +47,9 @@ public final class NumberElement extends SettingElement {
     public void render(MatrixStack matrixStack, int x, int y) {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), new Color(255, 0, 0, 150).getRGB()); //temp color for testing
     }
+
+    @Override
+    public void onClick(double mouseX, double mouseY) {
+
+    }
 }

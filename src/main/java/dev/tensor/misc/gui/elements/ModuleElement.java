@@ -106,4 +106,9 @@ public final class ModuleElement implements Element {
 
         DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255 ,255, 255).getRGB());
     }
+
+    @Override
+    public void onClick(double mouseX, double mouseY) {
+        this.setViewed(true);
+    }
 }

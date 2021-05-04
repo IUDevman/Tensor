@@ -23,4 +23,6 @@ public interface Element extends Wrapper {
     void setPosY(int posY);
 
     void render(MatrixStack matrixStack, int x, int y);
+
+    void onClick(double mouseX, double mouseY);
 }

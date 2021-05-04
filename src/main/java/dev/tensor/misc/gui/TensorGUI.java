@@ -151,16 +151,21 @@ public final class TensorGUI extends Screen implements Wrapper {
             this.categoryElements.forEach(categoryElement -> {
 
                 if (isHovered(categoryElement, mouseX, mouseY)) {
-                    categoryElement.setSelected(true);
+                    categoryElement.onClick(mouseX, mouseY);
                     triggerHovered(categoryElement);
                     return;
                 }
 
                 categoryElement.getModuleElements().forEach(moduleElement -> {
                     if (isHovered(moduleElement, mouseX, mouseY)) {
-                        moduleElement.setViewed(true);
+                        moduleElement.onClick(mouseX, mouseY);
                         triggerView(moduleElement, categoryElement);
+                        return;
                     }
+
+                    moduleElement.getSettingElements().forEach(settingElement -> {
+
+                    });
                 });
             });
         }

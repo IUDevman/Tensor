@@ -71,4 +71,9 @@ public final class PropertyElement implements Element {
         DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, "Drawn", x + (this.getWidth() / 2), y + 18, module.isDrawn() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
         DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, "Messages", x + (this.getWidth() / 2), y + 33, module.isMessages() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
     }
+
+    @Override
+    public void onClick(double mouseX, double mouseY) {
+
+    }
 }
