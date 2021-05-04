@@ -2,6 +2,8 @@ package dev.tensor.misc.gui;
 
 import dev.tensor.Tensor;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.misc.gui.elements.CategoryElement;
+import dev.tensor.misc.gui.elements.ModuleElement;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Wrapper;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -17,8 +19,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public final class TensorGUI extends Screen implements Wrapper {
 
-    private final ArrayList<CategoryButton> categoryButtons = new ArrayList<>();
-    private final ArrayList<ModuleButton> moduleButtons = new ArrayList<>();
+    private final ArrayList<CategoryElement> categoryElements = new ArrayList<>();
 
     private final NumberSetting x = new NumberSetting("X", 100, 0, 1000, 0);
     private final NumberSetting y = new NumberSetting("Y", 100, 0, 1000, 0);
@@ -31,40 +32,38 @@ public final class TensorGUI extends Screen implements Wrapper {
         final AtomicInteger categoryY = new AtomicInteger(0);
 
         Arrays.stream(Category.values()).forEach(category -> {
-            CategoryButton categoryButton = new CategoryButton(category, x, y, 0, categoryY.get());
-            this.categoryButtons.add(categoryButton);
-            categoryY.getAndAdd(categoryButton.getHeight());
+            CategoryElement categoryElement = new CategoryElement(category, x, y, 0, categoryY.get());
+            this.categoryElements.add(categoryElement);
+            categoryY.getAndAdd(categoryElement.getHeight());
 
             //temp addition to test
             if (category.equals(Category.Player)) {
-                categoryButton.setSelected(true);
+                categoryElement.setSelected(true);
             }
 
             final AtomicInteger moduleY = new AtomicInteger(22);
 
             ModuleManager.INSTANCE.getModulesInCategory(category).forEach(module -> {
-                ModuleButton moduleButton = new ModuleButton(module, x, y, 62, moduleY.get());
-                this.moduleButtons.add(moduleButton);
-                moduleY.getAndAdd(moduleButton.getHeight());
+                ModuleElement moduleElement = new ModuleElement(module, x, y, 62, moduleY.get());
+                categoryElement.addModuleElement(moduleElement);
+                moduleY.getAndAdd(moduleElement.getHeight());
             });
         });
     }
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float delta) {
-        AtomicInteger guiHeight = new AtomicInteger(0);
-        AtomicInteger moduleHeight = new AtomicInteger(22);
+        final AtomicInteger guiHeight = new AtomicInteger(0);
+        final AtomicInteger moduleHeight = new AtomicInteger(22);
 
-        this.categoryButtons.forEach(categoryButton -> {
-            categoryButton.render(matrixStack, categoryButton.getPosX(), categoryButton.getPosY());
-            guiHeight.getAndAdd(categoryButton.getHeight());
+        this.categoryElements.forEach(categoryElement -> {
+            categoryElement.render(matrixStack, categoryElement.getPosX(), categoryElement.getPosY());
+            guiHeight.getAndAdd(categoryElement.getHeight());
 
-            if (categoryButton.isSelected()) {
-                this.moduleButtons.forEach(moduleButton -> {
-                    if (moduleButton.getModule().getCategory().equals(categoryButton.getCategory())) {
-                        moduleButton.render(matrixStack, moduleButton.getPosX(), moduleButton.getPosY());
-                        moduleHeight.getAndAdd(moduleButton.getHeight());
-                    }
+            if (categoryElement.isSelected()) {
+                categoryElement.getModuleElements().forEach(moduleElement -> {
+                    moduleElement.render(matrixStack, moduleElement.getPosX(), moduleElement.getPosY());
+                    moduleHeight.getAndAdd(moduleElement.getHeight());
                 });
             }
         });

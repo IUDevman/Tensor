@@ -1,5 +1,6 @@
-package dev.tensor.misc.gui;
+package dev.tensor.misc.gui.elements;
 
+import dev.tensor.misc.gui.Element;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
@@ -7,7 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
 
-public final class ModuleButton implements Element {
+public final class ModuleElement implements Element {
 
     private final Module module;
     private final NumberSetting x;
@@ -15,7 +16,7 @@ public final class ModuleButton implements Element {
     private int posX;
     private int posY;
 
-    public ModuleButton(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
+    public ModuleElement(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
         this.module = module;
         this.x = x;
         this.y = y;

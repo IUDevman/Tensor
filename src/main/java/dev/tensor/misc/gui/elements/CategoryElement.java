@@ -1,13 +1,17 @@
-package dev.tensor.misc.gui;
+package dev.tensor.misc.gui.elements;
 
+import dev.tensor.misc.gui.Element;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
+import java.util.ArrayList;
 
-public final class CategoryButton implements Element {
+public final class CategoryElement implements Element {
+
+    private final ArrayList<ModuleElement> moduleElements = new ArrayList<>();
 
     private final Category category;
     private final NumberSetting x;
@@ -16,12 +20,20 @@ public final class CategoryButton implements Element {
     private int posY;
     private boolean selected = false;
 
-    public CategoryButton(Category category, NumberSetting x, NumberSetting y, int posX, int posY) {
+    public CategoryElement(Category category, NumberSetting x, NumberSetting y, int posX, int posY) {
         this.category = category;
         this.x = x;
         this.y = y;
         this.posX = posX;
         this.posY = posY;
+    }
+
+    public ArrayList<ModuleElement> getModuleElements() {
+        return this.moduleElements;
+    }
+
+    public void addModuleElement(ModuleElement moduleElement) {
+        this.moduleElements.add(moduleElement);
     }
 
     public Category getCategory() {
@@ -30,22 +42,6 @@ public final class CategoryButton implements Element {
 
     public String getName() {
         return this.getCategory().name();
-    }
-
-    public int getPosX() {
-        return this.posX + this.x.getValue().intValue();
-    }
-
-    public int getPosY() {
-        return this.posY + this.y.getValue().intValue();
-    }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
     }
 
     public boolean isSelected() {
@@ -64,6 +60,26 @@ public final class CategoryButton implements Element {
     @Override
     public int getHeight() {
         return 40;
+    }
+
+    @Override
+    public int getPosX() {
+        return this.x.getValue().intValue() + this.posX;
+    }
+
+    @Override
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    @Override
+    public int getPosY() {
+        return this.y.getValue().intValue() + this.posY;
+    }
+
+    @Override
+    public void setPosY(int posY) {
+        this.posY = posY;
     }
 
     @Override
