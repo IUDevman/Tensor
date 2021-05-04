@@ -36,8 +36,8 @@ public final class TensorGUI extends Screen implements Wrapper {
 
     private final ArrayList<CategoryElement> categoryElements = new ArrayList<>();
 
-    private final NumberSetting x = new NumberSetting("X", 100, 0, 1000, 0);
-    private final NumberSetting y = new NumberSetting("Y", 100, 0, 1000, 0);
+    private final NumberSetting x = new NumberSetting("X", 265, 0, 1000, 0);
+    private final NumberSetting y = new NumberSetting("Y", 135, 0, 1000, 0);
     private final NumberSetting mScrollY = new NumberSetting("Module Scroll Y", 0, -1000, 1000, 0);
     private final NumberSetting sScrollY = new NumberSetting("Setting Scroll Y", 0, -1000, 1000, 0);
 
@@ -150,8 +150,8 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     @Override
-    public boolean mouseClicked(double mouseX, double mouseY, int clickedButton) {
-        if (clickedButton == 0) {
+    public boolean mouseClicked(double mouseX, double mouseY, int button) {
+        if (button == 0) {
 
             this.categoryElements.forEach(categoryElement -> {
 
@@ -187,6 +187,21 @@ public final class TensorGUI extends Screen implements Wrapper {
                     });
                 }
             });
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean mouseDragged(double mouseX, double mouseY, int button, double deltaX, double deltaY) {
+        if (button != 0) return true;
+
+        if (isHovered(this.x.getValue().intValue() + 60, this.y.getValue().intValue() - 2, this.x.getValue().intValue() + this.guiWidth, this.y.getValue().intValue() + 22, mouseX, mouseY)) {
+            double newX = this.x.getValue() + deltaX;
+            double newY = this.y.getValue() + deltaY;
+
+            this.x.setValue(newX);
+            this.y.setValue(newY);
         }
 
         return true;
