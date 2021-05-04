@@ -21,7 +21,7 @@ public final class ColorElement extends SettingElement {
 
     @Override
     public int getHeight() {
-        return 40;
+        return 45;
     }
 
     @Override

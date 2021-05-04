@@ -20,7 +20,7 @@ public final class NumberElement extends SettingElement {
 
     @Override
     public int getHeight() {
-        return 10;
+        return 15;
     }
 
     @Override

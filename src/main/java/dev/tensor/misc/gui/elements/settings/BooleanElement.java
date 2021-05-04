@@ -21,7 +21,7 @@ public final class BooleanElement extends SettingElement {
 
     @Override
     public int getHeight() {
-        return 10;
+        return 15;
     }
 
     @Override
