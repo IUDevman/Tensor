@@ -15,6 +15,7 @@ public final class ModuleElement implements Element {
     private final NumberSetting y;
     private int posX;
     private int posY;
+    private boolean viewed = false;
 
     public ModuleElement(Module module, NumberSetting x, NumberSetting y, int posX, int posY) {
         this.module = module;
@@ -32,20 +33,12 @@ public final class ModuleElement implements Element {
         return this.getModule().getName();
     }
 
-    public int getPosX() {
-        return this.posX + this.x.getValue().intValue();
+    public boolean isViewed() {
+        return this.viewed;
     }
 
-    public int getPosY() {
-        return this.posY + this.y.getValue().intValue();
-    }
-
-    public void setPosX(int posX) {
-        this.posX = posX;
-    }
-
-    public void setPosY(int posY) {
-        this.posY = posY;
+    public void setViewed(boolean viewed) {
+        this.viewed = viewed;
     }
 
     @Override
@@ -59,8 +52,28 @@ public final class ModuleElement implements Element {
     }
 
     @Override
+    public int getPosX() {
+        return this.x.getValue().intValue() + this.posX;
+    }
+
+    @Override
+    public void setPosX(int posX) {
+        this.posX = posX;
+    }
+
+    @Override
+    public int getPosY() {
+        return this.y.getValue().intValue() + this.posY;
+    }
+
+    @Override
+    public void setPosY(int posY) {
+        this.posY = posY;
+    }
+
+    @Override
     public void render(MatrixStack matrixStack, int x, int y) {
-        DrawableHelper.fill(matrixStack, x + 1, y + 1, x + this.getWidth() - 1, y + this.getHeight() - 1, new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x + 1, y + 1, x + this.getWidth() - 1, y + this.getHeight() - 1, this.isViewed() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 1, new Color(130, 130, 130, 150).getRGB()); //top
         DrawableHelper.fill(matrixStack, x, y + this.getHeight() - 1, x + this.getWidth(), y + this.getHeight(), new Color(130, 130, 130, 150).getRGB()); //bottom
         DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB()); //left

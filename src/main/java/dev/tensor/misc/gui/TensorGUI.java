@@ -36,10 +36,7 @@ public final class TensorGUI extends Screen implements Wrapper {
             this.categoryElements.add(categoryElement);
             categoryY.getAndAdd(categoryElement.getHeight());
 
-            //temp addition to test
-            if (category.equals(Category.Player)) {
-                categoryElement.setSelected(true);
-            }
+            if (this.categoryElements.size() == 1) categoryElement.setSelected(true);
 
             final AtomicInteger moduleY = new AtomicInteger(22);
 
@@ -47,6 +44,8 @@ public final class TensorGUI extends Screen implements Wrapper {
                 ModuleElement moduleElement = new ModuleElement(module, x, y, 62, moduleY.get());
                 categoryElement.addModuleElement(moduleElement);
                 moduleY.getAndAdd(moduleElement.getHeight());
+
+                if (categoryElement.getModuleElements().size() == 1) moduleElement.setViewed(true);
             });
         });
     }
@@ -87,7 +86,52 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     @Override
+    public boolean mouseClicked(double mouseX, double mouseY, int clickedButton) {
+        if (clickedButton == 0) {
+
+            this.categoryElements.forEach(categoryElement -> {
+
+                if (isHovered(categoryElement, mouseX, mouseY)) {
+                    categoryElement.setSelected(true);
+                    triggerHovered(categoryElement);
+                    return;
+                }
+
+                categoryElement.getModuleElements().forEach(moduleElement -> {
+                    if (isHovered(moduleElement, mouseX, mouseY)) {
+                        moduleElement.setViewed(true);
+                        triggerView(moduleElement, categoryElement);
+                    }
+                });
+            });
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean isPauseScreen() {
         return false;
+    }
+
+    private boolean isHovered(Element element, double mouseX, double mouseY) {
+       return isHovered(element.getPosX(), element.getPosY(), element.getPosX() + element.getWidth(), element.getPosY() + element.getHeight(), mouseX, mouseY);
+    }
+
+    private boolean isHovered(int minX, int minY, int maxX, int maxY, double mouseX, double mouseY) {
+        if (mouseX < minX || mouseX > maxX) return false;
+        else return !(mouseY < minY) && !(mouseY > maxY);
+    }
+
+    private void triggerHovered(CategoryElement categoryElement) {
+        this.categoryElements.forEach(categoryElement1 -> {
+            if (!categoryElement1.equals(categoryElement)) categoryElement1.setSelected(false);
+        });
+    }
+
+    private void triggerView(ModuleElement moduleElement, CategoryElement categoryElement) {
+        categoryElement.getModuleElements().forEach(moduleElement1 -> {
+            if (!moduleElement1.equals(moduleElement)) moduleElement1.setViewed(false);
+        });
     }
 }
