@@ -8,7 +8,14 @@ import net.minecraft.client.util.math.MatrixStack;
 
 import java.awt.*;
 
+/**
+ * @author IUDevman
+ * @since 05-03-2021
+ */
+
 public final class ModuleElement implements Element {
+
+    private PropertyElement propertyElement;
 
     private final Module module;
     private final NumberSetting x;
@@ -31,6 +38,14 @@ public final class ModuleElement implements Element {
 
     public String getName() {
         return this.getModule().getName();
+    }
+
+    public PropertyElement getPropertyElement() {
+        return this.propertyElement;
+    }
+
+    public void addPropertyElement(PropertyElement propertyElement) {
+        this.propertyElement = propertyElement;
     }
 
     public boolean isViewed() {
@@ -79,6 +94,6 @@ public final class ModuleElement implements Element {
         DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB()); //left
         DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB()); //right
 
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255 ,255, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255 ,255, 255).getRGB());
     }
 }

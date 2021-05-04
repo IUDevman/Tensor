@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.misc.gui.elements.CategoryElement;
 import dev.tensor.misc.gui.elements.ModuleElement;
+import dev.tensor.misc.gui.elements.PropertyElement;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Wrapper;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -11,11 +12,17 @@ import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
+import net.minecraft.util.Formatting;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicInteger;
+
+/**
+ * @author IUDevman
+ * @since 05-03-2021
+ */
 
 public final class TensorGUI extends Screen implements Wrapper {
 
@@ -46,6 +53,9 @@ public final class TensorGUI extends Screen implements Wrapper {
                 moduleY.getAndAdd(moduleElement.getHeight());
 
                 if (categoryElement.getModuleElements().size() == 1) moduleElement.setViewed(true);
+
+                PropertyElement propertyElement = new PropertyElement(module, x, y, 184, 22);
+                moduleElement.addPropertyElement(propertyElement);
             });
         });
     }
@@ -54,6 +64,7 @@ public final class TensorGUI extends Screen implements Wrapper {
     public void render(MatrixStack matrixStack, int x, int y, float delta) {
         final AtomicInteger guiHeight = new AtomicInteger(0);
         final AtomicInteger moduleHeight = new AtomicInteger(22);
+        final AtomicInteger settingHeight = new AtomicInteger(22);
 
         this.categoryElements.forEach(categoryElement -> {
             categoryElement.render(matrixStack, categoryElement.getPosX(), categoryElement.getPosY());
@@ -63,12 +74,22 @@ public final class TensorGUI extends Screen implements Wrapper {
                 categoryElement.getModuleElements().forEach(moduleElement -> {
                     moduleElement.render(matrixStack, moduleElement.getPosX(), moduleElement.getPosY());
                     moduleHeight.getAndAdd(moduleElement.getHeight());
+
+                    if (moduleElement.isViewed()) {
+                        PropertyElement propertyElement = moduleElement.getPropertyElement();
+                        propertyElement.render(matrixStack, propertyElement.getPosX(), propertyElement.getPosY());
+                        settingHeight.getAndAdd(propertyElement.getHeight());
+                    }
                 });
             }
         });
 
         if (moduleHeight.get() < guiHeight.get()) {
             DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + moduleHeight.get(), this.x.getValue().intValue() + 182, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB());
+        }
+
+        if (settingHeight.get() < guiHeight.get()) {
+            DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + settingHeight.get(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB()); //setting fill
         }
 
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //c-m line
@@ -79,9 +100,8 @@ public final class TensorGUI extends Screen implements Wrapper {
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() - 2, this.y.getValue().intValue(), this.x.getValue().intValue(), this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //left
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() - 2, this.x.getValue().intValue() + guiWidth + 2, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //right
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + 20, new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB()); //setting fill
 
-        String name = Tensor.INSTANCE.MOD_NAME + " (" + Tensor.INSTANCE.MOD_VERSION + ")";
+        String name = Tensor.INSTANCE.MOD_NAME + " (" + Formatting.YELLOW + Tensor.INSTANCE.MOD_VERSION + Formatting.RESET + ")";
         DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, name, this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
     }
 
