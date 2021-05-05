@@ -9,12 +9,11 @@
     "Go_Hoosiers"
   ],
   "contact": {
-    "homepage": "https://insert-discord.here",
+    "homepage": "https://github.com/IUDevman",
     "sources": "https://github.com/IUDevman/Tensor"
   },
 
   "license": "ARR",
-  "icon": "assets/tensor/logo.png",
 
   "environment": "*",
   "entrypoints": {

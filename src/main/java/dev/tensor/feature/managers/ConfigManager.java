@@ -171,4 +171,8 @@ public enum ConfigManager implements Manager {
 
         Files.createFile(path);
     }
+
+    public String getMainPath() {
+        return this.mainPath;
+    }
 }
