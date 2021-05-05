@@ -21,6 +21,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -106,7 +107,27 @@ public final class TensorGUI extends Screen implements Wrapper {
         this.categoryElements.forEach(categoryElement -> {
             categoryElement.render(matrixStack, categoryElement.getPosX(), categoryElement.getPosY());
             guiHeight.getAndAdd(categoryElement.getHeight());
+        });
 
+        this.guiHeight = guiHeight.get();
+
+        int posX = this.x.getValue().intValue() + 62;
+        int posY = this.y.getValue().intValue() + 22;
+        int width1 = this.guiWidth - 62;
+        int height1 = this.guiHeight - 22;
+
+        int windowHeight = getMinecraft().getWindow().getHeight();
+        double scale = getMinecraft().getWindow().getScaleFactor();
+        int widthScaled = (int) (scale * width1);
+        int heightScaled = (int) (scale * height1);
+        int xScaled = (int) (posX * scale);
+        int yScaled = (int) (posY * scale);
+
+        GL11.glPushMatrix();
+        GL11.glScissor(xScaled, windowHeight - yScaled - heightScaled, widthScaled, heightScaled);
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+
+        this.categoryElements.forEach(categoryElement -> {
             if (categoryElement.isSelected()) {
                 categoryElement.getModuleElements().forEach(moduleElement -> {
                     moduleElement.render(matrixStack, moduleElement.getPosX(), moduleElement.getPosY());
@@ -126,8 +147,6 @@ public final class TensorGUI extends Screen implements Wrapper {
             }
         });
 
-        this.guiHeight = guiHeight.get();
-
         if (moduleHeight.get() + this.mScrollY.getValue().intValue() < guiHeight.get()) {
             DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue() + this.mScrollY.getValue().intValue() + moduleHeight.get(), this.x.getValue().intValue() + 182, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB());
         }
@@ -135,6 +154,9 @@ public final class TensorGUI extends Screen implements Wrapper {
         if (settingHeight.get() + this.sScrollY.getValue().intValue() < guiHeight.get()) {
             DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + this.sScrollY.getValue().intValue() + settingHeight.get(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), new Color(0, 0, 0, 150).getRGB()); //setting fill
         }
+
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+        GL11.glPopMatrix();
 
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //c-m line
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB()); //m-s line
