@@ -21,6 +21,7 @@ public final class ManagerLoader {
         loadManager(SettingManager.INSTANCE);
         loadManager(EventManager.INSTANCE);
         loadManager(ConfigManager.INSTANCE);
+        loadManager(CapeManager.INSTANCE);
     }
 
     private static void loadManager(Manager manager) {

@@ -12,5 +12,5 @@ import dev.tensor.misc.imp.settings.NumberSetting;
 @Module.Info(name = "Reach", category = Category.Player)
 public final class Reach extends Module {
 
-    public final NumberSetting distance = new NumberSetting("Distance", 5, 3, 8, 2);
+    public final NumberSetting distance = new NumberSetting("Distance", 5.00, 3.00, 8.00, 2);
 }

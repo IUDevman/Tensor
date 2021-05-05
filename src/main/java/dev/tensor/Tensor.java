@@ -37,14 +37,14 @@ public final class Tensor implements ModInitializer {
         LOGGER.info("Finished initializing " + MOD_NAME + " " + MOD_VERSION +  " (" + finishedTime + "s)!");
     }
 
-    public TensorGUI GUI;
+    public TensorGUI TENSOR_GUI;
 
     private void setupClient() {
 
         ManagerLoader.load();
         LOGGER.info("Finished initializing managers!");
 
-        GUI = new TensorGUI();
+        TENSOR_GUI = new TensorGUI();
         LOGGER.info("Finished initializing gui!");
     }
 }

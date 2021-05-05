@@ -3,6 +3,10 @@ package dev.tensor.feature.managers;
 import com.google.gson.*;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.settings.BooleanSetting;
+import dev.tensor.misc.imp.settings.ColorSetting;
+import dev.tensor.misc.imp.settings.EnumSetting;
+import dev.tensor.misc.imp.settings.NumberSetting;
 
 import java.awt.*;
 import java.io.*;
@@ -10,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 
 /**
  * @author IUDevman
@@ -64,25 +69,21 @@ public enum ConfigManager implements Manager {
 
                     if (jsonElement == null) return;
 
-                    if (objectSetting.getValue() instanceof Boolean) {
-                        objectSetting.setValue(jsonElement.getAsBoolean());
-                    } else if (objectSetting.getValue() instanceof Integer || objectSetting.getValue() instanceof Double) {
-                        objectSetting.setValue(jsonElement.getAsDouble());
-                    } else if (objectSetting.getValue() instanceof Enum) {
-                        int count = 0;
-                        while (!objectSetting.getValue().toString().equals(jsonElement.getAsString())) {
-                            Enum<?>[] array = ((Enum<?>) objectSetting.getValue()).getDeclaringClass().getEnumConstants();
-                            int index = ((Enum<?>) objectSetting.getValue()).ordinal() + 1;
+                    if (objectSetting instanceof BooleanSetting) {
+                        ((BooleanSetting) objectSetting).setValue(jsonElement.getAsBoolean());
+                    } else if (objectSetting instanceof NumberSetting) {
+                        ((NumberSetting) objectSetting).setValue(jsonElement.getAsDouble());
+                    } else if (objectSetting instanceof EnumSetting) {
+                        Enum<?>[] array = ((EnumSetting) objectSetting).getValue().getDeclaringClass().getEnumConstants();
 
-                            if (index >= array.length) index = 0;
+                        Arrays.stream(array).forEach(anEnum -> {
+                            if (anEnum.name().equalsIgnoreCase(jsonElement.getAsString())) {
+                                ((EnumSetting) objectSetting).setValue(anEnum);
+                            }
+                        });
 
-                            if (count > array.length) return;
-
-                            objectSetting.setValue(array[index]);
-                            count++;
-                        }
-                    } else if (objectSetting.getValue() instanceof Color) {
-                        objectSetting.setValue(new Color(jsonElement.getAsInt()));
+                    } else if (objectSetting instanceof ColorSetting) {
+                        ((ColorSetting) objectSetting).setValue(new Color(jsonElement.getAsInt()));
                     }
                 });
 
@@ -169,5 +170,9 @@ public enum ConfigManager implements Manager {
         if (Files.exists(path)) Files.delete(path);
 
         Files.createFile(path);
+    }
+
+    public String getMainPath() {
+        return this.mainPath;
     }
 }

@@ -19,7 +19,7 @@ public enum SettingManager implements Manager {
 
     INSTANCE;
 
-    private final LinkedHashMap<Setting<Object>, Module> settingModuleLinkedHashMap = new LinkedHashMap<>();
+    private final LinkedHashMap<Setting<?>, Module> settingModuleLinkedHashMap = new LinkedHashMap<>();
 
     @Override
     public void load() {
@@ -31,8 +31,7 @@ public enum SettingManager implements Manager {
                 if (!field.isAccessible()) field.setAccessible(true);
 
                 try {
-                    @SuppressWarnings("unchecked")
-                    Setting<Object> setting = (Setting<Object>) field.get(module);
+                    Setting<?> setting = (Setting<?>) field.get(module);
                     this.settingModuleLinkedHashMap.put(setting, module);
 
                 } catch (IllegalAccessException e) {
@@ -42,12 +41,12 @@ public enum SettingManager implements Manager {
         }));
     }
 
-    public Collection<Setting<Object>> getSettings() {
+    public Collection<Setting<?>> getSettings() {
         return settingModuleLinkedHashMap.keySet();
     }
 
-    public ArrayList<Setting<Object>> getSettingsForModule(Module module) {
-        final ArrayList<Setting<Object>> settings = new ArrayList<>();
+    public ArrayList<Setting<?>> getSettingsForModule(Module module) {
+        final ArrayList<Setting<?>> settings = new ArrayList<>();
 
         this.settingModuleLinkedHashMap.forEach((setting, module1) -> {
             if (module1.equals(module)) settings.add(setting);
