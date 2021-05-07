@@ -20,8 +20,8 @@ public final class ManagerLoader {
         loadManager(ModuleManager.INSTANCE);
         loadManager(SettingManager.INSTANCE);
         loadManager(EventManager.INSTANCE);
-        loadManager(ConfigManager.INSTANCE);
         loadManager(CapeManager.INSTANCE);
+        loadManager(ConfigManager.INSTANCE);
     }
 
     private static void loadManager(Manager manager) {

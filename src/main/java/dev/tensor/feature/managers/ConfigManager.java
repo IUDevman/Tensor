@@ -15,6 +15,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
+import java.util.Locale;
 
 /**
  * @author IUDevman
@@ -25,7 +26,7 @@ public enum ConfigManager implements Manager {
 
     INSTANCE;
 
-    private final String mainPath = "tensor/";
+    private final String mainPath = Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/";
     private final String modulePath = mainPath + "modules/";
 
     @Override
@@ -170,9 +171,5 @@ public enum ConfigManager implements Manager {
         if (Files.exists(path)) Files.delete(path);
 
         Files.createFile(path);
-    }
-
-    public String getMainPath() {
-        return this.mainPath;
     }
 }

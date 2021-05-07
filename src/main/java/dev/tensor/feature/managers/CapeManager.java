@@ -10,6 +10,8 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Locale;
 
 /**
  * @author IUDevman
@@ -20,11 +22,13 @@ public enum CapeManager implements Manager {
 
     INSTANCE;
 
+    private final ArrayList<String> capePlayers = new ArrayList<>();
+
     @Override
     public void load() {
         Tensor.INSTANCE.LOGGER.info("CapeManager");
 
-        Path path = Paths.get(ConfigManager.INSTANCE.getMainPath() + "Cape.png");
+        Path path = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/Cape.png");
 
         if (Files.exists(path)) return;
 
