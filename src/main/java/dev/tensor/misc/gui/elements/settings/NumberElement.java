@@ -7,8 +7,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Formatting;
 
 import java.awt.*;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 /**
  * @author IUDevman
@@ -61,15 +59,5 @@ public final class NumberElement extends SettingElement {
     @Override
     public void onClick(double mouseX, double mouseY) {
 
-    }
-
-    //todo
-    @SuppressWarnings("ResultOfMethodCallIgnored")
-    private void handleSetValue(double newValue) {
-        BigDecimal bigDecimal = new BigDecimal(newValue);
-        bigDecimal.setScale(this.numberSetting.getDecimal() + 1, RoundingMode.HALF_UP); //I need to test to see what this value returns
-
-        if (bigDecimal.doubleValue() > this.numberSetting.getMax()) this.numberSetting.setValue(this.numberSetting.getMax());
-        else this.numberSetting.setValue(Math.max(bigDecimal.doubleValue(), this.numberSetting.getMin()));
     }
 }

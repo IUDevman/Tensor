@@ -19,8 +19,8 @@ public final class PropertyElement implements Element {
     private final NumberSetting x;
     private final NumberSetting y;
     private final NumberSetting scrollY;
-    private int posX;
-    private int posY;
+    private final int posX;
+    private final int posY;
     
     public PropertyElement(Module module, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         this.module = module;
