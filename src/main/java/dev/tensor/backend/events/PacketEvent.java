@@ -8,7 +8,7 @@ import net.minecraft.network.Packet;
  * @since 04-13-2021
  */
 
-public class PacketEvent extends Event {
+public final class PacketEvent extends Event {
 
     private final Type type;
     private final Packet<?> packet;
