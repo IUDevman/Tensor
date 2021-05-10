@@ -12,9 +12,7 @@
     "KeyBindingMixin",
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
-    "accessors.ChatHudAccessor",
-    "accessors.EntityVelocityUpdateS2CPacketAccessor",
-    "accessors.ExplosionS2CPacketAccessor"
+    "accessors.ChatHudAccessor"
   ],
   "injectors": {
     "defaultRequire": 1

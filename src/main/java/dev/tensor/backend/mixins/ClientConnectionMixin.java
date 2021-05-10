@@ -3,7 +3,6 @@ package dev.tensor.backend.mixins;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Wrapper;
-import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
 import net.minecraft.network.ClientConnection;
@@ -25,16 +24,7 @@ public final class ClientConnectionMixin implements Wrapper {
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
-        if (!isNull()) Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
-
-        if (packetEvent.isCancelled()) callbackInfo.cancel();
-    }
-
-    @Inject(method = "channelRead0", at = @At("HEAD"), cancellable = true)
-    public void receive(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo callbackInfo) {
-        PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
-
-        if (!isNull()) Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
+        Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
 
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
