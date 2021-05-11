@@ -7,6 +7,8 @@ import dev.tensor.misc.imp.Module;
 public final class NoWeather extends Module {
 
     public void onTick() {
+        if (!getWorld().getDimension().isBedWorking()) return;
+
         if (getWorld().isRaining()) getWorld().setRainGradient(0);
         if (getWorld().isThundering()) getWorld().setThunderGradient(0);
     }
