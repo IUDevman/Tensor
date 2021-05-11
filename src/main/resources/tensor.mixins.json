@@ -15,6 +15,7 @@
     "KeyBindingMixin",
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
+    "WorldRendererMixin",
     "accessors.ChatHudAccessor"
   ],
   "injectors": {
