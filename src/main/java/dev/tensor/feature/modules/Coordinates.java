@@ -34,7 +34,7 @@ public final class Coordinates extends Module {
 
         if (nether.getValue() && !getWorld().getDimension().hasEnderDragonFight()) {
             final String nether = "X: " + decimalFormat.format(playerX / 8) + " Y: " + decimalFormat.format(playerY) + " Z: " + decimalFormat.format(playerZ / 8);
-            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, nether, posX.getValue().intValue(), posY.getValue().intValue() + getMinecraft().textRenderer.fontHeight, new Color(255, 0, 0, 255).getRGB());
+            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, nether, posX.getValue().intValue(), posY.getValue().intValue() + getMinecraft().textRenderer.fontHeight + 1, new Color(255, 0, 0, 255).getRGB());
         }
     }
 }
