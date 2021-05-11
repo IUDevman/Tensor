@@ -23,20 +23,20 @@ public final class InGameHudMixin implements Wrapper {
     public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
         NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled()) callbackInfo.cancel();
+        if (noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
     public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled()) callbackInfo.cancel();
+        if (noOverlay.isEnabled() && noOverlay.status.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
     public void renderVignetteOverlay(Entity entity, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled()) callbackInfo.cancel();
+        if (noOverlay.isEnabled() && noOverlay.vignette.getValue()) callbackInfo.cancel();
     }
 }
