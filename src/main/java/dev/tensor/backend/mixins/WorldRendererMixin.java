@@ -49,6 +49,7 @@ public final class WorldRendererMixin implements Wrapper {
         if (noParticles.isEnabled()) {
             if (noParticles.all.getValue()) cir.cancel();
             else if (noParticles.ash.getValue() && (parameters.getType().equals(ParticleTypes.ASH) || parameters.getType().equals(ParticleTypes.WHITE_ASH))) cir.cancel();
+            else if (noParticles.spore.getValue() && (parameters.getType().equals(ParticleTypes.CRIMSON_SPORE) || parameters.getType().equals(ParticleTypes.WARPED_SPORE) || parameters.getType().equals(ParticleTypes.MYCELIUM))) cir.cancel();
             else if (noParticles.explosion.getValue() && parameters.getType().equals(ParticleTypes.EXPLOSION)) cir.cancel();
             else if (noParticles.underWater.getValue() && parameters.getType().equals(ParticleTypes.UNDERWATER)) cir.cancel();
             else if (noParticles.lava.getValue() && parameters.getType().equals(ParticleTypes.LAVA)) cir.cancel();

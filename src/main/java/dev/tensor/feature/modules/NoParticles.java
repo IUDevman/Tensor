@@ -14,6 +14,7 @@ public final class NoParticles extends Module {
 
     public final BooleanSetting all = new BooleanSetting("All", false);
     public final BooleanSetting ash = new BooleanSetting("Ash", true);
+    public final BooleanSetting spore = new BooleanSetting("Spore", true);
     public final BooleanSetting explosion = new BooleanSetting("Explosion", true);
     public final BooleanSetting underWater = new BooleanSetting("Underwater", true);
     public final BooleanSetting lava = new BooleanSetting("Lava", false);
