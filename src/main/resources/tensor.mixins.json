@@ -9,6 +9,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "GameRendererMixin",
+    "InGameHudMixin",
     "InGameOverlayRendererMixin",
     "KeyBindingMixin",
     "MinecraftClientMixin",
