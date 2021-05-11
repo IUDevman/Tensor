@@ -17,7 +17,7 @@ public final class Coordinates extends Module {
     public final NumberSetting posY = new NumberSetting("Y Position", 20, 0, 1000, 0);
     public final BooleanSetting nether = new BooleanSetting("Nether", false);
 
-    private final DecimalFormat decimalFormat = new DecimalFormat("###.##");
+    private final DecimalFormat decimalFormat = new DecimalFormat("###.#");
 
     public void onRender2D(MatrixStack matrixStack) {
         double playerX = getPlayer().getX();
