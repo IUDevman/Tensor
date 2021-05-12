@@ -39,6 +39,7 @@ public final class ColorElement extends SettingElement {
         this.searchingR = false;
         this.searchingG = false;
         this.searchingB = false;
+        this.value = "";
     }
 
     @Override

@@ -38,6 +38,7 @@ public final class NumberElement extends SettingElement {
 
     public void setSearching(boolean searching) {
         this.searching = searching;
+        this.value = "";
     }
 
     @Override
