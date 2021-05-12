@@ -242,13 +242,13 @@ public final class TensorGUI extends Screen implements Wrapper {
             int scrollSpeed = scroll > 0 ? -10 : 10;
 
             if (isHovered(this.x.getValue().intValue() + 62, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
-                //if (shouldScroll(true)) return true;
+                if (shouldScroll(true, scrollSpeed)) return true;
                 handleScroll(this.mScrollY, scrollSpeed);
                 return true;
             }
 
             if (isHovered(this.x.getValue().intValue() + 184, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + this.guiWidth, this.y.getValue().intValue() + this.guiHeight, mouseX, mouseY)) {
-                //if (shouldScroll(false)) return true;
+                if (shouldScroll(false, scrollSpeed)) return true;
                 handleScroll(this.sScrollY, scrollSpeed);
                 return true;
             }
@@ -344,7 +344,7 @@ public final class TensorGUI extends Screen implements Wrapper {
         numberSetting.setValue(numberSetting.getValue() + scrollSpeed);
     }
 
-    private boolean shouldScroll(boolean module) {
+    private boolean shouldScroll(boolean module, int scrollSpeed) {
         AtomicInteger moduleLength = new AtomicInteger(0);
         AtomicInteger settingLength = new AtomicInteger(0);
 
@@ -362,7 +362,7 @@ public final class TensorGUI extends Screen implements Wrapper {
             }
         });
 
-        return module ? (moduleLength.get() <= this.guiHeight - 22) : (settingLength.get() <= this.guiHeight - 22);
+        return module ? (moduleLength.get() + (scrollSpeed < 0 ? this.mScrollY.getValue().intValue() : 0) <= this.guiHeight - 22) : (settingLength.get() + (scrollSpeed < 0 ? this.sScrollY.getValue().intValue() : 0) <= this.guiHeight - 22);
     }
 
     public int[] getAcceptedKeys() {
