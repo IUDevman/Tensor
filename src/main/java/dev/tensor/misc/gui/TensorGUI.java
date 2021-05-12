@@ -199,6 +199,7 @@ public final class TensorGUI extends Screen implements Wrapper {
                         if (moduleElement.isViewed()) {
                             if (isHovered(moduleElement.getPropertyElement(), mouseX, mouseY)) {
                                 moduleElement.getPropertyElement().onClick(mouseX, mouseY);
+                                triggerSetting(null);
                                 return;
                             }
 
