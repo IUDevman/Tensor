@@ -64,7 +64,7 @@ public final class NumberElement extends SettingElement {
     public void render(MatrixStack matrixStack, int x, int y) {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), this.isSearching() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
 
-        String value = this.numberSetting.getName() + " (" + this.numberSetting.getMin() + " -> " + this.numberSetting.getMax() + ") : " + Formatting.GRAY + (this.isSearching() ? this.value :  this.numberSetting.getValue()); //probably gonna wanna round this value too
+        String value = this.numberSetting.getName() + " (" + this.numberSetting.getMin() + " -> " + this.numberSetting.getMax() + ") : " + Formatting.GRAY + (this.isSearching() ? (this.value.equalsIgnoreCase("") ? "..." : this.value) :  this.numberSetting.getValue()); //probably gonna wanna round this value too
 
         DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, value, x + 3, y + 3, new Color(255, 255 ,255 ,255).getRGB());
     }

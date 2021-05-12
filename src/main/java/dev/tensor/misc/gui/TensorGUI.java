@@ -291,6 +291,7 @@ public final class TensorGUI extends Screen implements Wrapper {
     @Override
     public void onClose() {
         resetScroll(true);
+        triggerSetting(null);
         super.onClose();
     }
 
