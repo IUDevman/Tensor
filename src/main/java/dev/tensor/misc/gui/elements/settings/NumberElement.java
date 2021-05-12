@@ -82,8 +82,13 @@ public final class NumberElement extends SettingElement {
             return;
         }
 
-        if (key == GLFW.GLFW_KEY_ENTER && !value.equals("")) {
-            //set new value
+        if (key == GLFW.GLFW_KEY_ENTER) {
+
+            if (value.equals("")) {
+                setSearching(false);
+                return;
+            }
+
             double value1 = Double.parseDouble(value);
 
             if (value1 > getNumberSetting().getMax()) value1 = getNumberSetting().getMax();
