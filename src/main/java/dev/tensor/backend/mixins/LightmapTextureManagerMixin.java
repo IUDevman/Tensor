@@ -1,0 +1,29 @@
+package dev.tensor.backend.mixins;
+
+import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.FullBright;
+import dev.tensor.misc.imp.Wrapper;
+import net.minecraft.client.render.LightmapTextureManager;
+import net.minecraft.world.World;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+/**
+ * @author IUDevman
+ * @since 05-12-2021
+ */
+
+@Mixin(LightmapTextureManager.class)
+public final class LightmapTextureManagerMixin implements Wrapper {
+
+    @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)
+    public void getBrightness(World world, int i, CallbackInfoReturnable<Float> cir) {
+        FullBright fullBright = ModuleManager.INSTANCE.getModule(FullBright.class);
+
+        if (fullBright.isEnabled()) {
+            cir.setReturnValue(100F);
+        }
+    }
+}

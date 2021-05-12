@@ -13,6 +13,7 @@
     "InGameHudMixin",
     "InGameOverlayRendererMixin",
     "KeyBindingMixin",
+    "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
     "WorldRendererMixin",
