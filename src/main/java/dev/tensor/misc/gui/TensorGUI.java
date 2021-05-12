@@ -6,10 +6,8 @@ import dev.tensor.feature.managers.SettingManager;
 import dev.tensor.misc.gui.elements.CategoryElement;
 import dev.tensor.misc.gui.elements.ModuleElement;
 import dev.tensor.misc.gui.elements.PropertyElement;
-import dev.tensor.misc.gui.elements.settings.BooleanElement;
-import dev.tensor.misc.gui.elements.settings.ColorElement;
-import dev.tensor.misc.gui.elements.settings.EnumElement;
-import dev.tensor.misc.gui.elements.settings.NumberElement;
+import dev.tensor.misc.gui.elements.SettingElement;
+import dev.tensor.misc.gui.elements.settings.*;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Wrapper;
 import dev.tensor.misc.imp.settings.BooleanSetting;
@@ -94,6 +92,10 @@ public final class TensorGUI extends Screen implements Wrapper {
                         settingY.getAndAdd(categoryElement.getHeight());
                     }
                 });
+
+                KeybindElement keybindElement = new KeybindElement(module, x, y, sScrollY, 184, settingY.get());
+                moduleElement.addSettingElement(keybindElement);
+                settingY.getAndAdd(keybindElement.getHeight());
             });
         });
     }
@@ -203,6 +205,7 @@ public final class TensorGUI extends Screen implements Wrapper {
                             moduleElement.getSettingElements().forEach(settingElement -> {
                                 if (isHovered(settingElement, mouseX, mouseY)) {
                                     settingElement.onClick(mouseX, mouseY);
+                                    triggerSetting(settingElement);
                                 }
                             });
                         }
@@ -253,6 +256,30 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     @Override
+    public boolean keyPressed(int keyCode, int scanCode, int modifiers) {
+        if (!super.keyPressed(keyCode, scanCode, modifiers)) {
+            this.categoryElements.forEach(categoryElement -> {
+
+                if (categoryElement.isSelected()) {
+                    categoryElement.getModuleElements().forEach(moduleElement -> {
+
+                        if (moduleElement.isViewed()) {
+                            moduleElement.getSettingElements().forEach(settingElement -> {
+
+                                if (settingElement instanceof KeybindElement) {
+                                    ((KeybindElement) settingElement).onKeyPressed(keyCode);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        }
+
+        return true;
+    }
+
+    @Override
     public boolean isPauseScreen() {
         return false;
     }
@@ -277,6 +304,7 @@ public final class TensorGUI extends Screen implements Wrapper {
         this.categoryElements.forEach(categoryElement1 -> {
             if (!categoryElement1.equals(categoryElement)) categoryElement1.setSelected(false);
         });
+        triggerSetting(null);
     }
 
     private void triggerView(ModuleElement moduleElement, CategoryElement categoryElement) {
@@ -284,6 +312,15 @@ public final class TensorGUI extends Screen implements Wrapper {
         categoryElement.getModuleElements().forEach(moduleElement1 -> {
             if (!moduleElement1.equals(moduleElement)) moduleElement1.setViewed(false);
         });
+        triggerSetting(null);
+    }
+
+    private void triggerSetting(SettingElement settingElement) {
+        this.categoryElements.forEach(categoryElement -> categoryElement.getModuleElements().forEach(moduleElement -> moduleElement.getSettingElements().forEach(settingElement1 -> {
+            if (!settingElement1.equals(settingElement) && settingElement1 instanceof KeybindElement) {
+                ((KeybindElement) settingElement1).setSearching(false);
+            }
+        })));
     }
 
     private void resetScroll(boolean category) {
