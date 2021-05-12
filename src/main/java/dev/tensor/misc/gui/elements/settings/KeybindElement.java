@@ -75,6 +75,10 @@ public final class KeybindElement extends SettingElement {
     public void onKeyPressed(int key) {
         if (!isSearching()) return;
 
+        if (key == GLFW.GLFW_KEY_DELETE) {
+            getModule().setBind(GLFW.GLFW_KEY_UNKNOWN);
+        }
+
         if (key != GLFW.GLFW_KEY_ESCAPE && key != GLFW.GLFW_KEY_DELETE && key != GLFW.GLFW_KEY_ENTER) {
             getModule().setBind(key);
         }
