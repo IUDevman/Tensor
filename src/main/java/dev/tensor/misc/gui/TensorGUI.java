@@ -19,6 +19,7 @@ import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
+import org.lwjgl.glfw.GLFW;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -269,6 +270,8 @@ public final class TensorGUI extends Screen implements Wrapper {
 
                                 if (settingElement instanceof KeybindElement) {
                                     ((KeybindElement) settingElement).onKeyPressed(keyCode);
+                                } else if (settingElement instanceof NumberElement) {
+                                    ((NumberElement) settingElement).onKeyPressed(keyCode);
                                 }
                             });
                         }
@@ -292,7 +295,7 @@ public final class TensorGUI extends Screen implements Wrapper {
     }
 
     private boolean isHovered(Element element, double mouseX, double mouseY) {
-       return isHovered(element.getPosX(), element.getPosY(), element.getPosX() + element.getWidth(), element.getPosY() + element.getHeight(), mouseX, mouseY);
+        return isHovered(element.getPosX(), element.getPosY(), element.getPosX() + element.getWidth(), element.getPosY() + element.getHeight(), mouseX, mouseY);
     }
 
     private boolean isHovered(int minX, int minY, int maxX, int maxY, double mouseX, double mouseY) {
@@ -318,8 +321,10 @@ public final class TensorGUI extends Screen implements Wrapper {
 
     private void triggerSetting(SettingElement settingElement) {
         this.categoryElements.forEach(categoryElement -> categoryElement.getModuleElements().forEach(moduleElement -> moduleElement.getSettingElements().forEach(settingElement1 -> {
-            if (!settingElement1.equals(settingElement) && settingElement1 instanceof KeybindElement) {
+            if (settingElement1 instanceof KeybindElement && !settingElement1.equals(settingElement)) {
                 ((KeybindElement) settingElement1).setSearching(false);
+            } else if (settingElement1 instanceof NumberElement && !settingElement1.equals(settingElement)) {
+                ((NumberElement) settingElement1).setSearching(false);
             }
         })));
     }
@@ -353,5 +358,22 @@ public final class TensorGUI extends Screen implements Wrapper {
         });
 
         return module ? (moduleLength.get() <= this.guiHeight - 22) : (settingLength.get() <= this.guiHeight - 22);
+    }
+
+    public int[] getAcceptedKeys() {
+        return new int[] {
+                GLFW.GLFW_KEY_0,
+                GLFW.GLFW_KEY_1,
+                GLFW.GLFW_KEY_2,
+                GLFW.GLFW_KEY_3,
+                GLFW.GLFW_KEY_4,
+                GLFW.GLFW_KEY_5,
+                GLFW.GLFW_KEY_6,
+                GLFW.GLFW_KEY_7,
+                GLFW.GLFW_KEY_8,
+                GLFW.GLFW_KEY_9,
+                GLFW.GLFW_KEY_PERIOD,
+                GLFW.GLFW_KEY_BACKSPACE
+        };
     }
 }
