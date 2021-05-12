@@ -12,5 +12,5 @@ import dev.tensor.misc.imp.settings.BooleanSetting;
 @Module.Info(name = "NoViewBob", category = Category.Render)
 public final class NoViewBob extends Module {
 
-    public final BooleanSetting hurtOnly = new BooleanSetting("Hurt Only", false);
+    public final BooleanSetting hurtOnly = new BooleanSetting("Hurt Only", true);
 }
