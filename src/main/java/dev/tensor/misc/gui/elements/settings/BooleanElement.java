@@ -52,7 +52,7 @@ public final class BooleanElement extends SettingElement {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), new Color(0, 0, 0, 150).getRGB());
 
         String text = getBooleanSetting().getName() + " (" + (getBooleanSetting().getValue() ? Formatting.GREEN + "true" : Formatting.RED + "false") + Formatting.RESET + ")";
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255 ,255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

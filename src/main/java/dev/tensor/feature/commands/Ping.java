@@ -28,7 +28,7 @@ public final class Ping implements Command {
 
     @Override
     public String[] getAliases() {
-        return new String[] {
+        return new String[]{
                 "ping",
                 "testping",
                 "pingpong"

@@ -34,7 +34,7 @@ public final class Tensor implements ModInitializer {
         setupClient();
 
         double finishedTime = (System.currentTimeMillis() - startTime) / 1000;
-        LOGGER.info("Finished initializing " + MOD_NAME + " " + MOD_VERSION +  " (" + finishedTime + "s)!");
+        LOGGER.info("Finished initializing " + MOD_NAME + " " + MOD_VERSION + " (" + finishedTime + "s)!");
     }
 
     public TensorGUI TENSOR_GUI;

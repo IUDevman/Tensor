@@ -52,7 +52,7 @@ public final class EnumElement extends SettingElement {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), new Color(0, 0, 0, 150).getRGB());
 
         String text = getEnumSetting().getName() + " : " + Formatting.GRAY + getEnumSetting().getValue().name();
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255 ,255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

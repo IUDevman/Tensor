@@ -45,7 +45,8 @@ public final class AutoTool extends Module {
                 }
                 break;
             }
-            default: break;
+            default:
+                break;
         }
     });
 }

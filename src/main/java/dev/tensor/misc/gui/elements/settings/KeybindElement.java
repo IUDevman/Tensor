@@ -65,7 +65,7 @@ public final class KeybindElement extends SettingElement {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), this.isSearching() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
 
         String text = "Keybind : " + Formatting.GRAY + (this.isSearching() ? "..." : InputUtil.Type.KEYSYM.createFromCode(getModule().getBind()).getTranslationKey().replace("key.keyboard.", "").replace("unknown", "none").toUpperCase(Locale.ROOT));
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255 ,255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

@@ -1,7 +1,10 @@
 package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
-import dev.tensor.backend.events.*;
+import dev.tensor.backend.events.ClientRenderEvent;
+import dev.tensor.backend.events.ClientTickEvent;
+import dev.tensor.backend.events.KeyPressedEvent;
+import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -48,7 +51,8 @@ public enum EventManager implements Manager {
                         module.onRender2D(new MatrixStack());
                         break;
                     }
-                    default: break;
+                    default:
+                        break;
                 }
             }
         });

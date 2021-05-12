@@ -34,7 +34,7 @@ public final class Bind implements Command {
 
     @Override
     public String[] getAliases() {
-        return new String[] {
+        return new String[]{
                 "bind",
                 "binds",
                 "setbind"

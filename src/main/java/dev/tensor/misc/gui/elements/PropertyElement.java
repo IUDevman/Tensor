@@ -21,7 +21,7 @@ public final class PropertyElement implements Element {
     private final NumberSetting scrollY;
     private final int posX;
     private final int posY;
-    
+
     public PropertyElement(Module module, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         this.module = module;
         this.x = x;
@@ -30,7 +30,7 @@ public final class PropertyElement implements Element {
         this.posX = posX;
         this.posY = posY;
     }
-    
+
     @Override
     public int getWidth() {
         return 204;

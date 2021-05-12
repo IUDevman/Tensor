@@ -29,7 +29,7 @@ public final class Prefix implements Command {
 
     @Override
     public String[] getAliases() {
-        return new String[] {
+        return new String[]{
                 "prefix",
                 "setprefix",
                 "bindprefix",
@@ -58,6 +58,6 @@ public final class Prefix implements Command {
         }
 
         CommandManager.INSTANCE.setPrefix(prefix);
-        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY +")!", this.getID(), true, true);
+        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
     }
 }

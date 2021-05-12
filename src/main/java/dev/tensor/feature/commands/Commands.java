@@ -31,7 +31,7 @@ public final class Commands implements Command {
 
     @Override
     public String[] getAliases() {
-        return new String[] {
+        return new String[]{
                 "commands",
                 "command",
                 "listcommands",

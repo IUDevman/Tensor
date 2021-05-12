@@ -23,7 +23,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(ClientPlayerInteractionManager.class)
 public final class ClientPlayerInteractionManagerMixin implements Wrapper {
 
-    @Shadow private int blockBreakingCooldown;
+    @Shadow
+    private int blockBreakingCooldown;
 
     @Inject(method = "updateBlockBreakingProgress", at = @At("HEAD"))
     public void updateBlockBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {

@@ -30,7 +30,7 @@ public final class Messages implements Command {
 
     @Override
     public String[] getAliases() {
-        return new String[] {
+        return new String[]{
                 "messages",
                 "message",
                 "sendmessages",

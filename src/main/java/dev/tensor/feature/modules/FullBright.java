@@ -40,7 +40,8 @@ public final class FullBright extends Module {
                 getPlayer().removeStatusEffect(StatusEffects.NIGHT_VISION);
                 break;
             }
-            default: break;
+            default:
+                break;
         }
     }
 
