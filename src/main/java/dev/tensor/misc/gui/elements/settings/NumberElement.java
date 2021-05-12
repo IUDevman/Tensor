@@ -64,7 +64,7 @@ public final class NumberElement extends SettingElement {
     public void render(MatrixStack matrixStack, int x, int y) {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), this.isSearching() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
 
-        String value = this.numberSetting.getName() + " (" + this.numberSetting.getMin() + " -> " + this.numberSetting.getMax() + ") : " + Formatting.GRAY + (this.isSearching() ? (this.value.equalsIgnoreCase("") ? "..." : this.value) :  this.numberSetting.getValue()); //probably gonna wanna round this value too
+        String value = this.numberSetting.getName() + " (" + adjustForDecimals(this.numberSetting.getMin()) + " -> " + adjustForDecimals(this.numberSetting.getMax()) + ") : " + Formatting.GRAY + (this.isSearching() ? (this.value.equalsIgnoreCase("") ? "..." : this.value) :  adjustForDecimals(this.numberSetting.getValue()));
 
         DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, value, x + 3, y + 3, new Color(255, 255 ,255 ,255).getRGB());
     }
@@ -89,7 +89,7 @@ public final class NumberElement extends SettingElement {
             if (value1 > getNumberSetting().getMax()) value1 = getNumberSetting().getMax();
             else if (value1 < getNumberSetting().getMin()) value1 = getNumberSetting().getMin();
 
-            getNumberSetting().setValue(value1);
+            getNumberSetting().setValue(Double.parseDouble(this.adjustForDecimals(value1)));
             value = "";
             setSearching(false);
         }
@@ -102,5 +102,9 @@ public final class NumberElement extends SettingElement {
         }
 
         value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "").replace("period", ".");
+    }
+
+    private String adjustForDecimals(double value) {
+        return String.format("%." + this.numberSetting.getDecimal() + "f", value);
     }
 }
