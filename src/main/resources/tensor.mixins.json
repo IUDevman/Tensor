@@ -17,7 +17,8 @@
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
     "WorldRendererMixin",
-    "accessors.ChatHudAccessor"
+    "accessors.ChatHudAccessor",
+    "accessors.CloseHandledScreenC2SAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
