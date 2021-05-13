@@ -5,10 +5,12 @@
   "compatibilityLevel": "JAVA_8",
   "mixins": [
     "BackgroundRendererMixin",
+    "BlockMixin",
     "CameraMixin",
     "ClientConnectionMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
+    "CobWebBlockMixin",
     "GameRendererMixin",
     "InGameHudMixin",
     "InGameOverlayRendererMixin",
@@ -16,6 +18,7 @@
     "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
+    "SweetBerryBushBlockMixin",
     "WorldRendererMixin",
     "accessors.ChatHudAccessor",
     "accessors.CloseHandledScreenC2SAccessor"
