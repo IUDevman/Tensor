@@ -10,8 +10,6 @@ import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
 import org.lwjgl.glfw.GLFW;
 
-import java.util.Objects;
-
 /**
  * @author IUDevman
  * @since 05-13-2021
@@ -24,13 +22,14 @@ public final class MiddleClickPearl extends Module {
     @EventHandler
     private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
+        if (getMinecraft().interactionManager == null) return;
 
         final int oldSlot = getInventory().selectedSlot;
         final int newSlot = InventoryUtil.INSTANCE.findItem(Items.ENDER_PEARL);
 
         if (newSlot != -1) {
             InventoryUtil.INSTANCE.swap(newSlot);
-            Objects.requireNonNull(getMinecraft().interactionManager).interactItem(getPlayer(), getWorld(), Hand.MAIN_HAND);
+            getMinecraft().interactionManager.interactItem(getPlayer(), getWorld(), Hand.MAIN_HAND);
             InventoryUtil.INSTANCE.swap(oldSlot);
         }
     });
