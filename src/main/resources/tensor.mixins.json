@@ -18,6 +18,7 @@
     "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
     "RenderTickCounterMixin",
+    "SlimeBlockMixin",
     "SweetBerryBushBlockMixin",
     "WorldRendererMixin",
     "accessors.ChatHudAccessor",

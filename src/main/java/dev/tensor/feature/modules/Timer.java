@@ -12,7 +12,7 @@ import me.zero.alpine.listener.Listener;
  * @since 04-14-2021
  */
 
-@Module.Info(name = "Timer", category = Category.Player)
+@Module.Info(name = "Timer", category = Category.Movement)
 public final class Timer extends Module {
 
     public final NumberSetting multiplier = new NumberSetting("Multiplier", 2.0, 0.1, 20.0, 1);
