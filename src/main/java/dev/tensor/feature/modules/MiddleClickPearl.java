@@ -8,6 +8,7 @@ import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.item.Items;
 import net.minecraft.util.Hand;
+import net.minecraft.util.hit.HitResult;
 import org.lwjgl.glfw.GLFW;
 
 import java.util.Objects;
@@ -24,6 +25,7 @@ public final class MiddleClickPearl extends Module {
     @EventHandler
     private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
+        if (Objects.requireNonNull(getMinecraft().crosshairTarget).getType() != HitResult.Type.MISS) return;
 
         final int oldSlot = getInventory().selectedSlot;
         final int newSlot = InventoryUtil.INSTANCE.findItem(Items.ENDER_PEARL);
