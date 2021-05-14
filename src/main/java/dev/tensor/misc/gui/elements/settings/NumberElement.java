@@ -90,14 +90,21 @@ public final class NumberElement extends SettingElement {
                 return;
             }
 
-            double value1 = Double.parseDouble(value);
+            try {
+                double value1 = Double.parseDouble(value);
 
-            if (value1 > getNumberSetting().getMax()) value1 = getNumberSetting().getMax();
-            else if (value1 < getNumberSetting().getMin()) value1 = getNumberSetting().getMin();
+                if (value1 > getNumberSetting().getMax()) value1 = getNumberSetting().getMax();
+                else if (value1 < getNumberSetting().getMin()) value1 = getNumberSetting().getMin();
 
-            getNumberSetting().setValue(Double.parseDouble(this.adjustForDecimals(value1)));
-            value = "";
-            setSearching(false);
+                getNumberSetting().setValue(Double.parseDouble(this.adjustForDecimals(value1)));
+                value = "";
+                setSearching(false);
+
+            } catch (NullPointerException | NumberFormatException ignored) {
+                value = "";
+                setSearching(false);
+                return;
+            }
         }
 
         if (Arrays.stream(Tensor.INSTANCE.TENSOR_GUI.getAcceptedKeys()).noneMatch(value -> value == key)) return;
