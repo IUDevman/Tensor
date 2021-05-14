@@ -378,7 +378,8 @@ public final class TensorGUI extends Screen implements Wrapper {
                 GLFW.GLFW_KEY_8,
                 GLFW.GLFW_KEY_9,
                 GLFW.GLFW_KEY_PERIOD,
-                GLFW.GLFW_KEY_BACKSPACE
+                GLFW.GLFW_KEY_MINUS,
+                GLFW.GLFW_KEY_BACKSPACE,
         };
     }
 }

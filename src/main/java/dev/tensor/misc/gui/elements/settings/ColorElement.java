@@ -127,7 +127,7 @@ public final class ColorElement extends SettingElement {
 
         if (Arrays.stream(Tensor.INSTANCE.TENSOR_GUI.getAcceptedKeys()).noneMatch(value -> value == key)) return;
 
-        if (key == GLFW.GLFW_KEY_PERIOD) return;
+        if (key == GLFW.GLFW_KEY_PERIOD || key == GLFW.GLFW_KEY_MINUS) return;
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
             value = value.substring(0, value.length() - 1);

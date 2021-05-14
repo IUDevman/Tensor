@@ -107,7 +107,7 @@ public final class NumberElement extends SettingElement {
             return;
         }
 
-        value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "").replace("period", ".");
+        value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "").replace("period", ".").replace("minus", "-");
     }
 
     private String adjustForDecimals(double value) {
