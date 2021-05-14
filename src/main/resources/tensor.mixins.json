@@ -22,6 +22,7 @@
     "SweetBerryBushBlockMixin",
     "WorldRendererMixin",
     "accessors.ChatHudAccessor",
+    "accessors.ChatMessageC2SPacketAccessor",
     "accessors.CloseHandledScreenC2SAccessor",
     "accessors.EntityVelocityUpdateS2CPacketAccessor",
     "accessors.ExplosionS2CPacketAccessor"
