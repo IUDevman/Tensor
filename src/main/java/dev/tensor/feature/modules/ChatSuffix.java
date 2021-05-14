@@ -11,6 +11,11 @@ import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
+/**
+ * @author IUDevman
+ * @since 05-14-2021
+ */
+
 @Module.Info(name = "ChatSuffix", category = Category.Misc)
 public final class ChatSuffix extends Module {
 
