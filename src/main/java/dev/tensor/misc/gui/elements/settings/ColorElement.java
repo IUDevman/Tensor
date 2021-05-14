@@ -130,6 +130,7 @@ public final class ColorElement extends SettingElement {
         if (key == GLFW.GLFW_KEY_PERIOD || key == GLFW.GLFW_KEY_MINUS) return;
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
+            if (value.length() < 1) return;
             value = value.substring(0, value.length() - 1);
             return;
         }

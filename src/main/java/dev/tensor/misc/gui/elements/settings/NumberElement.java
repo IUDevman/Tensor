@@ -103,6 +103,7 @@ public final class NumberElement extends SettingElement {
         if (Arrays.stream(Tensor.INSTANCE.TENSOR_GUI.getAcceptedKeys()).noneMatch(value -> value == key)) return;
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
+            if (value.length() < 1) return;
             value = value.substring(0, value.length() - 1);
             return;
         }
