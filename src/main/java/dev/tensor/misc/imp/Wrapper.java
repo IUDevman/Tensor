@@ -39,6 +39,6 @@ public interface Wrapper {
     }
 
     default boolean isNull() {
-        return getMinecraft() == null || getWorld() == null;
+        return getPlayer() == null || getWorld() == null;
     }
 }

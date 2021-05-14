@@ -23,19 +23,21 @@ public final class ClientConnectionMixin implements Wrapper {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
+        if (isNull()) return;
+
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
         Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
-
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 
     @Inject(method = "channelRead0", at = @At("HEAD"), cancellable = true)
     public void receive(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo callbackInfo) {
+        if (isNull()) return;
+
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
 
         Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
-
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 }
