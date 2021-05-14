@@ -4,6 +4,11 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 
+/**
+ * @author IUDevman
+ * @since 05-11-2021
+ */
+
 @Module.Info(name = "CameraClip", category = Category.Render)
 public final class CameraClip extends Module {
 

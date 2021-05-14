@@ -10,6 +10,11 @@ import net.minecraft.client.util.math.MatrixStack;
 import java.awt.*;
 import java.text.DecimalFormat;
 
+/**
+ * @author IUDevman
+ * @since 05-10-2021
+ */
+
 @Module.Info(name = "Coordinates", category = Category.HUD)
 public final class Coordinates extends Module {
 
