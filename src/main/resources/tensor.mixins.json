@@ -22,7 +22,9 @@
     "SweetBerryBushBlockMixin",
     "WorldRendererMixin",
     "accessors.ChatHudAccessor",
-    "accessors.CloseHandledScreenC2SAccessor"
+    "accessors.CloseHandledScreenC2SAccessor",
+    "accessors.EntityVelocityUpdateS2CPacketAccessor",
+    "accessors.ExplosionS2CPacketAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
