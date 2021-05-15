@@ -11,6 +11,9 @@ import me.zero.alpine.listener.Listener;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
+
 /**
  * @author IUDevman
  * @since 04-12-2021
@@ -19,6 +22,8 @@ import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 public enum EventManager implements Manager {
 
     INSTANCE;
+
+    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
     @Override
     public void load() {
@@ -31,7 +36,7 @@ public enum EventManager implements Manager {
         if (isNull()) return;
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onTick();
+            if (module.isEnabled()) threadPoolExecutor.execute(module::onTick);
         });
     });
 
