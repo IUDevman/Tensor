@@ -21,10 +21,6 @@ public interface Utilities extends Wrapper {
 
     String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.INSTANCE.MOD_NAME + Formatting.DARK_GRAY + "]";
 
-    default void sendChatMessage(String message) {
-        getPlayer().sendChatMessage(message);
-    }
-
     default void sendClientMessage(String message, boolean prefix) {
         getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
     }
