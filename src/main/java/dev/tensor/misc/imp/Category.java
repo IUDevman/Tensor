@@ -8,6 +8,7 @@ import java.awt.*;
  */
 
 public enum Category {
+
     Combat(Color.RED),
     Movement(Color.CYAN),
     Player(Color.ORANGE),
