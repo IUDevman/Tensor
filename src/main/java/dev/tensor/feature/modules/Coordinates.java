@@ -24,7 +24,8 @@ public final class Coordinates extends Module {
 
     private final DecimalFormat decimalFormat = new DecimalFormat("###.#");
 
-    public void onRender2D(MatrixStack matrixStack) {
+    public void onRender2D() {
+        MatrixStack matrixStack = new MatrixStack();
         double playerX = getPlayer().getX();
         double playerY = getPlayer().getY();
         double playerZ = getPlayer().getZ();

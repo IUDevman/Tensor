@@ -2,7 +2,6 @@ package dev.tensor.misc.imp;
 
 import dev.tensor.Tensor;
 import me.zero.alpine.listener.Listenable;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -120,7 +119,7 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
 
     }
 
-    public void onRender2D(MatrixStack matrixStack) {
+    public void onRender2D() {
 
     }
 

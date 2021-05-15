@@ -22,7 +22,8 @@ public final class ArrayList extends Module {
     public final NumberSetting x = new NumberSetting("X Position", 0, 0, 1000, 0);
     public final NumberSetting y = new NumberSetting("Y Position", 100, 0, 1000, 0);
 
-    public void onRender2D(MatrixStack matrixStack) {
+    public void onRender2D() {
+        MatrixStack matrixStack = new MatrixStack();
         AtomicInteger incrementY = new AtomicInteger();
 
         ModuleManager.INSTANCE.getModules().forEach(module -> {

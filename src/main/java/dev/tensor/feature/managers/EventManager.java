@@ -8,7 +8,6 @@ import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Manager;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
-import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
 import java.util.concurrent.Executors;
@@ -53,7 +52,7 @@ public enum EventManager implements Manager {
                         break;
                     }
                     case HUD: {
-                        module.onRender2D(new MatrixStack());
+                        module.onRender2D();
                         break;
                     }
                     default:
