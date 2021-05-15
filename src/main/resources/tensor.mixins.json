@@ -27,7 +27,8 @@
     "accessors.ChatMessageC2SPacketAccessor",
     "accessors.CloseHandledScreenC2SAccessor",
     "accessors.EntityVelocityUpdateS2CPacketAccessor",
-    "accessors.ExplosionS2CPacketAccessor"
+    "accessors.ExplosionS2CPacketAccessor",
+    "accessors.PlayerMoveC2SPacketAccessor"
   ],
   "injectors": {
     "defaultRequire": 1
