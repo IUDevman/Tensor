@@ -1,6 +1,7 @@
-package dev.tensor.misc.util;
+package dev.tensor.misc.imp;
 
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.Tensor;
+import dev.tensor.backend.mixins.accessors.ChatHudAccessor;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -8,17 +9,31 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.text.LiteralText;
+import net.minecraft.util.Formatting;
 
 /**
  * @author IUDevman
- * @since 05-01-2021
+ * @since 05-14-2021
  */
 
-public enum InventoryUtil implements Wrapper {
+public interface Utilities extends Wrapper {
 
-    INSTANCE;
+    String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.INSTANCE.MOD_NAME + Formatting.DARK_GRAY + "]";
 
-    public int findBlock(Block block) {
+    default void sendChatMessage(String message) {
+        getPlayer().sendChatMessage(message);
+    }
+
+    default void sendClientMessage(String message, boolean prefix) {
+        getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
+    }
+
+    default void sendReplaceableClientMessage(String message, int id, boolean prefix) {
+        ((ChatHudAccessor) getChatHud()).addReplaceable(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message), id);
+    }
+
+    default int findBlock(Block block) {
         int slot = -1;
 
         for (int i = 0; i < 9; i++) {
@@ -35,7 +50,7 @@ public enum InventoryUtil implements Wrapper {
         return slot;
     }
 
-    public int findItem(Item item) {
+    default int findItem(Item item) {
         int slot = -1;
 
         for (int i = 0; i < 9; i++) {
@@ -52,7 +67,7 @@ public enum InventoryUtil implements Wrapper {
         return slot;
     }
 
-    public int findBestTool(BlockState blockState) {
+    default int findBestTool(BlockState blockState) {
         int slot = -1;
         double maxMultiplier = 0;
 
@@ -77,7 +92,7 @@ public enum InventoryUtil implements Wrapper {
         return slot;
     }
 
-    public void swap(int slot) {
+    default void swap(int slot) {
         getInventory().selectedSlot = slot;
     }
 }

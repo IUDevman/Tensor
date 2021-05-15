@@ -3,8 +3,6 @@ package dev.tensor.feature.managers;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Manager;
-import dev.tensor.misc.util.ClassUtil;
-import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
@@ -28,7 +26,7 @@ public enum CommandManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("CommandManager");
 
-        ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
+        this.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 
             if (Command.class.isAssignableFrom(aClass)) {
                 try {
@@ -64,7 +62,7 @@ public enum CommandManager implements Manager {
         }));
 
         if (!foundMessage.get()) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true, true);
+            this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true);
         }
     }
 

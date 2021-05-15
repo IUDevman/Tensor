@@ -1,6 +1,4 @@
-package dev.tensor.misc.util;
-
-import dev.tensor.Tensor;
+package dev.tensor.misc.imp;
 
 import java.io.File;
 import java.io.IOException;
@@ -17,18 +15,11 @@ import java.util.zip.ZipInputStream;
  * @since 04-06-2021
  */
 
-public enum ClassUtil {
+public interface ClassLoader {
 
-    INSTANCE;
-
-    @SuppressWarnings("FieldCanBeLocal")
-    private final boolean debug = false;
-
-    public ArrayList<Class<?>> findClassesForPath(String path) {
-        if (debug) Tensor.INSTANCE.LOGGER.info("Loading classes from " + path + " ...");
-
+    default ArrayList<Class<?>> findClassesForPath(String path) {
         final ArrayList<Class<?>> foundClasses = new ArrayList<>();
-        String resource = Objects.requireNonNull(ClassUtil.class.getClassLoader().getResource(path.replace(".", "/"))).getPath();
+        String resource = Objects.requireNonNull(ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"))).getPath();
 
         if (resource.contains("!")) {
 
@@ -44,7 +35,7 @@ public enum ClassUtil {
                         try {
                             Class<?> clazz = Class.forName(name.substring(0, name.length() - 6).replace("/", "."));
                             foundClasses.add(clazz);
-                            if (debug) Tensor.INSTANCE.LOGGER.info("Loaded " + clazz.getName() + "!");
+
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();
                         }
@@ -56,7 +47,7 @@ public enum ClassUtil {
         } else {
             try {
 
-                URL classPathURL = ClassUtil.class.getClassLoader().getResource(path.replace(".", "/"));
+                URL classPathURL = ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"));
 
                 if (classPathURL != null) {
 
@@ -71,7 +62,6 @@ public enum ClassUtil {
 
                                 if (className.endsWith(".class")) {
                                     foundClasses.add(Class.forName(path + "." + className.substring(0, className.length() - 6)));
-                                    if (debug) Tensor.INSTANCE.LOGGER.info("Loaded " + className + "!");
                                 }
                             }
                         }

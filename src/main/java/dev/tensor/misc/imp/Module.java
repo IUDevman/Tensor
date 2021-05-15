@@ -1,7 +1,6 @@
 package dev.tensor.misc.imp;
 
 import dev.tensor.Tensor;
-import dev.tensor.misc.util.MessageUtil;
 import me.zero.alpine.listener.Listenable;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.util.Formatting;
@@ -17,7 +16,7 @@ import java.lang.annotation.Target;
  * @since 04-12-2021
  */
 
-public abstract class Module implements Wrapper, Listenable {
+public abstract class Module implements Wrapper, Listenable, Utilities {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
@@ -96,7 +95,7 @@ public abstract class Module implements Wrapper, Listenable {
         Tensor.INSTANCE.EVENT_BUS.subscribe(this);
         if (!isNull()) {
             onEnable();
-            if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true, true);
+            if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true);
         }
     }
 
@@ -105,7 +104,7 @@ public abstract class Module implements Wrapper, Listenable {
         Tensor.INSTANCE.EVENT_BUS.unsubscribe(this);
         if (!isNull()) {
             onDisable();
-            if (isMessages()) MessageUtil.INSTANCE.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true, true);
+            if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true);
         }
     }
 

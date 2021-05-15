@@ -1,7 +1,6 @@
 package dev.tensor.feature.commands;
 
 import dev.tensor.misc.imp.Command;
-import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.util.Formatting;
 
 /**
@@ -42,6 +41,6 @@ public final class Ping implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        MessageUtil.INSTANCE.sendClientMessage(this.getMarker() + "Pong", true, true);
+        this.sendClientMessage(this.getMarker() + "Pong", true);
     }
 }

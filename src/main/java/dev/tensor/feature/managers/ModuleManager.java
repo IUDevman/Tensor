@@ -4,7 +4,6 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
-import dev.tensor.misc.util.ClassUtil;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,7 +26,7 @@ public enum ModuleManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("ModuleManager");
 
-        ClassUtil.INSTANCE.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
+       this.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 
             if (Module.class.isAssignableFrom(aClass)) {
                 try {

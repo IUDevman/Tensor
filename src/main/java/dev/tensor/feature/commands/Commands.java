@@ -2,7 +2,6 @@ package dev.tensor.feature.commands;
 
 import dev.tensor.feature.managers.CommandManager;
 import dev.tensor.misc.imp.Command;
-import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.util.Formatting;
 
 import java.util.Arrays;
@@ -46,13 +45,13 @@ public final class Commands implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        MessageUtil.INSTANCE.sendClientMessage(this.getMarker() + "Available Commands:", true, true);
+        this.sendClientMessage(this.getMarker() + "Available Commands:", true);
 
         CommandManager.INSTANCE.getCommands().forEach(command -> {
             String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);
 
-            MessageUtil.INSTANCE.sendClientMessage(syntax, true, true);
-            MessageUtil.INSTANCE.sendClientMessage(Formatting.YELLOW + "Aliases: " + Formatting.GRAY + Arrays.toString(command.getAliases()), true, true);
+            this.sendClientMessage(syntax, true);
+            this.sendClientMessage(Formatting.YELLOW + "Aliases: " + Formatting.GRAY + Arrays.toString(command.getAliases()), true);
         });
     }
 }
