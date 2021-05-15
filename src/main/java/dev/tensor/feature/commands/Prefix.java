@@ -2,7 +2,6 @@ package dev.tensor.feature.commands;
 
 import dev.tensor.feature.managers.CommandManager;
 import dev.tensor.misc.imp.Command;
-import dev.tensor.misc.util.MessageUtil;
 import net.minecraft.util.Formatting;
 
 /**
@@ -46,18 +45,18 @@ public final class Prefix implements Command {
     public void onCommand(String[] message) {
 
         if (message == null || message.length < 2) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "No prefix inputted!", this.getID(), true, true);
+            this.sendReplaceableClientMessage(this.getMarker() + "No prefix inputted!", this.getID(), true);
             return;
         }
 
         String prefix = message[1];
 
         if (prefix.length() > 1) {
-            MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
+            this.sendReplaceableClientMessage(this.getMarker() + "Invalid prefix (" + Formatting.YELLOW + prefix + Formatting.GRAY + ")!", this.getID(), true);
             return;
         }
 
         CommandManager.INSTANCE.setPrefix(prefix);
-        MessageUtil.INSTANCE.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY + ")!", this.getID(), true, true);
+        this.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY + ")!", this.getID(), true);
     }
 }

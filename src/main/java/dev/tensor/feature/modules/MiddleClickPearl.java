@@ -3,7 +3,6 @@ package dev.tensor.feature.modules;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import dev.tensor.misc.util.InventoryUtil;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
 import net.minecraft.item.Items;
@@ -28,12 +27,12 @@ public final class MiddleClickPearl extends Module {
         if (Objects.requireNonNull(getMinecraft().crosshairTarget).getType() != HitResult.Type.MISS) return;
 
         final int oldSlot = getInventory().selectedSlot;
-        final int newSlot = InventoryUtil.INSTANCE.findItem(Items.ENDER_PEARL);
+        final int newSlot = this.findItem(Items.ENDER_PEARL);
 
         if (newSlot != -1) {
-            InventoryUtil.INSTANCE.swap(newSlot);
+            this.swap(newSlot);
             Objects.requireNonNull(getMinecraft().interactionManager).interactItem(getPlayer(), getWorld(), Hand.MAIN_HAND);
-            InventoryUtil.INSTANCE.swap(oldSlot);
+            this.swap(oldSlot);
         }
     });
 }

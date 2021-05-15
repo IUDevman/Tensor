@@ -7,7 +7,7 @@ import me.zero.alpine.listener.Listenable;
  * @since 04-12-2021
  */
 
-public interface Manager extends Wrapper, Listenable {
+public interface Manager extends Wrapper, Listenable, ClassLoader, Utilities {
 
     void load();
 }

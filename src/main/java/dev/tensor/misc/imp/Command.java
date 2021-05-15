@@ -5,7 +5,7 @@ package dev.tensor.misc.imp;
  * @since 04-12-2021
  */
 
-public interface Command extends Wrapper {
+public interface Command extends Wrapper, Utilities {
 
     String getName();
 
