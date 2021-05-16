@@ -106,7 +106,7 @@ public enum ConfigManager implements Manager {
         CommandManager.INSTANCE.setPrefix(mainObject.get("Prefix").getAsString());
     }
 
-    public void loadClickGUI() throws IOException {
+    private void loadClickGUI() throws IOException {
         Path path = Paths.get(mainPath + "ClickGUI.json");
 
         if (!Files.exists(path)) return;
