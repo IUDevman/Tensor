@@ -382,4 +382,12 @@ public final class TensorGUI extends Screen implements Wrapper {
                 GLFW.GLFW_KEY_BACKSPACE,
         };
     }
+
+    public NumberSetting getX() {
+        return this.x;
+    }
+
+    public NumberSetting getY() {
+        return this.y;
+    }
 }

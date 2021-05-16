@@ -1,6 +1,6 @@
 package dev.tensor.misc.gui.elements.settings;
 
-import dev.tensor.Tensor;
+import dev.tensor.feature.managers.ClickGUIManager;
 import dev.tensor.misc.gui.elements.SettingElement;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
@@ -107,7 +107,7 @@ public final class NumberElement extends SettingElement {
             }
         }
 
-        if (Arrays.stream(Tensor.INSTANCE.TENSOR_GUI.getAcceptedKeys()).noneMatch(value -> value == key)) return;
+        if (Arrays.stream(ClickGUIManager.INSTANCE.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) return;
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
             if (value.length() < 1) return;

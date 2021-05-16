@@ -21,6 +21,7 @@ public final class ManagerLoader {
         loadManager(SettingManager.INSTANCE);
         loadManager(EventManager.INSTANCE);
         loadManager(CapeManager.INSTANCE);
+        loadManager(ClickGUIManager.INSTANCE);
         loadManager(ConfigManager.INSTANCE);
     }
 

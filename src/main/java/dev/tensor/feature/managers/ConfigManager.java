@@ -43,6 +43,7 @@ public enum ConfigManager implements Manager {
             }
 
             loadPrefix();
+            loadClickGUI();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -105,10 +106,23 @@ public enum ConfigManager implements Manager {
         CommandManager.INSTANCE.setPrefix(mainObject.get("Prefix").getAsString());
     }
 
+    public void loadClickGUI() throws IOException {
+        Path path = Paths.get(mainPath + "ClickGUI.json");
+
+        if (!Files.exists(path)) return;
+
+        InputStream inputStream = Files.newInputStream(path);
+        JsonObject mainObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+
+        ClickGUIManager.INSTANCE.getGUI().getX().setValue(mainObject.get("X Position").getAsDouble());
+        ClickGUIManager.INSTANCE.getGUI().getY().setValue(mainObject.get("Y Position").getAsDouble());
+    }
+
     public void save() {
 
         try {
             savePrefix();
+            saveClickGUI();
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -161,6 +175,22 @@ public enum ConfigManager implements Manager {
 
         JsonObject mainObject = new JsonObject();
         mainObject.add("Prefix", new JsonPrimitive(CommandManager.INSTANCE.getPrefix()));
+
+        String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
+        outputStreamWriter.write(jsonString);
+        outputStreamWriter.close();
+    }
+
+    private void saveClickGUI() throws IOException {
+        Path path = Paths.get(mainPath + "ClickGUI.json");
+        registerFile(path);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
+
+        JsonObject mainObject = new JsonObject();
+        mainObject.add("X Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getX().getValue()));
+        mainObject.add("Y Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getY().getValue()));
 
         String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
         outputStreamWriter.write(jsonString);

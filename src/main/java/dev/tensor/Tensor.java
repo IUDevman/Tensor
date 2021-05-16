@@ -1,6 +1,5 @@
 package dev.tensor;
 
-import dev.tensor.misc.gui.TensorGUI;
 import me.zero.alpine.bus.EventBus;
 import me.zero.alpine.bus.EventManager;
 import net.fabricmc.api.ModInitializer;
@@ -37,14 +36,9 @@ public final class Tensor implements ModInitializer {
         LOGGER.info("Finished initializing " + MOD_NAME + " " + MOD_VERSION + " (" + finishedTime + "s)!");
     }
 
-    public TensorGUI TENSOR_GUI;
-
     private void setupClient() {
 
         ManagerLoader.load();
         LOGGER.info("Finished initializing managers!");
-
-        TENSOR_GUI = new TensorGUI();
-        LOGGER.info("Finished initializing gui!");
     }
 }

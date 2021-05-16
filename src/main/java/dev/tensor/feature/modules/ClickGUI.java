@@ -1,6 +1,6 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.Tensor;
+import dev.tensor.feature.managers.ClickGUIManager;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 
@@ -13,7 +13,7 @@ import dev.tensor.misc.imp.Module;
 public final class ClickGUI extends Module {
 
     public void onEnable() {
-        getMinecraft().openScreen(Tensor.INSTANCE.TENSOR_GUI);
+        getMinecraft().openScreen(ClickGUIManager.INSTANCE.getGUI());
         disable();
     }
 }
