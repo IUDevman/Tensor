@@ -29,21 +29,17 @@ public enum EventManager implements Manager {
         Tensor.INSTANCE.LOGGER.info("EventManager");
     }
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CodeBlock2Expr"})
     @EventHandler
     private final Listener<ClientTickEvent> clientTickEventListener = new Listener<>(event -> {
-        if (isNull()) return;
-
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) threadPoolExecutor.execute(module::onTick);
         });
     });
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CodeBlock2Expr"})
     @EventHandler
     private final Listener<ClientRenderEvent> clientRenderEventListener = new Listener<>(event -> {
-        if (isNull()) return;
-
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) {
                 switch (event.getType()) {
@@ -62,11 +58,9 @@ public enum EventManager implements Manager {
         });
     });
 
-    @SuppressWarnings("unused")
+    @SuppressWarnings({"unused", "CodeBlock2Expr"})
     @EventHandler
     private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
-        if (isNull()) return;
-
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.getBind() == event.getBind()) module.toggle();
         });
@@ -75,7 +69,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventHandler
     private final Listener<PacketEvent> packetSendEventListener = new Listener<>(event -> {
-        if (isNull() || !event.getType().equals(PacketEvent.Type.Send)) return;
+        if (!event.getType().equals(PacketEvent.Type.Send)) return;
 
         if (event.getPacket() instanceof ChatMessageC2SPacket) {
 

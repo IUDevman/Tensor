@@ -26,6 +26,8 @@ public final class MinecraftClientMixin implements Wrapper {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
     public void tick(CallbackInfo callbackInfo) {
+        if (isNull()) return;
+
         Tensor.INSTANCE.EVENT_BUS.post(new ClientTickEvent());
     }
 
