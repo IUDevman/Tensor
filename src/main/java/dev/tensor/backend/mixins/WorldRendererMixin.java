@@ -60,7 +60,7 @@ public final class WorldRendererMixin implements Wrapper {
             else if (noParticles.lava.getValue() && parameters.getType().equals(ParticleTypes.LAVA)) cir.cancel();
             else if (noParticles.portal.getValue() && parameters.getType().equals(ParticleTypes.PORTAL)) cir.cancel();
             else if (noParticles.eating.getValue() && parameters.getType().equals(ParticleTypes.ITEM)) cir.cancel();
-            else if (noParticles.potions.getValue() && parameters.getType().equals(ParticleTypes.ENTITY_EFFECT)) cir.cancel();
+            else if (noParticles.potions.getValue() && parameters.getType().equals(ParticleTypes.ENTITY_EFFECT) && getPlayer().squaredDistanceTo(x, y, z ) < 4) cir.cancel();
         }
     }
 }
