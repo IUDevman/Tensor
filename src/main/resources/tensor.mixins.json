@@ -4,6 +4,7 @@
   "package": "dev.tensor.backend.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "ArmorFeatureRendererMixin",
     "BackgroundRendererMixin",
     "BlockMixin",
     "BossBarHudMixin",
@@ -12,6 +13,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "CobWebBlockMixin",
+    "EnchantingTableBlockEntityRendererMixin",
     "GameRendererMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",

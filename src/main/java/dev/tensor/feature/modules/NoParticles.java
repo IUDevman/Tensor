@@ -19,4 +19,5 @@ public final class NoParticles extends Module {
     public final BooleanSetting underWater = new BooleanSetting("Underwater", true);
     public final BooleanSetting lava = new BooleanSetting("Lava", false);
     public final BooleanSetting portal = new BooleanSetting("Portal", false);
+    public final BooleanSetting eating = new BooleanSetting("Item Use Effect", false);
 }
