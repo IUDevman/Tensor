@@ -14,6 +14,7 @@
     "ClientPlayerInteractionManagerMixin",
     "CobWebBlockMixin",
     "EnchantingTableBlockEntityRendererMixin",
+    "EntityMixin",
     "GameRendererMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",
