@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.Redirect;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -22,12 +22,14 @@ public final class EntityMixin implements Wrapper {
 
     @Shadow private int entityId;
 
-    @Redirect(method = "pushAwayFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(DDD)V"))
-    public void pushAwayFrom(Entity entity, double deltaX, double deltaY, double deltaZ) {
+    @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
+    public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
+        if (entityId != getPlayer().getEntityId()) return;
+
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
-        if (entity != getPlayer() || !noPush.isEnabled() || noPush.isEnabled() && !noPush.collisions.getValue()) {
-            entity.addVelocity(deltaX, deltaY, deltaZ);
+        if (noPush.isEnabled() && noPush.collisions.getValue()) {
+            callbackInfo.cancel();
         }
     }
 
