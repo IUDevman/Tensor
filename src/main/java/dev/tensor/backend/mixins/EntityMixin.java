@@ -22,15 +22,6 @@ public final class EntityMixin implements Wrapper {
 
     @Shadow private int entityId;
 
-    @Redirect(method = "updateMovementInFluid(Lnet/minecraft/tag/Tag;D)Z", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;setVelocity(Lnet/minecraft/util/math/Vec3d;)V"))
-    public void updateMovementInFluid(Entity entity, Vec3d velocity) {
-        NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
-
-        if (entity != getPlayer() || !noPush.isEnabled() || noPush.isEnabled() && !noPush.water.getValue()) {
-            entity.setVelocity(velocity);
-        }
-    }
-
     @Redirect(method = "pushAwayFrom", at = @At(value = "INVOKE", target = "Lnet/minecraft/entity/Entity;addVelocity(DDD)V"))
     public void pushAwayFrom(Entity entity, double deltaX, double deltaY, double deltaZ) {
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);

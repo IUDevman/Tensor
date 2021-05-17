@@ -15,6 +15,7 @@
     "CobWebBlockMixin",
     "EnchantingTableBlockEntityRendererMixin",
     "EntityMixin",
+    "FluidStateMixin",
     "GameRendererMixin",
     "HeldItemRendererMixin",
     "InGameHudMixin",
