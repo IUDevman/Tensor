@@ -3,9 +3,6 @@ package dev.tensor.misc.imp;
 import dev.tensor.Tensor;
 import dev.tensor.backend.mixins.accessors.ChatHudAccessor;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -57,31 +54,6 @@ public interface Utilities extends Wrapper {
             if (itemStack.getItem().equals(item)) {
                 slot = i;
                 break;
-            }
-        }
-
-        return slot;
-    }
-
-    default int findBestTool(BlockState blockState) {
-        int slot = -1;
-        double maxMultiplier = 0;
-
-        for (int i = 0; i < 9; i++) {
-            ItemStack itemStack = getInventory().getStack(i);
-
-            if (itemStack.isEmpty()) continue;
-
-            float speedMultiplier = itemStack.getMiningSpeedMultiplier(blockState);
-            final int efficiencyLevel = EnchantmentHelper.getLevel(Enchantments.EFFICIENCY, itemStack);
-
-            if (speedMultiplier > 1) {
-                speedMultiplier += efficiencyLevel > 0 ? Math.pow(efficiencyLevel, 2) + 1 : 0;
-
-                if (speedMultiplier > maxMultiplier) {
-                    maxMultiplier = speedMultiplier;
-                    slot = i;
-                }
             }
         }
 
