@@ -45,6 +45,8 @@ public final class WorldRendererMixin implements Wrapper {
 
     @Inject(method = "spawnParticle(Lnet/minecraft/particle/ParticleEffect;ZZDDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
     public void spawnParticle(ParticleEffect parameters, boolean alwaysSpawn, boolean canSpawnOnMinimal, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
+        if (isNull()) return;
+
         NoWeather noWeather = ModuleManager.INSTANCE.getModule(NoWeather.class);
 
         if (noWeather.isEnabled() && (getWorld().isRaining() || getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) cir.cancel();

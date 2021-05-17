@@ -36,6 +36,8 @@ public abstract class ClientPlayerEntityMixin implements Wrapper {
 
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
     public void tickMovement(CallbackInfo callbackInfo) {
+        if (isNull()) return;
+
         NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
 
         if (noSlow.isEnabled() && noSlow.items.getValue() && getPlayer().isUsingItem()) {

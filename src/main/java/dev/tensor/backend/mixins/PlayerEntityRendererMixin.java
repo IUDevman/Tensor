@@ -22,7 +22,7 @@ public final class PlayerEntityRendererMixin implements Wrapper {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
     public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo callbackInfo) {
-        if (player != getPlayer()) return;
+        if (isNull() || player != getPlayer()) return;
 
         ViewModel viewModel = ModuleManager.INSTANCE.getModule(ViewModel.class);
 

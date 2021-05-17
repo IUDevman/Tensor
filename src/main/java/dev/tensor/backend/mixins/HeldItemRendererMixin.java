@@ -24,7 +24,7 @@ public final class HeldItemRendererMixin implements Wrapper {
 
     @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))
     public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callbackInfo) {
-        if (player != getPlayer()) return;
+        if (isNull() || player != getPlayer()) return;
 
         ViewModel viewModel = ModuleManager.INSTANCE.getModule(ViewModel.class);
 

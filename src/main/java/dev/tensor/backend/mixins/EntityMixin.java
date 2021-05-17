@@ -24,7 +24,7 @@ public final class EntityMixin implements Wrapper {
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
-        if (entityId != getPlayer().getEntityId()) return;
+        if (isNull() || entityId != getPlayer().getEntityId()) return;
 
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
@@ -35,7 +35,7 @@ public final class EntityMixin implements Wrapper {
 
     @Inject(method = "adjustMovementForPiston", at = @At("HEAD"), cancellable = true)
     public void adjustMovementForPiston(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
-        if (entityId != getPlayer().getEntityId()) return;
+        if (isNull() || entityId != getPlayer().getEntityId()) return;
 
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
