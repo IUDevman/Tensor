@@ -33,7 +33,13 @@ public final class ChatSuffix extends Module {
 
             if (message.startsWith(CommandManager.INSTANCE.getPrefix()) || message.startsWith("/")) return;
 
-            ((ChatMessageC2SPacketAccessor) packet).setChatMessage(message + getSuffix());
+            String newMessage = message + getSuffix();
+
+            if (newMessage.length() > 256) {
+                newMessage = newMessage.substring(0, 256);
+            }
+
+            ((ChatMessageC2SPacketAccessor) packet).setChatMessage(newMessage);
         }
     });
 
