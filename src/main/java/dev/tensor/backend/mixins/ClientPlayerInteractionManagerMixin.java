@@ -66,7 +66,6 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
     public void interactEntity(PlayerEntity player, Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (entity.equals(player)) {
             cir.setReturnValue(ActionResult.FAIL);
-            cir.cancel();
         }
     }
 }

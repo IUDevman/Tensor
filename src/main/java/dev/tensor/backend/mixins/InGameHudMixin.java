@@ -51,7 +51,6 @@ public final class InGameHudMixin implements Wrapper {
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(getPlayer());
-            cir.cancel();
         }
     }
 }

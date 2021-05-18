@@ -64,7 +64,11 @@ public final class Freecam extends Module {
         }
 
         cameraEntity.setHealth(getPlayer().getHealth());
-        if (getPlayer().input instanceof KeyboardInput) ((ClientPlayerEntityAccessor) getPlayer()).setInput(new DummyInput());
+
+        if (getPlayer().input instanceof KeyboardInput) {
+            ((ClientPlayerEntityAccessor) getPlayer()).setInput(new DummyInput());
+        }
+
         cameraEntity.tickMovement();
     }
 

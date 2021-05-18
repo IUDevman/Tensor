@@ -51,7 +51,6 @@ public final class EntityMixin implements Wrapper {
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(true);
-            cir.cancel();
         }
     }
 }

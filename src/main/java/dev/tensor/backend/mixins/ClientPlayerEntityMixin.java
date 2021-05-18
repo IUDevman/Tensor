@@ -67,7 +67,6 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(true);
-            cir.cancel();
         }
     }
 

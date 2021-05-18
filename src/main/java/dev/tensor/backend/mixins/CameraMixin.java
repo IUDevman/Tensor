@@ -25,7 +25,6 @@ public final class CameraMixin implements Wrapper {
 
         if (cameraClip.isEnabled()) {
             cir.setReturnValue(cameraClip.distance.getValue());
-            cir.cancel();
         }
     }
 
@@ -35,7 +34,6 @@ public final class CameraMixin implements Wrapper {
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(true);
-            cir.cancel();
         }
     }
 
@@ -47,7 +45,6 @@ public final class CameraMixin implements Wrapper {
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(getPlayer());
-            cir.cancel();
         }
     }
 }
