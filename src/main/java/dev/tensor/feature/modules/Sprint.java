@@ -17,10 +17,6 @@ public final class Sprint extends Module {
     public final BooleanSetting sideways = new BooleanSetting("Sideways", true);
     public final BooleanSetting liquids = new BooleanSetting("Liquids", false);
 
-    public void onDisable() {
-        getPlayer().setSprinting(false);
-    }
-
     public void onTick() {
         if (!stationary.getValue() && getPlayer().forwardSpeed == 0 && getPlayer().sidewaysSpeed == 0) return;
         else if (!sideways.getValue() && getPlayer().sidewaysSpeed != 0) return;

@@ -2,10 +2,7 @@ package dev.tensor.backend.mixins;
 
 import com.mojang.authlib.GameProfile;
 import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.modules.Freecam;
-import dev.tensor.feature.modules.NoPortalEffect;
-import dev.tensor.feature.modules.NoPush;
-import dev.tensor.feature.modules.NoSlow;
+import dev.tensor.feature.modules.*;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
@@ -81,6 +78,30 @@ public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity
 
         } else {
             super.changeLookDirection(cursorDeltaX, cursorDeltaY);
+        }
+    }
+
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Override
+    public boolean isTouchingWater() {
+        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+
+        if (!isNull() && this.equals(getPlayer()) && flight.isEnabled() && flight.ignoreFluids.getValue()) {
+            return false;
+        } else {
+            return super.isTouchingWater();
+        }
+    }
+
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Override
+    public boolean isInLava() {
+        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+
+        if (!isNull() && this.equals(getPlayer()) && flight.isEnabled() && flight.ignoreFluids.getValue()) {
+            return false;
+        } else {
+            return super.isInLava();
         }
     }
 }
