@@ -3,16 +3,22 @@ package dev.tensor.backend.mixins;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
 import dev.tensor.feature.modules.Reach;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.ActionResult;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Direction;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
@@ -45,5 +51,22 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
         Reach reach = ModuleManager.INSTANCE.getModule(Reach.class);
 
         if (reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
+    }
+
+    @Inject(method = "attackEntity", at = @At("HEAD"), cancellable = true)
+    public void attackEntity(PlayerEntity player, Entity target, CallbackInfo callbackInfo) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (target.equals(player) || target.equals(freecam.getCameraEntity())) {
+            callbackInfo.cancel();
+        }
+    }
+
+    @Inject(method = "interactEntity", at = @At("HEAD"), cancellable = true)
+    public void interactEntity(PlayerEntity player, Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        if (entity.equals(player)) {
+            cir.setReturnValue(ActionResult.FAIL);
+            cir.cancel();
+        }
     }
 }

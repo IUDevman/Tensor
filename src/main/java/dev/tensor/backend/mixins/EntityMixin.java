@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.entity.Entity;
@@ -41,6 +42,16 @@ public final class EntityMixin implements Wrapper {
 
         if (noPush.isEnabled() && noPush.blocks.getValue()) {
             cir.setReturnValue(Vec3d.ZERO);
+        }
+    }
+
+    @Inject(method = "shouldRender(D)Z", at = @At("HEAD"), cancellable = true)
+    public void shouldRender(double distance, CallbackInfoReturnable<Boolean> cir) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled()) {
+            cir.setReturnValue(true);
+            cir.cancel();
         }
     }
 }

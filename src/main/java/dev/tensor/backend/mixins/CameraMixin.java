@@ -2,8 +2,10 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.CameraClip;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.Camera;
+import net.minecraft.entity.Entity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -23,6 +25,28 @@ public final class CameraMixin implements Wrapper {
 
         if (cameraClip.isEnabled()) {
             cir.setReturnValue(cameraClip.distance.getValue());
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "isThirdPerson", at = @At("HEAD"), cancellable = true)
+    public void isThirdPerson(CallbackInfoReturnable<Boolean> cir) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled()) {
+            cir.setReturnValue(true);
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "getFocusedEntity", at = @At("HEAD"), cancellable = true)
+    public void getFocusedEntity(CallbackInfoReturnable<Entity> cir) {
+        if (isNull()) return;
+
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled()) {
+            cir.setReturnValue(getPlayer());
             cir.cancel();
         }
     }

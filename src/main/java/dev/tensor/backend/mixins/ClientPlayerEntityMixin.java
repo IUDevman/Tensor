@@ -1,11 +1,15 @@
 package dev.tensor.backend.mixins;
 
+import com.mojang.authlib.GameProfile;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoPortalEffect;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Wrapper;
+import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.network.ClientPlayerEntity;
+import net.minecraft.client.world.ClientWorld;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -18,7 +22,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(ClientPlayerEntity.class)
-public abstract class ClientPlayerEntityMixin implements Wrapper {
+public abstract class ClientPlayerEntityMixin extends AbstractClientPlayerEntity implements Wrapper {
+
+    public ClientPlayerEntityMixin(ClientWorld clientWorld, GameProfile gameProfile) {
+        super(clientWorld, gameProfile);
+    }
 
     @Inject(method = "updateNausea", at = @At("HEAD"), cancellable = true)
     public void updateNausea(CallbackInfo callbackInfo) {
@@ -51,5 +59,29 @@ public abstract class ClientPlayerEntityMixin implements Wrapper {
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
         if (noPush.isEnabled() && noPush.blocks.getValue()) callbackInfo.cancel();
+    }
+
+    @Inject(method = "isCamera", at = @At("HEAD"), cancellable = true)
+    public void isCamera(CallbackInfoReturnable<Boolean> cir) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled()) {
+            cir.setReturnValue(true);
+            cir.cancel();
+        }
+    }
+
+    @SuppressWarnings("EqualsBetweenInconvertibleTypes")
+    @Override
+    public void changeLookDirection(double cursorDeltaX, double cursorDeltaY) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (!isNull() && this.equals(getPlayer()) && freecam.isEnabled() && freecam.getCameraEntity() != null) {
+            freecam.getCameraEntity().changeLookDirection(cursorDeltaX, cursorDeltaY);
+            freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().yaw);
+
+        } else {
+            super.changeLookDirection(cursorDeltaX, cursorDeltaY);
+        }
     }
 }

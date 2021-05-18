@@ -1,21 +1,20 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoParticles;
 import dev.tensor.feature.modules.NoWeather;
 import dev.tensor.misc.imp.Wrapper;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.LightmapTextureManager;
 import net.minecraft.client.render.WorldRenderer;
 import net.minecraft.particle.ParticleEffect;
 import net.minecraft.particle.ParticleTypes;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -26,8 +25,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(WorldRenderer.class)
 public final class WorldRendererMixin implements Wrapper {
-
-    @Shadow @Final private MinecraftClient client;
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
     public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo callbackInfo) {
@@ -64,5 +61,12 @@ public final class WorldRendererMixin implements Wrapper {
             else if (noParticles.eating.getValue() && parameters.getType().equals(ParticleTypes.ITEM)) cir.cancel();
             else if (noParticles.potions.getValue() && parameters.getType().equals(ParticleTypes.ENTITY_EFFECT) && getPlayer().squaredDistanceTo(x, y, z ) < 4) cir.cancel();
         }
+    }
+
+    @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;setupTerrain(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;ZIZ)V"), index = 4)
+    public boolean isSpectator(boolean spectator) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        return spectator || freecam.isEnabled();
     }
 }

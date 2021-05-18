@@ -2,6 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
+import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.feature.managers.ConfigManager;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.MinecraftClient;
@@ -32,12 +33,17 @@ public final class MinecraftClientMixin implements Wrapper {
     }
 
     @Inject(method = "stop", at = @At("HEAD"))
-    public void stop(CallbackInfo ci) {
+    public void stop(CallbackInfo callbackInfo) {
         ConfigManager.INSTANCE.save();
     }
 
     @Inject(method = "cleanUpAfterCrash", at = @At("HEAD"))
-    public void cleanUpAfterCrash(CallbackInfo ci) {
+    public void cleanUpAfterCrash(CallbackInfo callbackInfo) {
         ConfigManager.INSTANCE.save();
+    }
+
+    @Inject(method = "disconnect()V", at = @At("HEAD"))
+    public void disconnect(CallbackInfo callbackInfo) {
+        Tensor.INSTANCE.EVENT_BUS.post(new DisconnectEvent());
     }
 }
