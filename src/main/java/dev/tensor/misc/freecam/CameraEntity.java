@@ -35,18 +35,22 @@ public final class CameraEntity extends OtherClientPlayerEntity implements Wrapp
         getWorld().removeEntity(this.getEntityId());
     }
 
+    @Override
     public boolean shouldRender(double cameraX, double cameraY, double cameraZ) {
         return false;
     }
 
+    @Override
     public boolean shouldRender(double distance) {
         return false;
     }
 
+    @Override
     public boolean shouldRenderName() {
         return false;
     }
 
+    @Override
     public void tickMovement() {
         this.setVelocity(0, 0, 0);
 

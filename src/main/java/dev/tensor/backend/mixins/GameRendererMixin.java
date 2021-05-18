@@ -3,6 +3,7 @@ package dev.tensor.backend.mixins;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.GameRenderer;
@@ -11,6 +12,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /**
  * @author IUDevman
@@ -50,5 +52,12 @@ public final class GameRendererMixin implements Wrapper {
         if (noViewBob.isEnabled()) {
             callbackInfo.cancel();
         }
+    }
+    
+    @Inject(method = "shouldRenderBlockOutline", at = @At("HEAD"), cancellable = true)
+    public void shouldRenderBlockOutline(CallbackInfoReturnable<Boolean> cir) {
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled() && freecam.hideBlockOutline.getValue()) cir.setReturnValue(false);
     }
 }

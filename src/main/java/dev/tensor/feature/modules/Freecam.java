@@ -6,6 +6,7 @@ import dev.tensor.misc.freecam.DummyInput;
 import dev.tensor.backend.mixins.accessors.ClientPlayerEntityAccessor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
+import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import me.zero.alpine.listener.EventHandler;
 import me.zero.alpine.listener.Listener;
@@ -20,6 +21,7 @@ import net.minecraft.client.options.Perspective;
 @Module.Info(name = "Freecam", category = Category.Render)
 public final class Freecam extends Module {
 
+    public final BooleanSetting hideBlockOutline = new BooleanSetting("Hide Block Outline", true);
     public final NumberSetting speed = new NumberSetting("Speed", 10, 1, 20, 1);
 
     private CameraEntity cameraEntity = null;
