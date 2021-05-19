@@ -22,7 +22,7 @@ public enum EventManager implements Manager {
 
     INSTANCE;
 
-    ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
+    private final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
     @Override
     public void load() {

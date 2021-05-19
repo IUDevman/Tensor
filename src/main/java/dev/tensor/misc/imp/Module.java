@@ -15,6 +15,7 @@ import java.lang.annotation.Target;
  * @since 04-12-2021
  */
 
+@SuppressWarnings("EmptyMethod")
 public abstract class Module implements Wrapper, Listenable, Utilities {
 
     @Retention(RetentionPolicy.RUNTIME)
