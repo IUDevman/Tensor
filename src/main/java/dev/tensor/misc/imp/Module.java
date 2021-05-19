@@ -24,13 +24,13 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
 
         Category category();
 
-        boolean enabled() default false;
+        int bind() default GLFW.GLFW_KEY_UNKNOWN;
 
         boolean drawn() default true;
 
         boolean messages() default false;
 
-        int bind() default GLFW.GLFW_KEY_UNKNOWN;
+        boolean enabled() default false;
     }
 
     private Info getInfo() {
@@ -52,13 +52,12 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
         return this.category;
     }
 
-    public boolean isEnabled() {
-        return this.enabled;
+    public int getBind() {
+        return this.bind;
     }
 
-    public void setEnabled(boolean enabled) {
-        if (enabled) enable();
-        else disable();
+    public void setBind(int bind) {
+        this.bind = bind;
     }
 
     public boolean isDrawn() {
@@ -77,19 +76,20 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
         this.messages = messages;
     }
 
-    public int getBind() {
-        return this.bind;
+    public boolean isEnabled() {
+        return this.enabled;
     }
 
-    public void setBind(int bind) {
-        this.bind = bind;
+    public void setEnabled(boolean enabled) {
+        if (enabled) enable();
+        else disable();
     }
 
     public void toggle() {
         setEnabled(!isEnabled());
     }
 
-    public void enable() {
+    protected void enable() {
         this.enabled = true;
         Tensor.INSTANCE.EVENT_BUS.subscribe(this);
         if (!isNull()) {
@@ -98,7 +98,7 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
         }
     }
 
-    public void disable() {
+    protected void disable() {
         this.enabled = false;
         Tensor.INSTANCE.EVENT_BUS.unsubscribe(this);
         if (!isNull()) {
