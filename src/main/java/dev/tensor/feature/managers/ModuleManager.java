@@ -26,7 +26,7 @@ public enum ModuleManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("ModuleManager");
 
-       this.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
+        this.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 
             if (Module.class.isAssignableFrom(aClass)) {
                 try {
@@ -60,8 +60,8 @@ public enum ModuleManager implements Manager {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends Module> T getModule(Class<T> tClass) {
-        return (T) this.moduleClassLinkedHashMap.get(tClass);
+    public <T extends Module> T getModule(Class<T> aClass) {
+        return (T) this.moduleClassLinkedHashMap.get(aClass);
     }
 
     public Module getModule(String name) {

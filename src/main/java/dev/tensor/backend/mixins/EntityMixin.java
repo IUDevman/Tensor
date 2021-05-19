@@ -21,7 +21,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(Entity.class)
 public final class EntityMixin implements Wrapper {
 
-    @Shadow private int entityId;
+    @Shadow
+    private int entityId;
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {

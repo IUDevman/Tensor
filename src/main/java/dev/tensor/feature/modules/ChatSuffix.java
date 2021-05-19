@@ -51,7 +51,8 @@ public final class ChatSuffix extends Module {
             case Regular: {
                 return " | " + Tensor.INSTANCE.MOD_NAME;
             }
-            default: return "You broke something!";
+            default:
+                return "You broke something!";
         }
     }
 

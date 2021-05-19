@@ -65,9 +65,9 @@ public final class ColorElement extends SettingElement {
     @Override
     public void render(MatrixStack matrixStack, int x, int y) {
         DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 15, new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x , y + 15, x + this.getWidth(), y + 30, this.searchingR ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x , y + 30, x + this.getWidth(), y + 45, this.searchingG ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x , y + 45, x + this.getWidth(), y + 60, this.searchingB ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 15, x + this.getWidth(), y + 30, this.searchingR ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 30, x + this.getWidth(), y + 45, this.searchingG ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 45, x + this.getWidth(), y + 60, this.searchingB ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
 
         String name = getColorSetting().getName() + " : ";
         DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, name, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());

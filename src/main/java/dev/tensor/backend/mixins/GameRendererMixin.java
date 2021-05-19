@@ -53,7 +53,7 @@ public final class GameRendererMixin implements Wrapper {
             callbackInfo.cancel();
         }
     }
-    
+
     @Inject(method = "shouldRenderBlockOutline", at = @At("HEAD"), cancellable = true)
     public void shouldRenderBlockOutline(CallbackInfoReturnable<Boolean> cir) {
         Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);

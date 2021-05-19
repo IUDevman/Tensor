@@ -10,13 +10,13 @@ import net.minecraft.client.input.Input;
 public final class DummyInput extends Input {
 
     public DummyInput() {
-        movementForward = 0;
-        movementSideways = 0;
-        pressingForward = false;
-        pressingBack = false;
-        pressingLeft = false;
-        pressingRight = false;
-        jumping = false;
-        sneaking = false;
+        this.movementForward = 0;
+        this.movementSideways = 0;
+        this.pressingForward = false;
+        this.pressingBack = false;
+        this.pressingLeft = false;
+        this.pressingRight = false;
+        this.jumping = false;
+        this.sneaking = false;
     }
 }

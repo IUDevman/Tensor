@@ -1,9 +1,9 @@
 package dev.tensor.feature.modules;
 
 import dev.tensor.backend.events.DisconnectEvent;
+import dev.tensor.backend.mixins.accessors.ClientPlayerEntityAccessor;
 import dev.tensor.misc.freecam.CameraEntity;
 import dev.tensor.misc.freecam.DummyInput;
-import dev.tensor.backend.mixins.accessors.ClientPlayerEntityAccessor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
