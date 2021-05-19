@@ -32,8 +32,8 @@ public final class Messages implements Command {
         return new String[]{
                 "messages",
                 "message",
-                "sendmessages",
-                "togglemessages"
+                "msgs",
+                "msg"
         };
     }
 
