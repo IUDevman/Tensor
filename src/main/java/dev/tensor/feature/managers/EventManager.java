@@ -33,7 +33,7 @@ public enum EventManager implements Manager {
     @EventHandler
     private final Listener<ClientTickEvent> clientTickEventListener = new Listener<>(event -> {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
-            if (module.isEnabled()) threadPoolExecutor.execute(module::onTick);
+            if (module.isEnabled()) this.threadPoolExecutor.execute(module::onTick);
         });
     });
 

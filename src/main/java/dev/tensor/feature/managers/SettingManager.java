@@ -42,7 +42,7 @@ public enum SettingManager implements Manager {
     }
 
     public Collection<Setting<?>> getSettings() {
-        return settingModuleLinkedHashMap.keySet();
+        return this.settingModuleLinkedHashMap.keySet();
     }
 
     public ArrayList<Setting<?>> getSettingsForModule(Module module) {
