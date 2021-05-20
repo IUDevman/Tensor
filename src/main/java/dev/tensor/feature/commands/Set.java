@@ -34,7 +34,7 @@ public final class Set implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module] [setting_name] [value] (r_g_b for color setings)";
+        return "{alias} [module] [setting_name] [value] (r_g_b for color settings)";
     }
 
     @Override
