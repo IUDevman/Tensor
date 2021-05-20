@@ -17,13 +17,14 @@ import java.awt.*;
 @Module.Info(name = "Watermark", category = Category.HUD)
 public final class Watermark extends Module {
 
-    public final NumberSetting posX = new NumberSetting("X Position", 3, 0, 1000, 0);
-    public final NumberSetting posY = new NumberSetting("Y Position", 3, 0, 1000, 0);
+    public final NumberSetting x = new NumberSetting("X Position", 3, 0, 1000, 0);
+    public final NumberSetting y = new NumberSetting("Y Position", 3, 0, 1000, 0);
 
+    @Override
     public void onRender2D() {
         MatrixStack matrixStack = new MatrixStack();
         final String watermark = Tensor.INSTANCE.MOD_NAME + " (" + Tensor.INSTANCE.MOD_VERSION + ")";
 
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, watermark, posX.getValue().intValue(), posY.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, watermark, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
     }
 }

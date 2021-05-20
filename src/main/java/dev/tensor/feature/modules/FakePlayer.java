@@ -20,12 +20,7 @@ public final class FakePlayer extends Module {
 
     private OtherClientPlayerEntity otherClientPlayerEntity = null;
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
-        disable();
-    });
-
+    @Override
     public void onEnable() {
         otherClientPlayerEntity = new OtherClientPlayerEntity(getWorld(), new GameProfile(UUID.fromString("fdee323e-7f0c-4c15-8d1c-0f277442342a"), "Fit"));
         otherClientPlayerEntity.copyPositionAndRotation(getPlayer());
@@ -34,9 +29,16 @@ public final class FakePlayer extends Module {
         getWorld().getPlayers().add(otherClientPlayerEntity);
     }
 
+    @Override
     public void onDisable() {
         if (otherClientPlayerEntity == null) return;
 
         getWorld().removeEntity(otherClientPlayerEntity.getEntityId());
     }
+
+    @SuppressWarnings({"unused", "CodeBlock2Expr"})
+    @EventHandler
+    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
+        disable();
+    });
 }

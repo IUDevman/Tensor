@@ -11,12 +11,14 @@ import dev.tensor.misc.imp.Module;
 @Module.Info(name = "Sneak", category = Category.Movement)
 public final class Sneak extends Module {
 
+    @Override
     public void onDisable() {
         if (!getPlayer().isSneaking()) return;
 
         getMinecraft().options.keySneak.setPressed(false);
     }
 
+    @Override
     public void onTick() {
         if (getPlayer().isSneaking()) return;
 

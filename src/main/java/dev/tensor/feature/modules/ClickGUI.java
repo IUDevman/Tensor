@@ -13,6 +13,7 @@ import org.lwjgl.glfw.GLFW;
 @Module.Info(name = "ClickGUI", category = Category.Client, bind = GLFW.GLFW_KEY_RIGHT_SHIFT)
 public final class ClickGUI extends Module {
 
+    @Override
     public void onEnable() {
         getMinecraft().openScreen(ClickGUIManager.INSTANCE.getGUI());
         disable();

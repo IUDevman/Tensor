@@ -27,12 +27,7 @@ public final class Freecam extends Module {
     private CameraEntity cameraEntity = null;
     private Perspective perspective = null;
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
-        disable();
-    });
-
+    @Override
     public void onEnable() {
         cameraEntity = new CameraEntity(getWorld(), getPlayer().getGameProfile(), this);
         cameraEntity.copyPositionAndRotation(getPlayer());
@@ -48,6 +43,7 @@ public final class Freecam extends Module {
         }
     }
 
+    @Override
     public void onDisable() {
         if (perspective != null) getMinecraft().options.setPerspective(perspective);
         getMinecraft().setCameraEntity(getPlayer());
@@ -59,6 +55,7 @@ public final class Freecam extends Module {
         }
     }
 
+    @Override
     public void onTick() {
         if (cameraEntity == null || getPlayer().isDead()) {
             disable();
@@ -73,6 +70,13 @@ public final class Freecam extends Module {
 
         cameraEntity.tickMovement();
     }
+
+    @SuppressWarnings({"unused", "CodeBlock2Expr"})
+    @EventHandler
+    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
+        disable();
+    });
+
 
     public float getSpeed() {
         return (float) (this.speed.getValue() / 20);

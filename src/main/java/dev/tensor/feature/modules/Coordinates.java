@@ -18,12 +18,13 @@ import java.text.DecimalFormat;
 @Module.Info(name = "Coordinates", category = Category.HUD)
 public final class Coordinates extends Module {
 
-    public final NumberSetting posX = new NumberSetting("X Position", 3, 0, 1000, 0);
-    public final NumberSetting posY = new NumberSetting("Y Position", 20, 0, 1000, 0);
+    public final NumberSetting x = new NumberSetting("X Position", 3, 0, 1000, 0);
+    public final NumberSetting y = new NumberSetting("Y Position", 20, 0, 1000, 0);
     public final BooleanSetting nether = new BooleanSetting("Nether", false);
 
     private final DecimalFormat decimalFormat = new DecimalFormat("###.#");
 
+    @Override
     public void onRender2D() {
         MatrixStack matrixStack = new MatrixStack();
         double playerX = getPlayer().getX();
@@ -36,11 +37,11 @@ public final class Coordinates extends Module {
         }
 
         final String overWorld = "X: " + decimalFormat.format(playerX) + " Y: " + decimalFormat.format(playerY) + " Z: " + decimalFormat.format(playerZ);
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, overWorld, posX.getValue().intValue(), posY.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, overWorld, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
 
         if (nether.getValue() && !getWorld().getDimension().hasEnderDragonFight()) {
             final String nether = "X: " + decimalFormat.format(playerX / 8) + " Y: " + decimalFormat.format(playerY) + " Z: " + decimalFormat.format(playerZ / 8);
-            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, nether, posX.getValue().intValue(), posY.getValue().intValue() + getMinecraft().textRenderer.fontHeight + 1, new Color(255, 0, 0, 255).getRGB());
+            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, nether, x.getValue().intValue(), y.getValue().intValue() + getMinecraft().textRenderer.fontHeight + 1, new Color(255, 0, 0, 255).getRGB());
         }
     }
 }

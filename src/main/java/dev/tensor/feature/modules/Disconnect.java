@@ -11,6 +11,7 @@ import dev.tensor.misc.imp.Module;
 @Module.Info(name = "Disconnect", category = Category.Misc)
 public final class Disconnect extends Module {
 
+    @Override
     public void onEnable() {
         getWorld().disconnect();
         disable();

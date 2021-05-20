@@ -18,6 +18,7 @@ public final class XCarry extends Module {
 
     private boolean cancelled = false;
 
+    @Override
     public void onDisable() {
         if (cancelled) getNetwork().sendPacket(new CloseHandledScreenC2SPacket(getPlayer().playerScreenHandler.syncId));
     }

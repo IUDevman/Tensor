@@ -17,6 +17,7 @@ public final class Flight extends Module {
     public final BooleanSetting ignoreFluids = new BooleanSetting("Ignore Fluids", true);
     public final NumberSetting speed = new NumberSetting("Speed", 20, 1, 50, 1);
 
+    @Override
     public void onTick() {
         getPlayer().abilities.flying = false;
         getPlayer().flyingSpeed = getSpeed();

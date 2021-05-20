@@ -12,6 +12,7 @@ import net.minecraft.client.gui.screen.DeathScreen;
 @Module.Info(name = "AutoRespawn", category = Category.Misc)
 public final class AutoRespawn extends Module {
 
+    @Override
     public void onTick() {
         if (getMinecraft().currentScreen instanceof DeathScreen) {
             getPlayer().requestRespawn();
