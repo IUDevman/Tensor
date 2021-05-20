@@ -34,15 +34,16 @@ public enum ConfigManager implements Manager {
         Tensor.INSTANCE.LOGGER.info("ConfigManager");
 
         try {
-            if (!Files.exists(Paths.get(mainPath))) {
-                Files.createDirectories(Paths.get(mainPath));
+            if (!Files.exists(Paths.get(this.mainPath))) {
+                Files.createDirectories(Paths.get(this.mainPath));
             }
 
-            if (!Files.exists(Paths.get(modulePath))) {
-                Files.createDirectories(Paths.get(modulePath));
+            if (!Files.exists(Paths.get(this.modulePath))) {
+                Files.createDirectories(Paths.get(this.modulePath));
             }
 
             loadPrefix();
+            loadFriends();
             loadClickGUI();
 
         } catch (IOException e) {
@@ -52,19 +53,19 @@ public enum ConfigManager implements Manager {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
 
             try {
-                Path path = Paths.get(modulePath + module.getName() + ".json");
+                Path path = Paths.get(this.modulePath + module.getName() + ".json");
 
                 if (!Files.exists(path)) return;
 
                 InputStream inputStream = Files.newInputStream(path);
-                JsonObject mainObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+                JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-                module.setEnabled(mainObject.get("Enabled").getAsBoolean());
-                module.setMessages(mainObject.get("Messages").getAsBoolean());
-                module.setDrawn(mainObject.get("Drawn").getAsBoolean());
-                module.setBind(mainObject.get("Bind").getAsInt());
+                module.setEnabled(jsonObject.get("Enabled").getAsBoolean());
+                module.setMessages(jsonObject.get("Messages").getAsBoolean());
+                module.setDrawn(jsonObject.get("Drawn").getAsBoolean());
+                module.setBind(jsonObject.get("Bind").getAsInt());
 
-                JsonObject settingObject = mainObject.getAsJsonObject("Settings");
+                JsonObject settingObject = jsonObject.getAsJsonObject("Settings");
 
                 SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
                     JsonElement jsonElement = settingObject.get(objectSetting.getName());
@@ -96,32 +97,46 @@ public enum ConfigManager implements Manager {
     }
 
     private void loadPrefix() throws IOException {
-        Path path = Paths.get(mainPath + "Prefix.json");
+        Path path = Paths.get(this.mainPath + "Prefix.json");
 
         if (!Files.exists(path)) return;
 
         InputStream inputStream = Files.newInputStream(path);
-        JsonObject mainObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-        CommandManager.INSTANCE.setPrefix(mainObject.get("Prefix").getAsString());
+        CommandManager.INSTANCE.setPrefix(jsonObject.get("Prefix").getAsString());
+    }
+
+    private void loadFriends() throws IOException {
+        Path path = Paths.get(this.mainPath + "Friends.json");
+
+        if (!Files.exists(path)) return;
+
+        InputStream inputStream = Files.newInputStream(path);
+        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.get("Friends").getAsJsonArray();
+
+        FriendManager.INSTANCE.clearFriends();
+        jsonArray.forEach(jsonElement -> FriendManager.INSTANCE.addFriend(jsonElement.getAsString()));
     }
 
     private void loadClickGUI() throws IOException {
-        Path path = Paths.get(mainPath + "ClickGUI.json");
+        Path path = Paths.get(this.mainPath + "ClickGUI.json");
 
         if (!Files.exists(path)) return;
 
         InputStream inputStream = Files.newInputStream(path);
-        JsonObject mainObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-        ClickGUIManager.INSTANCE.getGUI().getX().setValue(mainObject.get("X Position").getAsDouble());
-        ClickGUIManager.INSTANCE.getGUI().getY().setValue(mainObject.get("Y Position").getAsDouble());
+        ClickGUIManager.INSTANCE.getGUI().getX().setValue(jsonObject.get("X Position").getAsDouble());
+        ClickGUIManager.INSTANCE.getGUI().getY().setValue(jsonObject.get("Y Position").getAsDouble());
     }
 
     public void save() {
 
         try {
             savePrefix();
+            saveFriends();
             saveClickGUI();
 
         } catch (IOException e) {
@@ -131,18 +146,18 @@ public enum ConfigManager implements Manager {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
 
             try {
-                Path path = Paths.get(modulePath + module.getName() + ".json");
+                Path path = Paths.get(this.modulePath + module.getName() + ".json");
                 registerFile(path);
 
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
-                JsonObject mainObject = new JsonObject();
+                JsonObject jsonObject = new JsonObject();
 
-                mainObject.add("Enabled", new JsonPrimitive(module.isEnabled()));
-                mainObject.add("Messages", new JsonPrimitive(module.isMessages()));
-                mainObject.add("Drawn", new JsonPrimitive(module.isDrawn()));
-                mainObject.add("Bind", new JsonPrimitive(module.getBind()));
+                jsonObject.add("Enabled", new JsonPrimitive(module.isEnabled()));
+                jsonObject.add("Messages", new JsonPrimitive(module.isMessages()));
+                jsonObject.add("Drawn", new JsonPrimitive(module.isDrawn()));
+                jsonObject.add("Bind", new JsonPrimitive(module.getBind()));
 
                 JsonObject settingObject = new JsonObject();
 
@@ -154,9 +169,9 @@ public enum ConfigManager implements Manager {
                     }
                 });
 
-                mainObject.add("Settings", settingObject);
+                jsonObject.add("Settings", settingObject);
 
-                String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
+                String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
                 outputStreamWriter.write(jsonString);
                 outputStreamWriter.close();
 
@@ -167,32 +182,50 @@ public enum ConfigManager implements Manager {
     }
 
     private void savePrefix() throws IOException {
-        Path path = Paths.get(mainPath + "Prefix.json");
+        Path path = Paths.get(this.mainPath + "Prefix.json");
         registerFile(path);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
-        JsonObject mainObject = new JsonObject();
-        mainObject.add("Prefix", new JsonPrimitive(CommandManager.INSTANCE.getPrefix()));
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("Prefix", new JsonPrimitive(CommandManager.INSTANCE.getPrefix()));
 
-        String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
+        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
+        outputStreamWriter.write(jsonString);
+        outputStreamWriter.close();
+    }
+
+    private void saveFriends() throws IOException {
+        Path path = Paths.get(this.mainPath + "Friends.json");
+        registerFile(path);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
+
+        JsonObject jsonObject = new JsonObject();
+        JsonArray jsonArray = new JsonArray();
+
+        FriendManager.INSTANCE.getFriends().forEach(jsonArray::add);
+        jsonObject.add("Friends", jsonArray);
+
+        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
         outputStreamWriter.write(jsonString);
         outputStreamWriter.close();
     }
 
     private void saveClickGUI() throws IOException {
-        Path path = Paths.get(mainPath + "ClickGUI.json");
+        Path path = Paths.get(this.mainPath + "ClickGUI.json");
         registerFile(path);
 
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
-        JsonObject mainObject = new JsonObject();
-        mainObject.add("X Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getX().getValue()));
-        mainObject.add("Y Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getY().getValue()));
+        JsonObject jsonObject = new JsonObject();
+        jsonObject.add("X Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getX().getValue()));
+        jsonObject.add("Y Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getY().getValue()));
 
-        String jsonString = gson.toJson(new JsonParser().parse(mainObject.toString()));
+        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
         outputStreamWriter.write(jsonString);
         outputStreamWriter.close();
     }
