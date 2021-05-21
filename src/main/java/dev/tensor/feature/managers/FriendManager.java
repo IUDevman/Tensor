@@ -29,8 +29,8 @@ public enum FriendManager implements Manager {
         this.friends.add(name);
     }
 
-    public void removeFriend(String string) {
-        this.friends.remove(string);
+    public void removeFriend(String name) {
+        this.friends.remove(name);
     }
 
     public void clearFriends() {

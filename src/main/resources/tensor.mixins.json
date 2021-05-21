@@ -34,6 +34,7 @@
     "accessors.CloseHandledScreenC2SAccessor",
     "accessors.EntityVelocityUpdateS2CPacketAccessor",
     "accessors.ExplosionS2CPacketAccessor",
+    "accessors.MinecraftClientAccessor",
     "accessors.PlayerMoveC2SPacketAccessor"
   ],
   "injectors": {
