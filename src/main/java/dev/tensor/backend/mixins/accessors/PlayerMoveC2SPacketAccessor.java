@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-14-2021
  */
 
-@Mixin(PlayerMoveC2SPacket.class)
+@Mixin(value = PlayerMoveC2SPacket.class, priority = 9999)
 public interface PlayerMoveC2SPacketAccessor {
 
     @Accessor

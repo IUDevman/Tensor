@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-21-2021
  */
 
-@Mixin(MinecraftClient.class)
+@Mixin(value = MinecraftClient.class, priority = 9999)
 public interface MinecraftClientAccessor {
 
     @Accessor

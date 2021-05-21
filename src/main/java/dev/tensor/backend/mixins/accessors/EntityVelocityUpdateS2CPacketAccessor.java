@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-13-2021
  */
 
-@Mixin(EntityVelocityUpdateS2CPacket.class)
+@Mixin(value = EntityVelocityUpdateS2CPacket.class, priority = 9999)
 public interface EntityVelocityUpdateS2CPacketAccessor {
 
     @Accessor

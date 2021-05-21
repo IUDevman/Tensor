@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-17-2021
  */
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(value = ClientPlayerEntity.class, priority = 9999)
 public interface ClientPlayerEntityAccessor {
 
     @Accessor

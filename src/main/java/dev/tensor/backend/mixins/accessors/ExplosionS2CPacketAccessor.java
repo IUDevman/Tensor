@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-13-2021
  */
 
-@Mixin(ExplosionS2CPacket.class)
+@Mixin(value = ExplosionS2CPacket.class, priority = 9999)
 public interface ExplosionS2CPacketAccessor {
 
     @Accessor
