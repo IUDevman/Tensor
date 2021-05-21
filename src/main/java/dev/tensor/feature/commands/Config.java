@@ -52,18 +52,18 @@ public final class Config implements Command {
         String argument = message[1];
 
         switch (argument.toLowerCase(Locale.ROOT)) {
-            case "save" : {
+            case "save": {
                 ConfigManager.INSTANCE.save();
                 this.sendReplaceableClientMessage(this.getMarker() + "Saved config!", this.getID(), true);
                 break;
             }
-            case "reload" : {
+            case "reload": {
                 ConfigManager.INSTANCE.load();
                 this.sendReplaceableClientMessage(this.getMarker() + "Reloaded config!", this.getID(), true);
                 break;
             }
             default: {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid argument ("  + Formatting.YELLOW + argument + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid argument (" + Formatting.YELLOW + argument + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
         }

@@ -54,7 +54,7 @@ public final class Friend implements Command {
         boolean isMissingName = message.length < 3;
 
         switch (argument.toLowerCase(Locale.ROOT)) {
-            case "list" : {
+            case "list": {
                 if (FriendManager.INSTANCE.getFriends().size() == 0) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No friends!", this.getID(), true);
                     return;
@@ -63,12 +63,12 @@ public final class Friend implements Command {
                 this.sendReplaceableClientMessage(this.getMarker() + "Friends: " + FriendManager.INSTANCE.getFriends() + "!", this.getID(), true);
                 break;
             }
-            case "clear" : {
+            case "clear": {
                 FriendManager.INSTANCE.clearFriends();
                 this.sendReplaceableClientMessage(this.getMarker() + "Cleared friends!", this.getID(), true);
                 break;
             }
-            case "add" : {
+            case "add": {
                 if (isMissingName) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No name inputted!", this.getID(), true);
                     return;
@@ -85,7 +85,7 @@ public final class Friend implements Command {
                 this.sendReplaceableClientMessage(this.getMarker() + "Added friend (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
-            case "remove" : {
+            case "remove": {
                 if (isMissingName) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No name inputted!", this.getID(), true);
                     return;
@@ -103,7 +103,7 @@ public final class Friend implements Command {
                 break;
             }
             default: {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid argument ("  + Formatting.YELLOW + argument + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid argument (" + Formatting.YELLOW + argument + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
         }

@@ -1,7 +1,10 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.modules.*;
+import dev.tensor.feature.modules.Freecam;
+import dev.tensor.feature.modules.NoPortalEffect;
+import dev.tensor.feature.modules.NoPush;
+import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;

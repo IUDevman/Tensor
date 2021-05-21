@@ -31,13 +31,17 @@ public abstract class EntityMixin implements Wrapper {
     @Shadow
     private int entityId;
 
-    @Shadow public abstract Vec3d getCameraPosVec(float tickDelta);
+    @Shadow
+    public abstract Vec3d getCameraPosVec(float tickDelta);
 
-    @Shadow public abstract Vec3d getRotationVec(float tickDelta);
+    @Shadow
+    public abstract Vec3d getRotationVec(float tickDelta);
 
-    @Shadow public abstract Text getName();
+    @Shadow
+    public abstract Text getName();
 
-    @Shadow protected boolean firstUpdate;
+    @Shadow
+    protected boolean firstUpdate;
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {

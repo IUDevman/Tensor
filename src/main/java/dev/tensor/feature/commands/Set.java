@@ -94,7 +94,7 @@ public final class Set implements Command {
     private void setValueDetailed(Setting<?> setting, String value) {
         if (setting instanceof BooleanSetting) {
             if (!value.equalsIgnoreCase("true") && !value.equalsIgnoreCase("false")) {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid boolean value (" +  Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid boolean value (" + Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
                 return;
             }
 
@@ -114,7 +114,7 @@ public final class Set implements Command {
                 this.sendReplaceableClientMessage(this.getMarker() + "Set number value (" + setting.getName() + ") to " + Formatting.GREEN + decimalFix + Formatting.GRAY + "!", this.getID(), true);
 
             } catch (NumberFormatException ignored) {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid number value (" +  Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid number value (" + Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
             }
 
         } else if (setting instanceof EnumSetting) {
@@ -131,14 +131,14 @@ public final class Set implements Command {
             });
 
             if (!found.get()) {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid enum value (" +  Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid enum value (" + Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
             }
 
         } else if (setting instanceof ColorSetting) {
             String[] values = value.split("_");
 
             if (values.length < 3) {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid color value (" +  Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid color value (" + Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
                 return;
             }
 
@@ -151,7 +151,7 @@ public final class Set implements Command {
                 this.sendReplaceableClientMessage(this.getMarker() + "Set color value (" + setting.getName() + ") to " + Formatting.GREEN + red + "_" + green + "_" + blue + Formatting.GRAY + "!", this.getID(), true);
 
             } catch (NumberFormatException ignored) {
-                this.sendReplaceableClientMessage(this.getMarker() + "Invalid color value (" +  Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid color value (" + Formatting.RED + value + Formatting.GRAY + ")!", this.getID(), true);
             }
         }
     }
