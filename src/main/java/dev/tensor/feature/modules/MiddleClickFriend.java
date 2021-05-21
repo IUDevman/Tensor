@@ -1,6 +1,5 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.Tensor;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.feature.managers.FriendManager;
 import dev.tensor.misc.imp.Category;
