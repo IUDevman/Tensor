@@ -7,14 +7,14 @@ import net.minecraft.util.Formatting;
 
 /**
  * @author IUDevman
- * @since 04-17-2021
+ * @since 05-21-2021
  */
 
-public final class Messages implements Command {
+public final class Drawn implements Command {
 
     @Override
     public String getName() {
-        return "Messages";
+        return "Drawn";
     }
 
     @Override
@@ -30,16 +30,14 @@ public final class Messages implements Command {
     @Override
     public String[] getAliases() {
         return new String[]{
-                "messages",
-                "message",
-                "msgs",
-                "msg"
+                "drawn",
+                "setdrawn"
         };
     }
 
     @Override
     public int getID() {
-        return 670;
+        return 677;
     }
 
     @Override
@@ -58,9 +56,9 @@ public final class Messages implements Command {
             return;
         }
 
-        module.setMessages(!module.isMessages());
+        module.setDrawn(!module.isDrawn());
 
         String value = module.isMessages() ? Formatting.GREEN + "true" : Formatting.RED + "false";
-        this.sendReplaceableClientMessage(this.getMarker() + "Toggled messages: " + module.getName() + " (" + value + Formatting.GRAY + ")!", this.getID(), true);
+        this.sendReplaceableClientMessage(this.getMarker() + "Set drawn: " + module.getName() + " (" + value + Formatting.GRAY + ")!", this.getID(), true);
     }
 }

@@ -44,7 +44,6 @@ public final class Config implements Command {
 
     @Override
     public void onCommand(String[] message) {
-
         if (message == null || message.length < 2) {
             this.sendReplaceableClientMessage(this.getMarker() + "No argument inputted!", this.getID(), true);
             return;

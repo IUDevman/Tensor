@@ -16,7 +16,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 
 //this is a mega WIP module
-@Module.Info(name = "ArrayList", category = Category.HUD)
+@Module.Info(name = "ArrayList", category = Category.HUD, drawn = false)
 public final class ArrayList extends Module {
 
     public final NumberSetting x = new NumberSetting("X Position", 0, 0, 1000, 0);

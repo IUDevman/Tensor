@@ -43,7 +43,6 @@ public final class Prefix implements Command {
 
     @Override
     public void onCommand(String[] message) {
-
         if (message == null || message.length < 2) {
             this.sendReplaceableClientMessage(this.getMarker() + "No prefix inputted!", this.getID(), true);
             return;
