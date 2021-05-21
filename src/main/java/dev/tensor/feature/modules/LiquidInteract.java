@@ -9,6 +9,6 @@ import dev.tensor.misc.imp.Module;
  */
 
 @Module.Info(name = "LiquidInteract", category = Category.Player)
-public class LiquidInteract extends Module {
+public final class LiquidInteract extends Module {
 
 }
