@@ -2,10 +2,14 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
+import dev.tensor.feature.modules.LiquidInteract;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.entity.Entity;
+import net.minecraft.text.Text;
+import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.world.RaycastContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -13,16 +17,24 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.util.Objects;
+
 /**
  * @author IUDevman
  * @since 05-16-2021
  */
 
 @Mixin(Entity.class)
-public final class EntityMixin implements Wrapper {
+public abstract class EntityMixin implements Wrapper {
 
     @Shadow
     private int entityId;
+
+    @Shadow public abstract Vec3d getCameraPosVec(float tickDelta);
+
+    @Shadow public abstract Vec3d getRotationVec(float tickDelta);
+
+    @Shadow public abstract Text getName();
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
@@ -52,6 +64,20 @@ public final class EntityMixin implements Wrapper {
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(true);
+        }
+    }
+
+    @Inject(method = "raycast", at = @At("HEAD"), cancellable = true)
+    public void raycast(double maxDistance, float tickDelta, boolean includeFluids, CallbackInfoReturnable<HitResult> cir) {
+        if (isNull() || entityId != Objects.requireNonNull(getMinecraft().getCameraEntity()).getEntityId() || getPlayer().isSubmergedInWater()) return;
+
+        LiquidInteract liquidInteract = ModuleManager.INSTANCE.getModule(LiquidInteract.class);
+
+        if (liquidInteract.isEnabled()) {
+            Vec3d vec3d = this.getCameraPosVec(tickDelta);
+            Vec3d vec3d2 = this.getRotationVec(tickDelta);
+            Vec3d vec3d3 = vec3d.add(vec3d2.getX() * maxDistance, vec3d2.getY() * maxDistance, vec3d2.getZ() * maxDistance);
+            cir.setReturnValue(getWorld().raycast(new RaycastContext(vec3d, vec3d3, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.ANY, getMinecraft().getCameraEntity())));
         }
     }
 }
