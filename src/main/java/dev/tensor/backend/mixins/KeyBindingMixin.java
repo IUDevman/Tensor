@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 04-13-2021
  */
 
-@Mixin(KeyBinding.class)
+@Mixin(value = KeyBinding.class, priority = Integer.MAX_VALUE)
 public final class KeyBindingMixin implements Wrapper {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))

@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-14-2021
  */
 
-@Mixin(BossBarHud.class)
+@Mixin(value = BossBarHud.class, priority = Integer.MAX_VALUE)
 public final class BossBarHudMixin implements Wrapper {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

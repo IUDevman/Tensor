@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-10-2021
  */
 
-@Mixin(InGameHud.class)
+@Mixin(value = InGameHud.class, priority = Integer.MAX_VALUE)
 public final class InGameHudMixin implements Wrapper {
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)

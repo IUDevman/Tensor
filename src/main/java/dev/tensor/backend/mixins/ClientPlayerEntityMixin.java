@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-09-2021
  */
 
-@Mixin(ClientPlayerEntity.class)
+@Mixin(value = ClientPlayerEntity.class, priority = Integer.MAX_VALUE)
 public final class ClientPlayerEntityMixin implements Wrapper {
 
     @Inject(method = "updateNausea", at = @At("HEAD"), cancellable = true)

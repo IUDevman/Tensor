@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-12-2021
  */
 
-@Mixin(value = CloseHandledScreenC2SPacket.class, priority = 9999)
+@Mixin(value = CloseHandledScreenC2SPacket.class, priority = Integer.MAX_VALUE)
 public interface CloseHandledScreenC2SAccessor {
 
     @Accessor("syncId")

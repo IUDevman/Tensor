@@ -26,7 +26,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-01-2021
  */
 
-@Mixin(ClientPlayerInteractionManager.class)
+@Mixin(value = ClientPlayerInteractionManager.class, priority = Integer.MAX_VALUE)
 public final class ClientPlayerInteractionManagerMixin implements Wrapper {
 
     @Shadow

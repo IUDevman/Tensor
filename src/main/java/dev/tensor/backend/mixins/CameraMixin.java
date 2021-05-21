@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-11-2021
  */
 
-@Mixin(Camera.class)
+@Mixin(value = Camera.class, priority = Integer.MAX_VALUE)
 public final class CameraMixin implements Wrapper {
 
     @Inject(method = "clipToSpace", at = @At("HEAD"), cancellable = true)

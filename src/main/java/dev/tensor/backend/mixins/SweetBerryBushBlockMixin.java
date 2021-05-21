@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-09-2021
  */
 
-@Mixin(SweetBerryBushBlock.class)
+@Mixin(value = SweetBerryBushBlock.class, priority = Integer.MAX_VALUE)
 public final class SweetBerryBushBlockMixin implements Wrapper {
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)

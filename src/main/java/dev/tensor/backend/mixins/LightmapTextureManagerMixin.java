@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-12-2021
  */
 
-@Mixin(LightmapTextureManager.class)
+@Mixin(value = LightmapTextureManager.class, priority = Integer.MAX_VALUE)
 public final class LightmapTextureManagerMixin implements Wrapper {
 
     @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)

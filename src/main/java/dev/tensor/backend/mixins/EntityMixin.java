@@ -25,7 +25,7 @@ import java.util.Objects;
  * @since 05-16-2021
  */
 
-@Mixin(Entity.class)
+@Mixin(value = Entity.class, priority = Integer.MAX_VALUE)
 public abstract class EntityMixin implements Wrapper {
 
     @Shadow

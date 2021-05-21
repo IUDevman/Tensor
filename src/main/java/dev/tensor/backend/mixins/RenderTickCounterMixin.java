@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 04-14-2021
  */
 
-@Mixin(RenderTickCounter.class)
+@Mixin(value = RenderTickCounter.class, priority = Integer.MAX_VALUE)
 public final class RenderTickCounterMixin implements Wrapper {
 
     @Shadow

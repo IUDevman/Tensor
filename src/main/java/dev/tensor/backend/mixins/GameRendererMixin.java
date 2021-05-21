@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 04-12-2021
  */
 
-@Mixin(GameRenderer.class)
+@Mixin(value = GameRenderer.class, priority = Integer.MAX_VALUE)
 public final class GameRendererMixin implements Wrapper {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))

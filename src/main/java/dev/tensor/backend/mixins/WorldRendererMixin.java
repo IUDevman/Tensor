@@ -23,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-11-2021
  */
 
-@Mixin(WorldRenderer.class)
+@Mixin(value = WorldRenderer.class, priority = Integer.MAX_VALUE)
 public final class WorldRendererMixin implements Wrapper {
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)

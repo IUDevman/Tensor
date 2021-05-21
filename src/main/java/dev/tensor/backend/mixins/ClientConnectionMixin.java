@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 04-13-2021
  */
 
-@Mixin(ClientConnection.class)
+@Mixin(value = ClientConnection.class, priority = Integer.MAX_VALUE)
 public final class ClientConnectionMixin implements Wrapper {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)

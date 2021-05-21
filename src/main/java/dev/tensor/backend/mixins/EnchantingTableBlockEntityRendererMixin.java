@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-15-2021
  */
 
-@Mixin(EnchantingTableBlockEntityRenderer.class)
+@Mixin(value = EnchantingTableBlockEntityRenderer.class, priority = Integer.MAX_VALUE)
 public final class EnchantingTableBlockEntityRendererMixin implements Wrapper {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

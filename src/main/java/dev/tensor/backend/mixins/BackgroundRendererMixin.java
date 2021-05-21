@@ -15,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 04-14-2021
  */
 
-@Mixin(BackgroundRenderer.class)
+@Mixin(value = BackgroundRenderer.class, priority = Integer.MAX_VALUE)
 public final class BackgroundRendererMixin implements Wrapper {
 
     @Inject(method = "applyFog", at = @At("HEAD"), cancellable = true)

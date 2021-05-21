@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-12-2021
  */
 
-@Mixin(CobwebBlock.class)
+@Mixin(value = CobwebBlock.class, priority = Integer.MAX_VALUE)
 public final class CobWebBlockMixin implements Wrapper {
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)

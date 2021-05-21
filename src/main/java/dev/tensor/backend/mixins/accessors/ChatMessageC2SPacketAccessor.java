@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-14-2021
  */
 
-@Mixin(value = ChatMessageC2SPacket.class, priority = 9999)
+@Mixin(value = ChatMessageC2SPacket.class, priority = Integer.MAX_VALUE)
 public interface ChatMessageC2SPacketAccessor {
 
     @Accessor

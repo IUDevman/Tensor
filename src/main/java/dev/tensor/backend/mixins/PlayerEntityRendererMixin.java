@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-14-2021
  */
 
-@Mixin(PlayerEntityRenderer.class)
+@Mixin(value = PlayerEntityRenderer.class, priority = Integer.MAX_VALUE)
 public final class PlayerEntityRendererMixin implements Wrapper {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)

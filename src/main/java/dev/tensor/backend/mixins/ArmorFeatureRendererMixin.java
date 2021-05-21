@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-15-2021
  */
 
-@Mixin(ArmorFeatureRenderer.class)
+@Mixin(value = ArmorFeatureRenderer.class, priority = Integer.MAX_VALUE)
 public final class ArmorFeatureRendererMixin implements Wrapper {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

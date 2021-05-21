@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-14-2021
  */
 
-@Mixin(HeldItemRenderer.class)
+@Mixin(value = HeldItemRenderer.class, priority = Integer.MAX_VALUE)
 public final class HeldItemRendererMixin implements Wrapper {
 
     @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))

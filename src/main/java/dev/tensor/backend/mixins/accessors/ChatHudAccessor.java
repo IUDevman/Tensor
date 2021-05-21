@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Invoker;
  * @since 04-17-2021
  */
 
-@Mixin(value = ChatHud.class, priority = 9999)
+@Mixin(value = ChatHud.class, priority = Integer.MAX_VALUE)
 public interface ChatHudAccessor {
 
     @Invoker("addMessage")

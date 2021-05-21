@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(FluidState.class)
+@Mixin(value = FluidState.class, priority = Integer.MAX_VALUE)
 public final class FluidStateMixin implements Wrapper {
 
     @Inject(method = "getVelocity", at = @At("HEAD"), cancellable = true)

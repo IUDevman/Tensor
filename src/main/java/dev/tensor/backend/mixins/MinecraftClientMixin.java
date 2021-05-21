@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 04-12-2021
  */
 
-@Mixin(MinecraftClient.class)
+@Mixin(value = MinecraftClient.class, priority = Integer.MAX_VALUE)
 public final class MinecraftClientMixin implements Wrapper {
 
     @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-10-2021
  */
 
-@Mixin(InGameOverlayRenderer.class)
+@Mixin(value = InGameOverlayRenderer.class, priority = Integer.MAX_VALUE)
 public final class InGameOverlayRendererMixin implements Wrapper {
 
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)

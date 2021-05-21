@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-09-2021
  */
 
-@Mixin(Block.class)
+@Mixin(value = Block.class, priority = Integer.MAX_VALUE)
 public final class BlockMixin implements Wrapper {
 
     @Inject(method = "getVelocityMultiplier()F", at = @At("HEAD"), cancellable = true)

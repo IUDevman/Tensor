@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-12-2021
  */
 
-@Mixin(SlimeBlock.class)
+@Mixin(value = SlimeBlock.class, priority = Integer.MAX_VALUE)
 public final class SlimeBlockMixin implements Wrapper {
 
     @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
