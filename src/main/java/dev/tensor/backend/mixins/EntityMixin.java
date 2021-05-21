@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.feature.modules.Flight;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.LiquidInteract;
 import dev.tensor.feature.modules.NoPush;
@@ -35,6 +36,8 @@ public abstract class EntityMixin implements Wrapper {
     @Shadow public abstract Vec3d getRotationVec(float tickDelta);
 
     @Shadow public abstract Text getName();
+
+    @Shadow protected boolean firstUpdate;
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
@@ -78,6 +81,41 @@ public abstract class EntityMixin implements Wrapper {
             Vec3d vec3d2 = this.getRotationVec(tickDelta);
             Vec3d vec3d3 = vec3d.add(vec3d2.getX() * maxDistance, vec3d2.getY() * maxDistance, vec3d2.getZ() * maxDistance);
             cir.setReturnValue(getWorld().raycast(new RaycastContext(vec3d, vec3d3, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.ANY, getMinecraft().getCameraEntity())));
+        }
+    }
+
+    @Inject(method = "isTouchingWater", at = @At("HEAD"), cancellable = true)
+    public void isTouchingWater(CallbackInfoReturnable<Boolean> cir) {
+        if (isNull() || entityId != getPlayer().getEntityId()) return;
+
+        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+
+        if (flight.isEnabled() && flight.ignoreFluids.getValue()) {
+            cir.setReturnValue(firstUpdate);
+        }
+    }
+
+    @Inject(method = "isInLava", at = @At("HEAD"), cancellable = true)
+    public void isInLava(CallbackInfoReturnable<Boolean> cir) {
+        if (isNull() || entityId != getPlayer().getEntityId()) return;
+
+        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+
+        if (flight.isEnabled() && flight.ignoreFluids.getValue()) {
+            cir.setReturnValue(firstUpdate);
+        }
+    }
+
+    @Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
+    public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo callbackInfo) {
+        if (isNull() || entityId != getPlayer().getEntityId()) return;
+
+        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+
+        if (freecam.isEnabled() && freecam.getCameraEntity() != null) {
+            freecam.getCameraEntity().changeLookDirection(cursorDeltaX, cursorDeltaY);
+            freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().yaw);
+            callbackInfo.cancel();
         }
     }
 }
