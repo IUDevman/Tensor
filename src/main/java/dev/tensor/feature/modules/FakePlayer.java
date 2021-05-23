@@ -38,6 +38,6 @@ public final class FakePlayer extends Module {
     @SuppressWarnings("unused")
     @EventTarget
     public void onDisconnect(DisconnectEvent event) {
-        disable();
+        this.disable();
     }
 }

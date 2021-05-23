@@ -57,7 +57,7 @@ public final class Freecam extends Module {
     @Override
     public void onTick() {
         if (cameraEntity == null || getPlayer().isDead()) {
-            disable();
+            this.disable();
             return;
         }
 
@@ -73,7 +73,7 @@ public final class Freecam extends Module {
     @SuppressWarnings("unused")
     @EventTarget
     public void onDisconnect(DisconnectEvent event) {
-        disable();
+        this.disable();
     }
 
     public float getSpeed() {

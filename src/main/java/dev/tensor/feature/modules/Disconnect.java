@@ -14,6 +14,6 @@ public final class Disconnect extends Module {
     @Override
     public void onEnable() {
         getWorld().disconnect();
-        disable();
+        this.disable();
     }
 }

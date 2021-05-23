@@ -16,6 +16,6 @@ public final class ClickGUI extends Module {
     @Override
     public void onEnable() {
         getMinecraft().openScreen(ClickGUIManager.INSTANCE.getGUI());
-        disable();
+        this.disable();
     }
 }
