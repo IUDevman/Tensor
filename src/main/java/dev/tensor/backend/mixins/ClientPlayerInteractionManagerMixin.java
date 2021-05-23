@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
@@ -34,7 +34,7 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
 
     @Inject(method = "updateBlockBreakingProgress", at = @At("HEAD"))
     public void updateBlockBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        Tensor.INSTANCE.EVENT_BUS.post(new BlockInteractEvent(BlockInteractEvent.Type.Damage, pos));
+        EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Damage, pos));
 
         NoBreakDelay noBreakDelay = ModuleManager.INSTANCE.getModule(NoBreakDelay.class);
 
@@ -43,7 +43,7 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
 
     @Inject(method = "breakBlock", at = @At("HEAD"))
     public void breakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        Tensor.INSTANCE.EVENT_BUS.post(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
+        EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
     }
 
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)

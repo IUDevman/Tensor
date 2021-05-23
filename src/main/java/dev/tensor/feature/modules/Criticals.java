@@ -1,11 +1,10 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
@@ -22,8 +21,8 @@ public final class Criticals extends Module {
     public final BooleanSetting endCrystals = new BooleanSetting("End Crystals", false);
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<PacketEvent> packetEventListener = new Listener<>(event -> {
+    @EventTarget
+    public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
         if (event.getPacket() instanceof PlayerInteractEntityC2SPacket) {
@@ -34,7 +33,7 @@ public final class Criticals extends Module {
             getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.1, getPlayer().getZ(), false));
             getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
         }
-    });
+    }
 
     private boolean shouldApplyCriticals(Entity entity) {
         if (getPlayer().isSwimming() || getPlayer().isInSwimmingPose()) return false;

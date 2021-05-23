@@ -1,11 +1,10 @@
 package dev.tensor.feature.modules;
 
 import com.mojang.authlib.GameProfile;
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.client.network.OtherClientPlayerEntity;
 
 import java.util.UUID;
@@ -36,9 +35,9 @@ public final class FakePlayer extends Module {
         getWorld().removeEntity(otherClientPlayerEntity.getEntityId());
     }
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onDisconnect(DisconnectEvent event) {
         disable();
-    });
+    }
 }

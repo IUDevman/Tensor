@@ -1,13 +1,12 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.backend.mixins.accessors.EntityVelocityUpdateS2CPacketAccessor;
 import dev.tensor.backend.mixins.accessors.ExplosionS2CPacketAccessor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.network.packet.s2c.play.EntityVelocityUpdateS2CPacket;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 
@@ -23,8 +22,8 @@ public final class Velocity extends Module {
     public final BooleanSetting explosion = new BooleanSetting("Explosion", true);
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<PacketEvent> packetEventListener = new Listener<>(event -> {
+    @EventTarget
+    public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Receive) return;
 
         if (event.getPacket() instanceof EntityVelocityUpdateS2CPacket && damage.getValue()) {
@@ -44,5 +43,5 @@ public final class Velocity extends Module {
             ((ExplosionS2CPacketAccessor) packet).setPlayerVelocityY(0);
             ((ExplosionS2CPacketAccessor) packet).setPlayerVelocityZ(0);
         }
-    });
+    }
 }

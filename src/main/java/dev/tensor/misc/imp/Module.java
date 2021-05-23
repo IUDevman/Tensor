@@ -1,7 +1,6 @@
 package dev.tensor.misc.imp;
 
-import dev.tensor.Tensor;
-import me.zero.alpine.listener.Listenable;
+import dev.darkmagician6.eventapi.EventHandler;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -16,7 +15,7 @@ import java.lang.annotation.Target;
  */
 
 @SuppressWarnings("EmptyMethod")
-public abstract class Module implements Wrapper, Listenable, Utilities {
+public abstract class Module implements Wrapper, Utilities {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
@@ -92,7 +91,7 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
 
     protected void enable() {
         this.enabled = true;
-        Tensor.INSTANCE.EVENT_BUS.subscribe(this);
+        EventHandler.register(this);
         if (!isNull()) {
             onEnable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true);
@@ -101,7 +100,7 @@ public abstract class Module implements Wrapper, Listenable, Utilities {
 
     protected void disable() {
         this.enabled = false;
-        Tensor.INSTANCE.EVENT_BUS.unsubscribe(this);
+        EventHandler.unregister(this);
         if (!isNull()) {
             onDisable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true);

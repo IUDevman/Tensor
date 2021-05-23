@@ -1,6 +1,6 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.misc.imp.Event;
+import dev.darkmagician6.eventapi.imp.EventCancellable;
 import net.minecraft.network.Packet;
 
 /**
@@ -8,7 +8,7 @@ import net.minecraft.network.Packet;
  * @since 04-13-2021
  */
 
-public final class PacketEvent extends Event {
+public final class PacketEvent extends EventCancellable {
 
     private final Type type;
     private final Packet<?> packet;

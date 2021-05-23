@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.options.KeyBinding;
@@ -20,6 +20,6 @@ public final class KeyBindingMixin implements Wrapper {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))
     private static void onKeyPressed(InputUtil.Key key, CallbackInfo callbackInfo) {
-        Tensor.INSTANCE.EVENT_BUS.post(new KeyPressedEvent(key.getCode()));
+        EventHandler.call(new KeyPressedEvent(key.getCode()));
     }
 }

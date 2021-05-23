@@ -1,11 +1,10 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.block.BlockState;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
@@ -27,9 +26,8 @@ public final class AutoTool extends Module {
     private final HashMap<BlockPos, Integer> blockPosIntegerHashMap = new HashMap<>();
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<BlockInteractEvent> blockEventListener = new Listener<>(event -> {
-
+    @EventTarget
+    public void onBlockInteract(BlockInteractEvent event) {
         switch (event.getType()) {
             case Break: {
                 if (swapBack.getValue() && blockPosIntegerHashMap.containsKey(event.getBlockPos()) && getInventory().selectedSlot != blockPosIntegerHashMap.get(event.getBlockPos())) {
@@ -51,7 +49,7 @@ public final class AutoTool extends Module {
             default:
                 break;
         }
-    });
+    }
 
     private int findBestTool(BlockState blockState) {
         int slot = -1;

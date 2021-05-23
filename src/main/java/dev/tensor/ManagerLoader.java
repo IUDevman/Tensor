@@ -1,5 +1,6 @@
 package dev.tensor;
 
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.feature.managers.*;
 import dev.tensor.misc.imp.Manager;
 
@@ -28,7 +29,7 @@ public final class ManagerLoader {
 
     private static void loadManager(Manager manager) {
         managers.add(manager);
-        Tensor.INSTANCE.EVENT_BUS.subscribe(manager);
+        EventHandler.register(manager);
         manager.load();
     }
 }

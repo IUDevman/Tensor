@@ -1,13 +1,13 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.misc.imp.Event;
+import dev.darkmagician6.eventapi.imp.EventCancellable;
 
 /**
  * @author IUDevman
  * @since 04-14-2021
  */
 
-public final class BeginRenderTickEvent extends Event {
+public final class BeginRenderTickEvent extends EventCancellable {
 
     private double multiplier = 1.00;
 

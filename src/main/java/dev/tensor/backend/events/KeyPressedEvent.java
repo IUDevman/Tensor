@@ -1,13 +1,13 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.misc.imp.Event;
+import dev.darkmagician6.eventapi.imp.EventCancellable;
 
 /**
  * @author IUDevman
  * @since 04-13-2021
  */
 
-public final class KeyPressedEvent extends Event {
+public final class KeyPressedEvent extends EventCancellable {
 
     private final int bind;
 

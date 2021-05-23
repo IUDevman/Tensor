@@ -1,13 +1,13 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.misc.imp.Event;
+import dev.darkmagician6.eventapi.imp.EventCancellable;
 
 /**
  * @author IUDevman
  * @since 05-01-2021
  */
 
-public final class ClientRenderEvent extends Event {
+public final class ClientRenderEvent extends EventCancellable {
 
     private final Type type;
 

@@ -1,5 +1,6 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.backend.mixins.accessors.ClientPlayerEntityAccessor;
 import dev.tensor.misc.freecam.CameraEntity;
@@ -8,8 +9,6 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.options.Perspective;
 
@@ -71,12 +70,11 @@ public final class Freecam extends Module {
         cameraEntity.tickMovement();
     }
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<DisconnectEvent> disconnectEventListener = new Listener<>(event -> {
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onDisconnect(DisconnectEvent event) {
         disable();
-    });
-
+    }
 
     public float getSpeed() {
         return (float) (this.speed.getValue() / 20);
