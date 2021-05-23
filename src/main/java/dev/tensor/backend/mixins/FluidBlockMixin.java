@@ -6,7 +6,7 @@ import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.ShapeContext;
-import net.minecraft.fluid.WaterFluid;
+import net.minecraft.fluid.LavaFluid;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
@@ -30,7 +30,12 @@ public final class FluidBlockMixin implements Wrapper {
 
         Jesus jesus = ModuleManager.INSTANCE.getModule(Jesus.class);
 
-        if (jesus.isEnabled() && (!jesus.cancelOnFall.getValue() || getPlayer().fallDistance < 3)) {
+        if (jesus.isEnabled()) {
+
+            if (jesus.cancelOnFall.getValue() && getPlayer().fallDistance >= 3 && !(state.getFluidState().getFluid() instanceof LavaFluid)) {
+                return;
+            }
+
             cir.setReturnValue(VoxelShapes.fullCube());
         }
     }
