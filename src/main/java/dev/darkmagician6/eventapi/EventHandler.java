@@ -69,7 +69,6 @@ public final class EventHandler {
             }
         } else {
             REGISTRY_MAP.put(indexClass, new CopyOnWriteArrayList<MethodData>() {
-                //Eclipse was bitching about a serialVersionUID.
                 private static final long serialVersionUID = 666L;
 
                 {
