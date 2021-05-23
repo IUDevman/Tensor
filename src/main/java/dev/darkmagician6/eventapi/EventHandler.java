@@ -1,8 +1,7 @@
 package dev.darkmagician6.eventapi;
 
-import dev.darkmagician6.eventapi.events.Event;
-import dev.darkmagician6.eventapi.events.EventStoppable;
-import dev.darkmagician6.eventapi.types.Priority;
+import dev.darkmagician6.eventapi.imp.Event;
+import dev.darkmagician6.eventapi.imp.Priority;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -127,20 +126,8 @@ public final class EventHandler {
         List<MethodData> dataList = REGISTRY_MAP.get(event.getClass());
 
         if (dataList != null) {
-            if (event instanceof EventStoppable) {
-                EventStoppable stoppable = (EventStoppable) event;
-
-                for (final MethodData data : dataList) {
-                    invoke(data, event);
-
-                    if (stoppable.isStopped()) {
-                        break;
-                    }
-                }
-            } else {
-                for (final MethodData data : dataList) {
-                    invoke(data, event);
-                }
+            for (final MethodData data : dataList) {
+                invoke(data, event);
             }
         }
 

@@ -1,4 +1,4 @@
-package dev.darkmagician6.eventapi.events;
+package dev.darkmagician6.eventapi.imp;
 
 /**
  * @author DarkMagician6

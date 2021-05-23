@@ -1,6 +1,6 @@
 package dev.tensor.backend.events;
 
-import dev.darkmagician6.eventapi.events.EventCancellable;
+import dev.darkmagician6.eventapi.imp.EventCancellable;
 
 /**
  * @author IUDevman

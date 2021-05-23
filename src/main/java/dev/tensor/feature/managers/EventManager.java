@@ -1,6 +1,7 @@
 package dev.tensor.feature.managers;
 
 import dev.darkmagician6.eventapi.EventTarget;
+import dev.darkmagician6.eventapi.imp.Priority;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
@@ -29,7 +30,7 @@ public enum EventManager implements Manager {
     }
 
     @SuppressWarnings("unused")
-    @EventTarget
+    @EventTarget(Priority.HIGHEST)
     public void onClientTick(ClientTickEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) this.threadPoolExecutor.execute(module::onTick);
@@ -37,7 +38,7 @@ public enum EventManager implements Manager {
     }
 
     @SuppressWarnings("unused")
-    @EventTarget
+    @EventTarget(Priority.HIGH)
     public void onClientRender(ClientRenderEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) {
