@@ -19,7 +19,7 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 @Module.Info(name = "Criticals", category = Category.Combat)
 public final class Criticals extends Module {
 
-    public final EnumSetting mode = new EnumSetting("Mode", Mode.Packet);
+    public final EnumSetting type = new EnumSetting("Type", Type.Packet);
     public final BooleanSetting endCrystals = new BooleanSetting("End Crystals", false);
 
     @SuppressWarnings("unused")
@@ -32,18 +32,22 @@ public final class Criticals extends Module {
 
             if (!shouldApplyCriticals(packet.getEntity(getWorld()))) return;
 
-            switch (mode.getValue()) {
-                case Packet:
+            switch ((Type) type.getValue()) {
+                case Packet: {
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.05, getPlayer().getZ(), false));
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.03, getPlayer().getZ(), false));
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
                     break;
-                case Strict:
+                }
+                case Strict: {
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.062602401692772, getPlayer().getZ(), false));
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.0726023996066094, getPlayer().getZ(), false));
                     getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
-                    break
+                    break;
+                }
+                default:
+                    break;
             }
         }
     }
@@ -54,8 +58,8 @@ public final class Criticals extends Module {
         else if (!getPlayer().isOnGround()) return false;
         else return !(entity instanceof EndCrystalEntity) || endCrystals.getValue();
     }
-    
-    private enum Mode {
+
+    public enum Type {
         Packet,
         Strict
     }
