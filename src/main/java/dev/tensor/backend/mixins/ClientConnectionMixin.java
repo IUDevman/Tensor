@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Wrapper;
 import io.netty.channel.ChannelHandlerContext;
@@ -27,7 +27,7 @@ public final class ClientConnectionMixin implements Wrapper {
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
-        Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
+        EventHandler.call(packetEvent);
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 
@@ -37,7 +37,7 @@ public final class ClientConnectionMixin implements Wrapper {
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
 
-        Tensor.INSTANCE.EVENT_BUS.post(packetEvent);
+        EventHandler.call(packetEvent);
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 }

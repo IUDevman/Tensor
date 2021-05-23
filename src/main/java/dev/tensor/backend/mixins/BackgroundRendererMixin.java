@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.ApplyFogEvent;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -22,7 +22,7 @@ public final class BackgroundRendererMixin implements Wrapper {
     private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo callbackInfo) {
         ApplyFogEvent applyFogEvent = new ApplyFogEvent();
 
-        Tensor.INSTANCE.EVENT_BUS.post(applyFogEvent);
+        EventHandler.call(applyFogEvent);
 
         if (applyFogEvent.isCancelled()) callbackInfo.cancel();
     }

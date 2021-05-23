@@ -1,13 +1,12 @@
 package dev.tensor.feature.managers;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Manager;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
 import java.util.concurrent.Executors;
@@ -26,20 +25,20 @@ public enum EventManager implements Manager {
 
     @Override
     public void load() {
-        Tensor.INSTANCE.LOGGER.info("EventManager");
+        Tensor.INSTANCE.LOGGER.info("EventHandler");
     }
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<ClientTickEvent> clientTickEventListener = new Listener<>(event -> {
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onClientTick(ClientTickEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) this.threadPoolExecutor.execute(module::onTick);
         });
-    });
+    }
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<ClientRenderEvent> clientRenderEventListener = new Listener<>(event -> {
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onClientRender(ClientRenderEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) {
                 switch (event.getType()) {
@@ -56,19 +55,19 @@ public enum EventManager implements Manager {
                 }
             }
         });
-    });
+    }
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr"})
-    @EventHandler
-    private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onKeyPressed(KeyPressedEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.getBind() == event.getBind()) module.toggle();
         });
-    });
+    }
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<PacketEvent> packetSendEventListener = new Listener<>(event -> {
+    @EventTarget
+    public void onPacket(PacketEvent event) {
         if (!event.getType().equals(PacketEvent.Type.Send)) return;
 
         if (event.getPacket() instanceof ChatMessageC2SPacket) {
@@ -76,9 +75,9 @@ public enum EventManager implements Manager {
             ChatMessageC2SPacket chatMessageC2SPacket = (ChatMessageC2SPacket) event.getPacket();
 
             if (chatMessageC2SPacket.getChatMessage().startsWith(CommandManager.INSTANCE.getPrefix())) {
-                event.cancel();
+                event.setCancelled(true);
                 CommandManager.INSTANCE.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
             }
         }
-    });
+    }
 }

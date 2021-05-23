@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.BeginRenderTickEvent;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.RenderTickCounter;
@@ -26,7 +26,7 @@ public final class RenderTickCounterMixin implements Wrapper {
     public void beginRenderTick(long timeMillis, CallbackInfoReturnable<Integer> cir) {
         BeginRenderTickEvent beginRenderTickEvent = new BeginRenderTickEvent();
 
-        Tensor.INSTANCE.EVENT_BUS.post(beginRenderTickEvent);
+        EventHandler.call(beginRenderTickEvent);
 
         if (beginRenderTickEvent.getMultiplier() != 1.00) lastFrameDuration *= beginRenderTickEvent.getMultiplier();
     }

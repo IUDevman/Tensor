@@ -1,6 +1,6 @@
 package dev.tensor.backend.events;
 
-import dev.tensor.misc.imp.Event;
+import dev.darkmagician6.eventapi.events.EventCancellable;
 import net.minecraft.util.math.BlockPos;
 
 /**
@@ -8,7 +8,7 @@ import net.minecraft.util.math.BlockPos;
  * @since 05-01-2021
  */
 
-public final class BlockInteractEvent extends Event {
+public final class BlockInteractEvent extends EventCancellable {
 
     private final Type type;
     private final BlockPos blockPos;

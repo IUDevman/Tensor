@@ -1,7 +1,5 @@
 package dev.tensor;
 
-import me.zero.alpine.bus.EventBus;
-import me.zero.alpine.bus.EventManager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,7 +21,6 @@ public final class Tensor implements ModInitializer {
     public final String MOD_VERSION = "0.3.0-SNAPSHOT";
 
     public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-    public final EventBus EVENT_BUS = new EventManager();
 
     @Override
     public void onInitialize() {

@@ -1,11 +1,10 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.backend.mixins.accessors.PlayerMoveC2SPacketAccessor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 
 /**
@@ -17,8 +16,8 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 public final class OnGround extends Module {
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<PacketEvent> packetEventListener = new Listener<>(event -> {
+    @EventTarget
+    public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
         if (event.getPacket() instanceof PlayerMoveC2SPacket) {
@@ -26,5 +25,5 @@ public final class OnGround extends Module {
 
             ((PlayerMoveC2SPacketAccessor) packet).setOnGround(false);
         }
-    });
+    }
 }

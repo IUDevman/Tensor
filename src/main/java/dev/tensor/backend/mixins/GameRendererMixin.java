@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.Tensor;
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
@@ -26,14 +26,14 @@ public final class GameRendererMixin implements Wrapper {
     public void render(CallbackInfo callbackInfo) {
         if (isNull()) return;
 
-        Tensor.INSTANCE.EVENT_BUS.post(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
+        EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
     public void renderHand(CallbackInfo callbackInfo) {
         if (isNull()) return;
 
-        Tensor.INSTANCE.EVENT_BUS.post(new ClientRenderEvent(ClientRenderEvent.Type.World));
+        EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.World));
     }
 
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)

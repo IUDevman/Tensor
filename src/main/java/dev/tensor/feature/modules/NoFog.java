@@ -1,10 +1,9 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.ApplyFogEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 
 /**
  * @author IUDevman
@@ -14,9 +13,9 @@ import me.zero.alpine.listener.Listener;
 @Module.Info(name = "NoFog", category = Category.Render)
 public final class NoFog extends Module {
 
-    @SuppressWarnings({"unused", "CodeBlock2Expr", "Convert2MethodRef"})
-    @EventHandler
-    private final Listener<ApplyFogEvent> applyFogEventListener = new Listener<>(event -> {
-        event.cancel();
-    });
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onApplyFog(ApplyFogEvent event) {
+        event.setCancelled(true);
+    }
 }

@@ -1,11 +1,10 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.feature.managers.FriendManager;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
-import me.zero.alpine.listener.EventHandler;
-import me.zero.alpine.listener.Listener;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.hit.EntityHitResult;
@@ -23,8 +22,8 @@ import java.util.Objects;
 public final class MiddleClickFriend extends Module {
 
     @SuppressWarnings("unused")
-    @EventHandler
-    private final Listener<KeyPressedEvent> keyPressedEventListener = new Listener<>(event -> {
+    @EventTarget
+    public void onKeyPressed(KeyPressedEvent event) {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
         if (Objects.requireNonNull(getMinecraft().crosshairTarget).getType() != HitResult.Type.ENTITY) return;
 
@@ -40,5 +39,5 @@ public final class MiddleClickFriend extends Module {
             FriendManager.INSTANCE.addFriend(name);
             this.sendReplaceableClientMessage("Added " + Formatting.GREEN + name + Formatting.GRAY + " to the friends list!", 1000, true);
         }
-    });
+    }
 }

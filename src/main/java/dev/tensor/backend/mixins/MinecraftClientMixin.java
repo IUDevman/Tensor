@@ -1,5 +1,6 @@
 package dev.tensor.backend.mixins;
 
+import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
@@ -29,7 +30,7 @@ public final class MinecraftClientMixin implements Wrapper {
     public void tick(CallbackInfo callbackInfo) {
         if (isNull()) return;
 
-        Tensor.INSTANCE.EVENT_BUS.post(new ClientTickEvent());
+        EventHandler.call(new ClientTickEvent());
     }
 
     @Inject(method = "stop", at = @At("HEAD"))
@@ -44,6 +45,6 @@ public final class MinecraftClientMixin implements Wrapper {
 
     @Inject(method = "disconnect()V", at = @At("HEAD"))
     public void disconnect(CallbackInfo callbackInfo) {
-        Tensor.INSTANCE.EVENT_BUS.post(new DisconnectEvent());
+        EventHandler.call(new DisconnectEvent());
     }
 }
