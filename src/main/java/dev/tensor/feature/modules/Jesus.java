@@ -16,11 +16,6 @@ public final class Jesus extends Module {
     public final EnumSetting denomination = new EnumSetting("Denomination", Denomination.Baptist);
     public final BooleanSetting cancelOnFall = new BooleanSetting("Cancel On Fall", true);
 
-    @Override
-    public void onTick() {
-
-    }
-
     @SuppressWarnings("unused")
     public enum Denomination {
         Baptist,
