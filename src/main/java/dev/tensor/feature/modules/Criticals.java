@@ -5,6 +5,7 @@ import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
+import dev.tensor.misc.imp.settings.EnumSetting;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.decoration.EndCrystalEntity;
 import net.minecraft.network.packet.c2s.play.PlayerInteractEntityC2SPacket;
@@ -18,6 +19,7 @@ import net.minecraft.network.packet.c2s.play.PlayerMoveC2SPacket;
 @Module.Info(name = "Criticals", category = Category.Combat)
 public final class Criticals extends Module {
 
+    public final EnumSetting mode = new EnumSetting("Mode", Mode.Packet);
     public final BooleanSetting endCrystals = new BooleanSetting("End Crystals", false);
 
     @SuppressWarnings("unused")
@@ -30,8 +32,19 @@ public final class Criticals extends Module {
 
             if (!shouldApplyCriticals(packet.getEntity(getWorld()))) return;
 
-            getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.1, getPlayer().getZ(), false));
-            getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+            switch (mode.getValue()) {
+                case Packet:
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.05, getPlayer().getZ(), false));
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.03, getPlayer().getZ(), false));
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+                    break;
+                case Strict:
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.062602401692772, getPlayer().getZ(), false));
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.0726023996066094, getPlayer().getZ(), false));
+                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+                    break
+            }
         }
     }
 
@@ -40,5 +53,10 @@ public final class Criticals extends Module {
         else if (getPlayer().isInLava()) return false;
         else if (!getPlayer().isOnGround()) return false;
         else return !(entity instanceof EndCrystalEntity) || endCrystals.getValue();
+    }
+    
+    private enum Mode {
+        Packet,
+        Strict
     }
 }
