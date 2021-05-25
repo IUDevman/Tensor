@@ -3,7 +3,6 @@ package dev.tensor.backend.mixins;
 import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.modules.BreakCancel;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
 import dev.tensor.feature.modules.Reach;
@@ -67,15 +66,6 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
     public void interactEntity(PlayerEntity player, Entity entity, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         if (entity.equals(player)) {
             cir.setReturnValue(ActionResult.FAIL);
-        }
-    }
-
-    @Inject(method = "cancelBlockBreaking", at = @At("HEAD"), cancellable = true)
-    public void cancelBlockBreaking(CallbackInfo callbackInfo) {
-        BreakCancel breakCancel = ModuleManager.INSTANCE.getModule(BreakCancel.class);
-
-        if (breakCancel.isEnabled()) {
-            callbackInfo.cancel();
         }
     }
 }
