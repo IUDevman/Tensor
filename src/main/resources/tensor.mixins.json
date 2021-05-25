@@ -4,6 +4,7 @@
   "package": "dev.tensor.backend.mixins",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
+    "AdvancementToastMixin",
     "ArmorFeatureRendererMixin",
     "BackgroundRendererMixin",
     "BlockMixin",
@@ -25,8 +26,10 @@
     "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
     "PlayerEntityRendererMixin",
+    "RecipeToastMixin",
     "RenderTickCounterMixin",
     "SlimeBlockMixin",
+    "SoundManagerMixin",
     "SweetBerryBushBlockMixin",
     "WorldRendererMixin",
     "accessors.ChatHudAccessor",
