@@ -18,7 +18,7 @@ public final class Tensor implements ModInitializer {
     }
 
     public final String MOD_NAME = "Tensor";
-    public final String MOD_VERSION = "0.3.0-SNAPSHOT";
+    public final String MOD_VERSION = "0.3.0-RELEASE";
 
     public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
 
