@@ -44,6 +44,7 @@ public enum ConfigManager implements Manager {
 
             loadPrefix();
             loadFriends();
+            loadCapes();
             loadClickGUI();
 
         } catch (IOException e) {
@@ -120,6 +121,19 @@ public enum ConfigManager implements Manager {
         jsonArray.forEach(jsonElement -> FriendManager.INSTANCE.addFriend(jsonElement.getAsString()));
     }
 
+    private void loadCapes() throws IOException {
+        Path path = Paths.get(this.mainPath + "Capes.json");
+
+        if (!Files.exists(path)) return;
+
+        InputStream inputStream = Files.newInputStream(path);
+        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonArray jsonArray = jsonObject.get("Capes").getAsJsonArray();
+
+        CapeManager.INSTANCE.clearCapes();
+        jsonArray.forEach(jsonElement -> CapeManager.INSTANCE.addCape(jsonElement.getAsString()));
+    }
+
     private void loadClickGUI() throws IOException {
         Path path = Paths.get(this.mainPath + "ClickGUI.json");
 
@@ -137,6 +151,7 @@ public enum ConfigManager implements Manager {
         try {
             savePrefix();
             saveFriends();
+            saveCapes();
             saveClickGUI();
 
         } catch (IOException e) {
@@ -208,6 +223,24 @@ public enum ConfigManager implements Manager {
 
         FriendManager.INSTANCE.getFriends().forEach(jsonArray::add);
         jsonObject.add("Friends", jsonArray);
+
+        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
+        outputStreamWriter.write(jsonString);
+        outputStreamWriter.close();
+    }
+
+    private void saveCapes() throws IOException {
+        Path path = Paths.get(this.mainPath + "Capes.json");
+        registerFile(path);
+
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
+
+        JsonObject jsonObject = new JsonObject();
+        JsonArray jsonArray = new JsonArray();
+
+        CapeManager.INSTANCE.getCapes().forEach(jsonArray::add);
+        jsonObject.add("Capes", jsonArray);
 
         String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
         outputStreamWriter.write(jsonString);
