@@ -22,7 +22,7 @@ public enum CapeManager implements Manager {
 
     INSTANCE;
 
-    private final ArrayList<String> capePlayers = new ArrayList<>();
+    private final ArrayList<String> capes = new ArrayList<>();
 
     @Override
     public void load() {
@@ -42,5 +42,25 @@ public enum CapeManager implements Manager {
         } catch (IOException ignored) {
             Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
         }
+    }
+
+    public ArrayList<String> getCapes() {
+        return this.capes;
+    }
+
+    public void addCape(String name) {
+        this.capes.add(name);
+    }
+
+    public void removeCape(String name) {
+        this.capes.remove(name);
+    }
+
+    public void clearCapes() {
+        this.capes.clear();
+    }
+
+    public boolean hasCape(String name) {
+        return this.capes.contains(name);
     }
 }
