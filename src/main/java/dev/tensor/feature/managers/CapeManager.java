@@ -76,19 +76,19 @@ public enum CapeManager implements Manager {
 
         if (this.capes.contains(name) || getPlayer().getEntityName().equalsIgnoreCase(name)) {
             if (this.cape == null) {
-               try {
-                   Path path = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/Cape.png");
+                try {
+                    Path path = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/Cape.png");
 
-                   if (!Files.exists(path)) return null;
+                    if (!Files.exists(path)) return null;
 
-                   ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                   ImageIO.write(ImageIO.read(path.toFile()), "png", byteArrayOutputStream);
-                   InputStream inputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
+                    ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                    ImageIO.write(ImageIO.read(path.toFile()), "png", byteArrayOutputStream);
+                    InputStream inputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
 
-                   this.cape = getMinecraft().getTextureManager().registerDynamicTexture("666cape666", new NativeImageBackedTexture(NativeImage.read(inputStream)));
-               } catch (IOException ignored) {
-                   Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
-               }
+                    this.cape = getMinecraft().getTextureManager().registerDynamicTexture("666cape666", new NativeImageBackedTexture(NativeImage.read(inputStream)));
+                } catch (IOException ignored) {
+                    Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
+                }
             }
 
             return this.cape;
