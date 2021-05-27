@@ -86,6 +86,7 @@ public enum CapeManager implements Manager {
                     InputStream inputStream = new ByteArrayInputStream(byteArrayOutputStream.toByteArray());
 
                     this.cape = getMinecraft().getTextureManager().registerDynamicTexture("666cape666", new NativeImageBackedTexture(NativeImage.read(inputStream)));
+
                 } catch (IOException ignored) {
                     Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
                 }
