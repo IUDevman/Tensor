@@ -43,8 +43,12 @@ public final class VisualRange extends Module {
             }
         });
 
+        ArrayList<PlayerEntity> removedPlayers = new ArrayList<>();
+
         spottedPlayers.forEach(player -> {
             if (!getWorld().getPlayers().contains(player)) {
+                removedPlayers.add(player);
+                
                 String message = "Player " + Formatting.YELLOW + player.getEntityName() + Formatting.GRAY + " has " + Formatting.GREEN + "left " + Formatting.GRAY + "your visual range!";
 
                 if (replaceMessages.getValue()) {
@@ -52,9 +56,9 @@ public final class VisualRange extends Module {
                 } else {
                     this.sendClientMessage(message, true);
                 }
-
-                spottedPlayers.remove(player);
             }
         });
+
+        removedPlayers.forEach(spottedPlayers::remove);
     }
 }
