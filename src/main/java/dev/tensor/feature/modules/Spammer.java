@@ -28,6 +28,7 @@ public final class Spammer extends Module {
     @Override
     public void onEnable() {
         loadSpammer();
+        delayCount = 0;
     }
 
     @Override
@@ -49,12 +50,6 @@ public final class Spammer extends Module {
             spammerFiles.remove(0);
         }
         delayCount++;
-    }
-
-    @Override
-    public void onDisable() {
-        loadSpammer();
-        delayCount = 0;
     }
 
     private void loadSpammer() {
