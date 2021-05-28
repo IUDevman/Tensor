@@ -1,5 +1,6 @@
 package dev.tensor.feature.modules;
 
+import dev.tensor.feature.managers.FriendManager;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 @Module.Info(name = "VisualRange", category = Category.Misc)
 public final class VisualRange extends Module {
 
+    public final BooleanSetting friends = new BooleanSetting("Friends", true);
     public final BooleanSetting replaceMessages = new BooleanSetting("Replace Messages", true);
 
     private final ArrayList<PlayerEntity> spottedPlayers = new ArrayList<>();
@@ -31,6 +33,9 @@ public final class VisualRange extends Module {
         getWorld().getPlayers().forEach(player -> {
 
             if (!spottedPlayers.contains(player) && player != getPlayer()) {
+
+                if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;
+
                 spottedPlayers.add(player);
 
                 String message = "Player " + Formatting.YELLOW + player.getEntityName() + Formatting.GRAY + " has " + Formatting.RED + "entered " + Formatting.GRAY + "your visual range!";
@@ -49,6 +54,8 @@ public final class VisualRange extends Module {
 
             if (!getWorld().getPlayers().contains(player)) {
                 removedPlayers.add(player);
+
+                if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;
 
                 String message = "Player " + Formatting.YELLOW + player.getEntityName() + Formatting.GRAY + " has " + Formatting.GREEN + "left " + Formatting.GRAY + "your visual range!";
 
