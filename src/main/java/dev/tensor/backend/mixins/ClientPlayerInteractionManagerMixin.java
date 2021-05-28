@@ -5,13 +5,11 @@ import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
-import dev.tensor.feature.modules.NoGlitchBlock;
 import dev.tensor.feature.modules.Reach;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
@@ -46,15 +44,6 @@ public final class ClientPlayerInteractionManagerMixin implements Wrapper {
     @Inject(method = "breakBlock", at = @At("HEAD"))
     public void breakBlockHead(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
-    }
-
-    @Inject(method = "breakBlock", at = @At("RETURN"))
-    public void breakBlockReturn(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        NoGlitchBlock NoGlitchBlock = ModuleManager.INSTANCE.getModule(NoGlitchBlock.class);
-
-        if (NoGlitchBlock.isEnabled()) {
-            getNetwork().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.ABORT_DESTROY_BLOCK, pos, Direction.UP));
-        }
     }
 
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
