@@ -43,7 +43,7 @@ public final class Spammer implements Command {
 
     @Override
     public int getID() {
-        return 679;
+        return 680;
     }
 
     @Override
