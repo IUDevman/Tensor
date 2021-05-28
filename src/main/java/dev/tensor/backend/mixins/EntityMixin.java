@@ -1,10 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.modules.Flight;
-import dev.tensor.feature.modules.Freecam;
-import dev.tensor.feature.modules.LiquidInteract;
-import dev.tensor.feature.modules.NoPush;
+import dev.tensor.feature.modules.*;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
@@ -93,8 +90,9 @@ public abstract class EntityMixin implements Wrapper {
         if (isNull() || entityId != getPlayer().getEntityId()) return;
 
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+        ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if (flight.isEnabled() && flight.ignoreFluids.getValue()) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue())) {
             cir.setReturnValue(firstUpdate);
         }
     }
@@ -104,8 +102,9 @@ public abstract class EntityMixin implements Wrapper {
         if (isNull() || entityId != getPlayer().getEntityId()) return;
 
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
+        ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if (flight.isEnabled() && flight.ignoreFluids.getValue()) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue())) {
             cir.setReturnValue(firstUpdate);
         }
     }

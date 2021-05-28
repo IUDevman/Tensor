@@ -4,6 +4,8 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ElytraItem;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -15,6 +17,7 @@ import net.minecraft.util.math.Vec3d;
 public final class Flight extends Module {
 
     public final BooleanSetting ignoreFluids = new BooleanSetting("Ignore Fluids", true);
+    public final BooleanSetting elytraCheck = new BooleanSetting("Elytra Check", true);
     public final NumberSetting speed = new NumberSetting("Speed", 20, 1, 50, 1);
     public final BooleanSetting toggleTimer = new BooleanSetting("Toggle Timer", false);
     public final NumberSetting toggleTicks = new NumberSetting("Toggle Ticks", 10, 1, 40, 0);
@@ -28,6 +31,8 @@ public final class Flight extends Module {
 
     @Override
     public void onTick() {
+        if (elytraCheck.getValue() && getPlayer().getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) return;
+
         getPlayer().abilities.flying = false;
 
         if (!toggleTimer.getValue() || delayCount >= toggleTicks.getValue()) {
