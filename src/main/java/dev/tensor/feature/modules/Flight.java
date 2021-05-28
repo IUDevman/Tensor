@@ -31,7 +31,7 @@ public final class Flight extends Module {
 
     @Override
     public void onTick() {
-        if (elytraCheck.getValue() && getPlayer().getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem) return;
+        if (elytraCheck.getValue() && getPlayer().getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem && getPlayer().isFallFlying()) return;
 
         getPlayer().abilities.flying = false;
 
