@@ -28,6 +28,7 @@ public enum ConfigManager implements Manager {
 
     private final String mainPath = Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/";
     private final String modulePath = mainPath + "modules/";
+    private final String spammerPath = mainPath + "spammer/";
 
     @Override
     public void load() {
@@ -40,6 +41,10 @@ public enum ConfigManager implements Manager {
 
             if (!Files.exists(Paths.get(this.modulePath))) {
                 Files.createDirectories(Paths.get(this.modulePath));
+            }
+
+            if (!Files.exists(Paths.get(this.spammerPath))) {
+                Files.createDirectories(Paths.get(this.spammerPath));
             }
 
             loadPrefix();
