@@ -1,6 +1,8 @@
 package dev.tensor.feature.modules;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.Tensor;
+import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -50,6 +52,12 @@ public final class Spammer extends Module {
             spammerFiles.remove(0);
         }
         delayCount++;
+    }
+
+    @SuppressWarnings("unused")
+    @EventTarget
+    public void onDisconnect(DisconnectEvent event) {
+        this.disable();
     }
 
     private void loadSpammer() {
