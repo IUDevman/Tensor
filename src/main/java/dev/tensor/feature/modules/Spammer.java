@@ -28,12 +28,6 @@ public final class Spammer extends Module {
     private int delayCount = 0;
 
     @Override
-    public void onEnable() {
-        loadSpammer();
-        delayCount = 0;
-    }
-
-    @Override
     public void onTick() {
         if (spammerFiles.size() == 0) {
             loadSpammer();
@@ -80,5 +74,7 @@ public final class Spammer extends Module {
 
     public void setPath(Path path) {
         this.path = path;
+
+        loadSpammer();
     }
 }
