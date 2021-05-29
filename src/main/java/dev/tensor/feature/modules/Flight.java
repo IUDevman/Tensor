@@ -4,8 +4,6 @@ import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ElytraItem;
 import net.minecraft.util.math.Vec3d;
 
 /**
@@ -31,7 +29,7 @@ public final class Flight extends Module {
 
     @Override
     public void onTick() {
-        if (elytraCheck.getValue() && getPlayer().getEquippedStack(EquipmentSlot.CHEST).getItem() instanceof ElytraItem && getPlayer().isFallFlying()) return;
+        if (elytraCheck.getValue() && getPlayer().isFallFlying()) return;
 
         getPlayer().abilities.flying = false;
 

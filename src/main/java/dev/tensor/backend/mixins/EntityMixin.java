@@ -92,7 +92,7 @@ public abstract class EntityMixin implements Wrapper {
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
         ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue())) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
@@ -104,7 +104,7 @@ public abstract class EntityMixin implements Wrapper {
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
         ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue())) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
