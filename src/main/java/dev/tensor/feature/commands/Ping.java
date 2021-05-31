@@ -23,7 +23,7 @@ public final class Ping implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [player] (case sensitive)";
+        return "{alias} [player]";
     }
 
     @Override
