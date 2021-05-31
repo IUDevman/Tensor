@@ -31,7 +31,6 @@ public enum CommandManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("CommandManager");
         
-        
         this.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 
             if (Command.class.isAssignableFrom(aClass)) {
