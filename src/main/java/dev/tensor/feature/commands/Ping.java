@@ -31,6 +31,7 @@ public final class Ping implements Command {
         return new String[]{
                 "ping",
                 "latency",
+                "pong"
         };
     }
 
