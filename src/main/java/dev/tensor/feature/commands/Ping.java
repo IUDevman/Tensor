@@ -1,6 +1,7 @@
 package dev.tensor.feature.commands;
 
 import dev.tensor.misc.imp.Command;
+import net.minecraft.client.network.PlayerListEntry;
 import net.minecraft.util.Formatting;
 
 /**
@@ -22,15 +23,14 @@ public final class Ping implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
+        return "{alias} [player] (case sensitive)";
     }
 
     @Override
     public String[] getAliases() {
         return new String[]{
                 "ping",
-                "testping",
-                "pingpong"
+                "latency",
         };
     }
 
@@ -41,6 +41,25 @@ public final class Ping implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        this.sendClientMessage(this.getMarker() + "Pong", true);
+        if (message == null || message.length < 2) {
+            this.sendReplaceableClientMessage(this.getMarker() + "No player inputted!", this.getID(), true);
+            return;
+        }
+
+        String playerName = message[1];
+
+        if (getMinecraft().getNetworkHandler() == null) {
+            this.sendReplaceableClientMessage(this.getMarker() + "No network connection!", this.getID(), true);
+            return;
+        }
+
+        PlayerListEntry playerListEntry = getMinecraft().getNetworkHandler().getPlayerListEntry(playerName);
+
+        if (playerListEntry == null) {
+            this.sendReplaceableClientMessage(this.getMarker() + "Invalid player (" + Formatting.YELLOW + playerName + Formatting.GRAY + ")!", this.getID(), true);
+            return;
+        }
+
+        this.sendReplaceableClientMessage(this.getMarker() + "Ping for player " + Formatting.YELLOW + playerName + Formatting.GRAY + " is " + Formatting.GREEN + playerListEntry.getLatency() + "ms" + Formatting.GRAY + "!", this.getID(), true);
     }
 }
