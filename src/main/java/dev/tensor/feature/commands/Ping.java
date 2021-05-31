@@ -53,13 +53,24 @@ public final class Ping implements Command {
             return;
         }
 
-        PlayerListEntry playerListEntry = getMinecraft().getNetworkHandler().getPlayerListEntry(playerName);
+        try {
+            PlayerListEntry playerListEntry = findPlayerListEntryByName(playerName);
 
-        if (playerListEntry == null) {
-            this.sendReplaceableClientMessage(this.getMarker() + "Invalid player (" + Formatting.YELLOW + playerName + Formatting.GRAY + ")!", this.getID(), true);
-            return;
+            if (playerListEntry == null) {
+                this.sendReplaceableClientMessage(this.getMarker() + "Invalid player (" + Formatting.YELLOW + playerName + Formatting.GRAY + ")!", this.getID(), true);
+                return;
+            }
+
+            this.sendReplaceableClientMessage(this.getMarker() + "Ping for player " + Formatting.YELLOW + playerListEntry.getProfile().getName() + Formatting.GRAY + " is " + Formatting.GREEN + playerListEntry.getLatency() + "ms" + Formatting.GRAY + "!", this.getID(), true);
+
+        } catch (Exception ignored) {
+            this.sendReplaceableClientMessage(this.getMarker() + "Error with grabbing latency values (your game is still loading)!", this.getID(), true);
         }
+    }
 
-        this.sendReplaceableClientMessage(this.getMarker() + "Ping for player " + Formatting.YELLOW + playerName + Formatting.GRAY + " is " + Formatting.GREEN + playerListEntry.getLatency() + "ms" + Formatting.GRAY + "!", this.getID(), true);
+    private PlayerListEntry findPlayerListEntryByName(String name) {
+        if (getMinecraft().getNetworkHandler() == null) return null;
+
+        return getMinecraft().getNetworkHandler().getPlayerList().stream().filter(playerListEntry -> playerListEntry.getProfile().getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 }
