@@ -1,8 +1,13 @@
 package dev.tensor.feature.managers;
 
+import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.Tensor;
+import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Manager;
+import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.screen.ChatScreen;
+import net.minecraft.client.util.InputUtil;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
@@ -25,7 +30,8 @@ public enum CommandManager implements Manager {
     @Override
     public void load() {
         Tensor.INSTANCE.LOGGER.info("CommandManager");
-
+        
+        
         this.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
 
             if (Command.class.isAssignableFrom(aClass)) {
@@ -64,6 +70,14 @@ public enum CommandManager implements Manager {
         if (!foundMessage.get()) {
             this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true);
         }
+    }
+    
+    @EventTarget
+    public void onPrefixPressed(KeyPressedEvent event) {
+    	if(InputUtil.isKeyPressed(MinecraftClient.getInstance().getWindow().getHandle(), prefix.charAt(0)))
+    		if(prefix.length() == 1) {
+    			MinecraftClient.getInstance().openScreen(new ChatScreen(""));
+    		}
     }
 
     public String getPrefix() {
