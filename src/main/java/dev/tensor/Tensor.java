@@ -1,8 +1,13 @@
 package dev.tensor;
 
+import dev.darkmagician6.eventapi.EventHandler;
+import dev.tensor.feature.managers.*;
+import dev.tensor.misc.imp.Manager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.ArrayList;
 
 /**
  * @author IUDevman
@@ -21,21 +26,35 @@ public final class Tensor implements ModInitializer {
     public final String MOD_VERSION = "0.4.0-SNAPSHOT";
 
     public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+    public final ArrayList<Manager> MANAGERS = new ArrayList<>();
 
     @Override
     public void onInitialize() {
         double startTime = System.currentTimeMillis();
-        LOGGER.info("Initializing " + MOD_NAME + " " + MOD_VERSION + "!");
+        this.LOGGER.info("Initializing " + this.MOD_NAME + " " + this.MOD_VERSION + "!");
 
-        setupClient();
+        loadClient();
 
         double finishedTime = (System.currentTimeMillis() - startTime) / 1000;
-        LOGGER.info("Finished initializing " + MOD_NAME + " " + MOD_VERSION + " (" + finishedTime + "s)!");
+        this.LOGGER.info("Finished initializing " + this.MOD_NAME + " " + this.MOD_VERSION + " (" + finishedTime + "s)!");
     }
 
-    private void setupClient() {
+    private void loadClient() {
+        loadManager(CommandManager.INSTANCE);
+        loadManager(ModuleManager.INSTANCE);
+        loadManager(SettingManager.INSTANCE);
+        loadManager(EventManager.INSTANCE);
+        loadManager(CapeManager.INSTANCE);
+        loadManager(FriendManager.INSTANCE);
+        loadManager(ClickGUIManager.INSTANCE);
+        loadManager(ConfigManager.INSTANCE);
 
-        ManagerLoader.load();
-        LOGGER.info("Finished initializing managers!");
+        this.LOGGER.info("Finished initializing managers!");
+    }
+
+    private void loadManager(Manager manager) {
+        this.MANAGERS.add(manager);
+        EventHandler.register(manager);
+        manager.load();
     }
 }
