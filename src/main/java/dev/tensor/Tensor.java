@@ -1,7 +1,7 @@
 package dev.tensor;
 
-import dev.tensor.feature.managers.*;
 import dev.tensor.misc.event.EventHandler;
+import dev.tensor.feature.managers.*;
 import dev.tensor.misc.imp.Manager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +23,7 @@ public final class Tensor implements ModInitializer {
     }
 
     public final String MOD_NAME = "Tensor";
-    public final String MOD_VERSION = "0.4.0-RELEASE";
+    public final String MOD_VERSION = "0.5.0-SNAPSHOT";
 
     public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
     public final ArrayList<Manager> MANAGERS = new ArrayList<>();
