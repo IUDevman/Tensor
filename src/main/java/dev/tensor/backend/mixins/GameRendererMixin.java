@@ -1,10 +1,10 @@
 package dev.tensor.backend.mixins;
 
-import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
+import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;

@@ -1,6 +1,6 @@
 package dev.tensor.backend.events;
 
-import dev.darkmagician6.eventapi.imp.EventCancellable;
+import dev.tensor.misc.event.imp.EventCancellable;
 import net.minecraft.client.sound.SoundInstance;
 
 /**

@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
-import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.PacketEvent;
+import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Wrapper;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;

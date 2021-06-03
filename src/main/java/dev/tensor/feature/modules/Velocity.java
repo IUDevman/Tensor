@@ -1,9 +1,9 @@
 package dev.tensor.feature.modules;
 
-import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.backend.mixins.accessors.EntityVelocityUpdateS2CPacketAccessor;
 import dev.tensor.backend.mixins.accessors.ExplosionS2CPacketAccessor;
+import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;

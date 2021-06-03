@@ -1,10 +1,10 @@
 package dev.tensor.backend.mixins;
 
-import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.feature.managers.ConfigManager;
+import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;

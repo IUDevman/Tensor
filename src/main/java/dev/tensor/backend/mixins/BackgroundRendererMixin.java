@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
-import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.backend.events.ApplyFogEvent;
+import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Wrapper;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;

@@ -1,6 +1,6 @@
 package dev.tensor.misc.imp;
 
-import dev.darkmagician6.eventapi.EventHandler;
+import dev.tensor.misc.event.EventHandler;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 

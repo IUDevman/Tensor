@@ -1,4 +1,4 @@
-package dev.darkmagician6.eventapi.imp;
+package dev.tensor.misc.event.imp;
 
 /**
  * @author DarkMagician6

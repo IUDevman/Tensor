@@ -1,7 +1,7 @@
 package dev.tensor;
 
-import dev.darkmagician6.eventapi.EventHandler;
 import dev.tensor.feature.managers.*;
+import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Manager;
 import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;

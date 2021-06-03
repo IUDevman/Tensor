@@ -1,4 +1,4 @@
-package dev.darkmagician6.eventapi.imp;
+package dev.tensor.misc.event.imp;
 
 /**
  * @author DarkMagician6
@@ -13,15 +13,11 @@ public final class Priority {
     public static final byte LOW = 3;
     public static final byte LOWEST = 4;
 
-    public static final byte[] VALUE_ARRAY;
-
-    static {
-        VALUE_ARRAY = new byte[]{
-                HIGHEST,
-                HIGH,
-                MEDIUM,
-                LOW,
-                LOWEST
-        };
-    }
+    public static final byte[] VALUE_ARRAY = new byte[]{
+            HIGHEST,
+            HIGH,
+            MEDIUM,
+            LOW,
+            LOWEST
+    };
 }

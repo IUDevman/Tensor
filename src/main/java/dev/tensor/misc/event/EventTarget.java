@@ -1,6 +1,6 @@
-package dev.darkmagician6.eventapi;
+package dev.tensor.misc.event;
 
-import dev.darkmagician6.eventapi.imp.Priority;
+import dev.tensor.misc.event.imp.Priority;
 
 import java.lang.annotation.*;
 

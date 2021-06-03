@@ -1,8 +1,8 @@
 package dev.tensor.feature.modules;
 
-import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.backend.mixins.accessors.ClientPlayerEntityAccessor;
+import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.freecam.CameraEntity;
 import dev.tensor.misc.freecam.DummyInput;
 import dev.tensor.misc.imp.Category;

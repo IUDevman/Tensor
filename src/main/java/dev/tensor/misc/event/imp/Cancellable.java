@@ -1,4 +1,4 @@
-package dev.darkmagician6.eventapi.imp;
+package dev.tensor.misc.event.imp;
 
 /**
  * @author DarkMagician6
@@ -9,5 +9,5 @@ public interface Cancellable {
 
     boolean isCancelled();
 
-    void setCancelled(boolean state);
+    void setCancelled(boolean cancelled);
 }

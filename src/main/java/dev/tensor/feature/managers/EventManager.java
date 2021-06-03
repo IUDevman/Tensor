@@ -1,12 +1,12 @@
 package dev.tensor.feature.managers;
 
-import dev.darkmagician6.eventapi.EventTarget;
-import dev.darkmagician6.eventapi.imp.Priority;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.backend.events.PacketEvent;
+import dev.tensor.misc.event.EventTarget;
+import dev.tensor.misc.event.imp.Priority;
 import dev.tensor.misc.imp.Manager;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 

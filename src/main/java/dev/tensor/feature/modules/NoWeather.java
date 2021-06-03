@@ -1,7 +1,7 @@
 package dev.tensor.feature.modules;
 
-import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.backend.events.PacketEvent;
+import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import net.minecraft.network.packet.s2c.play.PlaySoundS2CPacket;

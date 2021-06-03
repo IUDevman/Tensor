@@ -1,10 +1,10 @@
 package dev.tensor.feature.modules;
 
-import dev.darkmagician6.eventapi.EventTarget;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.backend.mixins.accessors.ChatMessageC2SPacketAccessor;
 import dev.tensor.feature.managers.CommandManager;
+import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.EnumSetting;

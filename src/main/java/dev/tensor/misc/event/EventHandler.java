@@ -1,7 +1,7 @@
-package dev.darkmagician6.eventapi;
+package dev.tensor.misc.event;
 
-import dev.darkmagician6.eventapi.imp.Event;
-import dev.darkmagician6.eventapi.imp.Priority;
+import dev.tensor.misc.event.imp.Event;
+import dev.tensor.misc.event.imp.Priority;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -16,6 +16,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @since 02-02-2014
  */
 
+@SuppressWarnings("unused")
 public final class EventHandler {
 
     private static final HashMap<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<>();
@@ -121,6 +122,7 @@ public final class EventHandler {
         return isMethodBad(method) || !method.getParameterTypes()[0].equals(eventClass);
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     public static Event call(final Event event) {
         List<MethodData> dataList = REGISTRY_MAP.get(event.getClass());
 
