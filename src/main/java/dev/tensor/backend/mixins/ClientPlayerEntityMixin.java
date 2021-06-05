@@ -5,7 +5,7 @@ import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoPortalEffect;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.feature.modules.NoSlow;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.ClientPlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = ClientPlayerEntity.class, priority = Integer.MAX_VALUE)
-public final class ClientPlayerEntityMixin implements Wrapper {
+public final class ClientPlayerEntityMixin implements Global {
 
     @Inject(method = "updateNausea", at = @At("HEAD"), cancellable = true)
     public void updateNausea(CallbackInfo callbackInfo) {

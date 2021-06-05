@@ -3,7 +3,7 @@ package dev.tensor.backend.mixins;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoOverlay;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = InGameHud.class, priority = Integer.MAX_VALUE)
-public final class InGameHudMixin implements Wrapper {
+public final class InGameHudMixin implements Global {
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlay(CallbackInfo callbackInfo) {

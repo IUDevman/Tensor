@@ -4,7 +4,7 @@ import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoParticles;
 import dev.tensor.feature.modules.NoWeather;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.particle.Particle;
 import net.minecraft.client.render.Camera;
 import net.minecraft.client.render.LightmapTextureManager;
@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = WorldRenderer.class, priority = Integer.MAX_VALUE)
-public final class WorldRendererMixin implements Wrapper {
+public final class WorldRendererMixin implements Global {
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
     public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo callbackInfo) {

@@ -12,7 +12,7 @@ import net.minecraft.entity.player.PlayerInventory;
  * @since 04-12-2021
  */
 
-public interface Wrapper {
+public interface Global {
 
     default MinecraftClient getMinecraft() {
         return MinecraftClient.getInstance();

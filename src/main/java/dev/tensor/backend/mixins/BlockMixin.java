@@ -3,7 +3,7 @@ package dev.tensor.backend.mixins;
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.NoGlitchBlock;
 import dev.tensor.feature.modules.NoSlow;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.network.packet.c2s.play.PlayerActionC2SPacket;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = Block.class, priority = Integer.MAX_VALUE)
-public final class BlockMixin implements Wrapper {
+public final class BlockMixin implements Global {
 
     @Inject(method = "getVelocityMultiplier()F", at = @At("HEAD"), cancellable = true)
     public void getVelocityMultiplier(CallbackInfoReturnable<Float> cir) {

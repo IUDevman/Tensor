@@ -5,7 +5,7 @@ import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
 import org.spongepowered.asm.mixin.Mixin;
@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = GameRenderer.class, priority = Integer.MAX_VALUE)
-public final class GameRendererMixin implements Wrapper {
+public final class GameRendererMixin implements Global {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
     public void render(CallbackInfo callbackInfo) {

@@ -6,7 +6,7 @@ import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
 import dev.tensor.feature.modules.Reach;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,7 +27,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = ClientPlayerInteractionManager.class, priority = Integer.MAX_VALUE)
-public final class ClientPlayerInteractionManagerMixin implements Wrapper {
+public final class ClientPlayerInteractionManagerMixin implements Global {
 
     @Shadow
     private int blockBreakingCooldown;

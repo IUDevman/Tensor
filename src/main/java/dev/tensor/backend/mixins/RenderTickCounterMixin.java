@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.backend.events.BeginRenderTickEvent;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.RenderTickCounter;
 import org.objectweb.asm.Opcodes;
 import org.spongepowered.asm.mixin.Mixin;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = RenderTickCounter.class, priority = Integer.MAX_VALUE)
-public final class RenderTickCounterMixin implements Wrapper {
+public final class RenderTickCounterMixin implements Global {
 
     @Shadow
     public float lastFrameDuration;

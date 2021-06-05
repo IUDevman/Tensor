@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.*;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.entity.Entity;
 import net.minecraft.text.Text;
 import net.minecraft.util.hit.HitResult;
@@ -23,7 +23,7 @@ import java.util.Objects;
  */
 
 @Mixin(value = Entity.class, priority = Integer.MAX_VALUE)
-public abstract class EntityMixin implements Wrapper {
+public abstract class EntityMixin implements Global {
 
     @Shadow
     private int entityId;

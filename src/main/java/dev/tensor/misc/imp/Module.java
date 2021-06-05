@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
  */
 
 @SuppressWarnings("EmptyMethod")
-public abstract class Module implements Wrapper, Utilities {
+public abstract class Module implements Global, Utilities {
 
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)

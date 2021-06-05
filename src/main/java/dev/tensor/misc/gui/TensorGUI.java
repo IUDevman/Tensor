@@ -9,7 +9,7 @@ import dev.tensor.misc.gui.elements.PropertyElement;
 import dev.tensor.misc.gui.elements.SettingElement;
 import dev.tensor.misc.gui.elements.settings.*;
 import dev.tensor.misc.imp.Category;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.ColorSetting;
 import dev.tensor.misc.imp.settings.EnumSetting;
@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @since 05-03-2021
  */
 
-public final class TensorGUI extends Screen implements Wrapper {
+public final class TensorGUI extends Screen implements Global {
 
     private final ArrayList<CategoryElement> categoryElements = new ArrayList<>();
 
