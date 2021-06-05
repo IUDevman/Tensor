@@ -1,6 +1,6 @@
 package dev.tensor.misc.gui;
 
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.util.math.MatrixStack;
 
 /**
@@ -8,7 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
  * @since 05-03-2021
  */
 
-public interface Element extends Wrapper {
+public interface Element extends Global {
 
     int getWidth();
 

@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.backend.events.PlaySoundEvent;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(value = SoundManager.class, priority = Integer.MAX_VALUE)
-public final class SoundManagerMixin implements Wrapper {
+public final class SoundManagerMixin implements Global {
 
     @Inject(method = "play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
     public void playNoDelay(SoundInstance sound, CallbackInfo callbackInfo) {

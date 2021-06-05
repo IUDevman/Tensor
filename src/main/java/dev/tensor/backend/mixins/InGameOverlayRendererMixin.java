@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.NoOverlay;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.hud.InGameOverlayRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -17,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(value = InGameOverlayRenderer.class, priority = Integer.MAX_VALUE)
-public final class InGameOverlayRendererMixin implements Wrapper {
+public final class InGameOverlayRendererMixin implements Global {
 
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)
     private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo callbackInfo) {

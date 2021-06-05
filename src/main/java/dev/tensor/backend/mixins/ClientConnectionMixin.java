@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(value = ClientConnection.class, priority = Integer.MAX_VALUE)
-public final class ClientConnectionMixin implements Wrapper {
+public final class ClientConnectionMixin implements Global {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {

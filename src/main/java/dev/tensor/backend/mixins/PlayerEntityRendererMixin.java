@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.ViewModel;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.render.VertexConsumerProvider;
 import net.minecraft.client.render.entity.PlayerEntityRenderer;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(value = PlayerEntityRenderer.class, priority = Integer.MAX_VALUE)
-public final class PlayerEntityRendererMixin implements Wrapper {
+public final class PlayerEntityRendererMixin implements Global {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
     public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo callbackInfo) {

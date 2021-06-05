@@ -5,7 +5,7 @@ import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.feature.managers.ConfigManager;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = MinecraftClient.class, priority = Integer.MAX_VALUE)
-public final class MinecraftClientMixin implements Wrapper {
+public final class MinecraftClientMixin implements Global {
 
     @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)
     public void getWindowTitle(CallbackInfoReturnable<String> cir) {

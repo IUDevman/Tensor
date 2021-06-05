@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Jesus;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.FluidBlock;
 import net.minecraft.block.ShapeContext;
@@ -22,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = FluidBlock.class, priority = Integer.MAX_VALUE)
-public final class FluidBlockMixin implements Wrapper {
+public final class FluidBlockMixin implements Global {
 
     @Inject(method = "getCollisionShape", at = @At("HEAD"), cancellable = true)
     public void getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {

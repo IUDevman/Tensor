@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.NoPush;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.fluid.FluidState;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
@@ -18,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = FluidState.class, priority = Integer.MAX_VALUE)
-public final class FluidStateMixin implements Wrapper {
+public final class FluidStateMixin implements Global {
 
     @Inject(method = "getVelocity", at = @At("HEAD"), cancellable = true)
     public void getVelocity(BlockView world, BlockPos pos, CallbackInfoReturnable<Vec3d> cir) {

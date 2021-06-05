@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.event.EventHandler;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  */
 
 @Mixin(value = KeyBinding.class, priority = Integer.MAX_VALUE)
-public final class KeyBindingMixin implements Wrapper {
+public final class KeyBindingMixin implements Global {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))
     private static void onKeyPressed(InputUtil.Key key, CallbackInfo callbackInfo) {

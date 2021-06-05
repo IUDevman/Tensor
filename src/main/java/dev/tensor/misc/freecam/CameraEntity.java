@@ -2,7 +2,7 @@ package dev.tensor.misc.freecam;
 
 import com.mojang.authlib.GameProfile;
 import dev.tensor.feature.modules.Freecam;
-import dev.tensor.misc.imp.Wrapper;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.input.KeyboardInput;
 import net.minecraft.client.network.OtherClientPlayerEntity;
@@ -15,7 +15,7 @@ import net.minecraft.util.math.Vec3d;
  */
 
 @SuppressWarnings("EntityConstructor")
-public final class CameraEntity extends OtherClientPlayerEntity implements Wrapper {
+public final class CameraEntity extends OtherClientPlayerEntity implements Global {
 
     private final Input input;
     private final Freecam freecam;
