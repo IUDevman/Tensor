@@ -33,8 +33,8 @@ public interface ClassLoader {
                     if (name.startsWith(path.replace(".", "/") + "/") && name.endsWith(".class")) {
 
                         try {
-                            Class<?> clazz = Class.forName(name.substring(0, name.length() - 6).replace("/", "."));
-                            foundClasses.add(clazz);
+                            Class<?> aClass = Class.forName(name.substring(0, name.length() - 6).replace("/", "."));
+                            foundClasses.add(aClass);
 
                         } catch (ClassNotFoundException e) {
                             e.printStackTrace();

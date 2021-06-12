@@ -47,7 +47,7 @@ public enum CapeManager implements Manager {
             ImageIO.write(bufferedImage, "png", path.toFile());
 
         } catch (IOException ignored) {
-            Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
+            Tensor.INSTANCE.LOGGER.info("Failed to download cape!");
         }
     }
 
