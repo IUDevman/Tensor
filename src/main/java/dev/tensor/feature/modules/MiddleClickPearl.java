@@ -23,14 +23,14 @@ public final class MiddleClickPearl extends Module {
     @EventTarget
     public void onKeyPressed(KeyPressedEvent event) {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
-        if (Objects.requireNonNull(getMinecraft().crosshairTarget).getType() != HitResult.Type.MISS) return;
+        if (Objects.requireNonNull(this.getMinecraft().crosshairTarget).getType() != HitResult.Type.MISS) return;
 
-        final int oldSlot = getInventory().selectedSlot;
+        final int oldSlot = this.getInventory().selectedSlot;
         final int newSlot = this.findItem(Items.ENDER_PEARL);
 
         if (newSlot != -1) {
             this.swap(newSlot);
-            Objects.requireNonNull(getMinecraft().interactionManager).interactItem(getPlayer(), getWorld(), Hand.MAIN_HAND);
+            Objects.requireNonNull(this.getMinecraft().interactionManager).interactItem(this.getPlayer(), this.getWorld(), Hand.MAIN_HAND);
             this.swap(oldSlot);
         }
     }

@@ -26,7 +26,7 @@ public final class FluidBlockMixin implements Global {
 
     @Inject(method = "getCollisionShape", at = @At("HEAD"), cancellable = true)
     public void getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
-        if (isNull() || getPlayer().isSubmergedInWater() || getPlayer().isSneaking() || getWorld().getBlockState(getPlayer().getBlockPos()).getBlock() instanceof FluidBlock) return;
+        if (this.isNull() || this.getPlayer().isSubmergedInWater() || this.getPlayer().isSneaking() || this.getWorld().getBlockState(this.getPlayer().getBlockPos()).getBlock() instanceof FluidBlock) return;
 
         Jesus jesus = ModuleManager.INSTANCE.getModule(Jesus.class);
 

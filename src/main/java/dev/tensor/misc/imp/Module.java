@@ -92,7 +92,7 @@ public abstract class Module implements Global, Utilities {
     protected void enable() {
         this.enabled = true;
         EventHandler.register(this);
-        if (!isNull()) {
+        if (!this.isNull()) {
             onEnable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true);
         }
@@ -101,7 +101,7 @@ public abstract class Module implements Global, Utilities {
     protected void disable() {
         this.enabled = false;
         EventHandler.unregister(this);
-        if (!isNull()) {
+        if (!this.isNull()) {
             onDisable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true);
         }

@@ -22,7 +22,7 @@ public final class SlimeBlockMixin implements Global {
 
     @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
     public void onSteppedOn(World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
-        if (isNull() || entity != getPlayer()) return;
+        if (this.isNull() || entity != this.getPlayer()) return;
 
         NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
 

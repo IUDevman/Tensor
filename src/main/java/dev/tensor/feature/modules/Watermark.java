@@ -25,6 +25,6 @@ public final class Watermark extends Module {
         MatrixStack matrixStack = new MatrixStack();
         final String watermark = Tensor.INSTANCE.MOD_NAME + " (" + Tensor.INSTANCE.MOD_VERSION + ")";
 
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, watermark, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, watermark, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
     }
 }

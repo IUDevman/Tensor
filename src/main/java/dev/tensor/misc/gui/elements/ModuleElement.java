@@ -96,7 +96,7 @@ public final class ModuleElement implements Element {
         DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
         DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
 
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

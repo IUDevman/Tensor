@@ -19,11 +19,11 @@ public final class Sprint extends Module {
 
     @Override
     public void onTick() {
-        if (!stationary.getValue() && getPlayer().forwardSpeed == 0 && getPlayer().sidewaysSpeed == 0) return;
-        else if (!sideways.getValue() && getPlayer().sidewaysSpeed != 0) return;
-        else if (!reverse.getValue() && getPlayer().forwardSpeed < 0) return;
-        else if (!liquids.getValue() && (getPlayer().isInsideWaterOrBubbleColumn() || getPlayer().isInLava())) return;
+        if (!stationary.getValue() && this.getPlayer().forwardSpeed == 0 && this.getPlayer().sidewaysSpeed == 0) return;
+        else if (!sideways.getValue() && this.getPlayer().sidewaysSpeed != 0) return;
+        else if (!reverse.getValue() && this.getPlayer().forwardSpeed < 0) return;
+        else if (!liquids.getValue() && (this.getPlayer().isInsideWaterOrBubbleColumn() || this.getPlayer().isInLava())) return;
 
-        getPlayer().setSprinting(true);
+        this.getPlayer().setSprinting(true);
     }
 }

@@ -23,16 +23,16 @@ public final class CameraEntity extends OtherClientPlayerEntity implements Globa
     public CameraEntity(ClientWorld clientWorld, GameProfile gameProfile, Freecam freecam) {
         super(clientWorld, gameProfile);
 
-        this.input = new KeyboardInput(getMinecraft().options);
+        this.input = new KeyboardInput(this.getMinecraft().options);
         this.freecam = freecam;
     }
 
     public void spawn() {
-        getWorld().addEntity(this.getEntityId(), this);
+        this.getWorld().addEntity(this.getEntityId(), this);
     }
 
     public void despawn() {
-        getWorld().removeEntity(this.getEntityId());
+        this.getWorld().removeEntity(this.getEntityId());
     }
 
     @Override

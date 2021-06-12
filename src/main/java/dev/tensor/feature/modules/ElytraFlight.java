@@ -22,22 +22,22 @@ public final class ElytraFlight extends Module {
 
     @Override
     public void onTick() {
-        if (!getPlayer().isFallFlying()) return;
+        if (!this.getPlayer().isFallFlying()) return;
 
-        getPlayer().abilities.flying = false;
+        this.getPlayer().abilities.flying = false;
 
         if (areButtonsDown() || alwaysMoving.getValue()) {
-            getPlayer().setVelocity(getFlyingVelocity());
+            this.getPlayer().setVelocity(getFlyingVelocity());
 
         } else {
-            getPlayer().setVelocity(0, 0, 0);
+            this.getPlayer().setVelocity(0, 0, 0);
         }
 
         if (!stableY.getValue() && !rotationY.getValue()) {
-            if (getMinecraft().options.keyJump.isPressed()) {
-                getPlayer().setVelocity(getPlayer().getVelocity().add(0, getSpeed(), 0));
+            if (this.getMinecraft().options.keyJump.isPressed()) {
+                this.getPlayer().setVelocity(this.getPlayer().getVelocity().add(0, getSpeed(), 0));
             } else if (getMinecraft().options.keySneak.isPressed()) {
-                getPlayer().setVelocity(getPlayer().getVelocity().add(0, -getSpeed(), 0));
+                this.getPlayer().setVelocity(this.getPlayer().getVelocity().add(0, -getSpeed(), 0));
             }
         }
     }
@@ -47,23 +47,23 @@ public final class ElytraFlight extends Module {
     }
 
     private boolean areButtonsDown() {
-        if (getMinecraft().options.keyForward.isPressed()) return true;
-        else if (getMinecraft().options.keyBack.isPressed()) return true;
-        else if (getMinecraft().options.keyLeft.isPressed()) return true;
-        else if (getMinecraft().options.keyRight.isPressed()) return true;
+        if (this.getMinecraft().options.keyForward.isPressed()) return true;
+        else if (this.getMinecraft().options.keyBack.isPressed()) return true;
+        else if (this.getMinecraft().options.keyLeft.isPressed()) return true;
+        else if (this.getMinecraft().options.keyRight.isPressed()) return true;
 
         if (rotationY.getValue()) {
-            if (getMinecraft().options.keySneak.isPressed()) return true;
-            else return getMinecraft().options.keyJump.isPressed();
+            if (this.getMinecraft().options.keySneak.isPressed()) return true;
+            else return this.getMinecraft().options.keyJump.isPressed();
         }
 
         return false;
     }
 
     private Vec3d getFlyingVelocity() {
-        double x = getPlayer().getRotationVector().getX() * getSpeed();
-        double y = getPlayer().getRotationVector().getY();
-        double z = getPlayer().getRotationVector().getZ() * getSpeed();
+        double x = this.getPlayer().getRotationVector().getX() * getSpeed();
+        double y = this.getPlayer().getRotationVector().getY();
+        double z = this.getPlayer().getRotationVector().getZ() * getSpeed();
 
         if (rotationY.getValue()) y *= getSpeed();
 

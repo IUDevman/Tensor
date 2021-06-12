@@ -42,7 +42,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
-        if (isNull() || entityId != getPlayer().getEntityId()) return;
+        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
@@ -53,7 +53,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "adjustMovementForPiston", at = @At("HEAD"), cancellable = true)
     public void adjustMovementForPiston(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
-        if (isNull() || entityId != getPlayer().getEntityId()) return;
+        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 
@@ -73,7 +73,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "raycast", at = @At("HEAD"), cancellable = true)
     public void raycast(double maxDistance, float tickDelta, boolean includeFluids, CallbackInfoReturnable<HitResult> cir) {
-        if (isNull() || entityId != Objects.requireNonNull(getMinecraft().getCameraEntity()).getEntityId() || getPlayer().isSubmergedInWater()) return;
+        if (this.isNull() || entityId != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getEntityId() || this.getPlayer().isSubmergedInWater()) return;
 
         LiquidInteract liquidInteract = ModuleManager.INSTANCE.getModule(LiquidInteract.class);
 
@@ -87,31 +87,31 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "isTouchingWater", at = @At("HEAD"), cancellable = true)
     public void isTouchingWater(CallbackInfoReturnable<Boolean> cir) {
-        if (isNull() || entityId != getPlayer().getEntityId()) return;
+        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
         ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && getPlayer().isFallFlying())) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
 
     @Inject(method = "isInLava", at = @At("HEAD"), cancellable = true)
     public void isInLava(CallbackInfoReturnable<Boolean> cir) {
-        if (isNull() || entityId != getPlayer().getEntityId()) return;
+        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
         Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
         ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && getPlayer().isFallFlying())) {
+        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
 
     @Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo callbackInfo) {
-        if (isNull() || entityId != getPlayer().getEntityId()) return;
+        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
         Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
 

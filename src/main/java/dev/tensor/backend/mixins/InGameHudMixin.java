@@ -45,12 +45,12 @@ public final class InGameHudMixin implements Global {
 
     @Inject(method = "getCameraPlayer", at = @At("HEAD"), cancellable = true)
     public void getCameraPlayer(CallbackInfoReturnable<PlayerEntity> cir) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
 
         if (freecam.isEnabled()) {
-            cir.setReturnValue(getPlayer());
+            cir.setReturnValue(this.getPlayer());
         }
     }
 }

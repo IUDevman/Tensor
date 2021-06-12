@@ -27,21 +27,21 @@ public final class Coordinates extends Module {
     @Override
     public void onRender2D() {
         MatrixStack matrixStack = new MatrixStack();
-        double playerX = getPlayer().getX();
-        double playerY = getPlayer().getY();
-        double playerZ = getPlayer().getZ();
+        double playerX = this.getPlayer().getX();
+        double playerY = this.getPlayer().getY();
+        double playerZ = this.getPlayer().getZ();
 
-        if (getWorld().getDimension().isRespawnAnchorWorking()) {
+        if (this.getWorld().getDimension().isRespawnAnchorWorking()) {
             playerX *= 8;
             playerZ *= 8;
         }
 
         final String overWorld = "X: " + decimalFormat.format(playerX) + " Y: " + decimalFormat.format(playerY) + " Z: " + decimalFormat.format(playerZ);
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, overWorld, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, overWorld, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
 
-        if (nether.getValue() && !getWorld().getDimension().hasEnderDragonFight()) {
+        if (nether.getValue() && !this.getWorld().getDimension().hasEnderDragonFight()) {
             final String nether = "X: " + decimalFormat.format(playerX / 8) + " Y: " + decimalFormat.format(playerY) + " Z: " + decimalFormat.format(playerZ / 8);
-            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, nether, x.getValue().intValue(), y.getValue().intValue() + getMinecraft().textRenderer.fontHeight + 1, new Color(255, 0, 0, 255).getRGB());
+            DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, nether, x.getValue().intValue(), y.getValue().intValue() + this.getMinecraft().textRenderer.fontHeight + 1, new Color(255, 0, 0, 255).getRGB());
         }
     }
 }

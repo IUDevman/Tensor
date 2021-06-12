@@ -34,16 +34,16 @@ public final class Criticals extends Module {
 
             switch ((Type) type.getValue()) {
                 case Packet: {
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.05, getPlayer().getZ(), false));
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.03, getPlayer().getZ(), false));
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.05, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.03, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
                     break;
                 }
                 case Strict: {
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.062602401692772, getPlayer().getZ(), false));
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY() + 0.0726023996066094, getPlayer().getZ(), false));
-                    getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(getPlayer().getX(), getPlayer().getY(), getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.062602401692772, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.0726023996066094, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
                     break;
                 }
                 default:
@@ -53,9 +53,9 @@ public final class Criticals extends Module {
     }
 
     private boolean shouldApplyCriticals(Entity entity) {
-        if (getPlayer().isSwimming() || getPlayer().isInSwimmingPose()) return false;
-        else if (getPlayer().isInLava()) return false;
-        else if (!getPlayer().isOnGround()) return false;
+        if (this.getPlayer().isSwimming() || this.getPlayer().isInSwimmingPose()) return false;
+        else if (this.getPlayer().isInLava()) return false;
+        else if (!this.getPlayer().isOnGround()) return false;
         else return !(entity instanceof EndCrystalEntity) || endCrystals.getValue();
     }
 

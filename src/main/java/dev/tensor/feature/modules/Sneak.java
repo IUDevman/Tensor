@@ -13,15 +13,15 @@ public final class Sneak extends Module {
 
     @Override
     public void onDisable() {
-        if (!getPlayer().isSneaking()) return;
+        if (!this.getPlayer().isSneaking()) return;
 
-        getMinecraft().options.keySneak.setPressed(false);
+        this.getMinecraft().options.keySneak.setPressed(false);
     }
 
     @Override
     public void onTick() {
-        if (getPlayer().isSneaking()) return;
+        if (this.getPlayer().isSneaking()) return;
 
-        getMinecraft().options.keySneak.setPressed(true);
+        this.getMinecraft().options.keySneak.setPressed(true);
     }
 }

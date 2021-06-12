@@ -13,7 +13,7 @@ public final class Disconnect extends Module {
 
     @Override
     public void onEnable() {
-        getWorld().disconnect();
+        this.getWorld().disconnect();
         this.disable();
     }
 }

@@ -70,14 +70,14 @@ public final class ColorElement extends SettingElement {
         DrawableHelper.fill(matrixStack, x, y + 45, x + this.getWidth(), y + 60, this.searchingB ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
 
         String name = getColorSetting().getName() + " : ";
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, name, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, name, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
 
         String rgb = "(" + getColorSetting().getValue().getRed() + ", " + getColorSetting().getValue().getGreen() + ", " + getColorSetting().getValue().getBlue() + ")";
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, rgb, x + 3 + getMinecraft().textRenderer.getWidth(name), y + 3, getColorSetting().getValue().getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, rgb, x + 3 + this.getMinecraft().textRenderer.getWidth(name), y + 3, getColorSetting().getValue().getRGB());
 
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, "  > Red (0 -> 255) : " + Formatting.GRAY + (this.searchingR ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getRed()), x + 3, y + 18, new Color(255, 255, 255, 255).getRGB());
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, "  > Green (0 -> 255) : " + Formatting.GRAY + (this.searchingG ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getGreen()), x + 3, y + 33, new Color(255, 255, 255, 255).getRGB());
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, "  > Blue (0 -> 255) : " + Formatting.GRAY + (this.searchingB ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getBlue()), x + 3, y + 48, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Red (0 -> 255) : " + Formatting.GRAY + (this.searchingR ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getRed()), x + 3, y + 18, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Green (0 -> 255) : " + Formatting.GRAY + (this.searchingG ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getGreen()), x + 3, y + 33, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Blue (0 -> 255) : " + Formatting.GRAY + (this.searchingB ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getBlue()), x + 3, y + 48, new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

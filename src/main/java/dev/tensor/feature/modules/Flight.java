@@ -29,19 +29,19 @@ public final class Flight extends Module {
 
     @Override
     public void onTick() {
-        if (elytraCheck.getValue() && getPlayer().isFallFlying()) return;
+        if (elytraCheck.getValue() && this.getPlayer().isFallFlying()) return;
 
-        getPlayer().abilities.flying = false;
+        this.getPlayer().abilities.flying = false;
 
         if (!toggleTimer.getValue() || delayCount >= toggleTicks.getValue()) {
             delayCount = 0;
-            getPlayer().flyingSpeed = getSpeed();
-            getPlayer().setVelocity(new Vec3d(0, 0, 0));
+            this.getPlayer().flyingSpeed = getSpeed();
+            this.getPlayer().setVelocity(new Vec3d(0, 0, 0));
 
-            if (getMinecraft().options.keyJump.isPressed()) {
-                getPlayer().setVelocity(getPlayer().getVelocity().add(0, getSpeed(), 0));
-            } else if (getMinecraft().options.keySneak.isPressed()) {
-                getPlayer().setVelocity(getPlayer().getVelocity().add(0, -getSpeed(), 0));
+            if (this.getMinecraft().options.keyJump.isPressed()) {
+                this.getPlayer().setVelocity(this.getPlayer().getVelocity().add(0, getSpeed(), 0));
+            } else if (this.getMinecraft().options.keySneak.isPressed()) {
+                this.getPlayer().setVelocity(this.getPlayer().getVelocity().add(0, -getSpeed(), 0));
             }
         }
         delayCount++;

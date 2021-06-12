@@ -30,9 +30,9 @@ public final class VisualRange extends Module {
     @SuppressWarnings("SuspiciousMethodCalls")
     @Override
     public void onTick() {
-        getWorld().getPlayers().forEach(player -> {
+        this.getWorld().getPlayers().forEach(player -> {
 
-            if (!spottedPlayers.contains(player) && player != getPlayer()) {
+            if (!spottedPlayers.contains(player) && player != this.getPlayer()) {
 
                 if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;
 
@@ -52,7 +52,7 @@ public final class VisualRange extends Module {
 
         spottedPlayers.forEach(player -> {
 
-            if (!getWorld().getPlayers().contains(player)) {
+            if (!this.getWorld().getPlayers().contains(player)) {
                 removedPlayers.add(player);
 
                 if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;

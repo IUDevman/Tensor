@@ -72,9 +72,9 @@ public enum CapeManager implements Manager {
     }
 
     public Identifier getCape(String name) {
-        if (isNull()) return null;
+        if (this.isNull()) return null;
 
-        if (this.capes.contains(name) || getPlayer().getEntityName().equalsIgnoreCase(name)) {
+        if (this.capes.contains(name) || this.getPlayer().getEntityName().equalsIgnoreCase(name)) {
             if (this.cape == null) {
                 try {
                     Path path = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/Cape.png");

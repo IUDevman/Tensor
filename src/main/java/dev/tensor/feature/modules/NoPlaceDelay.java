@@ -22,14 +22,14 @@ public final class NoPlaceDelay extends Module {
     @Override
     public void onTick() {
         if (shouldToggleDelay()) {
-            ((MinecraftClientAccessor) getMinecraft()).setItemUseCooldown(0);
+            ((MinecraftClientAccessor) this.getMinecraft()).setItemUseCooldown(0);
         }
     }
 
     private boolean shouldToggleDelay() {
         if (all.getValue()) return true;
-        else if (xp.getValue() && getPlayer().getMainHandStack().getItem() == Items.EXPERIENCE_BOTTLE) return true;
-        else if (mainCrystal.getValue() && getPlayer().getMainHandStack().getItem() == Items.END_CRYSTAL) return true;
-        else return offhandCrystal.getValue() && getPlayer().getOffHandStack().getItem() == Items.END_CRYSTAL;
+        else if (xp.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.EXPERIENCE_BOTTLE) return true;
+        else if (mainCrystal.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.END_CRYSTAL) return true;
+        else return offhandCrystal.getValue() && this.getPlayer().getOffHandStack().getItem() == Items.END_CRYSTAL;
     }
 }

@@ -30,8 +30,8 @@ public final class ArrayList extends Module {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (!module.isEnabled() || !module.isDrawn()) return;
 
-            DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, module.getName(), this.x.getValue().intValue(), this.y.getValue().intValue() + incrementY.get(), new Color(255, 255, 255, 255).getRGB());
-            incrementY.getAndAdd(getMinecraft().textRenderer.fontHeight);
+            DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, module.getName(), this.x.getValue().intValue(), this.y.getValue().intValue() + incrementY.get(), new Color(255, 255, 255, 255).getRGB());
+            incrementY.getAndAdd(this.getMinecraft().textRenderer.fontHeight);
         });
     }
 }

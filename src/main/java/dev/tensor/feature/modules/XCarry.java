@@ -19,7 +19,7 @@ public final class XCarry extends Module {
 
     @Override
     public void onDisable() {
-        if (cancelled) getNetwork().sendPacket(new CloseHandledScreenC2SPacket(getPlayer().playerScreenHandler.syncId));
+        if (cancelled) this.getNetwork().sendPacket(new CloseHandledScreenC2SPacket(this.getPlayer().playerScreenHandler.syncId));
     }
 
     @SuppressWarnings("unused")
@@ -30,7 +30,7 @@ public final class XCarry extends Module {
         if (event.getPacket() instanceof CloseHandledScreenC2SPacket) {
             CloseHandledScreenC2SPacket packet = (CloseHandledScreenC2SPacket) event.getPacket();
 
-            if (((CloseHandledScreenC2SAccessor) packet).getSyncId() == getPlayer().playerScreenHandler.syncId) {
+            if (((CloseHandledScreenC2SAccessor) packet).getSyncId() == this.getPlayer().playerScreenHandler.syncId) {
                 event.setCancelled(true);
                 cancelled = true;
             }

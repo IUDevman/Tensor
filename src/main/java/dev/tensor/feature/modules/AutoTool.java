@@ -30,7 +30,7 @@ public final class AutoTool extends Module {
     public void onBlockInteract(BlockInteractEvent event) {
         switch (event.getType()) {
             case Break: {
-                if (swapBack.getValue() && blockPosIntegerHashMap.containsKey(event.getBlockPos()) && getInventory().selectedSlot != blockPosIntegerHashMap.get(event.getBlockPos())) {
+                if (swapBack.getValue() && blockPosIntegerHashMap.containsKey(event.getBlockPos()) && this.getInventory().selectedSlot != blockPosIntegerHashMap.get(event.getBlockPos())) {
                     this.swap(blockPosIntegerHashMap.get(event.getBlockPos()));
                 }
 
@@ -38,10 +38,10 @@ public final class AutoTool extends Module {
                 break;
             }
             case Damage: {
-                final int toolSlot = findBestTool(getWorld().getBlockState(event.getBlockPos()));
+                final int toolSlot = findBestTool(this.getWorld().getBlockState(event.getBlockPos()));
 
                 if (toolSlot != -1) {
-                    blockPosIntegerHashMap.put(event.getBlockPos(), blockPosIntegerHashMap.getOrDefault(event.getBlockPos(), getInventory().selectedSlot));
+                    blockPosIntegerHashMap.put(event.getBlockPos(), blockPosIntegerHashMap.getOrDefault(event.getBlockPos(), this.getInventory().selectedSlot));
                     this.swap(toolSlot);
                 }
                 break;
@@ -56,7 +56,7 @@ public final class AutoTool extends Module {
         double maxMultiplier = 0;
 
         for (int i = 0; i < 9; i++) {
-            ItemStack itemStack = getInventory().getStack(i);
+            ItemStack itemStack = this.getInventory().getStack(i);
 
             if (itemStack.isEmpty()) continue;
 

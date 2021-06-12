@@ -22,7 +22,7 @@ public final class FluidStateMixin implements Global {
 
     @Inject(method = "getVelocity", at = @At("HEAD"), cancellable = true)
     public void getVelocity(BlockView world, BlockPos pos, CallbackInfoReturnable<Vec3d> cir) {
-        if (isNull() || getPlayer().squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ()) > 3) return;
+        if (this.isNull() || this.getPlayer().squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ()) > 3) return;
 
         NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
 

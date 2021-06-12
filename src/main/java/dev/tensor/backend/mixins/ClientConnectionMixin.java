@@ -23,7 +23,7 @@ public final class ClientConnectionMixin implements Global {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
     public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
@@ -33,7 +33,7 @@ public final class ClientConnectionMixin implements Global {
 
     @Inject(method = "channelRead0", at = @At("HEAD"), cancellable = true)
     public void receive(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
 

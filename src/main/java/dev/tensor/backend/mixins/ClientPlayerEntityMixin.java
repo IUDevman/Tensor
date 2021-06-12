@@ -37,13 +37,13 @@ public final class ClientPlayerEntityMixin implements Global {
 
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
     public void tickMovement(CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
 
-        if (noSlow.isEnabled() && noSlow.items.getValue() && getPlayer().isUsingItem()) {
-            getPlayer().input.movementForward /= 0.2F;
-            getPlayer().input.movementSideways /= 0.2F;
+        if (noSlow.isEnabled() && noSlow.items.getValue() && this.getPlayer().isUsingItem()) {
+            this.getPlayer().input.movementForward /= 0.2F;
+            this.getPlayer().input.movementSideways /= 0.2F;
         }
     }
 

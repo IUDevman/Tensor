@@ -67,7 +67,7 @@ public final class NumberElement extends SettingElement {
 
         String value = this.numberSetting.getName() + " (" + adjustForDecimals(this.numberSetting.getMin()) + " -> " + adjustForDecimals(this.numberSetting.getMax()) + ") : " + Formatting.GRAY + (this.isSearching() ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : adjustForDecimals(this.numberSetting.getValue()));
 
-        DrawableHelper.drawStringWithShadow(matrixStack, getMinecraft().textRenderer, value, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, value, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

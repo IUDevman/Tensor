@@ -28,7 +28,7 @@ public final class MinecraftClientMixin implements Global {
 
     @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
     public void tick(CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         EventHandler.call(new ClientTickEvent());
     }

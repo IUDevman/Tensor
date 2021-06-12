@@ -42,7 +42,7 @@ public final class Spammer extends Module {
                 string = string.substring(0, 256);
             }
 
-            getPlayer().sendChatMessage(string);
+            this.getPlayer().sendChatMessage(string);
             spammerFiles.remove(0);
         }
         delayCount++;

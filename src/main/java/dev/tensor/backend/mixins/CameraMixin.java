@@ -39,7 +39,7 @@ public final class CameraMixin implements Global {
 
     @Inject(method = "getFocusedEntity", at = @At("HEAD"), cancellable = true)
     public void getFocusedEntity(CallbackInfoReturnable<Entity> cir) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
 

@@ -21,18 +21,18 @@ public final class FakePlayer extends Module {
 
     @Override
     public void onEnable() {
-        otherClientPlayerEntity = new OtherClientPlayerEntity(getWorld(), new GameProfile(UUID.fromString("fdee323e-7f0c-4c15-8d1c-0f277442342a"), "Fit"));
-        otherClientPlayerEntity.copyPositionAndRotation(getPlayer());
+        otherClientPlayerEntity = new OtherClientPlayerEntity(this.getWorld(), new GameProfile(UUID.fromString("fdee323e-7f0c-4c15-8d1c-0f277442342a"), "Fit"));
+        otherClientPlayerEntity.copyPositionAndRotation(this.getPlayer());
         otherClientPlayerEntity.setEntityId(-666);
-        getWorld().addEntity(otherClientPlayerEntity.getEntityId(), otherClientPlayerEntity);
-        getWorld().getPlayers().add(otherClientPlayerEntity);
+        this.getWorld().addEntity(otherClientPlayerEntity.getEntityId(), otherClientPlayerEntity);
+        this.getWorld().getPlayers().add(otherClientPlayerEntity);
     }
 
     @Override
     public void onDisable() {
         if (otherClientPlayerEntity == null) return;
 
-        getWorld().removeEntity(otherClientPlayerEntity.getEntityId());
+        this.getWorld().removeEntity(otherClientPlayerEntity.getEntityId());
     }
 
     @SuppressWarnings("unused")

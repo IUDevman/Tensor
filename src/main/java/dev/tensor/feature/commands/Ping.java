@@ -49,7 +49,7 @@ public final class Ping implements Command {
 
         String playerName = message[1];
 
-        if (getMinecraft().getNetworkHandler() == null) {
+        if (this.getMinecraft().getNetworkHandler() == null) {
             this.sendReplaceableClientMessage(this.getMarker() + "No network connection!", this.getID(), true);
             return;
         }
@@ -70,8 +70,8 @@ public final class Ping implements Command {
     }
 
     private PlayerListEntry findPlayerListEntryByName(String name) {
-        if (getMinecraft().getNetworkHandler() == null) return null;
+        if (this.getMinecraft().getNetworkHandler() == null) return null;
 
-        return getMinecraft().getNetworkHandler().getPlayerList().stream().filter(playerListEntry -> playerListEntry.getProfile().getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+        return this.getMinecraft().getNetworkHandler().getPlayerList().stream().filter(playerListEntry -> playerListEntry.getProfile().getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 }

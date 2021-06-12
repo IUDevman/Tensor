@@ -19,18 +19,18 @@ public interface Utilities extends Global {
     String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.INSTANCE.MOD_NAME + Formatting.DARK_GRAY + "]";
 
     default void sendClientMessage(String message, boolean prefix) {
-        getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
+        this.getChatHud().addMessage(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message));
     }
 
     default void sendReplaceableClientMessage(String message, int id, boolean prefix) {
-        ((ChatHudAccessor) getChatHud()).addReplaceable(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message), id);
+        ((ChatHudAccessor) this.getChatHud()).addReplaceable(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message), id);
     }
 
     default int findBlock(Block block) {
         int slot = -1;
 
         for (int i = 0; i < 9; i++) {
-            ItemStack itemStack = getInventory().getStack(i);
+            ItemStack itemStack = this.getInventory().getStack(i);
 
             if (itemStack.isEmpty() || !(itemStack.getItem() instanceof BlockItem)) continue;
 
@@ -47,7 +47,7 @@ public interface Utilities extends Global {
         int slot = -1;
 
         for (int i = 0; i < 9; i++) {
-            ItemStack itemStack = getInventory().getStack(i);
+            ItemStack itemStack = this.getInventory().getStack(i);
 
             if (itemStack.isEmpty()) continue;
 
@@ -61,6 +61,6 @@ public interface Utilities extends Global {
     }
 
     default void swap(int slot) {
-        getInventory().selectedSlot = slot;
+        this.getInventory().selectedSlot = slot;
     }
 }

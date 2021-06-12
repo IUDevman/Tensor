@@ -23,7 +23,7 @@ public final class CobWebBlockMixin implements Global {
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
-        if (isNull() || entity != getPlayer()) return;
+        if (this.isNull() || entity != this.getPlayer()) return;
 
         NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
 

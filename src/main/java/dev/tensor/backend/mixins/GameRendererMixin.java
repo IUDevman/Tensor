@@ -24,14 +24,14 @@ public final class GameRendererMixin implements Global {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
     public void render(CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
     public void renderHand(CallbackInfo callbackInfo) {
-        if (isNull()) return;
+        if (this.isNull()) return;
 
         EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.World));
     }

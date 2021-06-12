@@ -119,8 +119,8 @@ public final class TensorGUI extends Screen implements Global {
         int width1 = this.guiWidth - 62;
         int height1 = this.guiHeight - 22;
 
-        int windowHeight = getMinecraft().getWindow().getHeight();
-        double scale = getMinecraft().getWindow().getScaleFactor();
+        int windowHeight = this.getMinecraft().getWindow().getHeight();
+        double scale = this.getMinecraft().getWindow().getScaleFactor();
         int widthScaled = (int) (scale * width1);
         int heightScaled = (int) (scale * height1);
         int xScaled = (int) (posX * scale);
@@ -171,7 +171,7 @@ public final class TensorGUI extends Screen implements Global {
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + 20, new Color(0, 0, 0, 150).getRGB());
 
         String name = Tensor.INSTANCE.MOD_NAME + " (" + Formatting.YELLOW + Tensor.INSTANCE.MOD_VERSION + Formatting.RESET + ")";
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, name, this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, name, this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

@@ -25,9 +25,9 @@ public final class MiddleClickFriend extends Module {
     @EventTarget
     public void onKeyPressed(KeyPressedEvent event) {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
-        if (Objects.requireNonNull(getMinecraft().crosshairTarget).getType() != HitResult.Type.ENTITY) return;
+        if (Objects.requireNonNull(this.getMinecraft().crosshairTarget).getType() != HitResult.Type.ENTITY) return;
 
-        EntityHitResult entityHitResult = (EntityHitResult) getMinecraft().crosshairTarget;
+        EntityHitResult entityHitResult = (EntityHitResult) this.getMinecraft().crosshairTarget;
         if (!(entityHitResult.getEntity() instanceof PlayerEntity)) return;
 
         String name = entityHitResult.getEntity().getEntityName();

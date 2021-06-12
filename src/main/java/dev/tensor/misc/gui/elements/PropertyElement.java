@@ -59,9 +59,9 @@ public final class PropertyElement implements Element {
         DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
         DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
 
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, "Enabled", x + (this.getWidth() / 2), y + 3, module.isEnabled() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, "Drawn", x + (this.getWidth() / 2), y + 18, module.isDrawn() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
-        DrawableHelper.drawCenteredString(matrixStack, getMinecraft().textRenderer, "Messages", x + (this.getWidth() / 2), y + 33, module.isMessages() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, "Enabled", x + (this.getWidth() / 2), y + 3, module.isEnabled() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, "Drawn", x + (this.getWidth() / 2), y + 18, module.isDrawn() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
+        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, "Messages", x + (this.getWidth() / 2), y + 33, module.isMessages() ? new Color(0, 255, 0, 255).getRGB() : new Color(255, 0, 0, 255).getRGB());
     }
 
     @Override

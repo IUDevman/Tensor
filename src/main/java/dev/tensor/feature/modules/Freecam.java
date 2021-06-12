@@ -28,43 +28,43 @@ public final class Freecam extends Module {
 
     @Override
     public void onEnable() {
-        cameraEntity = new CameraEntity(getWorld(), getPlayer().getGameProfile(), this);
-        cameraEntity.copyPositionAndRotation(getPlayer());
-        cameraEntity.setHeadYaw(getPlayer().headYaw);
+        cameraEntity = new CameraEntity(this.getWorld(), this.getPlayer().getGameProfile(), this);
+        cameraEntity.copyPositionAndRotation(this.getPlayer());
+        cameraEntity.setHeadYaw(this.getPlayer().headYaw);
         cameraEntity.spawn();
 
-        perspective = getMinecraft().options.getPerspective();
-        getMinecraft().options.setPerspective(Perspective.FIRST_PERSON);
-        getMinecraft().setCameraEntity(cameraEntity);
+        perspective = this.getMinecraft().options.getPerspective();
+        this.getMinecraft().options.setPerspective(Perspective.FIRST_PERSON);
+        this.getMinecraft().setCameraEntity(cameraEntity);
 
-        if (getPlayer().input instanceof KeyboardInput) {
-            ((ClientPlayerEntityAccessor) getPlayer()).setInput(new DummyInput());
+        if (this.getPlayer().input instanceof KeyboardInput) {
+            ((ClientPlayerEntityAccessor) this.getPlayer()).setInput(new DummyInput());
         }
     }
 
     @Override
     public void onDisable() {
-        if (perspective != null) getMinecraft().options.setPerspective(perspective);
-        getMinecraft().setCameraEntity(getPlayer());
+        if (perspective != null) this.getMinecraft().options.setPerspective(perspective);
+        this.getMinecraft().setCameraEntity(this.getPlayer());
         if (cameraEntity != null) cameraEntity.despawn();
         cameraEntity = null;
 
-        if (getPlayer().input instanceof DummyInput) {
-            ((ClientPlayerEntityAccessor) getPlayer()).setInput(new KeyboardInput(getMinecraft().options));
+        if (this.getPlayer().input instanceof DummyInput) {
+            ((ClientPlayerEntityAccessor) this.getPlayer()).setInput(new KeyboardInput(this.getMinecraft().options));
         }
     }
 
     @Override
     public void onTick() {
-        if (cameraEntity == null || getPlayer().isDead()) {
+        if (cameraEntity == null || this.getPlayer().isDead()) {
             this.disable();
             return;
         }
 
-        cameraEntity.setHealth(getPlayer().getHealth());
+        cameraEntity.setHealth(this.getPlayer().getHealth());
 
-        if (getPlayer().input instanceof KeyboardInput) {
-            ((ClientPlayerEntityAccessor) getPlayer()).setInput(new DummyInput());
+        if (this.getPlayer().input instanceof KeyboardInput) {
+            ((ClientPlayerEntityAccessor) this.getPlayer()).setInput(new DummyInput());
         }
 
         cameraEntity.tickMovement();

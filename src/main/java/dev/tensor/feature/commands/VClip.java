@@ -51,7 +51,7 @@ public final class VClip implements Command {
         try {
             int clipAmount = Integer.parseInt(value);
 
-            getPlayer().updatePosition(getPlayer().getX(), getPlayer().getY() + clipAmount, getPlayer().getZ());
+            this.getPlayer().updatePosition(this.getPlayer().getX(), this.getPlayer().getY() + clipAmount, this.getPlayer().getZ());
             this.sendReplaceableClientMessage(this.getMarker() + "Attempted to y-teleport (" + Formatting.GREEN + clipAmount + Formatting.GRAY + ") blocks!", this.getID(), true);
 
         } catch (NullPointerException | NumberFormatException ignored) {

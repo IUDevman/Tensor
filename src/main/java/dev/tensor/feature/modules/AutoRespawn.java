@@ -14,9 +14,9 @@ public final class AutoRespawn extends Module {
 
     @Override
     public void onTick() {
-        if (getMinecraft().currentScreen instanceof DeathScreen) {
-            getPlayer().requestRespawn();
-            getMinecraft().openScreen(null);
+        if (this.getMinecraft().currentScreen instanceof DeathScreen) {
+            this.getPlayer().requestRespawn();
+            this.getMinecraft().openScreen(null);
         }
     }
 }

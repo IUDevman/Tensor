@@ -13,6 +13,6 @@ public final class AutoWalk extends Module {
 
     @Override
     public void onTick() {
-        getMinecraft().options.keyForward.setPressed(true);
+        this.getMinecraft().options.keyForward.setPressed(true);
     }
 }
