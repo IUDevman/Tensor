@@ -44,6 +44,22 @@ public final class TensorGUI extends Screen implements Global {
     private final int guiWidth = 388;
     private int guiHeight = 0;
 
+    private final int[] acceptedKeys = new int[]{
+            GLFW.GLFW_KEY_0,
+            GLFW.GLFW_KEY_1,
+            GLFW.GLFW_KEY_2,
+            GLFW.GLFW_KEY_3,
+            GLFW.GLFW_KEY_4,
+            GLFW.GLFW_KEY_5,
+            GLFW.GLFW_KEY_6,
+            GLFW.GLFW_KEY_7,
+            GLFW.GLFW_KEY_8,
+            GLFW.GLFW_KEY_9,
+            GLFW.GLFW_KEY_PERIOD,
+            GLFW.GLFW_KEY_MINUS,
+            GLFW.GLFW_KEY_BACKSPACE
+    };
+
     public TensorGUI() {
         super(new LiteralText("Tensor GUI"));
 
@@ -366,21 +382,7 @@ public final class TensorGUI extends Screen implements Global {
     }
 
     public int[] getAcceptedKeys() {
-        return new int[]{
-                GLFW.GLFW_KEY_0,
-                GLFW.GLFW_KEY_1,
-                GLFW.GLFW_KEY_2,
-                GLFW.GLFW_KEY_3,
-                GLFW.GLFW_KEY_4,
-                GLFW.GLFW_KEY_5,
-                GLFW.GLFW_KEY_6,
-                GLFW.GLFW_KEY_7,
-                GLFW.GLFW_KEY_8,
-                GLFW.GLFW_KEY_9,
-                GLFW.GLFW_KEY_PERIOD,
-                GLFW.GLFW_KEY_MINUS,
-                GLFW.GLFW_KEY_BACKSPACE,
-        };
+        return this.acceptedKeys;
     }
 
     public NumberSetting getX() {
