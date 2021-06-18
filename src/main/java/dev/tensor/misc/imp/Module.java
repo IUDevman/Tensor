@@ -4,10 +4,7 @@ import dev.tensor.misc.event.EventHandler;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.annotation.Target;
+import java.lang.annotation.*;
 
 /**
  * @author IUDevman
@@ -17,6 +14,7 @@ import java.lang.annotation.Target;
 @SuppressWarnings("EmptyMethod")
 public abstract class Module implements Global, Utilities {
 
+    @Documented
     @Retention(RetentionPolicy.RUNTIME)
     @Target(ElementType.TYPE)
     public @interface Info {
