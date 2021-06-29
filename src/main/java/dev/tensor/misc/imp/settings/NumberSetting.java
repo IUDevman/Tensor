@@ -10,6 +10,7 @@ import dev.tensor.misc.imp.Setting;
 public final class NumberSetting implements Setting<Double> {
 
     private final String name;
+    private final double defaultValue;
     private double value;
     private final double min;
     private final double max;
@@ -17,6 +18,7 @@ public final class NumberSetting implements Setting<Double> {
 
     public NumberSetting(String name, double value, double min, double max, int decimal) {
         this.name = name;
+        this.defaultValue = value;
         this.value = value;
         this.min = min;
         this.max = max;
@@ -26,6 +28,11 @@ public final class NumberSetting implements Setting<Double> {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Double getDefaultValue() {
+        return this.defaultValue;
     }
 
     @Override

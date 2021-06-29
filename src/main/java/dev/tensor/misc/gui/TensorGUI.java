@@ -110,9 +110,9 @@ public final class TensorGUI extends Screen implements Global {
                     }
                 });
 
-                KeybindElement keybindElement = new KeybindElement(module, x, y, sScrollY, 184, settingY.get());
-                moduleElement.addSettingElement(keybindElement);
-                settingY.getAndAdd(keybindElement.getHeight());
+                ModulePropertyElement modulePropertyElement = new ModulePropertyElement(module, x, y, sScrollY, 184, settingY.get());
+                moduleElement.addSettingElement(modulePropertyElement);
+                settingY.getAndAdd(modulePropertyElement.getHeight());
             });
         });
     }
@@ -284,8 +284,8 @@ public final class TensorGUI extends Screen implements Global {
                         if (moduleElement.isViewed()) {
                             moduleElement.getSettingElements().forEach(settingElement -> {
 
-                                if (settingElement instanceof KeybindElement) {
-                                    ((KeybindElement) settingElement).onKeyPressed(keyCode);
+                                if (settingElement instanceof ModulePropertyElement) {
+                                    ((ModulePropertyElement) settingElement).onKeyPressed(keyCode);
                                 } else if (settingElement instanceof NumberElement) {
                                     ((NumberElement) settingElement).onKeyPressed(keyCode);
                                 } else if (settingElement instanceof ColorElement) {
@@ -340,8 +340,8 @@ public final class TensorGUI extends Screen implements Global {
 
     private void triggerSetting(SettingElement settingElement) {
         this.categoryElements.forEach(categoryElement -> categoryElement.getModuleElements().forEach(moduleElement -> moduleElement.getSettingElements().forEach(settingElement1 -> {
-            if (settingElement1 instanceof KeybindElement && !settingElement1.equals(settingElement)) {
-                ((KeybindElement) settingElement1).setSearching(false);
+            if (settingElement1 instanceof ModulePropertyElement && !settingElement1.equals(settingElement)) {
+                ((ModulePropertyElement) settingElement1).setSearching(false);
             } else if (settingElement1 instanceof NumberElement && !settingElement1.equals(settingElement)) {
                 ((NumberElement) settingElement1).setSearching(false);
             } else if (settingElement1 instanceof ColorElement && !settingElement1.equals(settingElement)) {

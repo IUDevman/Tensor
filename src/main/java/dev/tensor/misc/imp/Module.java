@@ -117,10 +117,6 @@ public abstract class Module implements Global, Utilities {
 
     }
 
-    public void onRender2D() {
-
-    }
-
     public void onRender3D() {
 
     }

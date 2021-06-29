@@ -5,9 +5,13 @@ import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.backend.events.PacketEvent;
+import dev.tensor.feature.modules.ClickGUI;
 import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.event.imp.Priority;
+import dev.tensor.misc.gui.TensorGUI;
+import dev.tensor.misc.imp.HUDModule;
 import dev.tensor.misc.imp.Manager;
+import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
 import java.util.concurrent.Executors;
@@ -42,17 +46,10 @@ public enum EventManager implements Manager {
     public void onClientRender(ClientRenderEvent event) {
         ModuleManager.INSTANCE.getModules().forEach(module -> {
             if (module.isEnabled()) {
-                switch (event.getType()) {
-                    case World: {
-                        module.onRender3D();
-                        break;
-                    }
-                    case HUD: {
-                        module.onRender2D();
-                        break;
-                    }
-                    default:
-                        break;
+                if (event.getType().equals(ClientRenderEvent.Type.World)) {
+                    module.onRender3D();
+                } else if (event.getType().equals(ClientRenderEvent.Type.HUD) && module instanceof HUDModule && shouldRender2D()) {
+                    ((HUDModule) module).onRender2D(new MatrixStack());
                 }
             }
         });
@@ -80,5 +77,11 @@ public enum EventManager implements Manager {
                 CommandManager.INSTANCE.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
             }
         }
+    }
+
+    private boolean shouldRender2D() {
+        ClickGUI clickGUI = ModuleManager.INSTANCE.getModule(ClickGUI.class);
+
+        return !(this.getMinecraft().currentScreen instanceof TensorGUI) || clickGUI.showHUDComponents.getValue();
     }
 }

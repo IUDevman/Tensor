@@ -12,16 +12,23 @@ import java.awt.*;
 public final class ColorSetting implements Setting<Color> {
 
     private final String name;
+    private final Color defaultValue;
     private Color value;
 
     public ColorSetting(String name, Color value) {
         this.name = name;
+        this.defaultValue = value;
         this.value = value;
     }
 
     @Override
     public String getName() {
         return name;
+    }
+
+    @Override
+    public Color getDefaultValue() {
+        return this.defaultValue;
     }
 
     @Override

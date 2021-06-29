@@ -2,29 +2,41 @@ package dev.tensor.feature.modules;
 
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
+import dev.tensor.misc.imp.HUDModule;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.util.Formatting;
 
 import java.awt.*;
 
 /**
  * @author IUDevman
- * @since 05-05-2021
+ * @since 06-29-2021
  */
 
 @Module.Info(name = "Watermark", category = Category.HUD)
-public final class Watermark extends Module {
+public final class Watermark extends Module implements HUDModule {
 
-    public final NumberSetting x = new NumberSetting("X Position", 3, 0, 1000, 0);
-    public final NumberSetting y = new NumberSetting("Y Position", 3, 0, 1000, 0);
+    public final NumberSetting x = new NumberSetting("X", 1, 0, 1000, 0);
+    public final NumberSetting y = new NumberSetting("Y", 1, 0, 1000, 0);
+
+    private final String text = Tensor.INSTANCE.MOD_NAME + " (" + Formatting.YELLOW + Tensor.INSTANCE.MOD_VERSION + Formatting.RESET + ")";
+    private final Color textColor = new Color(255, 255, 255, 255);
 
     @Override
-    public void onRender2D() {
-        MatrixStack matrixStack = new MatrixStack();
-        final String watermark = Tensor.INSTANCE.MOD_NAME + " (" + Tensor.INSTANCE.MOD_VERSION + ")";
+    public NumberSetting getStartX() {
+        return this.x;
+    }
 
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, watermark, x.getValue().intValue(), y.getValue().intValue(), new Color(255, 255, 255, 255).getRGB());
+    @Override
+    public NumberSetting getStartY() {
+        return this.y;
+    }
+
+    @Override
+    public void onRender2D(MatrixStack matrixStack) {
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, text, x.getValue().intValue(), y.getValue().intValue(), textColor.getRGB());
     }
 }

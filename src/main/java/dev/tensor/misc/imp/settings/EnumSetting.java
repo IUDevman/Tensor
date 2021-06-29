@@ -10,16 +10,23 @@ import dev.tensor.misc.imp.Setting;
 public final class EnumSetting implements Setting<Enum<?>> {
 
     private final String name;
+    private final Enum<?> defaultValue;
     private Enum<?> value;
 
     public EnumSetting(String name, Enum<?> value) {
         this.name = name;
+        this.defaultValue = value;
         this.value = value;
     }
 
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public Enum<?> getDefaultValue() {
+        return this.defaultValue;
     }
 
     @Override
