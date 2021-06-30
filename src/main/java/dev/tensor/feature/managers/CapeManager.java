@@ -43,6 +43,7 @@ public final class CapeManager implements Manager {
             BufferedImage bufferedImage = ImageIO.read(url);
             Files.createFile(path);
             ImageIO.write(bufferedImage, "png", path.toFile());
+            Tensor.INSTANCE.LOGGER.info("Downloaded cape!");
 
         } catch (IOException ignored) {
             Tensor.INSTANCE.LOGGER.info("Failed to download cape!");

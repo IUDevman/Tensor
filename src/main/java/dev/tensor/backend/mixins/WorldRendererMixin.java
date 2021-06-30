@@ -30,14 +30,14 @@ public final class WorldRendererMixin implements Global {
     public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo callbackInfo) {
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather.isEnabled()) callbackInfo.cancel();
+        if (noWeather != null && noWeather.isEnabled()) callbackInfo.cancel();
     }
 
     @Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
     public void tickRainSplashing(Camera camera, CallbackInfo callbackInfo) {
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather.isEnabled()) callbackInfo.cancel();
+        if (noWeather != null && noWeather.isEnabled()) callbackInfo.cancel();
     }
 
     @Inject(method = "spawnParticle(Lnet/minecraft/particle/ParticleEffect;ZZDDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)
@@ -46,11 +46,11 @@ public final class WorldRendererMixin implements Global {
 
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather.isEnabled() && (this.getWorld().isRaining() || this.getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) cir.cancel();
+        if (noWeather != null && noWeather.isEnabled() && (this.getWorld().isRaining() || this.getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) cir.cancel();
 
         NoParticles noParticles = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoParticles.class);
 
-        if (noParticles.isEnabled()) {
+        if (noParticles != null && noParticles.isEnabled()) {
             if (noParticles.all.getValue()) cir.cancel();
             else if (noParticles.ash.getValue() && (parameters.getType().equals(ParticleTypes.ASH) || parameters.getType().equals(ParticleTypes.WHITE_ASH))) cir.cancel();
             else if (noParticles.spore.getValue() && (parameters.getType().equals(ParticleTypes.CRIMSON_SPORE) || parameters.getType().equals(ParticleTypes.WARPED_SPORE) || parameters.getType().equals(ParticleTypes.MYCELIUM))) cir.cancel();
@@ -67,6 +67,6 @@ public final class WorldRendererMixin implements Global {
     public boolean isSpectator(boolean spectator) {
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        return spectator || freecam.isEnabled();
+        return spectator || (freecam != null && freecam.isEnabled());
     }
 }

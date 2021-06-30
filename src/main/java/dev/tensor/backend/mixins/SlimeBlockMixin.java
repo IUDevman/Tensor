@@ -26,6 +26,6 @@ public final class SlimeBlockMixin implements Global {
 
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow.isEnabled() && noSlow.blocks.getValue()) callbackInfo.cancel();
+        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue()) callbackInfo.cancel();
     }
 }

@@ -24,7 +24,7 @@ public final class AdvancementToastMixin implements Global {
     public void draw(MatrixStack matrices, ToastManager manager, long startTime, CallbackInfoReturnable<Toast.Visibility> cir) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.toast.getValue()) {
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.toast.getValue()) {
             cir.setReturnValue(Toast.Visibility.HIDE);
         }
     }

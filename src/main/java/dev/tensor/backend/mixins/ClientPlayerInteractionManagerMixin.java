@@ -38,7 +38,7 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
 
         NoBreakDelay noBreakDelay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoBreakDelay.class);
 
-        if (noBreakDelay.isEnabled()) blockBreakingCooldown = 0;
+        if (noBreakDelay != null && noBreakDelay.isEnabled()) blockBreakingCooldown = 0;
     }
 
     @Inject(method = "breakBlock", at = @At("HEAD"))
@@ -50,14 +50,14 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
     public void getReachDistance(CallbackInfoReturnable<Float> cir) {
         Reach reach = Tensor.INSTANCE.MODULE_MANAGER.getModule(Reach.class);
 
-        if (reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
+        if (reach != null && reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
     }
 
     @Inject(method = "attackEntity", at = @At("HEAD"), cancellable = true)
     public void attackEntity(PlayerEntity player, Entity target, CallbackInfo callbackInfo) {
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (target.equals(player) || target.equals(freecam.getCameraEntity())) {
+        if (freecam != null && (target.equals(player) || target.equals(freecam.getCameraEntity()))) {
             callbackInfo.cancel();
         }
     }

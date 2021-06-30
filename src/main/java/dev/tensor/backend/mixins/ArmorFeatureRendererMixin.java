@@ -24,6 +24,6 @@ public final class ArmorFeatureRendererMixin implements Global {
     public <T extends LivingEntity> void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo callbackInfo) {
         NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
-        if (noRender.isEnabled() && noRender.armor.getValue()) callbackInfo.cancel();
+        if (noRender != null && noRender.isEnabled() && noRender.armor.getValue()) callbackInfo.cancel();
     }
 }

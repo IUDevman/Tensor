@@ -40,7 +40,7 @@ public final class GameRendererMixin implements Global {
     public void bobView(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
         NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
-        if (noViewBob.isEnabled() && !noViewBob.hurtOnly.getValue()) {
+        if (noViewBob != null && noViewBob.isEnabled() && !noViewBob.hurtOnly.getValue()) {
             callbackInfo.cancel();
         }
     }
@@ -49,7 +49,7 @@ public final class GameRendererMixin implements Global {
     public void bobViewWhenHurt(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
         NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
-        if (noViewBob.isEnabled()) {
+        if (noViewBob != null && noViewBob.isEnabled()) {
             callbackInfo.cancel();
         }
     }
@@ -58,6 +58,6 @@ public final class GameRendererMixin implements Global {
     public void shouldRenderBlockOutline(CallbackInfoReturnable<Boolean> cir) {
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled() && freecam.hideBlockOutline.getValue()) cir.setReturnValue(false);
+        if (freecam != null && freecam.isEnabled() && freecam.hideBlockOutline.getValue()) cir.setReturnValue(false);
     }
 }

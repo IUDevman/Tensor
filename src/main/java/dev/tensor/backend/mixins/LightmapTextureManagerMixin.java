@@ -22,7 +22,7 @@ public final class LightmapTextureManagerMixin implements Global {
     public void getBrightness(World world, int i, CallbackInfoReturnable<Float> cir) {
         FullBright fullBright = Tensor.INSTANCE.MODULE_MANAGER.getModule(FullBright.class);
 
-        if (fullBright.isEnabled()) {
+        if (fullBright != null && fullBright.isEnabled()) {
             cir.setReturnValue(100F);
         }
     }

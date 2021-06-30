@@ -23,6 +23,6 @@ public final class InGameOverlayRendererMixin implements Global {
     private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled()) callbackInfo.cancel();
     }
 }

@@ -30,7 +30,7 @@ public final class FluidBlockMixin implements Global {
 
         Jesus jesus = Tensor.INSTANCE.MODULE_MANAGER.getModule(Jesus.class);
 
-        if (jesus.isEnabled()) {
+        if (jesus != null && jesus.isEnabled()) {
 
             if (jesus.cancelOnFall.getValue() && getPlayer().fallDistance >= 3 && !(state.getFluidState().getFluid() instanceof LavaFluid)) {
                 return;

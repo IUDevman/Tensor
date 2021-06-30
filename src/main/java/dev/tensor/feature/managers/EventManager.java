@@ -80,6 +80,8 @@ public final class EventManager implements Manager {
     private boolean shouldRender2D() {
         ClickGUI clickGUI = Tensor.INSTANCE.MODULE_MANAGER.getModule(ClickGUI.class);
 
+        if (clickGUI == null) return false;
+
         return !(this.getMinecraft().currentScreen instanceof TensorGUI) || clickGUI.showHUDComponents.getValue();
     }
 }

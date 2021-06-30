@@ -22,7 +22,7 @@ public final class BossBarHudMixin implements Global {
     public void render(MatrixStack matrices, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.bossBar.getValue()) {
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.bossBar.getValue()) {
             callbackInfo.cancel();
         }
     }

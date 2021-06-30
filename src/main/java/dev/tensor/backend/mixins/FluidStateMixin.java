@@ -26,6 +26,6 @@ public final class FluidStateMixin implements Global {
 
         NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
-        if (noPush.isEnabled() && noPush.water.getValue()) cir.setReturnValue(Vec3d.ZERO);
+        if (noPush != null && noPush.isEnabled() && noPush.water.getValue()) cir.setReturnValue(Vec3d.ZERO);
     }
 }

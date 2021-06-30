@@ -21,6 +21,6 @@ public final class EnchantingTableBlockEntityRendererMixin implements Global {
     public void render(CallbackInfo callbackInfo) {
         NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
-        if (noRender.isEnabled() && noRender.enchantBooks.getValue()) callbackInfo.cancel();
+        if (noRender != null && noRender.isEnabled() && noRender.enchantBooks.getValue()) callbackInfo.cancel();
     }
 }

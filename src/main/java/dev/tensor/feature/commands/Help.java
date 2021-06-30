@@ -46,6 +46,11 @@ public final class Help implements Command {
     @Override
     public void onCommand(String[] message) {
         ClickGUI clickGUI = Tensor.INSTANCE.MODULE_MANAGER.getModule(ClickGUI.class);
+
+        if (clickGUI == null) {
+            this.sendReplaceableClientMessage(this.getMarker() + "Failed to dispatch command... you're probably reloading the client!", this.getID(), true);
+        }
+
         String bind = InputUtil.Type.KEYSYM.createFromCode(clickGUI.getBind()).getTranslationKey().replace("key.keyboard.", "").replace("unknown", "none").toUpperCase(Locale.ROOT);
 
         this.sendClientMessage(this.getMarker() + "Welcome to " + Tensor.INSTANCE.MOD_NAME + " (" + Formatting.GREEN + Tensor.INSTANCE.MOD_VERSION + Formatting.GRAY + "):", true);

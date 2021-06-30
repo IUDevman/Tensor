@@ -26,21 +26,21 @@ public final class InGameHudMixin implements Global {
     public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
     public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.status.getValue()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.status.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
     public void renderVignetteOverlay(Entity entity, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.vignette.getValue()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.vignette.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "getCameraPlayer", at = @At("HEAD"), cancellable = true)
@@ -49,7 +49,7 @@ public final class InGameHudMixin implements Global {
 
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(this.getPlayer());
         }
     }

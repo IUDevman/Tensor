@@ -26,7 +26,7 @@ public final class PlayerEntityRendererMixin implements Global {
 
         ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);
 
-        if (viewModel.isEnabled() && !viewModel.renderEmptyMainHand.getValue()) {
+        if (viewModel != null && viewModel.isEnabled() && !viewModel.renderEmptyMainHand.getValue()) {
             callbackInfo.cancel();
         }
     }

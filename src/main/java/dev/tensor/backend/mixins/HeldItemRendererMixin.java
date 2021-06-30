@@ -28,7 +28,7 @@ public final class HeldItemRendererMixin implements Global {
 
         ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);
 
-        if (viewModel.isEnabled() && hand == Hand.MAIN_HAND) {
+        if (viewModel != null && viewModel.isEnabled() && hand == Hand.MAIN_HAND) {
             matrices.translate(0, viewModel.vertical.getValue(), viewModel.horizontal.getValue());
             matrices.scale(viewModel.scale.getValue().floatValue(), viewModel.scale.getValue().floatValue(), viewModel.scale.getValue().floatValue());
         }

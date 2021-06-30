@@ -23,7 +23,7 @@ public final class CameraMixin implements Global {
     public void clipToSpace(double desiredCameraDistance, CallbackInfoReturnable<Double> cir) {
         CameraClip cameraClip = Tensor.INSTANCE.MODULE_MANAGER.getModule(CameraClip.class);
 
-        if (cameraClip.isEnabled()) {
+        if (cameraClip != null && cameraClip.isEnabled()) {
             cir.setReturnValue(cameraClip.distance.getValue());
         }
     }
@@ -32,7 +32,7 @@ public final class CameraMixin implements Global {
     public void isThirdPerson(CallbackInfoReturnable<Boolean> cir) {
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(true);
         }
     }
@@ -43,7 +43,7 @@ public final class CameraMixin implements Global {
 
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(getPlayer());
         }
     }

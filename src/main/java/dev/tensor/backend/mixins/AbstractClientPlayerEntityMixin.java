@@ -29,7 +29,7 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
     public void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
         Capes capes = Tensor.INSTANCE.MODULE_MANAGER.getModule(Capes.class);
 
-        if (capes.isEnabled()) {
+        if (capes != null && capes.isEnabled()) {
             cir.setReturnValue(Tensor.INSTANCE.CAPE_MANAGER.getCape(this.getEntityName()));
         }
     }

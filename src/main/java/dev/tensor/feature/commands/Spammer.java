@@ -65,6 +65,11 @@ public final class Spammer implements Command {
 
         dev.tensor.feature.modules.Spammer spammer = Tensor.INSTANCE.MODULE_MANAGER.getModule(dev.tensor.feature.modules.Spammer.class);
 
+        if (spammer == null) {
+            this.sendReplaceableClientMessage(this.getMarker() + "Failed to set spammer file path!", this.getID(), true);
+            return;
+        }
+
         spammer.setPath(path);
     }
 }

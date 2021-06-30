@@ -28,14 +28,14 @@ public final class BlockMixin implements Global {
     public void getVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow.isEnabled() && noSlow.blocks.getValue() && cir.getReturnValueF() < 1F) cir.setReturnValue(1F);
+        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue() && cir.getReturnValueF() < 1F) cir.setReturnValue(1F);
     }
 
     @Inject(method = "onBroken", at = @At("RETURN"))
     public void onBroken(WorldAccess world, BlockPos pos, BlockState state, CallbackInfo callbackInfo) {
-        NoGlitchBlock NoGlitchBlock = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoGlitchBlock.class);
+        NoGlitchBlock noGlitchBlock = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoGlitchBlock.class);
 
-        if (NoGlitchBlock.isEnabled()) {
+        if (noGlitchBlock != null && noGlitchBlock.isEnabled()) {
             getNetwork().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.UP));
         }
     }
