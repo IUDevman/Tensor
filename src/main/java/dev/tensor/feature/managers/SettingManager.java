@@ -15,9 +15,7 @@ import java.util.LinkedHashMap;
  * @since 04-13-2021
  */
 
-public enum SettingManager implements Manager {
-
-    INSTANCE;
+public final class SettingManager implements Manager {
 
     private final LinkedHashMap<Setting<?>, Module> settingModuleLinkedHashMap = new LinkedHashMap<>();
 
@@ -25,7 +23,7 @@ public enum SettingManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("SettingManager");
 
-        ModuleManager.INSTANCE.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
 
             if (Setting.class.isAssignableFrom(field.getType())) {
                 if (!field.isAccessible()) field.setAccessible(true);

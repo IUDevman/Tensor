@@ -3,7 +3,6 @@ package dev.tensor.backend.mixins;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
-import dev.tensor.feature.managers.ConfigManager;
 import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
@@ -35,12 +34,12 @@ public final class MinecraftClientMixin implements Global {
 
     @Inject(method = "stop", at = @At("HEAD"))
     public void stop(CallbackInfo callbackInfo) {
-        ConfigManager.INSTANCE.save();
+        Tensor.INSTANCE.CONFIG_MANAGER.save();
     }
 
     @Inject(method = "cleanUpAfterCrash", at = @At("HEAD"))
     public void cleanUpAfterCrash(CallbackInfo callbackInfo) {
-        ConfigManager.INSTANCE.save();
+        Tensor.INSTANCE.CONFIG_MANAGER.save();
     }
 
     @Inject(method = "disconnect()V", at = @At("HEAD"))

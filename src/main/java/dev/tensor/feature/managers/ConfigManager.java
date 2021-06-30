@@ -22,9 +22,7 @@ import java.util.Locale;
  * @since 04-28-2021
  */
 
-public enum ConfigManager implements Manager {
-
-    INSTANCE;
+public final class ConfigManager implements Manager {
 
     private final String mainPath = Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/";
     private final String modulePath = mainPath + "modules/";
@@ -56,7 +54,7 @@ public enum ConfigManager implements Manager {
             e.printStackTrace();
         }
 
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
 
             try {
                 Path path = Paths.get(this.modulePath + module.getName() + ".json");
@@ -73,7 +71,7 @@ public enum ConfigManager implements Manager {
 
                 JsonObject settingObject = jsonObject.getAsJsonObject("Settings");
 
-                SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
+                Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(objectSetting -> {
                     JsonElement jsonElement = settingObject.get(objectSetting.getName());
 
                     if (jsonElement == null) return;
@@ -110,7 +108,7 @@ public enum ConfigManager implements Manager {
         InputStream inputStream = Files.newInputStream(path);
         JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-        CommandManager.INSTANCE.setPrefix(jsonObject.get("Prefix").getAsString());
+        Tensor.INSTANCE.COMMAND_MANAGER.setPrefix(jsonObject.get("Prefix").getAsString());
     }
 
     private void loadFriends() throws IOException {
@@ -122,8 +120,8 @@ public enum ConfigManager implements Manager {
         JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
         JsonArray jsonArray = jsonObject.get("Friends").getAsJsonArray();
 
-        FriendManager.INSTANCE.clearFriends();
-        jsonArray.forEach(jsonElement -> FriendManager.INSTANCE.addFriend(jsonElement.getAsString()));
+        Tensor.INSTANCE.FRIEND_MANAGER.clearFriends();
+        jsonArray.forEach(jsonElement -> Tensor.INSTANCE.FRIEND_MANAGER.addFriend(jsonElement.getAsString()));
     }
 
     private void loadCapes() throws IOException {
@@ -135,8 +133,8 @@ public enum ConfigManager implements Manager {
         JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
         JsonArray jsonArray = jsonObject.get("Capes").getAsJsonArray();
 
-        CapeManager.INSTANCE.clearCapes();
-        jsonArray.forEach(jsonElement -> CapeManager.INSTANCE.addCape(jsonElement.getAsString()));
+        Tensor.INSTANCE.CAPE_MANAGER.clearCapes();
+        jsonArray.forEach(jsonElement -> Tensor.INSTANCE.CAPE_MANAGER.addCape(jsonElement.getAsString()));
     }
 
     private void loadClickGUI() throws IOException {
@@ -147,8 +145,8 @@ public enum ConfigManager implements Manager {
         InputStream inputStream = Files.newInputStream(path);
         JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-        ClickGUIManager.INSTANCE.getGUI().getX().setValue(jsonObject.get("X Position").getAsDouble());
-        ClickGUIManager.INSTANCE.getGUI().getY().setValue(jsonObject.get("Y Position").getAsDouble());
+        Tensor.INSTANCE.GUI_MANAGER.getGUI().getX().setValue(jsonObject.get("X Position").getAsDouble());
+        Tensor.INSTANCE.GUI_MANAGER.getGUI().getY().setValue(jsonObject.get("Y Position").getAsDouble());
     }
 
     public void save() {
@@ -163,7 +161,7 @@ public enum ConfigManager implements Manager {
             e.printStackTrace();
         }
 
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
 
             try {
                 Path path = Paths.get(this.modulePath + module.getName() + ".json");
@@ -181,7 +179,7 @@ public enum ConfigManager implements Manager {
 
                 JsonObject settingObject = new JsonObject();
 
-                SettingManager.INSTANCE.getSettingsForModule(module).forEach(objectSetting -> {
+                Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(objectSetting -> {
                     if (objectSetting.getValue() instanceof Color) {
                         settingObject.add(objectSetting.getName(), new JsonPrimitive(((Color) objectSetting.getValue()).getRGB()));
                     } else {
@@ -209,7 +207,7 @@ public enum ConfigManager implements Manager {
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.add("Prefix", new JsonPrimitive(CommandManager.INSTANCE.getPrefix()));
+        jsonObject.add("Prefix", new JsonPrimitive(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix()));
 
         String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
         outputStreamWriter.write(jsonString);
@@ -226,7 +224,7 @@ public enum ConfigManager implements Manager {
         JsonObject jsonObject = new JsonObject();
         JsonArray jsonArray = new JsonArray();
 
-        FriendManager.INSTANCE.getFriends().forEach(jsonArray::add);
+        Tensor.INSTANCE.FRIEND_MANAGER.getFriends().forEach(jsonArray::add);
         jsonObject.add("Friends", jsonArray);
 
         String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
@@ -244,7 +242,7 @@ public enum ConfigManager implements Manager {
         JsonObject jsonObject = new JsonObject();
         JsonArray jsonArray = new JsonArray();
 
-        CapeManager.INSTANCE.getCapes().forEach(jsonArray::add);
+        Tensor.INSTANCE.CAPE_MANAGER.getCapes().forEach(jsonArray::add);
         jsonObject.add("Capes", jsonArray);
 
         String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
@@ -260,8 +258,8 @@ public enum ConfigManager implements Manager {
         OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
         JsonObject jsonObject = new JsonObject();
-        jsonObject.add("X Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getX().getValue()));
-        jsonObject.add("Y Position", new JsonPrimitive(ClickGUIManager.INSTANCE.getGUI().getY().getValue()));
+        jsonObject.add("X Position", new JsonPrimitive(Tensor.INSTANCE.GUI_MANAGER.getGUI().getX().getValue()));
+        jsonObject.add("Y Position", new JsonPrimitive(Tensor.INSTANCE.GUI_MANAGER.getGUI().getY().getValue()));
 
         String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
         outputStreamWriter.write(jsonString);

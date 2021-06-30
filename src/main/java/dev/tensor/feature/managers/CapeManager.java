@@ -24,9 +24,7 @@ import java.util.Locale;
  * @since 05-05-2021
  */
 
-public enum CapeManager implements Manager {
-
-    INSTANCE;
+public final class CapeManager implements Manager {
 
     private final ArrayList<String> capes = new ArrayList<>();
     private Identifier cape = null;
@@ -45,6 +43,7 @@ public enum CapeManager implements Manager {
             BufferedImage bufferedImage = ImageIO.read(url);
             Files.createFile(path);
             ImageIO.write(bufferedImage, "png", path.toFile());
+            Tensor.INSTANCE.LOGGER.info("Downloaded cape!");
 
         } catch (IOException ignored) {
             Tensor.INSTANCE.LOGGER.info("Failed to download cape!");

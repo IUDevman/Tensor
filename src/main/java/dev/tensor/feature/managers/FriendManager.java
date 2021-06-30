@@ -10,9 +10,7 @@ import java.util.ArrayList;
  * @since 05-20-2021
  */
 
-public enum FriendManager implements Manager {
-
-    INSTANCE;
+public final class FriendManager implements Manager {
 
     private final ArrayList<String> friends = new ArrayList<>();
 

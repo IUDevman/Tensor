@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoOverlay;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.toast.AdvancementToast;
@@ -22,9 +22,9 @@ public final class AdvancementToastMixin implements Global {
 
     @Inject(method = "draw", at = @At("HEAD"), cancellable = true)
     public void draw(MatrixStack matrices, ToastManager manager, long startTime, CallbackInfoReturnable<Toast.Visibility> cir) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay.isEnabled() && noOverlay.toast.getValue()) {
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.toast.getValue()) {
             cir.setReturnValue(Toast.Visibility.HIDE);
         }
     }

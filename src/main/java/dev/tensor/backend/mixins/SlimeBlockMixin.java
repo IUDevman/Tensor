@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.block.SlimeBlock;
@@ -24,8 +24,8 @@ public final class SlimeBlockMixin implements Global {
     public void onSteppedOn(World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
         if (this.isNull() || entity != this.getPlayer()) return;
 
-        NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
+        NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow.isEnabled() && noSlow.blocks.getValue()) callbackInfo.cancel();
+        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue()) callbackInfo.cancel();
     }
 }

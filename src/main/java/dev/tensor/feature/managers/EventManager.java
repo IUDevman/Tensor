@@ -22,9 +22,7 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @since 04-12-2021
  */
 
-public enum EventManager implements Manager {
-
-    INSTANCE;
+public final class EventManager implements Manager {
 
     private final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
@@ -36,7 +34,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventTarget(Priority.HIGHEST)
     public void onClientTick(ClientTickEvent event) {
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
             if (module.isEnabled()) this.threadPoolExecutor.execute(module::onTick);
         });
     }
@@ -44,7 +42,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventTarget(Priority.HIGH)
     public void onClientRender(ClientRenderEvent event) {
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
             if (module.isEnabled()) {
                 if (event.getType().equals(ClientRenderEvent.Type.World)) {
                     module.onRender3D();
@@ -58,7 +56,7 @@ public enum EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventTarget
     public void onKeyPressed(KeyPressedEvent event) {
-        ModuleManager.INSTANCE.getModules().forEach(module -> {
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
             if (module.getBind() == event.getBind()) module.toggle();
         });
     }
@@ -72,15 +70,17 @@ public enum EventManager implements Manager {
 
             ChatMessageC2SPacket chatMessageC2SPacket = (ChatMessageC2SPacket) event.getPacket();
 
-            if (chatMessageC2SPacket.getChatMessage().startsWith(CommandManager.INSTANCE.getPrefix())) {
+            if (chatMessageC2SPacket.getChatMessage().startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix())) {
                 event.setCancelled(true);
-                CommandManager.INSTANCE.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
+                Tensor.INSTANCE.COMMAND_MANAGER.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
             }
         }
     }
 
     private boolean shouldRender2D() {
-        ClickGUI clickGUI = ModuleManager.INSTANCE.getModule(ClickGUI.class);
+        ClickGUI clickGUI = Tensor.INSTANCE.MODULE_MANAGER.getModule(ClickGUI.class);
+
+        if (clickGUI == null) return false;
 
         return !(this.getMinecraft().currentScreen instanceof TensorGUI) || clickGUI.showHUDComponents.getValue();
     }

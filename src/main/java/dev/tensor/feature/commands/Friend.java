@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.FriendManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -55,16 +55,16 @@ public final class Friend implements Command {
 
         switch (argument.toLowerCase(Locale.ROOT)) {
             case "list": {
-                if (FriendManager.INSTANCE.getFriends().size() == 0) {
+                if (Tensor.INSTANCE.FRIEND_MANAGER.getFriends().size() == 0) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No friends!", this.getID(), true);
                     return;
                 }
 
-                this.sendReplaceableClientMessage(this.getMarker() + "Friends: " + FriendManager.INSTANCE.getFriends() + "!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Friends: " + Tensor.INSTANCE.FRIEND_MANAGER.getFriends() + "!", this.getID(), true);
                 break;
             }
             case "clear": {
-                FriendManager.INSTANCE.clearFriends();
+                Tensor.INSTANCE.FRIEND_MANAGER.clearFriends();
                 this.sendReplaceableClientMessage(this.getMarker() + "Cleared friends!", this.getID(), true);
                 break;
             }
@@ -76,12 +76,12 @@ public final class Friend implements Command {
 
                 String name = message[2];
 
-                if (FriendManager.INSTANCE.isFriend(name)) {
+                if (Tensor.INSTANCE.FRIEND_MANAGER.isFriend(name)) {
                     this.sendReplaceableClientMessage(this.getMarker() + "Already a friend (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                FriendManager.INSTANCE.addFriend(name);
+                Tensor.INSTANCE.FRIEND_MANAGER.addFriend(name);
                 this.sendReplaceableClientMessage(this.getMarker() + "Added friend (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
@@ -93,12 +93,12 @@ public final class Friend implements Command {
 
                 String name = message[2];
 
-                if (!FriendManager.INSTANCE.isFriend(name)) {
+                if (!Tensor.INSTANCE.FRIEND_MANAGER.isFriend(name)) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No friends matching (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                FriendManager.INSTANCE.removeFriend(name);
+                Tensor.INSTANCE.FRIEND_MANAGER.removeFriend(name);
                 this.sendReplaceableClientMessage(this.getMarker() + "Removed friend (" + Formatting.RED + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }

@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.*;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.entity.Entity;
@@ -44,9 +44,9 @@ public abstract class EntityMixin implements Global {
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
         if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
-        NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
+        NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
-        if (noPush.isEnabled() && noPush.collisions.getValue()) {
+        if (noPush != null && noPush.isEnabled() && noPush.collisions.getValue()) {
             callbackInfo.cancel();
         }
     }
@@ -55,18 +55,18 @@ public abstract class EntityMixin implements Global {
     public void adjustMovementForPiston(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
         if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
-        NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
+        NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
-        if (noPush.isEnabled() && noPush.blocks.getValue()) {
+        if (noPush != null && noPush.isEnabled() && noPush.blocks.getValue()) {
             cir.setReturnValue(Vec3d.ZERO);
         }
     }
 
     @Inject(method = "shouldRender(D)Z", at = @At("HEAD"), cancellable = true)
     public void shouldRender(double distance, CallbackInfoReturnable<Boolean> cir) {
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(true);
         }
     }
@@ -75,9 +75,9 @@ public abstract class EntityMixin implements Global {
     public void raycast(double maxDistance, float tickDelta, boolean includeFluids, CallbackInfoReturnable<HitResult> cir) {
         if (this.isNull() || entityId != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getEntityId() || this.getPlayer().isSubmergedInWater()) return;
 
-        LiquidInteract liquidInteract = ModuleManager.INSTANCE.getModule(LiquidInteract.class);
+        LiquidInteract liquidInteract = Tensor.INSTANCE.MODULE_MANAGER.getModule(LiquidInteract.class);
 
-        if (liquidInteract.isEnabled()) {
+        if (liquidInteract != null && liquidInteract.isEnabled()) {
             Vec3d vec3d = this.getCameraPosVec(tickDelta);
             Vec3d vec3d2 = this.getRotationVec(tickDelta);
             Vec3d vec3d3 = vec3d.add(vec3d2.getX() * maxDistance, vec3d2.getY() * maxDistance, vec3d2.getZ() * maxDistance);
@@ -89,10 +89,10 @@ public abstract class EntityMixin implements Global {
     public void isTouchingWater(CallbackInfoReturnable<Boolean> cir) {
         if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
-        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
-        ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
+        Flight flight = Tensor.INSTANCE.MODULE_MANAGER.getModule(Flight.class);
+        ElytraFlight elytraFlight = Tensor.INSTANCE.MODULE_MANAGER.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
+        if ((flight != null && flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight != null && elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
@@ -101,10 +101,10 @@ public abstract class EntityMixin implements Global {
     public void isInLava(CallbackInfoReturnable<Boolean> cir) {
         if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
-        Flight flight = ModuleManager.INSTANCE.getModule(Flight.class);
-        ElytraFlight elytraFlight = ModuleManager.INSTANCE.getModule(ElytraFlight.class);
+        Flight flight = Tensor.INSTANCE.MODULE_MANAGER.getModule(Flight.class);
+        ElytraFlight elytraFlight = Tensor.INSTANCE.MODULE_MANAGER.getModule(ElytraFlight.class);
 
-        if ((flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
+        if ((flight != null && flight.isEnabled() && flight.ignoreFluids.getValue()) || (elytraFlight != null && elytraFlight.isEnabled() && elytraFlight.ignoreFluids.getValue() && this.getPlayer().isFallFlying())) {
             cir.setReturnValue(firstUpdate);
         }
     }
@@ -113,9 +113,9 @@ public abstract class EntityMixin implements Global {
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo callbackInfo) {
         if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
 
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled() && freecam.getCameraEntity() != null) {
+        if (freecam != null && freecam.isEnabled() && freecam.getCameraEntity() != null) {
             freecam.getCameraEntity().changeLookDirection(cursorDeltaX, cursorDeltaY);
             freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().yaw);
             callbackInfo.cancel();

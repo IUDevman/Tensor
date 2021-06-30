@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.ViewModel;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -26,9 +26,9 @@ public final class HeldItemRendererMixin implements Global {
     public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callbackInfo) {
         if (this.isNull() || player != this.getPlayer()) return;
 
-        ViewModel viewModel = ModuleManager.INSTANCE.getModule(ViewModel.class);
+        ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);
 
-        if (viewModel.isEnabled() && hand == Hand.MAIN_HAND) {
+        if (viewModel != null && viewModel.isEnabled() && hand == Hand.MAIN_HAND) {
             matrices.translate(0, viewModel.vertical.getValue(), viewModel.horizontal.getValue());
             matrices.scale(viewModel.scale.getValue().floatValue(), viewModel.scale.getValue().floatValue(), viewModel.scale.getValue().floatValue());
         }

@@ -1,7 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.managers.SettingManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.Setting;
@@ -60,7 +59,7 @@ public final class Set implements Command {
 
         String moduleName = message[1];
 
-        Module module = ModuleManager.INSTANCE.getModule(moduleName);
+        Module module = Tensor.INSTANCE.MODULE_MANAGER.getModule(moduleName);
 
         if (module == null) {
             this.sendReplaceableClientMessage(this.getMarker() + "Invalid module (" + Formatting.YELLOW + moduleName + Formatting.GRAY + ")!", this.getID(), true);
@@ -74,7 +73,7 @@ public final class Set implements Command {
 
         String settingName = message[2].replace("_", " ");
 
-        Setting<?> setting = SettingManager.INSTANCE.getSettingsForModule(module).stream().filter(setting1 -> setting1.getName().equalsIgnoreCase(settingName)).findFirst().orElse(null);
+        Setting<?> setting = Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).stream().filter(setting1 -> setting1.getName().equalsIgnoreCase(settingName)).findFirst().orElse(null);
 
         if (setting == null) {
             this.sendReplaceableClientMessage(this.getMarker() + "Invalid setting (" + Formatting.YELLOW + settingName + Formatting.GRAY + ")!", this.getID(), true);

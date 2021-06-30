@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.block.BlockState;
@@ -25,8 +25,8 @@ public final class SweetBerryBushBlockMixin implements Global {
     public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
         if (this.isNull() || entity != this.getPlayer()) return;
 
-        NoSlow noSlow = ModuleManager.INSTANCE.getModule(NoSlow.class);
+        NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow.isEnabled() && noSlow.sticky.getValue()) callbackInfo.cancel();
+        if (noSlow != null && noSlow.isEnabled() && noSlow.sticky.getValue()) callbackInfo.cancel();
     }
 }

@@ -1,6 +1,6 @@
 package dev.tensor.misc.gui.elements.settings;
 
-import dev.tensor.feature.managers.ClickGUIManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.gui.elements.SettingElement;
 import dev.tensor.misc.imp.settings.ColorSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -125,7 +125,7 @@ public final class ColorElement extends SettingElement {
             clearSearching();
         }
 
-        if (Arrays.stream(ClickGUIManager.INSTANCE.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) return;
+        if (Arrays.stream(Tensor.INSTANCE.GUI_MANAGER.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) return;
 
         if (key == GLFW.GLFW_KEY_PERIOD || key == GLFW.GLFW_KEY_MINUS) return;
 

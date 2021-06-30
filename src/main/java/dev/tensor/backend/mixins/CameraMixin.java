@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.CameraClip;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.misc.imp.Global;
@@ -21,18 +21,18 @@ public final class CameraMixin implements Global {
 
     @Inject(method = "clipToSpace", at = @At("HEAD"), cancellable = true)
     public void clipToSpace(double desiredCameraDistance, CallbackInfoReturnable<Double> cir) {
-        CameraClip cameraClip = ModuleManager.INSTANCE.getModule(CameraClip.class);
+        CameraClip cameraClip = Tensor.INSTANCE.MODULE_MANAGER.getModule(CameraClip.class);
 
-        if (cameraClip.isEnabled()) {
+        if (cameraClip != null && cameraClip.isEnabled()) {
             cir.setReturnValue(cameraClip.distance.getValue());
         }
     }
 
     @Inject(method = "isThirdPerson", at = @At("HEAD"), cancellable = true)
     public void isThirdPerson(CallbackInfoReturnable<Boolean> cir) {
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(true);
         }
     }
@@ -41,9 +41,9 @@ public final class CameraMixin implements Global {
     public void getFocusedEntity(CallbackInfoReturnable<Entity> cir) {
         if (this.isNull()) return;
 
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
-        if (freecam.isEnabled()) {
+        if (freecam != null && freecam.isEnabled()) {
             cir.setReturnValue(getPlayer());
         }
     }

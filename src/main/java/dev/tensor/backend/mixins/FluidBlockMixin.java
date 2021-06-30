@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.Jesus;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.block.BlockState;
@@ -28,9 +28,9 @@ public final class FluidBlockMixin implements Global {
     public void getCollisionShape(BlockState state, BlockView world, BlockPos pos, ShapeContext context, CallbackInfoReturnable<VoxelShape> cir) {
         if (this.isNull() || this.getPlayer().isSubmergedInWater() || this.getPlayer().isSneaking() || this.getWorld().getBlockState(this.getPlayer().getBlockPos()).getBlock() instanceof FluidBlock) return;
 
-        Jesus jesus = ModuleManager.INSTANCE.getModule(Jesus.class);
+        Jesus jesus = Tensor.INSTANCE.MODULE_MANAGER.getModule(Jesus.class);
 
-        if (jesus.isEnabled()) {
+        if (jesus != null && jesus.isEnabled()) {
 
             if (jesus.cancelOnFall.getValue() && getPlayer().fallDistance >= 3 && !(state.getFluidState().getFluid() instanceof LavaFluid)) {
                 return;

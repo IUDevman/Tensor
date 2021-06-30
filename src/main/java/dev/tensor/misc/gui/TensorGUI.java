@@ -1,8 +1,6 @@
 package dev.tensor.misc.gui;
 
 import dev.tensor.Tensor;
-import dev.tensor.feature.managers.ModuleManager;
-import dev.tensor.feature.managers.SettingManager;
 import dev.tensor.misc.gui.elements.CategoryElement;
 import dev.tensor.misc.gui.elements.ModuleElement;
 import dev.tensor.misc.gui.elements.PropertyElement;
@@ -74,7 +72,7 @@ public final class TensorGUI extends Screen implements Global {
 
             final AtomicInteger moduleY = new AtomicInteger(22);
 
-            ModuleManager.INSTANCE.getModulesInCategory(category).forEach(module -> {
+            Tensor.INSTANCE.MODULE_MANAGER.getModulesInCategory(category).forEach(module -> {
                 ModuleElement moduleElement = new ModuleElement(module, x, y, mScrollY, 62, moduleY.get());
                 categoryElement.addModuleElement(moduleElement);
                 moduleY.getAndAdd(moduleElement.getHeight());
@@ -87,7 +85,7 @@ public final class TensorGUI extends Screen implements Global {
                 moduleElement.setPropertyElement(propertyElement);
                 settingY.getAndAdd(propertyElement.getHeight());
 
-                SettingManager.INSTANCE.getSettingsForModule(module).forEach(setting -> {
+                Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(setting -> {
                     if (setting instanceof BooleanSetting) {
                         BooleanElement booleanElement = new BooleanElement((BooleanSetting) setting, x, y, sScrollY, 184, settingY.get());
                         moduleElement.addSettingElement(booleanElement);

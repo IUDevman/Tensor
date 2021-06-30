@@ -1,6 +1,6 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.feature.managers.ClickGUIManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
@@ -18,7 +18,7 @@ public final class ClickGUI extends Module {
 
     @Override
     public void onEnable() {
-        this.getMinecraft().openScreen(ClickGUIManager.INSTANCE.getGUI());
+        this.getMinecraft().openScreen(Tensor.INSTANCE.GUI_MANAGER.getGUI());
         this.disable();
     }
 }

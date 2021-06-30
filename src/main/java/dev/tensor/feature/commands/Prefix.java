@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.CommandManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -55,7 +55,7 @@ public final class Prefix implements Command {
             return;
         }
 
-        CommandManager.INSTANCE.setPrefix(prefix);
+        Tensor.INSTANCE.COMMAND_MANAGER.setPrefix(prefix);
         this.sendReplaceableClientMessage(this.getMarker() + "Set command prefix to (" + Formatting.GREEN + prefix + Formatting.GRAY + ")!", this.getID(), true);
     }
 }

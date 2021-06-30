@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoRender;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.block.entity.EnchantingTableBlockEntityRenderer;
@@ -19,8 +19,8 @@ public final class EnchantingTableBlockEntityRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(CallbackInfo callbackInfo) {
-        NoRender noRender = ModuleManager.INSTANCE.getModule(NoRender.class);
+        NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
-        if (noRender.isEnabled() && noRender.enchantBooks.getValue()) callbackInfo.cancel();
+        if (noRender != null && noRender.isEnabled() && noRender.enchantBooks.getValue()) callbackInfo.cancel();
     }
 }
