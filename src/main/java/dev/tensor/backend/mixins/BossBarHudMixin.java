@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoOverlay;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.gui.hud.BossBarHud;
@@ -20,7 +20,7 @@ public final class BossBarHudMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public void render(MatrixStack matrices, CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay.isEnabled() && noOverlay.bossBar.getValue()) {
             callbackInfo.cancel();

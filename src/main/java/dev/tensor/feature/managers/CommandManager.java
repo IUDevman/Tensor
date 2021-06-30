@@ -14,9 +14,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
  * @since 04-12-2021
  */
 
-public enum CommandManager implements Manager {
-
-    INSTANCE;
+public final class CommandManager implements Manager {
 
     private String prefix = "-";
 
@@ -62,7 +60,7 @@ public enum CommandManager implements Manager {
         }));
 
         if (!foundMessage.get()) {
-            this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + CommandManager.INSTANCE.prefix + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true);
+            this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + getPrefix() + "commands" + Formatting.GRAY + " to see a full list of commands!", 665, true);
         }
     }
 

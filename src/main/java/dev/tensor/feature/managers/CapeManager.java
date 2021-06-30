@@ -24,9 +24,7 @@ import java.util.Locale;
  * @since 05-05-2021
  */
 
-public enum CapeManager implements Manager {
-
-    INSTANCE;
+public final class CapeManager implements Manager {
 
     private final ArrayList<String> capes = new ArrayList<>();
     private Identifier cape = null;

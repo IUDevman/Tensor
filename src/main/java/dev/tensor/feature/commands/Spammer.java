@@ -1,7 +1,6 @@
 package dev.tensor.feature.commands;
 
 import dev.tensor.Tensor;
-import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -64,7 +63,7 @@ public final class Spammer implements Command {
 
         this.sendReplaceableClientMessage(this.getMarker() + "Set spammer file (" + Formatting.GREEN + file + Formatting.GRAY + ")!", this.getID(), true);
 
-        dev.tensor.feature.modules.Spammer spammer = ModuleManager.INSTANCE.getModule(dev.tensor.feature.modules.Spammer.class);
+        dev.tensor.feature.modules.Spammer spammer = Tensor.INSTANCE.MODULE_MANAGER.getModule(dev.tensor.feature.modules.Spammer.class);
 
         spammer.setPath(path);
     }

@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoParticles;
 import dev.tensor.feature.modules.NoWeather;
@@ -28,14 +28,14 @@ public final class WorldRendererMixin implements Global {
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
     public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo callbackInfo) {
-        NoWeather noWeather = ModuleManager.INSTANCE.getModule(NoWeather.class);
+        NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
         if (noWeather.isEnabled()) callbackInfo.cancel();
     }
 
     @Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
     public void tickRainSplashing(Camera camera, CallbackInfo callbackInfo) {
-        NoWeather noWeather = ModuleManager.INSTANCE.getModule(NoWeather.class);
+        NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
         if (noWeather.isEnabled()) callbackInfo.cancel();
     }
@@ -44,11 +44,11 @@ public final class WorldRendererMixin implements Global {
     public void spawnParticle(ParticleEffect parameters, boolean alwaysSpawn, boolean canSpawnOnMinimal, double x, double y, double z, double velocityX, double velocityY, double velocityZ, CallbackInfoReturnable<Particle> cir) {
         if (this.isNull()) return;
 
-        NoWeather noWeather = ModuleManager.INSTANCE.getModule(NoWeather.class);
+        NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
         if (noWeather.isEnabled() && (this.getWorld().isRaining() || this.getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) cir.cancel();
 
-        NoParticles noParticles = ModuleManager.INSTANCE.getModule(NoParticles.class);
+        NoParticles noParticles = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoParticles.class);
 
         if (noParticles.isEnabled()) {
             if (noParticles.all.getValue()) cir.cancel();
@@ -65,7 +65,7 @@ public final class WorldRendererMixin implements Global {
 
     @ModifyArg(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/render/WorldRenderer;setupTerrain(Lnet/minecraft/client/render/Camera;Lnet/minecraft/client/render/Frustum;ZIZ)V"), index = 4)
     public boolean isSpectator(boolean spectator) {
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         return spectator || freecam.isEnabled();
     }

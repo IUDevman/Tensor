@@ -1,7 +1,7 @@
 package dev.tensor.feature.modules;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.KeyPressedEvent;
-import dev.tensor.feature.managers.FriendManager;
 import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
@@ -32,11 +32,11 @@ public final class MiddleClickFriend extends Module {
 
         String name = entityHitResult.getEntity().getEntityName();
 
-        if (FriendManager.INSTANCE.isFriend(name)) {
-            FriendManager.INSTANCE.removeFriend(name);
+        if (Tensor.INSTANCE.FRIEND_MANAGER.isFriend(name)) {
+            Tensor.INSTANCE.FRIEND_MANAGER.removeFriend(name);
             this.sendReplaceableClientMessage("Removed " + Formatting.RED + name + Formatting.GRAY + " from the friends list!", 1000, true);
         } else {
-            FriendManager.INSTANCE.addFriend(name);
+            Tensor.INSTANCE.FRIEND_MANAGER.addFriend(name);
             this.sendReplaceableClientMessage("Added " + Formatting.GREEN + name + Formatting.GRAY + " to the friends list!", 1000, true);
         }
     }

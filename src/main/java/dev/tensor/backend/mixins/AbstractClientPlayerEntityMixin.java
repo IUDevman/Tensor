@@ -1,8 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import com.mojang.authlib.GameProfile;
-import dev.tensor.feature.managers.CapeManager;
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.Capes;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,10 +27,10 @@ public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
 
     @Inject(method = "getCapeTexture", at = @At("HEAD"), cancellable = true)
     public void getCapeTexture(CallbackInfoReturnable<Identifier> cir) {
-        Capes capes = ModuleManager.INSTANCE.getModule(Capes.class);
+        Capes capes = Tensor.INSTANCE.MODULE_MANAGER.getModule(Capes.class);
 
         if (capes.isEnabled()) {
-            cir.setReturnValue(CapeManager.INSTANCE.getCape(this.getEntityName()));
+            cir.setReturnValue(Tensor.INSTANCE.CAPE_MANAGER.getCape(this.getEntityName()));
         }
     }
 }

@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
-import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
 import dev.tensor.misc.event.EventHandler;
@@ -38,7 +38,7 @@ public final class GameRendererMixin implements Global {
 
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
     public void bobView(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
-        NoViewBob noViewBob = ModuleManager.INSTANCE.getModule(NoViewBob.class);
+        NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
         if (noViewBob.isEnabled() && !noViewBob.hurtOnly.getValue()) {
             callbackInfo.cancel();
@@ -47,7 +47,7 @@ public final class GameRendererMixin implements Global {
 
     @Inject(method = "bobViewWhenHurt", at = @At("HEAD"), cancellable = true)
     public void bobViewWhenHurt(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
-        NoViewBob noViewBob = ModuleManager.INSTANCE.getModule(NoViewBob.class);
+        NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
         if (noViewBob.isEnabled()) {
             callbackInfo.cancel();
@@ -56,7 +56,7 @@ public final class GameRendererMixin implements Global {
 
     @Inject(method = "shouldRenderBlockOutline", at = @At("HEAD"), cancellable = true)
     public void shouldRenderBlockOutline(CallbackInfoReturnable<Boolean> cir) {
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         if (freecam.isEnabled() && freecam.hideBlockOutline.getValue()) cir.setReturnValue(false);
     }

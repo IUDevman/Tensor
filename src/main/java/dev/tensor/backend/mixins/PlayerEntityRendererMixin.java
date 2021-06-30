@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.ViewModel;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -24,7 +24,7 @@ public final class PlayerEntityRendererMixin implements Global {
     public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo callbackInfo) {
         if (this.isNull() || player != this.getPlayer()) return;
 
-        ViewModel viewModel = ModuleManager.INSTANCE.getModule(ViewModel.class);
+        ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);
 
         if (viewModel.isEnabled() && !viewModel.renderEmptyMainHand.getValue()) {
             callbackInfo.cancel();

@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.CapeManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -55,16 +55,16 @@ public final class Cape implements Command {
 
         switch (argument.toLowerCase(Locale.ROOT)) {
             case "list": {
-                if (CapeManager.INSTANCE.getCapes().size() == 0) {
+                if (Tensor.INSTANCE.CAPE_MANAGER.getCapes().size() == 0) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No caped players!", this.getID(), true);
                     return;
                 }
 
-                this.sendReplaceableClientMessage(this.getMarker() + "Caped players: " + CapeManager.INSTANCE.getCapes() + "!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Caped players: " + Tensor.INSTANCE.CAPE_MANAGER.getCapes() + "!", this.getID(), true);
                 break;
             }
             case "clear": {
-                CapeManager.INSTANCE.clearCapes();
+                Tensor.INSTANCE.CAPE_MANAGER.clearCapes();
                 this.sendReplaceableClientMessage(this.getMarker() + "Cleared caped players!", this.getID(), true);
                 break;
             }
@@ -76,12 +76,12 @@ public final class Cape implements Command {
 
                 String name = message[2];
 
-                if (CapeManager.INSTANCE.hasCape(name)) {
+                if (Tensor.INSTANCE.CAPE_MANAGER.hasCape(name)) {
                     this.sendReplaceableClientMessage(this.getMarker() + "Already a caped player (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                CapeManager.INSTANCE.addCape(name);
+                Tensor.INSTANCE.CAPE_MANAGER.addCape(name);
                 this.sendReplaceableClientMessage(this.getMarker() + "Added caped players (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
@@ -93,12 +93,12 @@ public final class Cape implements Command {
 
                 String name = message[2];
 
-                if (!CapeManager.INSTANCE.hasCape(name)) {
+                if (!Tensor.INSTANCE.CAPE_MANAGER.hasCape(name)) {
                     this.sendReplaceableClientMessage(this.getMarker() + "No caped players matching (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                CapeManager.INSTANCE.removeCape(name);
+                Tensor.INSTANCE.CAPE_MANAGER.removeCape(name);
                 this.sendReplaceableClientMessage(this.getMarker() + "Removed caped player (" + Formatting.RED + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }

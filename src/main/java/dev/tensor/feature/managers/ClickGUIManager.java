@@ -9,9 +9,7 @@ import dev.tensor.misc.imp.Manager;
  * @since 05-16-2021
  */
 
-public enum ClickGUIManager implements Manager {
-
-    INSTANCE;
+public final class ClickGUIManager implements Manager {
 
     private final TensorGUI tensorGUI = new TensorGUI();
 

@@ -15,9 +15,7 @@ import java.util.Locale;
  * @since 04-12-2021
  */
 
-public enum ModuleManager implements Manager {
-
-    INSTANCE;
+public final class ModuleManager implements Manager {
 
     private final LinkedHashMap<Class<? extends Module>, Module> moduleClassLinkedHashMap = new LinkedHashMap<>();
     private final LinkedHashMap<String, Module> moduleNameLinkedHashMap = new LinkedHashMap<>();

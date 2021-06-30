@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.fluid.FluidState;
@@ -24,7 +24,7 @@ public final class FluidStateMixin implements Global {
     public void getVelocity(BlockView world, BlockPos pos, CallbackInfoReturnable<Vec3d> cir) {
         if (this.isNull() || this.getPlayer().squaredDistanceTo(pos.getX(), pos.getY(), pos.getZ()) > 3) return;
 
-        NoPush noPush = ModuleManager.INSTANCE.getModule(NoPush.class);
+        NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
         if (noPush.isEnabled() && noPush.water.getValue()) cir.setReturnValue(Vec3d.ZERO);
     }

@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.FullBright;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.LightmapTextureManager;
@@ -20,7 +20,7 @@ public final class LightmapTextureManagerMixin implements Global {
 
     @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)
     public void getBrightness(World world, int i, CallbackInfoReturnable<Float> cir) {
-        FullBright fullBright = ModuleManager.INSTANCE.getModule(FullBright.class);
+        FullBright fullBright = Tensor.INSTANCE.MODULE_MANAGER.getModule(FullBright.class);
 
         if (fullBright.isEnabled()) {
             cir.setReturnValue(100F);

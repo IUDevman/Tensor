@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.CommandManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -47,7 +47,7 @@ public final class Commands implements Command {
     public void onCommand(String[] message) {
         this.sendClientMessage(this.getMarker() + "Available Commands:", true);
 
-        CommandManager.INSTANCE.getCommands().forEach(command -> {
+        Tensor.INSTANCE.COMMAND_MANAGER.getCommands().forEach(command -> {
             String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);
 
             this.sendClientMessage(syntax, true);

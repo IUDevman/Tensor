@@ -1,6 +1,6 @@
 package dev.tensor.feature.modules;
 
-import dev.tensor.feature.managers.FriendManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
@@ -34,7 +34,7 @@ public final class VisualRange extends Module {
 
             if (!spottedPlayers.contains(player) && player != this.getPlayer()) {
 
-                if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;
+                if (!friends.getValue() && Tensor.INSTANCE.FRIEND_MANAGER.isFriend(player.getEntityName())) return;
 
                 spottedPlayers.add(player);
 
@@ -55,7 +55,7 @@ public final class VisualRange extends Module {
             if (!this.getWorld().getPlayers().contains(player)) {
                 removedPlayers.add(player);
 
-                if (!friends.getValue() && FriendManager.INSTANCE.isFriend(player.getEntityName())) return;
+                if (!friends.getValue() && Tensor.INSTANCE.FRIEND_MANAGER.isFriend(player.getEntityName())) return;
 
                 String message = "Player " + Formatting.YELLOW + player.getEntityName() + Formatting.GRAY + " has " + Formatting.GREEN + "left " + Formatting.GRAY + "your visual range!";
 

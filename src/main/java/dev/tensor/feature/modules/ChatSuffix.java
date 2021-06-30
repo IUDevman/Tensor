@@ -3,7 +3,6 @@ package dev.tensor.feature.modules;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.backend.mixins.accessors.ChatMessageC2SPacketAccessor;
-import dev.tensor.feature.managers.CommandManager;
 import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
@@ -30,7 +29,7 @@ public final class ChatSuffix extends Module {
 
             String message = packet.getChatMessage();
 
-            if (message.startsWith(CommandManager.INSTANCE.getPrefix()) || message.startsWith("/")) return;
+            if (message.startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix()) || message.startsWith("/")) return;
 
             String newMessage = message + getSuffix();
 

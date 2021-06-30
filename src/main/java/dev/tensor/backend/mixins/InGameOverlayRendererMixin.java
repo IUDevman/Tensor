@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoOverlay;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
@@ -21,7 +21,7 @@ public final class InGameOverlayRendererMixin implements Global {
 
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)
     private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay.isEnabled()) callbackInfo.cancel();
     }

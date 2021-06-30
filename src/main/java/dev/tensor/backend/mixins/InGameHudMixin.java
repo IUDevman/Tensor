@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoOverlay;
 import dev.tensor.misc.imp.Global;
@@ -24,21 +24,21 @@ public final class InGameHudMixin implements Global {
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
     public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay.isEnabled() && noOverlay.status.getValue()) callbackInfo.cancel();
     }
 
     @Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
     public void renderVignetteOverlay(Entity entity, CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = ModuleManager.INSTANCE.getModule(NoOverlay.class);
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay.isEnabled() && noOverlay.vignette.getValue()) callbackInfo.cancel();
     }
@@ -47,7 +47,7 @@ public final class InGameHudMixin implements Global {
     public void getCameraPlayer(CallbackInfoReturnable<PlayerEntity> cir) {
         if (this.isNull()) return;
 
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         if (freecam.isEnabled()) {
             cir.setReturnValue(this.getPlayer());

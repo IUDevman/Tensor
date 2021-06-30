@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.BlockInteractEvent;
-import dev.tensor.feature.managers.ModuleManager;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
 import dev.tensor.feature.modules.Reach;
@@ -36,7 +36,7 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
     public void updateBlockBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
         EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Damage, pos));
 
-        NoBreakDelay noBreakDelay = ModuleManager.INSTANCE.getModule(NoBreakDelay.class);
+        NoBreakDelay noBreakDelay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoBreakDelay.class);
 
         if (noBreakDelay.isEnabled()) blockBreakingCooldown = 0;
     }
@@ -48,14 +48,14 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
 
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
     public void getReachDistance(CallbackInfoReturnable<Float> cir) {
-        Reach reach = ModuleManager.INSTANCE.getModule(Reach.class);
+        Reach reach = Tensor.INSTANCE.MODULE_MANAGER.getModule(Reach.class);
 
         if (reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
     }
 
     @Inject(method = "attackEntity", at = @At("HEAD"), cancellable = true)
     public void attackEntity(PlayerEntity player, Entity target, CallbackInfo callbackInfo) {
-        Freecam freecam = ModuleManager.INSTANCE.getModule(Freecam.class);
+        Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         if (target.equals(player) || target.equals(freecam.getCameraEntity())) {
             callbackInfo.cancel();

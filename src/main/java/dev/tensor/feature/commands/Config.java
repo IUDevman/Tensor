@@ -1,6 +1,6 @@
 package dev.tensor.feature.commands;
 
-import dev.tensor.feature.managers.ConfigManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
@@ -53,12 +53,12 @@ public final class Config implements Command {
 
         switch (argument.toLowerCase(Locale.ROOT)) {
             case "save": {
-                ConfigManager.INSTANCE.save();
+                Tensor.INSTANCE.CONFIG_MANAGER.save();
                 this.sendReplaceableClientMessage(this.getMarker() + "Saved config!", this.getID(), true);
                 break;
             }
             case "reload": {
-                ConfigManager.INSTANCE.load();
+                Tensor.INSTANCE.CONFIG_MANAGER.load();
                 this.sendReplaceableClientMessage(this.getMarker() + "Reloaded config!", this.getID(), true);
                 break;
             }

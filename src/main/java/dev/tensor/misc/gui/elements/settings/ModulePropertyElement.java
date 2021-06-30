@@ -1,6 +1,6 @@
 package dev.tensor.misc.gui.elements.settings;
 
-import dev.tensor.feature.managers.SettingManager;
+import dev.tensor.Tensor;
 import dev.tensor.misc.gui.elements.SettingElement;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.Setting;
@@ -83,7 +83,7 @@ public final class ModulePropertyElement extends SettingElement {
             module.setEnabled(false);
             module.setBind(GLFW.GLFW_KEY_UNKNOWN);
 
-            SettingManager.INSTANCE.getSettingsForModule(module).forEach(Setting::reset);
+            Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(Setting::reset);
             return;
         }
 

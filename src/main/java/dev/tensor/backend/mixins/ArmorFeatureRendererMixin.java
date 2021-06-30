@@ -1,6 +1,6 @@
 package dev.tensor.backend.mixins;
 
-import dev.tensor.feature.managers.ModuleManager;
+import dev.tensor.Tensor;
 import dev.tensor.feature.modules.NoRender;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -22,7 +22,7 @@ public final class ArmorFeatureRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
     public <T extends LivingEntity> void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo callbackInfo) {
-        NoRender noRender = ModuleManager.INSTANCE.getModule(NoRender.class);
+        NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
         if (noRender.isEnabled() && noRender.armor.getValue()) callbackInfo.cancel();
     }
