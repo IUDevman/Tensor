@@ -37,7 +37,7 @@ public final class Reload implements Command {
 
     @Override
     public int getID() {
-        return 681;
+        return 682;
     }
 
     @Override
