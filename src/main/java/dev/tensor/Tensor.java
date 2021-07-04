@@ -49,6 +49,12 @@ public final class Tensor implements ModInitializer {
         this.LOGGER.info("Finished initializing " + this.MOD_NAME + " " + this.MOD_VERSION + " (" + finishedTime + "s)!");
     }
 
+    public void onReload() {
+       this.MANAGERS.forEach(this.EVENT_HANDLER::unregister);
+
+       this.onInitialize();
+    }
+
     private void loadClient() {
         this.MANAGERS.clear();
 
