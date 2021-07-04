@@ -45,7 +45,7 @@ public final class Commands implements Command {
 
     @Override
     public void onCommand(String[] message) {
-        this.sendClientMessage(this.getMarker() + "Available Commands:", true);
+        this.sendClientMessage(this.getMarker() + "Available commands:", true);
 
         Tensor.INSTANCE.COMMAND_MANAGER.getCommands().forEach(command -> {
             String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);
