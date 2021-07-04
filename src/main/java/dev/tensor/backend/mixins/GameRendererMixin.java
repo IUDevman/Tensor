@@ -4,7 +4,6 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.GameRenderer;
 import net.minecraft.client.util.math.MatrixStack;
@@ -26,14 +25,14 @@ public final class GameRendererMixin implements Global {
     public void render(CallbackInfo callbackInfo) {
         if (this.isNull()) return;
 
-        EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
+        Tensor.INSTANCE.EVENT_HANDLER.call(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
     public void renderHand(CallbackInfo callbackInfo) {
         if (this.isNull()) return;
 
-        EventHandler.call(new ClientRenderEvent(ClientRenderEvent.Type.World));
+        Tensor.INSTANCE.EVENT_HANDLER.call(new ClientRenderEvent(ClientRenderEvent.Type.World));
     }
 
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)

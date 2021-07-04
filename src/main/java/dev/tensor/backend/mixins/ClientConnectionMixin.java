@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.PacketEvent;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
@@ -27,7 +27,7 @@ public final class ClientConnectionMixin implements Global {
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
-        EventHandler.call(packetEvent);
+        Tensor.INSTANCE.EVENT_HANDLER.call(packetEvent);
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 
@@ -37,7 +37,7 @@ public final class ClientConnectionMixin implements Global {
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
 
-        EventHandler.call(packetEvent);
+        Tensor.INSTANCE.EVENT_HANDLER.call(packetEvent);
         if (packetEvent.isCancelled()) callbackInfo.cancel();
     }
 }

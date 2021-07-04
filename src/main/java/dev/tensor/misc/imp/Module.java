@@ -1,6 +1,6 @@
 package dev.tensor.misc.imp;
 
-import dev.tensor.misc.event.EventHandler;
+import dev.tensor.Tensor;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
 
@@ -89,7 +89,7 @@ public abstract class Module implements Global, Utilities {
 
     protected void enable() {
         this.enabled = true;
-        EventHandler.register(this);
+        Tensor.INSTANCE.EVENT_HANDLER.register(this);
         if (!this.isNull()) {
             onEnable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true);
@@ -98,7 +98,7 @@ public abstract class Module implements Global, Utilities {
 
     protected void disable() {
         this.enabled = false;
-        EventHandler.unregister(this);
+        Tensor.INSTANCE.EVENT_HANDLER.unregister(this);
         if (!this.isNull()) {
             onDisable();
             if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true);

@@ -5,7 +5,6 @@ import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
 import dev.tensor.feature.modules.Reach;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
@@ -34,7 +33,7 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
 
     @Inject(method = "updateBlockBreakingProgress", at = @At("HEAD"))
     public void updateBlockBreakingProgress(BlockPos pos, Direction direction, CallbackInfoReturnable<Boolean> cir) {
-        EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Damage, pos));
+        Tensor.INSTANCE.EVENT_HANDLER.call(new BlockInteractEvent(BlockInteractEvent.Type.Damage, pos));
 
         NoBreakDelay noBreakDelay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoBreakDelay.class);
 
@@ -43,7 +42,7 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
 
     @Inject(method = "breakBlock", at = @At("HEAD"))
     public void breakBlockHead(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        EventHandler.call(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
+        Tensor.INSTANCE.EVENT_HANDLER.call(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
     }
 
     @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)

@@ -19,9 +19,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 @SuppressWarnings("unused")
 public final class EventHandler {
 
-    private static final HashMap<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<>();
+    private final HashMap<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<>();
 
-    public static void register(Object object) {
+    public void register(Object object) {
         for (final Method method : object.getClass().getDeclaredMethods()) {
             if (!isMethodBad(method)) {
                 register(method, object);
@@ -29,7 +29,7 @@ public final class EventHandler {
         }
     }
 
-    public static void register(Object object, Class<? extends Event> eventClass) {
+    public void register(Object object, Class<? extends Event> eventClass) {
         for (final Method method : object.getClass().getDeclaredMethods()) {
             if (!isMethodBad(method, eventClass)) {
                 register(method, object);
@@ -37,24 +37,24 @@ public final class EventHandler {
         }
     }
 
-    public static void unregister(Object object) {
-        for (final List<MethodData> dataList : REGISTRY_MAP.values()) {
+    public void unregister(Object object) {
+        for (final List<MethodData> dataList : this.REGISTRY_MAP.values()) {
             dataList.removeIf(data -> data.getSource().equals(object));
         }
 
         cleanMap(true);
     }
 
-    public static void unregister(Object object, Class<? extends Event> eventClass) {
-        if (REGISTRY_MAP.containsKey(eventClass)) {
-            REGISTRY_MAP.get(eventClass).removeIf(data -> data.getSource().equals(object));
+    public void unregister(Object object, Class<? extends Event> eventClass) {
+        if (this.REGISTRY_MAP.containsKey(eventClass)) {
+            this.REGISTRY_MAP.get(eventClass).removeIf(data -> data.getSource().equals(object));
 
             cleanMap(true);
         }
     }
 
     @SuppressWarnings("unchecked")
-    private static void register(Method method, Object object) {
+    private void register(Method method, Object object) {
         Class<? extends Event> indexClass = (Class<? extends Event>) method.getParameterTypes()[0];
 
         final MethodData data = new MethodData(object, method, method.getAnnotation(EventTarget.class).value());
@@ -63,13 +63,13 @@ public final class EventHandler {
             data.getTarget().setAccessible(true);
         }
 
-        if (REGISTRY_MAP.containsKey(indexClass)) {
-            if (!REGISTRY_MAP.get(indexClass).contains(data)) {
-                REGISTRY_MAP.get(indexClass).add(data);
+        if (this.REGISTRY_MAP.containsKey(indexClass)) {
+            if (!this.REGISTRY_MAP.get(indexClass).contains(data)) {
+                this.REGISTRY_MAP.get(indexClass).add(data);
                 sortListValue(indexClass);
             }
         } else {
-            REGISTRY_MAP.put(indexClass, new CopyOnWriteArrayList<MethodData>() {
+            this.REGISTRY_MAP.put(indexClass, new CopyOnWriteArrayList<MethodData>() {
                 private static final long serialVersionUID = 666L;
 
                 {
@@ -79,8 +79,8 @@ public final class EventHandler {
         }
     }
 
-    public static void removeEntry(Class<? extends Event> indexClass) {
-        Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = REGISTRY_MAP.entrySet().iterator();
+    public void removeEntry(Class<? extends Event> indexClass) {
+        Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = this.REGISTRY_MAP.entrySet().iterator();
 
         while (mapIterator.hasNext()) {
             if (mapIterator.next().getKey().equals(indexClass)) {
@@ -90,8 +90,8 @@ public final class EventHandler {
         }
     }
 
-    public static void cleanMap(boolean onlyEmptyEntries) {
-        Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = REGISTRY_MAP.entrySet().iterator();
+    public void cleanMap(boolean onlyEmptyEntries) {
+        Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = this.REGISTRY_MAP.entrySet().iterator();
 
         while (mapIterator.hasNext()) {
             if (!onlyEmptyEntries || mapIterator.next().getValue().isEmpty()) {
@@ -100,31 +100,31 @@ public final class EventHandler {
         }
     }
 
-    private static void sortListValue(Class<? extends Event> indexClass) {
+    private void sortListValue(Class<? extends Event> indexClass) {
         List<MethodData> sortedList = new CopyOnWriteArrayList<>();
 
         for (final byte priority : Priority.VALUE_ARRAY) {
-            for (final MethodData data : REGISTRY_MAP.get(indexClass)) {
+            for (final MethodData data : this.REGISTRY_MAP.get(indexClass)) {
                 if (data.getPriority() == priority) {
                     sortedList.add(data);
                 }
             }
         }
 
-        REGISTRY_MAP.put(indexClass, sortedList);
+        this.REGISTRY_MAP.put(indexClass, sortedList);
     }
 
-    private static boolean isMethodBad(Method method) {
+    private boolean isMethodBad(Method method) {
         return method.getParameterTypes().length != 1 || !method.isAnnotationPresent(EventTarget.class);
     }
 
-    private static boolean isMethodBad(Method method, Class<? extends Event> eventClass) {
+    private boolean isMethodBad(Method method, Class<? extends Event> eventClass) {
         return isMethodBad(method) || !method.getParameterTypes()[0].equals(eventClass);
     }
 
     @SuppressWarnings("UnusedReturnValue")
-    public static Event call(final Event event) {
-        List<MethodData> dataList = REGISTRY_MAP.get(event.getClass());
+    public Event call(final Event event) {
+        List<MethodData> dataList = this.REGISTRY_MAP.get(event.getClass());
 
         if (dataList != null) {
             for (final MethodData data : dataList) {
@@ -135,7 +135,7 @@ public final class EventHandler {
         return event;
     }
 
-    private static void invoke(MethodData data, Event argument) {
+    private void invoke(MethodData data, Event argument) {
         try {
             data.getTarget().invoke(data.getSource(), argument);
         } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {

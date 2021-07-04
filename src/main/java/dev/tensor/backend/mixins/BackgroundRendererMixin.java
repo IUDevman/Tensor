@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.ApplyFogEvent;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.BackgroundRenderer;
 import net.minecraft.client.render.Camera;
@@ -22,7 +22,7 @@ public final class BackgroundRendererMixin implements Global {
     private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo callbackInfo) {
         ApplyFogEvent applyFogEvent = new ApplyFogEvent();
 
-        EventHandler.call(applyFogEvent);
+        Tensor.INSTANCE.EVENT_HANDLER.call(applyFogEvent);
 
         if (applyFogEvent.isCancelled()) callbackInfo.cancel();
     }

@@ -1,7 +1,7 @@
 package dev.tensor.backend.mixins;
 
+import dev.tensor.Tensor;
 import dev.tensor.backend.events.PlaySoundEvent;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.sound.SoundInstance;
 import net.minecraft.client.sound.SoundManager;
@@ -22,7 +22,7 @@ public final class SoundManagerMixin implements Global {
     public void playNoDelay(SoundInstance sound, CallbackInfo callbackInfo) {
         PlaySoundEvent playSoundEvent = new PlaySoundEvent(sound);
 
-        EventHandler.call(playSoundEvent);
+        Tensor.INSTANCE.EVENT_HANDLER.call(playSoundEvent);
         if (playSoundEvent.isCancelled()) callbackInfo.cancel();
     }
 
@@ -30,7 +30,7 @@ public final class SoundManagerMixin implements Global {
     public void playWithDelay(SoundInstance sound, int delay, CallbackInfo callbackInfo) {
         PlaySoundEvent playSoundEvent = new PlaySoundEvent(sound);
 
-        EventHandler.call(playSoundEvent);
+        Tensor.INSTANCE.EVENT_HANDLER.call(playSoundEvent);
         if (playSoundEvent.isCancelled()) callbackInfo.cancel();
     }
 }

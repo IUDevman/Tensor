@@ -3,7 +3,6 @@ package dev.tensor.backend.mixins;
 import dev.tensor.Tensor;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
-import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
@@ -29,7 +28,7 @@ public final class MinecraftClientMixin implements Global {
     public void tick(CallbackInfo callbackInfo) {
         if (this.isNull()) return;
 
-        EventHandler.call(new ClientTickEvent());
+        Tensor.INSTANCE.EVENT_HANDLER.call(new ClientTickEvent());
     }
 
     @Inject(method = "stop", at = @At("HEAD"))
@@ -44,6 +43,6 @@ public final class MinecraftClientMixin implements Global {
 
     @Inject(method = "disconnect()V", at = @At("HEAD"))
     public void disconnect(CallbackInfo callbackInfo) {
-        EventHandler.call(new DisconnectEvent());
+        Tensor.INSTANCE.EVENT_HANDLER.call(new DisconnectEvent());
     }
 }
