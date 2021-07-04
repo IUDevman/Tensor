@@ -52,7 +52,7 @@ public final class Tensor implements ModInitializer {
     public void onReload() {
        this.MANAGERS.forEach(this.EVENT_HANDLER::unregister);
 
-       this.onInitialize();
+       onInitialize();
     }
 
     private void loadClient() {
