@@ -3,6 +3,7 @@ plugins {
     id "maven-publish"
 }
 
+archivesBaseName = project.mod_name
 version = project.mod_version
 group = project.maven_group
 
