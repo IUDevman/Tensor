@@ -64,7 +64,6 @@ public final class ConfigManager implements Manager {
                 InputStream inputStream = Files.newInputStream(path);
                 JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
 
-                module.setEnabled(jsonObject.get("Enabled").getAsBoolean());
                 module.setMessages(jsonObject.get("Messages").getAsBoolean());
                 module.setDrawn(jsonObject.get("Drawn").getAsBoolean());
                 module.setBind(jsonObject.get("Bind").getAsInt());
@@ -93,6 +92,8 @@ public final class ConfigManager implements Manager {
                         ((ColorSetting) objectSetting).setValue(new Color(jsonElement.getAsInt()));
                     }
                 });
+
+                module.setEnabled(jsonObject.get("Enabled").getAsBoolean());
 
             } catch (IOException e) {
                 e.printStackTrace();

@@ -7,8 +7,6 @@ import net.fabricmc.api.ModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.util.ArrayList;
-
 /**
  * @author IUDevman
  * @since 04-12-2021
@@ -26,8 +24,8 @@ public final class Tensor implements ModInitializer {
     public final String MOD_VERSION = "0.5.0-SNAPSHOT";
 
     public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
-    public final EventHandler EVENT_HANDLER = new EventHandler();
-    public final ArrayList<Manager> MANAGERS = new ArrayList<>();
+
+    public EventHandler EVENT_HANDLER;
 
     public CommandManager COMMAND_MANAGER;
     public ModuleManager MODULE_MANAGER;
@@ -49,14 +47,8 @@ public final class Tensor implements ModInitializer {
         this.LOGGER.info("Finished initializing " + this.MOD_NAME + " " + this.MOD_VERSION + " (" + finishedTime + "s)!");
     }
 
-    public void onReload() {
-       this.MANAGERS.forEach(this.EVENT_HANDLER::unregister);
-
-       onInitialize();
-    }
-
     private void loadClient() {
-        this.MANAGERS.clear();
+        this.EVENT_HANDLER = new EventHandler();
 
         this.COMMAND_MANAGER = new CommandManager();
         loadManager(this.COMMAND_MANAGER);
@@ -86,7 +78,6 @@ public final class Tensor implements ModInitializer {
     }
 
     private void loadManager(Manager manager) {
-        this.MANAGERS.add(manager);
         this.EVENT_HANDLER.register(manager);
         manager.load();
     }
