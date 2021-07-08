@@ -38,7 +38,7 @@ public final class ModuleManager implements Manager {
         });
     }
 
-    public void addModule(Module module) {
+    private void addModule(Module module) {
         this.moduleClassLinkedHashMap.put(module.getClass(), module);
         this.moduleNameLinkedHashMap.put(module.getName().toLowerCase(Locale.ROOT), module);
     }
@@ -63,7 +63,6 @@ public final class ModuleManager implements Manager {
     }
 
     public Module getModule(String name) {
-        if (name == null) return null;
         return this.moduleNameLinkedHashMap.get(name.toLowerCase(Locale.ROOT));
     }
 }
