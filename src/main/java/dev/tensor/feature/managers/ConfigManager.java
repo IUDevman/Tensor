@@ -35,7 +35,18 @@ public final class ConfigManager implements Manager {
                 Files.createDirectories(Paths.get(this.spammerPath));
             }
 
-            loadProfiles();
+            Path path = Paths.get(this.mainPath + "Profiles.json");
+
+            if (!Files.exists(path)) return;
+
+            InputStream inputStream = Files.newInputStream(path);
+            JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+            JsonArray jsonArray = jsonObject.get("Profiles").getAsJsonArray();
+
+            this.profiles.clear();
+            jsonArray.forEach(jsonElement -> addAndCreateProfile(jsonElement.getAsString()));
+
+            this.profiles.stream().filter(profile1 -> profile1.getName().equalsIgnoreCase(jsonObject.get("Default").getAsString())).findFirst().ifPresent(profile1 -> this.currentProfile = profile1);
 
             if (this.currentProfile == null) {
                 this.currentProfile = new Profile("default", this.mainPath);
@@ -47,26 +58,6 @@ public final class ConfigManager implements Manager {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }
-    }
-
-    @SuppressWarnings("SimplifyOptionalCallChains")
-    private void loadProfiles() throws IOException {
-        Path path = Paths.get(this.mainPath + "Profiles.json");
-
-        if (!Files.exists(path)) return;
-
-        InputStream inputStream = Files.newInputStream(path);
-        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
-        JsonArray jsonArray = jsonObject.get("Profiles").getAsJsonArray();
-
-        this.profiles.clear();
-        jsonArray.forEach(jsonElement -> addAndCreateProfile(jsonElement.getAsString()));
-
-        Profile profile = this.profiles.stream().filter(profile1 -> profile1.getName().equalsIgnoreCase(jsonObject.get("Default").getAsString())).findFirst().orElse(null);
-
-        if (profile != null) {
-            this.currentProfile = profile;
         }
     }
 
