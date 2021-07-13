@@ -42,6 +42,13 @@ public abstract class Module implements Global, Utilities {
     private boolean messages = getInfo().messages();
     private int bind = getInfo().bind();
 
+    public void reset() {
+        this.enabled = getInfo().enabled();
+        this.drawn = getInfo().drawn();
+        this.messages = getInfo().messages();
+        this.bind = getInfo().bind();
+    }
+
     public String getName() {
         return this.name;
     }

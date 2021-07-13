@@ -38,6 +38,20 @@ public final class Profile implements Global {
         return this.mainPath + this.name + "/";
     }
 
+    public void reset() {
+        Tensor.INSTANCE.COMMAND_MANAGER.setPrefix("-");
+        Tensor.INSTANCE.FRIEND_MANAGER.clearFriends();
+        Tensor.INSTANCE.CAPE_MANAGER.clearCapes();
+        Tensor.INSTANCE.GUI_MANAGER.getGUI().getX().reset();
+        Tensor.INSTANCE.GUI_MANAGER.getGUI().getY().reset();
+
+        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
+            module.reset();
+
+            Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(Setting::reset);
+        });
+    }
+
     public void load() {
         try {
             if (!Files.exists(Paths.get(getMainPath()))) {
