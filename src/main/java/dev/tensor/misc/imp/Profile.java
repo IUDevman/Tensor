@@ -34,6 +34,10 @@ public final class Profile implements Global {
         return this.name;
     }
 
+    public String getNamePath() {
+        return this.mainPath + this.name + "/";
+    }
+
     public void load() {
         try {
             if (!Files.exists(Paths.get(getMainPath()))) {

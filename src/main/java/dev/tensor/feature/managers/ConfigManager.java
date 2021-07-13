@@ -11,7 +11,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
+import java.util.Objects;
 
 /**
  * @author IUDevman
@@ -100,6 +102,34 @@ public final class ConfigManager implements Manager {
         }
     }
 
+    private void deleteFolder(File file) {
+        try {
+            Arrays.stream(Objects.requireNonNull(file.listFiles())).forEach(file1 -> {
+                if (file1.isDirectory()) {
+                    deleteFolder(file1);
+                    return;
+                }
+
+                try {
+                    Files.delete(file1.toPath());
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            Files.delete(file.toPath());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setCurrentProfile(String newProfile) {
         this.currentProfile.save();
 
@@ -122,6 +152,7 @@ public final class ConfigManager implements Manager {
 
         if (profile != null && this.currentProfile != profile) {
             this.profiles.remove(profile);
+            deleteFolder(Paths.get(profile.getNamePath()).toFile());
         }
     }
 
