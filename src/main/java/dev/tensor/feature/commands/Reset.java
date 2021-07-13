@@ -59,10 +59,7 @@ public final class Reset implements Command {
             return;
         }
 
-        module.setDrawn(true);
-        module.setMessages(false);
-        module.setEnabled(false);
-        module.setBind(GLFW.GLFW_KEY_UNKNOWN);
+        module.reset();
 
         Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(Setting::reset);
 
