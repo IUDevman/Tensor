@@ -124,6 +124,11 @@ public final class Profile implements Command {
                     return;
                 }
 
+                if (Tensor.INSTANCE.CONFIG_MANAGER.getCurrentProfile().getName().equalsIgnoreCase(name)) {
+                    this.sendReplaceableClientMessage(this.getMarker() + "Already the current profile!", this.getID(), true);
+                    return;
+                }
+
                 Tensor.INSTANCE.CONFIG_MANAGER.setCurrentProfile(name);
                 this.sendReplaceableClientMessage(this.getMarker() + "Set current profile (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
