@@ -49,6 +49,7 @@ public final class Help implements Command {
 
         if (clickGUI == null) {
             this.sendReplaceableClientMessage(this.getMarker() + "Failed to dispatch command... you're probably reloading the client!", this.getID(), true);
+            return;
         }
 
         String bind = InputUtil.Type.KEYSYM.createFromCode(clickGUI.getBind()).getTranslationKey().replace("key.keyboard.", "").replace("unknown", "none").toUpperCase(Locale.ROOT);
