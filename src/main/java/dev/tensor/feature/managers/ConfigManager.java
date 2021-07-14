@@ -134,11 +134,11 @@ public final class ConfigManager implements Manager {
         }
     }
 
-    public void setCurrentProfile(String newProfile) {
+    public void setCurrentProfile(String profileName) {
         this.currentProfile.save();
         this.currentProfile.reset();
 
-        Profile profile = this.profiles.stream().filter(profile1 -> profile1.getName().equalsIgnoreCase(newProfile)).findFirst().orElse(null);
+        Profile profile = this.profiles.stream().filter(profile1 -> profile1.getName().equalsIgnoreCase(profileName)).findFirst().orElse(null);
 
         if (profile != null) {
             this.currentProfile = profile;
