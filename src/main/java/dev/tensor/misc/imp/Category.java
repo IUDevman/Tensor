@@ -17,7 +17,13 @@ public enum Category {
     HUD(Color.MAGENTA),
     Client(Color.WHITE);
 
-    Category(Color color) {
+    private final Color color;
 
+    Category(Color color) {
+        this.color = color;
+    }
+
+    public Color getColor() {
+        return this.color;
     }
 }
