@@ -1,6 +1,6 @@
 package dev.tensor.misc.imp;
 
-import java.awt.*;
+import net.minecraft.util.Formatting;
 
 /**
  * @author IUDevman
@@ -9,21 +9,21 @@ import java.awt.*;
 
 public enum Category {
 
-    Combat(Color.RED),
-    Movement(Color.CYAN),
-    Player(Color.ORANGE),
-    Render(Color.GREEN),
-    Misc(Color.YELLOW),
-    HUD(Color.MAGENTA),
-    Client(Color.WHITE);
+    Combat(Formatting.RED),
+    Movement(Formatting.BLUE),
+    Player(Formatting.GOLD),
+    Render(Formatting.GREEN),
+    Misc(Formatting.YELLOW),
+    HUD(Formatting.LIGHT_PURPLE),
+    Client(Formatting.WHITE);
 
-    private final Color color;
+    private final Formatting formatting;
 
-    Category(Color color) {
-        this.color = color;
+    Category(Formatting formatting) {
+        this.formatting = formatting;
     }
 
-    public Color getColor() {
-        return this.color;
+    public Formatting getFormatting() {
+        return this.formatting;
     }
 }
