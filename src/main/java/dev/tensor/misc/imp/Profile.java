@@ -20,7 +20,7 @@ import java.util.Arrays;
  * @since 07-12-2021
  */
 
-public final class Profile implements Global {
+public final class Profile {
 
     private final String mainPath;
     private final String name;
