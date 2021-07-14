@@ -38,15 +38,15 @@ public abstract class Module implements Global, Utilities {
     private final String name = getInfo().name();
     private final Category category = getInfo().category();
     private int bind = getInfo().bind();
-    private boolean enabled = getInfo().enabled();
     private boolean drawn = getInfo().drawn();
     private boolean messages = getInfo().messages();
+    private boolean enabled = getInfo().enabled();
 
     public void reset() {
         this.bind = getInfo().bind();
-        this.enabled = getInfo().enabled();
         this.drawn = getInfo().drawn();
         this.messages = getInfo().messages();
+        this.enabled = getInfo().enabled();
     }
 
     public String getName() {
