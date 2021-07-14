@@ -5,7 +5,6 @@ import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.Setting;
 import net.minecraft.util.Formatting;
-import org.lwjgl.glfw.GLFW;
 
 /**
  * @author IUDevman
