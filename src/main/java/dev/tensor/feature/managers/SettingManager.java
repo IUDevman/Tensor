@@ -44,7 +44,7 @@ public final class SettingManager implements Manager {
     }
 
     public ArrayList<Setting<?>> getSettingsForModule(Module module) {
-        final ArrayList<Setting<?>> settings = new ArrayList<>();
+        ArrayList<Setting<?>> settings = new ArrayList<>();
 
         this.settingModuleLinkedHashMap.forEach((setting, module1) -> {
             if (module1.equals(module)) settings.add(setting);

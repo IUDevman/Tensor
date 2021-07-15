@@ -25,8 +25,8 @@ public final class MiddleClickPearl extends Module {
         if (event.getBind() != GLFW.GLFW_MOUSE_BUTTON_MIDDLE) return;
         if (Objects.requireNonNull(this.getMinecraft().crosshairTarget).getType() != HitResult.Type.MISS) return;
 
-        final int oldSlot = this.getInventory().selectedSlot;
-        final int newSlot = this.findItem(Items.ENDER_PEARL);
+        int oldSlot = this.getInventory().selectedSlot;
+        int newSlot = this.findItem(Items.ENDER_PEARL);
 
         if (newSlot != -1) {
             this.swap(newSlot);

@@ -18,7 +18,7 @@ import java.util.zip.ZipInputStream;
 public interface ClassLoader {
 
     default ArrayList<Class<?>> findClassesForPath(String path) {
-        final ArrayList<Class<?>> foundClasses = new ArrayList<>();
+        ArrayList<Class<?>> foundClasses = new ArrayList<>();
         String resource = Objects.requireNonNull(ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"))).getPath();
 
         if (resource.contains("!")) {
