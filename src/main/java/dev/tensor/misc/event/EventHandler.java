@@ -1,5 +1,6 @@
 package dev.tensor.misc.event;
 
+import dev.tensor.Tensor;
 import dev.tensor.misc.event.imp.Event;
 import dev.tensor.misc.event.imp.Priority;
 
@@ -20,6 +21,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public final class EventHandler {
 
     private final HashMap<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<>();
+
+    public EventHandler() {
+        Tensor.INSTANCE.LOGGER.info("EventHandler");
+    }
 
     public void register(Object object) {
         for (final Method method : object.getClass().getDeclaredMethods()) {
