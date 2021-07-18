@@ -38,6 +38,12 @@ public final class CapeManager implements Manager {
         if (Files.exists(path)) return;
 
         try {
+            Path configPath = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/");
+
+            if (!Files.exists(configPath)) {
+                Files.createDirectories(Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/"));
+            }
+
             URL url = new URL("https://raw.githubusercontent.com/IUDevman/gamesense-assets/main/files/tensor/cape.png");
 
             BufferedImage bufferedImage = ImageIO.read(url);
