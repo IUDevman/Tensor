@@ -41,7 +41,7 @@ public final class CapeManager implements Manager {
             Path configPath = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/");
 
             if (!Files.exists(configPath)) {
-                Files.createDirectories(Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/"));
+                Files.createDirectories(configPath);
             }
 
             URL url = new URL("https://raw.githubusercontent.com/IUDevman/gamesense-assets/main/files/tensor/cape.png");
