@@ -27,7 +27,7 @@ public final class KeyboardInputMixin extends Input implements Global {
 
         InventoryMove inventoryMove = Tensor.INSTANCE.MODULE_MANAGER.getModule(InventoryMove.class);
 
-        if (inventoryMove != null && this.getMinecraft().currentScreen != null) {
+        if (inventoryMove != null && inventoryMove.isEnabled() && this.getMinecraft().currentScreen != null) {
 
             if (this.getMinecraft().currentScreen instanceof ChatScreen && !inventoryMove.chatScreen.getValue()) return;
 
