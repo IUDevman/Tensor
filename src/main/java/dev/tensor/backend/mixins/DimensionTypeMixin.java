@@ -22,7 +22,7 @@ public final class DimensionTypeMixin implements Global {
         FullBright fullBright = Tensor.INSTANCE.MODULE_MANAGER.getModule(FullBright.class);
 
         if (fullBright != null && fullBright.isEnabled()) {
-            cir.setReturnValue(1.0F);
+            cir.setReturnValue(1F);
         }
     }
 }
