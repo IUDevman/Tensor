@@ -12,5 +12,5 @@ import dev.tensor.misc.imp.settings.NumberSetting;
 @Module.Info(name = "CameraClip", category = Category.Render)
 public final class CameraClip extends Module {
 
-    public final NumberSetting distance = new NumberSetting("Distance", 5.0, 1.0, 15.0, 1);
+    public final NumberSetting distance = new NumberSetting("Distance", 5.0, 1.0, 50.0, 1);
 }
