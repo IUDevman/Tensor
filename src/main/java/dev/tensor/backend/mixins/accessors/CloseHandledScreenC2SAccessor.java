@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = CloseHandledScreenC2SPacket.class, priority = Integer.MAX_VALUE)
 public interface CloseHandledScreenC2SAccessor {
 
-    @Accessor("syncId")
+    @Accessor(value = "syncId")
     int getSyncId();
 }

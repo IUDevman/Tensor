@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = ChatMessageC2SPacket.class, priority = Integer.MAX_VALUE)
 public interface ChatMessageC2SPacketAccessor {
 
-    @Accessor
+    @Accessor(value = "chatMessage")
     void setChatMessage(String chatMessage);
 }

@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = ExplosionS2CPacket.class, priority = Integer.MAX_VALUE)
 public interface ExplosionS2CPacketAccessor {
 
-    @Accessor
+    @Accessor(value = "playerVelocityX")
     void setPlayerVelocityX(float playerVelocityX);
 
-    @Accessor
+    @Accessor(value = "playerVelocityY")
     void setPlayerVelocityY(float playerVelocityY);
 
-    @Accessor
+    @Accessor(value = "playerVelocityZ")
     void setPlayerVelocityZ(float playerVelocityZ);
 }

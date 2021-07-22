@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.gen.Invoker;
 @Mixin(value = ChatHud.class, priority = Integer.MAX_VALUE)
 public interface ChatHudAccessor {
 
-    @Invoker("addMessage")
+    @Invoker(value = "addMessage")
     void addReplaceable(Text text, int id);
 }

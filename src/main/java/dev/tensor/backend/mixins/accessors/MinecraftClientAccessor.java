@@ -12,6 +12,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = MinecraftClient.class, priority = Integer.MAX_VALUE)
 public interface MinecraftClientAccessor {
 
-    @Accessor
+    @Accessor(value = "itemUseCooldown")
     void setItemUseCooldown(int itemUseCooldown);
 }

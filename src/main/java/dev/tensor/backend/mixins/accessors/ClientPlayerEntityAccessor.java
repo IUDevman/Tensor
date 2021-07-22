@@ -13,6 +13,6 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = ClientPlayerEntity.class, priority = Integer.MAX_VALUE)
 public interface ClientPlayerEntityAccessor {
 
-    @Accessor
+    @Accessor(value = "input")
     void setInput(Input input);
 }

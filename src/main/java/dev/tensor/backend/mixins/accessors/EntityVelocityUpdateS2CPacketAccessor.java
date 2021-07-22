@@ -12,12 +12,12 @@ import org.spongepowered.asm.mixin.gen.Accessor;
 @Mixin(value = EntityVelocityUpdateS2CPacket.class, priority = Integer.MAX_VALUE)
 public interface EntityVelocityUpdateS2CPacketAccessor {
 
-    @Accessor
+    @Accessor(value = "velocityX")
     void setVelocityX(int velocityX);
 
-    @Accessor
+    @Accessor(value = "velocityY")
     void setVelocityY(int velocityY);
 
-    @Accessor
+    @Accessor(value = "velocityZ")
     void setVelocityZ(int velocityZ);
 }
