@@ -26,6 +26,7 @@
     "KeyBindingMixin",
     "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
+    "NarratorManagerMixin",
     "PlayerEntityMixin",
     "PlayerEntityRendererMixin",
     "RecipeToastMixin",
