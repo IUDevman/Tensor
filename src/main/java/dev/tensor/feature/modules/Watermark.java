@@ -2,7 +2,7 @@ package dev.tensor.feature.modules;
 
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
-import dev.tensor.misc.imp.HUDModule;
+import dev.tensor.misc.imp.HUDComponent;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
@@ -17,7 +17,7 @@ import java.awt.*;
  */
 
 @Module.Info(name = "Watermark", category = Category.HUD)
-public final class Watermark extends Module implements HUDModule {
+public final class Watermark extends Module implements HUDComponent {
 
     public final NumberSetting x = new NumberSetting("X", 1, 0, 1000, 0);
     public final NumberSetting y = new NumberSetting("Y", 1, 0, 1000, 0);

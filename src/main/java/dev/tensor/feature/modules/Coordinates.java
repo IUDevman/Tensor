@@ -1,7 +1,7 @@
 package dev.tensor.feature.modules;
 
 import dev.tensor.misc.imp.Category;
-import dev.tensor.misc.imp.HUDModule;
+import dev.tensor.misc.imp.HUDComponent;
 import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
@@ -17,7 +17,7 @@ import java.text.DecimalFormat;
  */
 
 @Module.Info(name = "Coordinates", category = Category.HUD)
-public final class Coordinates extends Module implements HUDModule {
+public final class Coordinates extends Module implements HUDComponent {
 
     public final NumberSetting x = new NumberSetting("X", 1, 0, 1000, 0);
     public final NumberSetting y = new NumberSetting("Y", 17, 0, 1000, 0);

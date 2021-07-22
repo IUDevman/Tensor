@@ -8,7 +8,7 @@ import net.minecraft.client.util.math.MatrixStack;
  * @since 06-29-2021
  */
 
-public interface HUDModule {
+public interface HUDComponent {
 
     NumberSetting getStartX();
 
