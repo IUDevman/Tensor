@@ -24,6 +24,7 @@
     "InGameHudMixin",
     "InGameOverlayRendererMixin",
     "KeyBindingMixin",
+    "KeyboardInputMixin",
     "LightmapTextureManagerMixin",
     "MinecraftClientMixin",
     "NarratorManagerMixin",
@@ -41,6 +42,7 @@
     "accessors.CloseHandledScreenC2SAccessor",
     "accessors.EntityVelocityUpdateS2CPacketAccessor",
     "accessors.ExplosionS2CPacketAccessor",
+    "accessors.KeyBindingAccessor",
     "accessors.MinecraftClientAccessor",
     "accessors.PlayerMoveC2SPacketAccessor"
   ],
