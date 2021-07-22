@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoPush;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.fluid.FluidState;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-16-2021
  */
 
-@Mixin(value = FluidState.class, priority = Integer.MAX_VALUE)
+@Mixin(value = FluidState.class, priority = MixinPriority.VALUE)
 public final class FluidStateMixin implements Global {
 
     @Inject(method = "getVelocity", at = @At("HEAD"), cancellable = true)

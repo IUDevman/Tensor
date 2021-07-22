@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.ClientRenderEvent;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoViewBob;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 04-12-2021
  */
 
-@Mixin(value = GameRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = GameRenderer.class, priority = MixinPriority.VALUE)
 public final class GameRendererMixin implements Global {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))

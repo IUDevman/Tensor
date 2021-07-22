@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.misc.imp.Global;
 import io.netty.channel.ChannelHandlerContext;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 04-13-2021
  */
 
-@Mixin(value = ClientConnection.class, priority = Integer.MAX_VALUE)
+@Mixin(value = ClientConnection.class, priority = MixinPriority.VALUE)
 public final class ClientConnectionMixin implements Global {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)

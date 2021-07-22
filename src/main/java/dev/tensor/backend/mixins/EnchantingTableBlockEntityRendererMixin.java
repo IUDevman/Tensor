@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoRender;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.block.entity.EnchantingTableBlockEntityRenderer;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-15-2021
  */
 
-@Mixin(value = EnchantingTableBlockEntityRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = EnchantingTableBlockEntityRenderer.class, priority = MixinPriority.VALUE)
 public final class EnchantingTableBlockEntityRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

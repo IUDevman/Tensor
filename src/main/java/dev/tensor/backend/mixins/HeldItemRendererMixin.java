@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.ViewModel;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
@@ -19,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-14-2021
  */
 
-@Mixin(value = HeldItemRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = HeldItemRenderer.class, priority = MixinPriority.VALUE)
 public final class HeldItemRendererMixin implements Global {
 
     @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))

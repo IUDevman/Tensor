@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoGlitchBlock;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Global;
@@ -21,7 +22,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-09-2021
  */
 
-@Mixin(value = Block.class, priority = Integer.MAX_VALUE)
+@Mixin(value = Block.class, priority = MixinPriority.VALUE)
 public final class BlockMixin implements Global {
 
     @Inject(method = "getVelocityMultiplier()F", at = @At("HEAD"), cancellable = true)

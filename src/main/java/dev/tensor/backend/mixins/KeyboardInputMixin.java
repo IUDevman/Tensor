@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.mixins.accessors.KeyBindingAccessor;
 import dev.tensor.feature.modules.InventoryMove;
 import dev.tensor.misc.imp.Global;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 07-21-2021
  */
 
-@Mixin(value = KeyboardInput.class, priority = Integer.MAX_VALUE)
+@Mixin(value = KeyboardInput.class, priority = MixinPriority.VALUE)
 public final class KeyboardInputMixin extends Input implements Global {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)

@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoOverlay;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.gui.hud.BossBarHud;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-14-2021
  */
 
-@Mixin(value = BossBarHud.class, priority = Integer.MAX_VALUE)
+@Mixin(value = BossBarHud.class, priority = MixinPriority.VALUE)
 public final class BossBarHudMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

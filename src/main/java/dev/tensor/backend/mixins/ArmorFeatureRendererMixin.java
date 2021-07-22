@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoRender;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.VertexConsumerProvider;
@@ -17,7 +18,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-15-2021
  */
 
-@Mixin(value = ArmorFeatureRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = ArmorFeatureRenderer.class, priority = MixinPriority.VALUE)
 public final class ArmorFeatureRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)

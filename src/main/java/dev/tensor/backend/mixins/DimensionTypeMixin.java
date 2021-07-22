@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.FullBright;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.world.dimension.DimensionType;
@@ -14,7 +15,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * Added with explicit permission, thanks! :D
  */
 
-@Mixin(value = DimensionType.class, priority = Integer.MAX_VALUE)
+@Mixin(value = DimensionType.class, priority = MixinPriority.VALUE)
 public final class DimensionTypeMixin implements Global {
 
     @Inject(method = "method_28516", at = @At("HEAD"), cancellable = true)

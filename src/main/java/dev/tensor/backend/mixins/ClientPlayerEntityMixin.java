@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoPortalEffect;
 import dev.tensor.feature.modules.NoPush;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-09-2021
  */
 
-@Mixin(value = ClientPlayerEntity.class, priority = Integer.MAX_VALUE)
+@Mixin(value = ClientPlayerEntity.class, priority = MixinPriority.VALUE)
 public final class ClientPlayerEntityMixin implements Global {
 
     @Inject(method = "updateNausea", at = @At("HEAD"), cancellable = true)

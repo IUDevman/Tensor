@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.ApplyFogEvent;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.BackgroundRenderer;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 04-14-2021
  */
 
-@Mixin(value = BackgroundRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = BackgroundRenderer.class, priority = MixinPriority.VALUE)
 public final class BackgroundRendererMixin implements Global {
 
     @Inject(method = "applyFog", at = @At("HEAD"), cancellable = true)

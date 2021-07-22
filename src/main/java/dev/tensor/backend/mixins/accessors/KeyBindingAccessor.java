@@ -1,5 +1,6 @@
 package dev.tensor.backend.mixins.accessors;
 
+import dev.tensor.backend.MixinPriority;
 import net.minecraft.client.options.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Mixin;
@@ -10,7 +11,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 07-21-2021
  */
 
-@Mixin(value = KeyBinding.class, priority = Integer.MAX_VALUE)
+@Mixin(value = KeyBinding.class, priority = MixinPriority.VALUE)
 public interface KeyBindingAccessor {
 
     @Accessor(value = "boundKey")

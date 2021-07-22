@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.block.BlockState;
@@ -18,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * @since 05-09-2021
  */
 
-@Mixin(value = SweetBerryBushBlock.class, priority = Integer.MAX_VALUE)
+@Mixin(value = SweetBerryBushBlock.class, priority = MixinPriority.VALUE)
 public final class SweetBerryBushBlockMixin implements Global {
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)

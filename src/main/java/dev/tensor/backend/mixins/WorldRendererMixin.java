@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoParticles;
 import dev.tensor.feature.modules.NoWeather;
@@ -23,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-11-2021
  */
 
-@Mixin(value = WorldRenderer.class, priority = Integer.MAX_VALUE)
+@Mixin(value = WorldRenderer.class, priority = MixinPriority.VALUE)
 public final class WorldRendererMixin implements Global {
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)

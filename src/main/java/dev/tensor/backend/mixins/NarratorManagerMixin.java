@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.AntiNarrator;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.options.NarratorMode;
@@ -15,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 07-21-2021
  */
 
-@Mixin(value = NarratorManager.class, priority = Integer.MAX_VALUE)
+@Mixin(value = NarratorManager.class, priority = MixinPriority.VALUE)
 public final class NarratorManagerMixin implements Global {
 
     @Inject(method = "getNarratorOption", at = @At("HEAD"), cancellable = true)

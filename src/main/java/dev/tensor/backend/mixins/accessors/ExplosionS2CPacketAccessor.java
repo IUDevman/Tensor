@@ -1,5 +1,6 @@
 package dev.tensor.backend.mixins.accessors;
 
+import dev.tensor.backend.MixinPriority;
 import net.minecraft.network.packet.s2c.play.ExplosionS2CPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-13-2021
  */
 
-@Mixin(value = ExplosionS2CPacket.class, priority = Integer.MAX_VALUE)
+@Mixin(value = ExplosionS2CPacket.class, priority = MixinPriority.VALUE)
 public interface ExplosionS2CPacketAccessor {
 
     @Accessor(value = "playerVelocityX")

@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.CameraClip;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.misc.imp.Global;
@@ -16,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 05-11-2021
  */
 
-@Mixin(value = Camera.class, priority = Integer.MAX_VALUE)
+@Mixin(value = Camera.class, priority = MixinPriority.VALUE)
 public final class CameraMixin implements Global {
 
     @Inject(method = "clipToSpace", at = @At("HEAD"), cancellable = true)

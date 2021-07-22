@@ -1,5 +1,6 @@
 package dev.tensor.backend.mixins.accessors;
 
+import dev.tensor.backend.MixinPriority;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.gen.Accessor;
@@ -9,7 +10,7 @@ import org.spongepowered.asm.mixin.gen.Accessor;
  * @since 05-21-2021
  */
 
-@Mixin(value = MinecraftClient.class, priority = Integer.MAX_VALUE)
+@Mixin(value = MinecraftClient.class, priority = MixinPriority.VALUE)
 public interface MinecraftClientAccessor {
 
     @Accessor(value = "itemUseCooldown")

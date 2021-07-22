@@ -1,6 +1,7 @@
 package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
+import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.misc.imp.Global;
@@ -16,7 +17,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  * @since 04-12-2021
  */
 
-@Mixin(value = MinecraftClient.class, priority = Integer.MAX_VALUE)
+@Mixin(value = MinecraftClient.class, priority = MixinPriority.VALUE)
 public final class MinecraftClientMixin implements Global {
 
     @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)
