@@ -38,13 +38,13 @@ public final class Tensor implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        double startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis();
         this.LOGGER.info("Initializing " + this.MOD_NAME + " " + this.MOD_VERSION + "!");
 
         loadClient();
 
-        double finishedTime = (System.currentTimeMillis() - startTime) / 1000;
-        this.LOGGER.info("Finished initializing " + this.MOD_NAME + " " + this.MOD_VERSION + " (" + finishedTime + "s)!");
+        long finishedTime = System.currentTimeMillis() - startTime;
+        this.LOGGER.info("Finished initializing " + this.MOD_NAME + " " + this.MOD_VERSION + " (" + finishedTime + "ms)!");
     }
 
     private void loadClient() {
