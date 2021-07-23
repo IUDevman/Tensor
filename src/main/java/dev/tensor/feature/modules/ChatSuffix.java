@@ -24,9 +24,7 @@ public final class ChatSuffix extends Module {
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
-        if (event.getPacket() instanceof ChatMessageC2SPacket) {
-            ChatMessageC2SPacket packet = (ChatMessageC2SPacket) event.getPacket();
-
+        if (event.getPacket() instanceof ChatMessageC2SPacket packet) {
             String message = packet.getChatMessage();
 
             if (message.startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix()) || message.startsWith("/")) return;

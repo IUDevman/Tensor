@@ -27,9 +27,7 @@ public final class Criticals extends Module {
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
-        if (event.getPacket() instanceof PlayerInteractEntityC2SPacket) {
-            PlayerInteractEntityC2SPacket packet = (PlayerInteractEntityC2SPacket) event.getPacket();
-
+        if (event.getPacket() instanceof PlayerInteractEntityC2SPacket packet) {
             if (this.getMinecraft().getServer() == null) return;
 
             if (!shouldApplyCriticals(packet.getEntity(this.getMinecraft().getServer().getWorld(this.getWorld().getRegistryKey())))) return;

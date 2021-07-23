@@ -27,9 +27,8 @@ public final class NoOverlay extends Module {
     @SuppressWarnings("unused")
     @EventTarget
     public void onPlaySound(PlaySoundEvent event) {
-        if (!toast.getValue() || !(event.getSoundInstance() instanceof PositionedSoundInstance)) return;
+        if (!toast.getValue() || !(event.getSoundInstance() instanceof PositionedSoundInstance instance)) return;
 
-        PositionedSoundInstance instance = (PositionedSoundInstance) event.getSoundInstance();
         Identifier identifier = instance.getId();
 
         if (identifier == SoundEvents.UI_TOAST_IN.getId() || identifier == SoundEvents.UI_TOAST_OUT.getId() || identifier == SoundEvents.UI_TOAST_CHALLENGE_COMPLETE.getId()) {
