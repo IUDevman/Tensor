@@ -9,7 +9,10 @@ import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.util.Identifier;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -23,12 +26,24 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = InGameHud.class, priority = MixinPriority.VALUE)
 public final class InGameHudMixin implements Global {
 
-    //@Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
-    //public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
-    //    NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
-//
-      //  if (noOverlay != null && noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
-    //}
+    @Shadow
+    @Final
+    private static Identifier PUMPKIN_BLUR;
+
+    @Shadow
+    @Final
+    private static Identifier POWDER_SNOW_OUTLINE;
+
+    @Inject(method = "renderOverlay", at = @At("HEAD"), cancellable = true)
+    public void render(Identifier texture, float opacity, CallbackInfo callbackInfo) {
+        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
+
+        if (noOverlay != null && noOverlay.isEnabled()) {
+            if ((noOverlay.pumpkin.getValue() && texture == PUMPKIN_BLUR) || (noOverlay.powderedSnow.getValue() && texture == POWDER_SNOW_OUTLINE)) {
+                callbackInfo.cancel();
+            }
+        }
+    }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
     public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {

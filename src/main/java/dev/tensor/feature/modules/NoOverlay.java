@@ -19,6 +19,7 @@ public final class NoOverlay extends Module {
 
     public final BooleanSetting vignette = new BooleanSetting("Vignette", true);
     public final BooleanSetting pumpkin = new BooleanSetting("Pumpkin", true);
+    public final BooleanSetting powderedSnow = new BooleanSetting("Powdered Snow", true);
     public final BooleanSetting bossBar = new BooleanSetting("Boss Bar", true);
     public final BooleanSetting status = new BooleanSetting("Status", false);
     public final BooleanSetting toast = new BooleanSetting("Toast", false);
