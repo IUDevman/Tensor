@@ -35,7 +35,7 @@ public final class InGameHudMixin implements Global {
     private static Identifier POWDER_SNOW_OUTLINE;
 
     @Inject(method = "renderOverlay", at = @At("HEAD"), cancellable = true)
-    public void render(Identifier texture, float opacity, CallbackInfo callbackInfo) {
+    public void renderOverlay(Identifier texture, float opacity, CallbackInfo callbackInfo) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay != null && noOverlay.isEnabled()) {
