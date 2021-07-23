@@ -14,17 +14,12 @@ import dev.tensor.misc.imp.Manager;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
-
 /**
  * @author IUDevman
  * @since 04-12-2021
  */
 
 public final class EventManager implements Manager {
-
-    private final ThreadPoolExecutor threadPoolExecutor = (ThreadPoolExecutor) Executors.newCachedThreadPool();
 
     @Override
     public void load() {
@@ -35,7 +30,7 @@ public final class EventManager implements Manager {
     @EventTarget(Priority.HIGHEST)
     public void onClientTick(ClientTickEvent event) {
         Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
-            if (module.isEnabled()) this.threadPoolExecutor.execute(module::onTick);
+            if (module.isEnabled()) module.onTick();
         });
     }
 
