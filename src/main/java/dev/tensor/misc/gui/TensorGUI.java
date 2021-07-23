@@ -140,7 +140,6 @@ public final class TensorGUI extends Screen implements Global {
         int xScaled = (int) (posX * scale);
         int yScaled = (int) (posY * scale);
 
-        GL11.glPushMatrix();
         GL11.glScissor(xScaled, windowHeight - yScaled - heightScaled, widthScaled, heightScaled);
         GL11.glEnable(GL11.GL_SCISSOR_TEST);
 
@@ -173,7 +172,6 @@ public final class TensorGUI extends Screen implements Global {
         }
 
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
-        GL11.glPopMatrix();
 
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB());
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + guiHeight.get(), new Color(62, 11, 10, 200).getRGB());
@@ -185,7 +183,7 @@ public final class TensorGUI extends Screen implements Global {
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 62, this.y.getValue().intValue(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + 20, new Color(0, 0, 0, 150).getRGB());
 
         String name = Tensor.INSTANCE.MOD_NAME + " (" + Formatting.YELLOW + Tensor.INSTANCE.MOD_VERSION + Formatting.RESET + ")";
-        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, name, this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(name).asOrderedText(), this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override

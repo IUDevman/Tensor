@@ -4,7 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.misc.imp.Global;
-import net.minecraft.client.options.KeyBinding;
+import net.minecraft.client.option.KeyBinding;
 import net.minecraft.client.util.InputUtil;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

@@ -22,7 +22,7 @@ public final class Flight extends Module {
     public void onTick() {
         if (elytraCheck.getValue() && this.getPlayer().isFallFlying()) return;
 
-        this.getPlayer().abilities.flying = false;
+        this.getPlayer().getAbilities().flying = false;
 
         this.getPlayer().flyingSpeed = getSpeed();
         this.getPlayer().setVelocity(new Vec3d(0, 0, 0));

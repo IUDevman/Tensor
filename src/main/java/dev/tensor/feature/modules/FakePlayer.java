@@ -6,6 +6,7 @@ import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Module;
 import net.minecraft.client.network.OtherClientPlayerEntity;
+import net.minecraft.entity.Entity;
 
 import java.util.UUID;
 
@@ -23,8 +24,8 @@ public final class FakePlayer extends Module {
     public void onEnable() {
         otherClientPlayerEntity = new OtherClientPlayerEntity(this.getWorld(), new GameProfile(UUID.fromString("fdee323e-7f0c-4c15-8d1c-0f277442342a"), "Fit"));
         otherClientPlayerEntity.copyPositionAndRotation(this.getPlayer());
-        otherClientPlayerEntity.setEntityId(-666);
-        this.getWorld().addEntity(otherClientPlayerEntity.getEntityId(), otherClientPlayerEntity);
+        otherClientPlayerEntity.setId(-666);
+        this.getWorld().addEntity(otherClientPlayerEntity.getId(), otherClientPlayerEntity);
         this.getWorld().getPlayers().add(otherClientPlayerEntity);
     }
 
@@ -32,7 +33,7 @@ public final class FakePlayer extends Module {
     public void onDisable() {
         if (otherClientPlayerEntity == null) return;
 
-        this.getWorld().removeEntity(otherClientPlayerEntity.getEntityId());
+        this.getWorld().removeEntity(otherClientPlayerEntity.getId(), Entity.RemovalReason.DISCARDED);
     }
 
     @SuppressWarnings("unused")

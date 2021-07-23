@@ -19,6 +19,7 @@ public final class NoOverlay extends Module {
 
     public final BooleanSetting vignette = new BooleanSetting("Vignette", true);
     public final BooleanSetting pumpkin = new BooleanSetting("Pumpkin", true);
+    public final BooleanSetting powderedSnow = new BooleanSetting("Powdered Snow", true);
     public final BooleanSetting bossBar = new BooleanSetting("Boss Bar", true);
     public final BooleanSetting status = new BooleanSetting("Status", false);
     public final BooleanSetting toast = new BooleanSetting("Toast", false);
@@ -26,9 +27,8 @@ public final class NoOverlay extends Module {
     @SuppressWarnings("unused")
     @EventTarget
     public void onPlaySound(PlaySoundEvent event) {
-        if (!toast.getValue() || !(event.getSoundInstance() instanceof PositionedSoundInstance)) return;
+        if (!toast.getValue() || !(event.getSoundInstance() instanceof PositionedSoundInstance instance)) return;
 
-        PositionedSoundInstance instance = (PositionedSoundInstance) event.getSoundInstance();
         Identifier identifier = instance.getId();
 
         if (identifier == SoundEvents.UI_TOAST_IN.getId() || identifier == SoundEvents.UI_TOAST_OUT.getId() || identifier == SoundEvents.UI_TOAST_CHALLENGE_COMPLETE.getId()) {

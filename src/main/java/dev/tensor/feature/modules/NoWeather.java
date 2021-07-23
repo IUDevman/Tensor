@@ -20,8 +20,7 @@ public final class NoWeather extends Module {
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Receive) return;
 
-        if (event.getPacket() instanceof PlaySoundS2CPacket) {
-            PlaySoundS2CPacket packet = (PlaySoundS2CPacket) event.getPacket();
+        if (event.getPacket() instanceof PlaySoundS2CPacket packet) {
 
             if (packet.getSound().equals(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER)) event.setCancelled(true);
             else if (packet.getSound().equals(SoundEvents.WEATHER_RAIN) || packet.getSound().equals(SoundEvents.WEATHER_RAIN_ABOVE)) event.setCancelled(true);

@@ -66,9 +66,7 @@ public final class EventManager implements Manager {
     public void onPacket(PacketEvent event) {
         if (!event.getType().equals(PacketEvent.Type.Send)) return;
 
-        if (event.getPacket() instanceof ChatMessageC2SPacket) {
-
-            ChatMessageC2SPacket chatMessageC2SPacket = (ChatMessageC2SPacket) event.getPacket();
+        if (event.getPacket() instanceof ChatMessageC2SPacket chatMessageC2SPacket) {
 
             if (chatMessageC2SPacket.getChatMessage().startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix())) {
                 event.setCancelled(true);

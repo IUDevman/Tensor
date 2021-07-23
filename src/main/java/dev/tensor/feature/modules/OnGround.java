@@ -20,9 +20,7 @@ public final class OnGround extends Module {
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
-        if (event.getPacket() instanceof PlayerMoveC2SPacket) {
-            PlayerMoveC2SPacket packet = (PlayerMoveC2SPacket) event.getPacket();
-
+        if (event.getPacket() instanceof PlayerMoveC2SPacket packet) {
             ((PlayerMoveC2SPacketAccessor) packet).setOnGround(false);
         }
     }

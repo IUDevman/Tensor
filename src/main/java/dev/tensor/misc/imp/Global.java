@@ -31,7 +31,7 @@ public interface Global {
     }
 
     default PlayerInventory getInventory() {
-        return getPlayer().inventory;
+        return getPlayer().getInventory();
     }
 
     default ChatHud getChatHud() {

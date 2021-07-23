@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.event.imp.Event;
 import dev.tensor.misc.event.imp.Priority;
 
+import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -74,7 +75,8 @@ public final class EventHandler {
                 sortListValue(indexClass);
             }
         } else {
-            this.REGISTRY_MAP.put(indexClass, new CopyOnWriteArrayList<MethodData>() {
+            this.REGISTRY_MAP.put(indexClass, new CopyOnWriteArrayList<>() {
+                @Serial
                 private static final long serialVersionUID = 666L;
 
                 {

@@ -24,7 +24,7 @@ public final class ElytraFlight extends Module {
     public void onTick() {
         if (!this.getPlayer().isFallFlying()) return;
 
-        this.getPlayer().abilities.flying = false;
+        this.getPlayer().getAbilities().flying = false;
 
         if (areButtonsDown() || alwaysMoving.getValue()) {
             this.getPlayer().setVelocity(getFlyingVelocity());

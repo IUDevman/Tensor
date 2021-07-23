@@ -27,8 +27,7 @@ public final class XCarry extends Module {
     public void onPacket(PacketEvent event) {
         if (event.getType() != PacketEvent.Type.Send) return;
 
-        if (event.getPacket() instanceof CloseHandledScreenC2SPacket) {
-            CloseHandledScreenC2SPacket packet = (CloseHandledScreenC2SPacket) event.getPacket();
+        if (event.getPacket() instanceof CloseHandledScreenC2SPacket packet) {
 
             if (((CloseHandledScreenC2SAccessor) packet).getSyncId() == this.getPlayer().playerScreenHandler.syncId) {
                 event.setCancelled(true);
