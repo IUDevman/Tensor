@@ -5,6 +5,7 @@ import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.text.LiteralText;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -96,7 +97,7 @@ public final class ModuleElement implements Element {
         DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
         DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
 
-        DrawableHelper.drawCenteredString(matrixStack, this.getMinecraft().textRenderer, this.getName(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(this.getName()).asOrderedText(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), module.isEnabled() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255, 255, 255).getRGB());
     }
 
     @Override
