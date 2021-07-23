@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.NoSlow;
 import dev.tensor.misc.imp.Global;
+import net.minecraft.block.BlockState;
 import net.minecraft.block.SlimeBlock;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.math.BlockPos;
@@ -22,7 +23,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class SlimeBlockMixin implements Global {
 
     @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
-    public void onSteppedOn(World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo callbackInfo) {
         if (this.isNull() || entity != this.getPlayer()) return;
 
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);

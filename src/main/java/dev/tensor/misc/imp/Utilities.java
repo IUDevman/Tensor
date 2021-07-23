@@ -34,7 +34,7 @@ public interface Utilities extends Global {
 
             if (itemStack.isEmpty() || !(itemStack.getItem() instanceof BlockItem)) continue;
 
-            if (((BlockItem) itemStack.getItem()).getBlock().is(block)) {
+            if (((BlockItem) itemStack.getItem()).getBlock().equals(block)) {
                 slot = i;
                 break;
             }

@@ -29,7 +29,7 @@ public final class Velocity extends Module {
         if (event.getPacket() instanceof EntityVelocityUpdateS2CPacket && damage.getValue()) {
             EntityVelocityUpdateS2CPacket packet = (EntityVelocityUpdateS2CPacket) event.getPacket();
 
-            if (packet.getId() != this.getPlayer().getEntityId()) return;
+            if (packet.getId() != this.getPlayer().getId()) return;
 
             ((EntityVelocityUpdateS2CPacketAccessor) packet).setVelocityX(0);
             ((EntityVelocityUpdateS2CPacketAccessor) packet).setVelocityY(0);

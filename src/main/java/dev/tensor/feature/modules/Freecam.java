@@ -10,7 +10,7 @@ import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.imp.settings.BooleanSetting;
 import dev.tensor.misc.imp.settings.NumberSetting;
 import net.minecraft.client.input.KeyboardInput;
-import net.minecraft.client.options.Perspective;
+import net.minecraft.client.option.Perspective;
 
 /**
  * @author wagyourtail#3826

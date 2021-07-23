@@ -27,9 +27,6 @@ import java.util.Objects;
 public abstract class EntityMixin implements Global {
 
     @Shadow
-    private int entityId;
-
-    @Shadow
     public abstract Vec3d getCameraPosVec(float tickDelta);
 
     @Shadow
@@ -41,9 +38,12 @@ public abstract class EntityMixin implements Global {
     @Shadow
     protected boolean firstUpdate;
 
+    @Shadow
+    private int id;
+
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
     public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
-        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
+        if (this.isNull() || id != this.getPlayer().getId()) return;
 
         NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
@@ -54,7 +54,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "adjustMovementForPiston", at = @At("HEAD"), cancellable = true)
     public void adjustMovementForPiston(Vec3d movement, CallbackInfoReturnable<Vec3d> cir) {
-        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
+        if (this.isNull() || id != this.getPlayer().getId()) return;
 
         NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
@@ -74,7 +74,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "raycast", at = @At("HEAD"), cancellable = true)
     public void raycast(double maxDistance, float tickDelta, boolean includeFluids, CallbackInfoReturnable<HitResult> cir) {
-        if (this.isNull() || entityId != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getEntityId() || this.getPlayer().isSubmergedInWater()) return;
+        if (this.isNull() || id != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getId() || this.getPlayer().isSubmergedInWater()) return;
 
         LiquidInteract liquidInteract = Tensor.INSTANCE.MODULE_MANAGER.getModule(LiquidInteract.class);
 
@@ -88,7 +88,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "isTouchingWater", at = @At("HEAD"), cancellable = true)
     public void isTouchingWater(CallbackInfoReturnable<Boolean> cir) {
-        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
+        if (this.isNull() || id != this.getPlayer().getId()) return;
 
         Flight flight = Tensor.INSTANCE.MODULE_MANAGER.getModule(Flight.class);
         ElytraFlight elytraFlight = Tensor.INSTANCE.MODULE_MANAGER.getModule(ElytraFlight.class);
@@ -100,7 +100,7 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "isInLava", at = @At("HEAD"), cancellable = true)
     public void isInLava(CallbackInfoReturnable<Boolean> cir) {
-        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
+        if (this.isNull() || id != this.getPlayer().getId()) return;
 
         Flight flight = Tensor.INSTANCE.MODULE_MANAGER.getModule(Flight.class);
         ElytraFlight elytraFlight = Tensor.INSTANCE.MODULE_MANAGER.getModule(ElytraFlight.class);
@@ -112,13 +112,13 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
     public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo callbackInfo) {
-        if (this.isNull() || entityId != this.getPlayer().getEntityId()) return;
+        if (this.isNull() || id != this.getPlayer().getId()) return;
 
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         if (freecam != null && freecam.isEnabled() && freecam.getCameraEntity() != null) {
             freecam.getCameraEntity().changeLookDirection(cursorDeltaX, cursorDeltaY);
-            freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().yaw);
+            freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().getYaw());
             callbackInfo.cancel();
         }
     }

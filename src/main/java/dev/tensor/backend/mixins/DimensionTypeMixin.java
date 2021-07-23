@@ -18,8 +18,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = DimensionType.class, priority = MixinPriority.VALUE)
 public final class DimensionTypeMixin implements Global {
 
-    @Inject(method = "method_28516", at = @At("HEAD"), cancellable = true)
-    public void method_28516(int i, CallbackInfoReturnable<Float> cir) {
+    @Inject(method = "getBrightness", at = @At("HEAD"), cancellable = true)
+    public void getBrightness(int i, CallbackInfoReturnable<Float> cir) {
         FullBright fullBright = Tensor.INSTANCE.MODULE_MANAGER.getModule(FullBright.class);
 
         if (fullBright != null && fullBright.isEnabled()) {

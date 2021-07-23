@@ -28,11 +28,11 @@ public final class CameraEntity extends OtherClientPlayerEntity implements Globa
     }
 
     public void spawn() {
-        this.getWorld().addEntity(this.getEntityId(), this);
+        this.getWorld().addEntity(this.getId(), this);
     }
 
     public void despawn() {
-        this.getWorld().removeEntity(this.getEntityId());
+        this.getWorld().removeEntity(this.getId(), RemovalReason.DISCARDED);
     }
 
     @Override

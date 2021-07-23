@@ -23,12 +23,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(value = InGameHud.class, priority = MixinPriority.VALUE)
 public final class InGameHudMixin implements Global {
 
-    @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
-    public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
-        NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
-
-        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
-    }
+    //@Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
+    //public void renderPumpkinOverlay(CallbackInfo callbackInfo) {
+    //    NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
+//
+      //  if (noOverlay != null && noOverlay.isEnabled() && noOverlay.pumpkin.getValue()) callbackInfo.cancel();
+    //}
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
     public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {

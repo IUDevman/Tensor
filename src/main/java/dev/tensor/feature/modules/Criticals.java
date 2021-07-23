@@ -30,20 +30,20 @@ public final class Criticals extends Module {
         if (event.getPacket() instanceof PlayerInteractEntityC2SPacket) {
             PlayerInteractEntityC2SPacket packet = (PlayerInteractEntityC2SPacket) event.getPacket();
 
-            if (!shouldApplyCriticals(packet.getEntity(getWorld()))) return;
+            if (!shouldApplyCriticals(packet.getEntity(this.getMinecraft().getServer().getWorld()))) return;
 
             switch ((Type) type.getValue()) {
                 case Packet: {
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.05, this.getPlayer().getZ(), false));
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.03, this.getPlayer().getZ(), false));
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY() + 0.05, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY() + 0.03, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
                     break;
                 }
                 case Strict: {
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.062602401692772, this.getPlayer().getZ(), false));
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY() + 0.0726023996066094, this.getPlayer().getZ(), false));
-                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionOnly(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY() + 0.062602401692772, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY() + 0.0726023996066094, this.getPlayer().getZ(), false));
+                    this.getNetwork().sendPacket(new PlayerMoveC2SPacket.PositionAndOnGround(this.getPlayer().getX(), this.getPlayer().getY(), this.getPlayer().getZ(), false));
                     break;
                 }
                 default:
