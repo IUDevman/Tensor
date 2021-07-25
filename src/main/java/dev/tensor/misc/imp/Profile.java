@@ -78,8 +78,7 @@ public final class Profile {
 
                 if (!Files.exists(path)) return;
 
-                InputStream inputStream = Files.newInputStream(path);
-                JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+                JsonObject jsonObject = getJsonObjectFromPath(path);
 
                 module.setMessages(jsonObject.get("Messages").getAsBoolean());
                 module.setDrawn(jsonObject.get("Drawn").getAsBoolean());
@@ -123,8 +122,7 @@ public final class Profile {
 
         if (!Files.exists(path)) return;
 
-        InputStream inputStream = Files.newInputStream(path);
-        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = getJsonObjectFromPath(path);
 
         Tensor.INSTANCE.COMMAND_MANAGER.setPrefix(jsonObject.get("Prefix").getAsString());
     }
@@ -134,8 +132,7 @@ public final class Profile {
 
         if (!Files.exists(path)) return;
 
-        InputStream inputStream = Files.newInputStream(path);
-        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = getJsonObjectFromPath(path);
         JsonArray jsonArray = jsonObject.get("Friends").getAsJsonArray();
 
         Tensor.INSTANCE.FRIEND_MANAGER.clearFriends();
@@ -147,8 +144,7 @@ public final class Profile {
 
         if (!Files.exists(path)) return;
 
-        InputStream inputStream = Files.newInputStream(path);
-        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = getJsonObjectFromPath(path);
         JsonArray jsonArray = jsonObject.get("Capes").getAsJsonArray();
 
         Tensor.INSTANCE.CAPE_MANAGER.clearCapes();
@@ -160,8 +156,7 @@ public final class Profile {
 
         if (!Files.exists(path)) return;
 
-        InputStream inputStream = Files.newInputStream(path);
-        JsonObject jsonObject = new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
+        JsonObject jsonObject = getJsonObjectFromPath(path);
 
         Tensor.INSTANCE.GUI_MANAGER.getGUI().getX().setValue(jsonObject.get("X Position").getAsDouble());
         Tensor.INSTANCE.GUI_MANAGER.getGUI().getY().setValue(jsonObject.get("Y Position").getAsDouble());
@@ -184,9 +179,6 @@ public final class Profile {
                 Path path = Paths.get(getModulePath() + module.getName() + ".json");
                 registerFile(path);
 
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
-
                 JsonObject jsonObject = new JsonObject();
 
                 jsonObject.add("Enabled", new JsonPrimitive(module.isEnabled()));
@@ -206,9 +198,7 @@ public final class Profile {
 
                 jsonObject.add("Settings", settingObject);
 
-                String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
-                outputStreamWriter.write(jsonString);
-                outputStreamWriter.close();
+                createAndWrite(path, jsonObject);
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -220,23 +210,15 @@ public final class Profile {
         Path path = Paths.get(getMainPath() + "Prefix.json");
         registerFile(path);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
-
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("Prefix", new JsonPrimitive(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix()));
 
-        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
-        outputStreamWriter.write(jsonString);
-        outputStreamWriter.close();
+        createAndWrite(path, jsonObject);
     }
 
     private void saveFriends() throws IOException {
         Path path = Paths.get(getMainPath() + "Friends.json");
         registerFile(path);
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
         JsonObject jsonObject = new JsonObject();
         JsonArray jsonArray = new JsonArray();
@@ -244,17 +226,12 @@ public final class Profile {
         Tensor.INSTANCE.FRIEND_MANAGER.getFriends().forEach(jsonArray::add);
         jsonObject.add("Friends", jsonArray);
 
-        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
-        outputStreamWriter.write(jsonString);
-        outputStreamWriter.close();
+        createAndWrite(path, jsonObject);
     }
 
     private void saveCapes() throws IOException {
         Path path = Paths.get(getMainPath() + "Capes.json");
         registerFile(path);
-
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
 
         JsonObject jsonObject = new JsonObject();
         JsonArray jsonArray = new JsonArray();
@@ -262,31 +239,38 @@ public final class Profile {
         Tensor.INSTANCE.CAPE_MANAGER.getCapes().forEach(jsonArray::add);
         jsonObject.add("Capes", jsonArray);
 
-        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
-        outputStreamWriter.write(jsonString);
-        outputStreamWriter.close();
+        createAndWrite(path, jsonObject);
     }
 
     private void saveClickGUI() throws IOException {
         Path path = Paths.get(getMainPath() + "ClickGUI.json");
         registerFile(path);
 
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
-
         JsonObject jsonObject = new JsonObject();
         jsonObject.add("X Position", new JsonPrimitive(Tensor.INSTANCE.GUI_MANAGER.getGUI().getX().getValue()));
         jsonObject.add("Y Position", new JsonPrimitive(Tensor.INSTANCE.GUI_MANAGER.getGUI().getY().getValue()));
 
-        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
-        outputStreamWriter.write(jsonString);
-        outputStreamWriter.close();
+        createAndWrite(path, jsonObject);
+    }
+
+    private JsonObject getJsonObjectFromPath(Path path) throws IOException {
+        InputStream inputStream = Files.newInputStream(path);
+        return new JsonParser().parse(new InputStreamReader(inputStream)).getAsJsonObject();
     }
 
     private void registerFile(Path path) throws IOException {
         if (Files.exists(path)) Files.delete(path);
 
         Files.createFile(path);
+    }
+
+    private void createAndWrite(Path path, JsonObject jsonObject) throws IOException {
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(path.toString()), StandardCharsets.UTF_8);
+
+        String jsonString = gson.toJson(new JsonParser().parse(jsonObject.toString()));
+        outputStreamWriter.write(jsonString);
+        outputStreamWriter.close();
     }
 
     private String getMainPath() {
