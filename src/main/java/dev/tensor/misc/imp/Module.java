@@ -12,7 +12,7 @@ import java.lang.annotation.*;
  */
 
 @SuppressWarnings("EmptyMethod")
-public abstract class Module implements Global, Utilities {
+public abstract class Module implements Global, Utility {
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)

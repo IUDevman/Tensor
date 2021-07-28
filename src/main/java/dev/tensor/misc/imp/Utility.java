@@ -14,7 +14,7 @@ import net.minecraft.util.Formatting;
  * @since 05-14-2021
  */
 
-public interface Utilities extends Global {
+public interface Utility extends Global {
 
     String clientPrefix = Formatting.DARK_GRAY + "[" + Formatting.DARK_RED + Tensor.INSTANCE.MOD_NAME + Formatting.DARK_GRAY + "]";
 
