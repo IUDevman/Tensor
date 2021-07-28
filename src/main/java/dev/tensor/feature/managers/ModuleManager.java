@@ -26,7 +26,7 @@ public final class ModuleManager implements Manager {
 
         this.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
 
-            if (Module.class.isAssignableFrom(aClass)) {
+            if (Module.class.isAssignableFrom(aClass) && aClass.isAnnotationPresent(Module.Info.class)) {
                 try {
                     Module module = (Module) aClass.newInstance();
                     addModule(module);
