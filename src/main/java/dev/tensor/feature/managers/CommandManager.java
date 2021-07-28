@@ -28,10 +28,10 @@ public final class CommandManager implements Manager {
 
             if (Command.class.isAssignableFrom(aClass)) {
                 try {
-                    Command command = (Command) aClass.newInstance();
+                    Command command = (Command) aClass.getDeclaredConstructor().newInstance();
                     addCommand(command);
 
-                } catch (InstantiationException | IllegalAccessException e) {
+                } catch (ReflectiveOperationException e) {
                     e.printStackTrace();
                 }
             }

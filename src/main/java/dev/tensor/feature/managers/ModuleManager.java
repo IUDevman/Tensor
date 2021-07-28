@@ -28,10 +28,10 @@ public final class ModuleManager implements Manager {
 
             if (Module.class.isAssignableFrom(aClass) && aClass.isAnnotationPresent(Module.Info.class)) {
                 try {
-                    Module module = (Module) aClass.newInstance();
+                    Module module = (Module) aClass.getDeclaredConstructor().newInstance();
                     addModule(module);
 
-                } catch (IllegalAccessException | InstantiationException e) {
+                } catch (ReflectiveOperationException e) {
                     e.printStackTrace();
                 }
             }
