@@ -26,7 +26,7 @@ public final class SettingManager implements Manager {
         Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> Arrays.stream(module.getClass().getDeclaredFields()).forEach(field -> {
 
             if (Setting.class.isAssignableFrom(field.getType())) {
-                if (!field.isAccessible()) field.setAccessible(true);
+                if (!field.canAccess(module)) field.setAccessible(true);
 
                 try {
                     Setting<?> setting = (Setting<?>) field.get(module);

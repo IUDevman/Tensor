@@ -65,7 +65,7 @@ public final class EventHandler {
 
         final MethodData data = new MethodData(object, method, method.getAnnotation(EventTarget.class).value());
 
-        if (!data.getTarget().isAccessible()) {
+        if (!data.getTarget().canAccess(object)) {
             data.getTarget().setAccessible(true);
         }
 
