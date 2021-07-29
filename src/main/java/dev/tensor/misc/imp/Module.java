@@ -99,7 +99,7 @@ public abstract class Module implements Global, Utility {
         Tensor.INSTANCE.EVENT_HANDLER.register(this);
         if (!this.isNull()) {
             onEnable();
-            if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 666, true);
+            if (isMessages()) this.sendReplaceableClientMessage(Formatting.GREEN + getName() + " ENABLED!", 500, true);
         }
     }
 
@@ -108,7 +108,7 @@ public abstract class Module implements Global, Utility {
         Tensor.INSTANCE.EVENT_HANDLER.unregister(this);
         if (!this.isNull()) {
             onDisable();
-            if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 666, true);
+            if (isMessages()) this.sendReplaceableClientMessage(Formatting.RED + getName() + " DISABLED!", 500, true);
         }
     }
 

@@ -16,4 +16,7 @@ public interface ChatHudAccessor {
 
     @Invoker(value = "addMessage")
     void addReplaceable(Text text, int id);
+
+    @Invoker(value = "removeMessage")
+    void removeReplaceable(int id);
 }

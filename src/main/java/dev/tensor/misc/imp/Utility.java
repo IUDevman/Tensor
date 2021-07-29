@@ -26,6 +26,10 @@ public interface Utility extends Global {
         ((ChatHudAccessor) this.getChatHud()).addReplaceable(new LiteralText((prefix ? clientPrefix + " " : "") + Formatting.GRAY + message), id);
     }
 
+    default void removeReplaceableClientMessage(int id) {
+        ((ChatHudAccessor) this.getChatHud()).removeReplaceable(id);
+    }
+
     default int findBlock(Block block) {
         int slot = -1;
 

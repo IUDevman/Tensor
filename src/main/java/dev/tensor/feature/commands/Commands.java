@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -25,7 +26,7 @@ public final class Commands implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
+        return "{alias} [page]";
     }
 
     @Override
@@ -40,18 +41,49 @@ public final class Commands implements Command {
 
     @Override
     public int getID() {
-        return 671;
+        return 665;
     }
 
     @Override
     public void onCommand(String[] message) {
-        this.sendClientMessage(this.getMarker() + "Available commands:", true);
+        ArrayList<Command> commands = Tensor.INSTANCE.COMMAND_MANAGER.getCommands();
 
-        Tensor.INSTANCE.COMMAND_MANAGER.getCommands().forEach(command -> {
+        int commandPages = (int) Math.ceil((double) commands.size() / 4);
+
+        if (commandPages == 0) commandPages = 1;
+
+        int startingPage = 1;
+
+        if (message != null && message.length >= 2) {
+            try {
+                startingPage = Integer.parseInt(message[1]);
+
+            } catch (NumberFormatException ignored) {
+                
+            }
+        }
+
+        if (startingPage <= 0 || startingPage > commandPages) startingPage = 1;
+
+        this.sendReplaceableClientMessage(this.getMarker() + "Available commands (" + Formatting.GREEN + commands.size() + Formatting.GRAY + " total, page " + Formatting.YELLOW + startingPage + "/" + commandPages + Formatting.GRAY + "):", this.getID(), true);
+
+        int count = 0;
+
+        for (int i = (startingPage * 4) - 4; i < startingPage * 4; i++) {
+            count += 1;
+
+            if (i >= commands.size()) {
+                this.removeReplaceableClientMessage(this.getID() - count);
+                this.removeReplaceableClientMessage(this.getID() - (count * 5));
+                continue;
+            }
+
+            Command command = commands.get(i);
+
             String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);
 
-            this.sendClientMessage(syntax, true);
-            this.sendClientMessage(Formatting.YELLOW + "Aliases: " + Formatting.GRAY + Arrays.toString(command.getAliases()), true);
-        });
+            this.sendReplaceableClientMessage(syntax, this.getID() - count, true);
+            this.sendReplaceableClientMessage(Formatting.YELLOW + "Aliases: " + Formatting.GRAY + Arrays.toString(command.getAliases()), this.getID() - (count * 5), true);
+        }
     }
 }
