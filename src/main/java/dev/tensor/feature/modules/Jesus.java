@@ -15,6 +15,7 @@ public final class Jesus extends Module {
 
     public final EnumSetting denomination = new EnumSetting("Denomination", Denomination.Baptist);
     public final BooleanSetting cancelOnFall = new BooleanSetting("Cancel On Fall", true);
+    public final BooleanSetting powderedSnow = new BooleanSetting("Powdered Snow", false);
 
     @SuppressWarnings("unused")
     public enum Denomination {

@@ -30,6 +30,7 @@
     "NarratorManagerMixin",
     "PlayerEntityMixin",
     "PlayerEntityRendererMixin",
+    "PowderSnowBlockMixin",
     "RecipeToastMixin",
     "RenderTickCounterMixin",
     "SlimeBlockMixin",
