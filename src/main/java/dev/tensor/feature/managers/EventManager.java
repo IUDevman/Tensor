@@ -6,6 +6,7 @@ import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.KeyPressedEvent;
 import dev.tensor.backend.events.PacketEvent;
 import dev.tensor.feature.modules.ClickGUI;
+import dev.tensor.feature.modules.Commands;
 import dev.tensor.misc.event.EventTarget;
 import dev.tensor.misc.event.imp.Priority;
 import dev.tensor.misc.gui.TensorGUI;
@@ -63,7 +64,7 @@ public final class EventManager implements Manager {
 
         if (event.getPacket() instanceof ChatMessageC2SPacket chatMessageC2SPacket) {
 
-            if (chatMessageC2SPacket.getChatMessage().startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix())) {
+            if (chatMessageC2SPacket.getChatMessage().startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix()) && shouldDispatchCommands()) {
                 event.setCancelled(true);
                 Tensor.INSTANCE.COMMAND_MANAGER.dispatchCommands(chatMessageC2SPacket.getChatMessage().substring(1));
             }
@@ -76,5 +77,13 @@ public final class EventManager implements Manager {
         if (clickGUI == null) return false;
 
         return !(this.getMinecraft().currentScreen instanceof TensorGUI) || clickGUI.showHUDComponents.getValue();
+    }
+
+    private boolean shouldDispatchCommands() {
+        Commands commands = Tensor.INSTANCE.MODULE_MANAGER.getModule(Commands.class);
+
+        if (commands == null) return false;
+
+        return commands.isEnabled();
     }
 }
