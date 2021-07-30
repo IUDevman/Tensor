@@ -41,7 +41,7 @@ public final class Commands implements Command {
 
     @Override
     public int getID() {
-        return 665;
+        return 664;
     }
 
     @Override
