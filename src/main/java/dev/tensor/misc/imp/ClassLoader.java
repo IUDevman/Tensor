@@ -46,7 +46,6 @@ public interface ClassLoader {
             }
         } else {
             try {
-
                 URL classPathURL = ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"));
 
                 if (classPathURL != null) {
