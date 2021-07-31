@@ -22,7 +22,6 @@ public interface ClassLoader {
         String resource = Objects.requireNonNull(ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"))).getPath();
 
         if (resource.contains("!")) {
-
             try {
                 ZipInputStream file = new ZipInputStream(new URL(resource.substring(0, resource.lastIndexOf('!'))).openStream());
 
@@ -31,7 +30,6 @@ public interface ClassLoader {
                     String name = entry.getName();
 
                     if (name.startsWith(path.replace(".", "/") + "/") && name.endsWith(".class")) {
-
                         try {
                             Class<?> aClass = Class.forName(name.substring(0, name.length() - 6).replace("/", "."));
                             foundClasses.add(aClass);
@@ -49,7 +47,6 @@ public interface ClassLoader {
                 URL classPathURL = ClassLoader.class.getClassLoader().getResource(path.replace(".", "/"));
 
                 if (classPathURL != null) {
-
                     File file = new File(classPathURL.getFile());
 
                     if (file.exists()) {
@@ -58,7 +55,6 @@ public interface ClassLoader {
                         if (classNamesFound != null) {
 
                             for (String className : classNamesFound) {
-
                                 if (className.endsWith(".class")) {
                                     foundClasses.add(Class.forName(path + "." + className.substring(0, className.length() - 6)));
                                 }
