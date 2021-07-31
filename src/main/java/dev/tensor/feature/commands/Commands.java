@@ -59,7 +59,7 @@ public final class Commands implements Command {
                 startingPage = Integer.parseInt(message[1]);
 
             } catch (NumberFormatException ignored) {
-                
+
             }
         }
 
