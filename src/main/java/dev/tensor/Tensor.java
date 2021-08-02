@@ -50,35 +50,29 @@ public final class Tensor implements ModInitializer {
     private void loadClient() {
         this.EVENT_HANDLER = new EventHandler();
 
-        this.COMMAND_MANAGER = new CommandManager();
-        loadManager(this.COMMAND_MANAGER);
+        this.COMMAND_MANAGER = returnLoadedManager(new CommandManager());
 
-        this.MODULE_MANAGER = new ModuleManager();
-        loadManager(this.MODULE_MANAGER);
+        this.MODULE_MANAGER = returnLoadedManager(new ModuleManager());
 
-        this.SETTING_MANAGER = new SettingManager();
-        loadManager(this.SETTING_MANAGER);
+        this.SETTING_MANAGER = returnLoadedManager(new SettingManager());
 
-        this.EVENT_MANAGER = new EventManager();
-        loadManager(this.EVENT_MANAGER);
+        this.EVENT_MANAGER = returnLoadedManager(new EventManager());
 
-        this.CAPE_MANAGER = new CapeManager();
-        loadManager(this.CAPE_MANAGER);
+        this.CAPE_MANAGER = returnLoadedManager(new CapeManager());
 
-        this.FRIEND_MANAGER = new FriendManager();
-        loadManager(this.FRIEND_MANAGER);
+        this.FRIEND_MANAGER = returnLoadedManager(new FriendManager());
 
-        this.GUI_MANAGER = new ClickGUIManager();
-        loadManager(this.GUI_MANAGER);
+        this.GUI_MANAGER = returnLoadedManager(new ClickGUIManager());
 
-        this.CONFIG_MANAGER = new ConfigManager();
-        loadManager(this.CONFIG_MANAGER);
+        this.CONFIG_MANAGER = returnLoadedManager(new ConfigManager());
 
         this.LOGGER.info("Finished initializing managers!");
     }
 
-    private void loadManager(Manager manager) {
+    private <T extends Manager> T returnLoadedManager(T manager) {
         this.EVENT_HANDLER.register(manager);
         manager.load();
+
+        return manager;
     }
 }
