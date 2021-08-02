@@ -11,8 +11,4 @@ import dev.tensor.misc.imp.Module;
 @Module.Info(name = "AutoWalk", category = Category.Movement)
 public final class AutoWalk extends Module {
 
-    @Override
-    public void onTick() {
-        this.getMinecraft().options.keyForward.setPressed(true);
-    }
 }
