@@ -11,6 +11,7 @@
     "BlockMixin",
     "BossBarHudMixin",
     "CameraMixin",
+    "ClientBrandRetrieverMixin",
     "ClientConnectionMixin",
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
