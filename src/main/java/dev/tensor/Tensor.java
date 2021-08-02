@@ -65,8 +65,6 @@ public final class Tensor implements ModInitializer {
         this.GUI_MANAGER = returnLoadedManager(new ClickGUIManager());
 
         this.CONFIG_MANAGER = returnLoadedManager(new ConfigManager());
-
-        this.LOGGER.info("Finished initializing managers!");
     }
 
     private <T extends Manager> T returnLoadedManager(T manager) {
