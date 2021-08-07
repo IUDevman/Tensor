@@ -29,7 +29,9 @@ public final class BlockMixin implements Global {
     public void getVelocityMultiplier(CallbackInfoReturnable<Float> cir) {
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue() && cir.getReturnValueF() < 1F) cir.setReturnValue(1F);
+        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue() && cir.getReturnValueF() < 1F) {
+            cir.setReturnValue(1F);
+        }
     }
 
     @Inject(method = "onBroken", at = @At("RETURN"))

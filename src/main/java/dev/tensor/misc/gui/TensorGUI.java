@@ -200,7 +200,9 @@ public final class TensorGUI extends Screen implements Global {
 
                 if (categoryElement.isSelected()) {
 
-                    if (mouseY < this.y.getValue().intValue() + 22 || mouseY > this.y.getValue().intValue() + this.guiHeight) return;
+                    if (mouseY < this.y.getValue().intValue() + 22 || mouseY > this.y.getValue().intValue() + this.guiHeight) {
+                        return;
+                    }
 
                     categoryElement.getModuleElements().forEach(moduleElement -> {
                         if (isHovered(moduleElement, mouseX, mouseY)) {

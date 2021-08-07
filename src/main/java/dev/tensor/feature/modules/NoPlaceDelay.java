@@ -27,9 +27,14 @@ public final class NoPlaceDelay extends Module {
     }
 
     private boolean shouldToggleDelay() {
-        if (all.getValue()) return true;
-        else if (xp.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.EXPERIENCE_BOTTLE) return true;
-        else if (mainCrystal.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.END_CRYSTAL) return true;
-        else return offhandCrystal.getValue() && this.getPlayer().getOffHandStack().getItem() == Items.END_CRYSTAL;
+        if (all.getValue()) {
+            return true;
+        } else if (xp.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.EXPERIENCE_BOTTLE) {
+            return true;
+        } else if (mainCrystal.getValue() && this.getPlayer().getMainHandStack().getItem() == Items.END_CRYSTAL) {
+            return true;
+        } else {
+            return offhandCrystal.getValue() && this.getPlayer().getOffHandStack().getItem() == Items.END_CRYSTAL;
+        }
     }
 }

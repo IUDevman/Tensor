@@ -19,7 +19,9 @@ public final class XCarry extends Module {
 
     @Override
     public void onDisable() {
-        if (cancelled) this.getNetwork().sendPacket(new CloseHandledScreenC2SPacket(this.getPlayer().playerScreenHandler.syncId));
+        if (cancelled) {
+            this.getNetwork().sendPacket(new CloseHandledScreenC2SPacket(this.getPlayer().playerScreenHandler.syncId));
+        }
     }
 
     @SuppressWarnings("unused")

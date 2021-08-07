@@ -74,7 +74,9 @@ public abstract class EntityMixin implements Global {
 
     @Inject(method = "raycast", at = @At("HEAD"), cancellable = true)
     public void raycast(double maxDistance, float tickDelta, boolean includeFluids, CallbackInfoReturnable<HitResult> cir) {
-        if (this.isNull() || id != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getId() || this.getPlayer().isSubmergedInWater()) return;
+        if (this.isNull() || id != Objects.requireNonNull(this.getMinecraft().getCameraEntity()).getId() || this.getPlayer().isSubmergedInWater()) {
+            return;
+        }
 
         LiquidInteract liquidInteract = Tensor.INSTANCE.MODULE_MANAGER.getModule(LiquidInteract.class);
 

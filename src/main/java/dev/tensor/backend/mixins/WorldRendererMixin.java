@@ -47,20 +47,32 @@ public final class WorldRendererMixin implements Global {
 
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather != null && noWeather.isEnabled() && (this.getWorld().isRaining() || this.getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) cir.cancel();
+        if (noWeather != null && noWeather.isEnabled() && (this.getWorld().isRaining() || this.getWorld().isThundering()) && parameters.getType().equals(ParticleTypes.DRIPPING_WATER)) {
+            cir.cancel();
+        }
 
         NoParticles noParticles = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoParticles.class);
 
         if (noParticles != null && noParticles.isEnabled()) {
-            if (noParticles.all.getValue()) cir.cancel();
-            else if (noParticles.ash.getValue() && (parameters.getType().equals(ParticleTypes.ASH) || parameters.getType().equals(ParticleTypes.WHITE_ASH))) cir.cancel();
-            else if (noParticles.spore.getValue() && (parameters.getType().equals(ParticleTypes.CRIMSON_SPORE) || parameters.getType().equals(ParticleTypes.WARPED_SPORE) || parameters.getType().equals(ParticleTypes.MYCELIUM))) cir.cancel();
-            else if (noParticles.explosion.getValue() && parameters.getType().equals(ParticleTypes.EXPLOSION)) cir.cancel();
-            else if (noParticles.underWater.getValue() && parameters.getType().equals(ParticleTypes.UNDERWATER)) cir.cancel();
-            else if (noParticles.lava.getValue() && parameters.getType().equals(ParticleTypes.LAVA)) cir.cancel();
-            else if (noParticles.portal.getValue() && parameters.getType().equals(ParticleTypes.PORTAL)) cir.cancel();
-            else if (noParticles.eating.getValue() && parameters.getType().equals(ParticleTypes.ITEM)) cir.cancel();
-            else if (noParticles.potions.getValue() && parameters.getType().equals(ParticleTypes.ENTITY_EFFECT) && getPlayer().squaredDistanceTo(x, y, z) < 4) cir.cancel();
+            if (noParticles.all.getValue()) {
+                cir.cancel();
+            } else if (noParticles.ash.getValue() && (parameters.getType().equals(ParticleTypes.ASH) || parameters.getType().equals(ParticleTypes.WHITE_ASH))) {
+                cir.cancel();
+            } else if (noParticles.spore.getValue() && (parameters.getType().equals(ParticleTypes.CRIMSON_SPORE) || parameters.getType().equals(ParticleTypes.WARPED_SPORE) || parameters.getType().equals(ParticleTypes.MYCELIUM))) {
+                cir.cancel();
+            } else if (noParticles.explosion.getValue() && parameters.getType().equals(ParticleTypes.EXPLOSION)) {
+                cir.cancel();
+            } else if (noParticles.underWater.getValue() && parameters.getType().equals(ParticleTypes.UNDERWATER)) {
+                cir.cancel();
+            } else if (noParticles.lava.getValue() && parameters.getType().equals(ParticleTypes.LAVA)) {
+                cir.cancel();
+            } else if (noParticles.portal.getValue() && parameters.getType().equals(ParticleTypes.PORTAL)) {
+                cir.cancel();
+            } else if (noParticles.eating.getValue() && parameters.getType().equals(ParticleTypes.ITEM)) {
+                cir.cancel();
+            } else if (noParticles.potions.getValue() && parameters.getType().equals(ParticleTypes.ENTITY_EFFECT) && getPlayer().squaredDistanceTo(x, y, z) < 4) {
+                cir.cancel();
+            }
         }
     }
 

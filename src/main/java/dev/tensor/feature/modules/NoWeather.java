@@ -22,8 +22,11 @@ public final class NoWeather extends Module {
 
         if (event.getPacket() instanceof PlaySoundS2CPacket packet) {
 
-            if (packet.getSound().equals(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER)) event.setCancelled(true);
-            else if (packet.getSound().equals(SoundEvents.WEATHER_RAIN) || packet.getSound().equals(SoundEvents.WEATHER_RAIN_ABOVE)) event.setCancelled(true);
+            if (packet.getSound().equals(SoundEvents.ENTITY_LIGHTNING_BOLT_THUNDER)) {
+                event.setCancelled(true);
+            } else if (packet.getSound().equals(SoundEvents.WEATHER_RAIN) || packet.getSound().equals(SoundEvents.WEATHER_RAIN_ABOVE)) {
+                event.setCancelled(true);
+            }
         }
     }
 }

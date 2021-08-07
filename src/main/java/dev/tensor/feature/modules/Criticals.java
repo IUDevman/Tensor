@@ -30,7 +30,9 @@ public final class Criticals extends Module {
         if (event.getPacket() instanceof PlayerInteractEntityC2SPacket packet) {
             if (this.getMinecraft().getServer() == null) return;
 
-            if (!shouldApplyCriticals(packet.getEntity(this.getMinecraft().getServer().getWorld(this.getWorld().getRegistryKey())))) return;
+            if (!shouldApplyCriticals(packet.getEntity(this.getMinecraft().getServer().getWorld(this.getWorld().getRegistryKey())))) {
+                return;
+            }
 
             switch ((Type) type.getValue()) {
                 case Packet: {

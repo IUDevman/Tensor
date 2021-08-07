@@ -125,7 +125,9 @@ public final class ColorElement extends SettingElement {
             clearSearching();
         }
 
-        if (Arrays.stream(Tensor.INSTANCE.GUI_MANAGER.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) return;
+        if (Arrays.stream(Tensor.INSTANCE.GUI_MANAGER.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) {
+            return;
+        }
 
         if (key == GLFW.GLFW_KEY_PERIOD || key == GLFW.GLFW_KEY_MINUS) return;
 
@@ -141,8 +143,12 @@ public final class ColorElement extends SettingElement {
     private void setValue(int value) {
         Color oldColor = getColorSetting().getValue();
 
-        if (this.searchingR) getColorSetting().setValue(new Color(value, oldColor.getGreen(), oldColor.getBlue(), oldColor.getAlpha()));
-        else if (this.searchingG) getColorSetting().setValue(new Color(oldColor.getRed(), value, oldColor.getBlue(), oldColor.getAlpha()));
-        else if (this.searchingB) getColorSetting().setValue(new Color(oldColor.getRed(), oldColor.getGreen(), value, oldColor.getAlpha()));
+        if (this.searchingR) {
+            getColorSetting().setValue(new Color(value, oldColor.getGreen(), oldColor.getBlue(), oldColor.getAlpha()));
+        } else if (this.searchingG) {
+            getColorSetting().setValue(new Color(oldColor.getRed(), value, oldColor.getBlue(), oldColor.getAlpha()));
+        } else if (this.searchingB) {
+            getColorSetting().setValue(new Color(oldColor.getRed(), oldColor.getGreen(), value, oldColor.getAlpha()));
+        }
     }
 }

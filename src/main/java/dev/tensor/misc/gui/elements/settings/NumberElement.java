@@ -107,7 +107,9 @@ public final class NumberElement extends SettingElement {
             }
         }
 
-        if (Arrays.stream(Tensor.INSTANCE.GUI_MANAGER.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) return;
+        if (Arrays.stream(Tensor.INSTANCE.GUI_MANAGER.getGUI().getAcceptedKeys()).noneMatch(value -> value == key)) {
+            return;
+        }
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
             if (value.length() < 1) return;

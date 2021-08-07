@@ -26,7 +26,9 @@ public final class PlayerEntityMixin implements Global {
 
         if (safeWalk != null && safeWalk.isEnabled()) {
 
-            if (!safeWalk.fluids.getValue() && (this.getPlayer().isInLava() || this.getPlayer().isTouchingWater())) return;
+            if (!safeWalk.fluids.getValue() && (this.getPlayer().isInLava() || this.getPlayer().isTouchingWater())) {
+                return;
+            }
 
             cir.setReturnValue(true);
         }
