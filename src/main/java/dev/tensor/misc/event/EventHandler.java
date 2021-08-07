@@ -18,7 +18,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * @since 02-02-2014
  */
 
-@SuppressWarnings("unused")
 public final class EventHandler {
 
     private final HashMap<Class<? extends Event>, List<MethodData>> REGISTRY_MAP = new HashMap<>();
@@ -35,14 +34,6 @@ public final class EventHandler {
         }
     }
 
-    public void register(Object object, Class<? extends Event> eventClass) {
-        for (final Method method : object.getClass().getDeclaredMethods()) {
-            if (!isMethodBad(method, eventClass)) {
-                register(method, object);
-            }
-        }
-    }
-
     public void unregister(Object object) {
         for (final List<MethodData> dataList : this.REGISTRY_MAP.values()) {
             dataList.removeIf(data -> data.getSource().equals(object));
@@ -51,12 +42,17 @@ public final class EventHandler {
         cleanMap(true);
     }
 
-    public void unregister(Object object, Class<? extends Event> eventClass) {
-        if (this.REGISTRY_MAP.containsKey(eventClass)) {
-            this.REGISTRY_MAP.get(eventClass).removeIf(data -> data.getSource().equals(object));
+    @SuppressWarnings("UnusedReturnValue")
+    public Event call(final Event event) {
+        List<MethodData> dataList = this.REGISTRY_MAP.get(event.getClass());
 
-            cleanMap(true);
+        if (dataList != null) {
+            for (final MethodData data : dataList) {
+                invoke(data, event);
+            }
         }
+
+        return event;
     }
 
     @SuppressWarnings("unchecked")
@@ -86,24 +82,22 @@ public final class EventHandler {
         }
     }
 
-    public void removeEntry(Class<? extends Event> indexClass) {
-        Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = this.REGISTRY_MAP.entrySet().iterator();
-
-        while (mapIterator.hasNext()) {
-            if (mapIterator.next().getKey().equals(indexClass)) {
-                mapIterator.remove();
-                break;
-            }
-        }
-    }
-
-    public void cleanMap(boolean onlyEmptyEntries) {
+    @SuppressWarnings("SameParameterValue")
+    private void cleanMap(boolean onlyEmptyEntries) {
         Iterator<Map.Entry<Class<? extends Event>, List<MethodData>>> mapIterator = this.REGISTRY_MAP.entrySet().iterator();
 
         while (mapIterator.hasNext()) {
             if (!onlyEmptyEntries || mapIterator.next().getValue().isEmpty()) {
                 mapIterator.remove();
             }
+        }
+    }
+
+    private void invoke(MethodData data, Event argument) {
+        try {
+            data.getTarget().invoke(data.getSource(), argument);
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            e.printStackTrace();
         }
     }
 
@@ -123,31 +117,6 @@ public final class EventHandler {
 
     private boolean isMethodBad(Method method) {
         return method.getParameterTypes().length != 1 || !method.isAnnotationPresent(EventTarget.class);
-    }
-
-    private boolean isMethodBad(Method method, Class<? extends Event> eventClass) {
-        return isMethodBad(method) || !method.getParameterTypes()[0].equals(eventClass);
-    }
-
-    @SuppressWarnings("UnusedReturnValue")
-    public Event call(final Event event) {
-        List<MethodData> dataList = this.REGISTRY_MAP.get(event.getClass());
-
-        if (dataList != null) {
-            for (final MethodData data : dataList) {
-                invoke(data, event);
-            }
-        }
-
-        return event;
-    }
-
-    private void invoke(MethodData data, Event argument) {
-        try {
-            data.getTarget().invoke(data.getSource(), argument);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
-        }
     }
 
     private static final class MethodData {

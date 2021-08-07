@@ -10,8 +10,8 @@ import java.lang.annotation.*;
  */
 
 @Documented
-@Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
 public @interface EventTarget {
 
     byte value() default Priority.MEDIUM;

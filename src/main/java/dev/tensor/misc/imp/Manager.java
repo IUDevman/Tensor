@@ -5,6 +5,7 @@ package dev.tensor.misc.imp;
  * @since 04-12-2021
  */
 
+@FunctionalInterface
 public interface Manager extends Global, ClassLoader, Utility {
 
     void load();
