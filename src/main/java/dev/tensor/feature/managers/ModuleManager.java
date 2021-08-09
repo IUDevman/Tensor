@@ -6,9 +6,7 @@ import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.Locale;
+import java.util.stream.Collectors;
 
 /**
  * @author IUDevman
@@ -17,8 +15,7 @@ import java.util.Locale;
 
 public final class ModuleManager implements Manager {
 
-    private final LinkedHashMap<Class<? extends Module>, Module> moduleClassLinkedHashMap = new LinkedHashMap<>();
-    private final LinkedHashMap<String, Module> moduleNameLinkedHashMap = new LinkedHashMap<>();
+    private final ArrayList<Module> modules = new ArrayList<>();
 
     @Override
     public void load() {
@@ -39,30 +36,23 @@ public final class ModuleManager implements Manager {
     }
 
     private void addModule(Module module) {
-        this.moduleClassLinkedHashMap.put(module.getClass(), module);
-        this.moduleNameLinkedHashMap.put(module.getName().toLowerCase(Locale.ROOT), module);
+        this.modules.add(module);
     }
 
-    public Collection<Module> getModules() {
-        return this.moduleClassLinkedHashMap.values();
+    public ArrayList<Module> getModules() {
+        return this.modules;
     }
 
     public ArrayList<Module> getModulesInCategory(Category category) {
-        final ArrayList<Module> modules = new ArrayList<>();
-
-        this.moduleClassLinkedHashMap.forEach((aClass, module) -> {
-            if (module.getCategory().equals(category)) modules.add(module);
-        });
-
-        return modules;
+        return this.modules.stream().filter(module -> module.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
     }
 
     @SuppressWarnings("unchecked")
     public <T extends Module> T getModule(Class<T> aClass) {
-        return (T) this.moduleClassLinkedHashMap.get(aClass);
+        return (T) this.modules.stream().filter(module -> module.getClass().equals(aClass)).findFirst().orElse(null);
     }
 
     public Module getModule(String name) {
-        return this.moduleNameLinkedHashMap.get(name.toLowerCase(Locale.ROOT));
+        return this.modules.stream().filter(module -> module.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 }
