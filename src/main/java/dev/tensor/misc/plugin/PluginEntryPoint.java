@@ -1,4 +1,4 @@
-package dev.tensor.misc.imp;
+package dev.tensor.misc.plugin;
 
 import java.lang.annotation.*;
 

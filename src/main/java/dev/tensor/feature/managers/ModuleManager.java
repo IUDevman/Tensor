@@ -4,7 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
-import dev.tensor.misc.imp.PluginEntryPoint;
+import dev.tensor.misc.plugin.PluginEntryPoint;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
