@@ -19,9 +19,7 @@ public abstract class Plugin implements Global, ClassLoader, Methods {
     public @interface Info {
         String name();
 
-        String author() default "none";
-
-        String version() default "none";
+        String version();
     }
 
     public Info getInfo() {
@@ -29,15 +27,10 @@ public abstract class Plugin implements Global, ClassLoader, Methods {
     }
 
     private final String name = getInfo().name();
-    private final String author = getInfo().author();
     private final String version = getInfo().version();
 
     public String getName() {
         return this.name;
-    }
-
-    public String getAuthor() {
-        return this.author;
     }
 
     public String getVersion() {

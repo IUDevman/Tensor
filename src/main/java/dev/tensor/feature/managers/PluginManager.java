@@ -30,7 +30,10 @@ public final class PluginManager implements Manager {
             }
         });
 
-        this.plugins.forEach(Plugin::load);
+        this.plugins.forEach(plugin -> {
+            plugin.load();
+            Tensor.INSTANCE.LOGGER.info("Loading plugin: " + plugin.getName() + " " + plugin.getVersion() + "!");
+        });
     }
 
     public void save() {
