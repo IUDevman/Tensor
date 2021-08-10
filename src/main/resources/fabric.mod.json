@@ -4,7 +4,7 @@
   "version": "${version}",
 
   "name": "Tensor",
-  "description": "1.16.5 utility mod for anarchy-related servers using Fabric.",
+  "description": "1.17.1 utility mod for anarchy-related servers using Fabric.",
   "authors": [
     "Go_Hoosiers"
   ],
@@ -29,8 +29,5 @@
     "fabricloader": ">=0.11.3",
     "minecraft": "1.17.x",
     "java": ">=16"
-  },
-  "suggests": {
-    "another-mod": "*"
   }
 }
