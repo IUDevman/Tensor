@@ -32,4 +32,12 @@ public final class PluginManager implements Manager {
 
         this.plugins.forEach(Plugin::load);
     }
+
+    public void save() {
+        this.plugins.forEach(Plugin::save);
+    }
+
+    public ArrayList<Plugin> getPlugins() {
+        return this.plugins;
+    }
 }

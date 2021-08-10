@@ -68,6 +68,7 @@ public final class ConfigManager implements Manager {
     }
 
     public void save() {
+        Tensor.INSTANCE.PLUGIN_MANAGER.save();
         this.currentProfile.save();
 
         try {
