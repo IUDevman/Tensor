@@ -4,6 +4,7 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
+import dev.tensor.misc.imp.PluginEntryPoint;
 
 import java.util.ArrayList;
 import java.util.stream.Collectors;
@@ -35,7 +36,8 @@ public final class ModuleManager implements Manager {
         });
     }
 
-    private void addModule(Module module) {
+    @PluginEntryPoint
+    public void addModule(Module module) {
         this.modules.add(module);
     }
 

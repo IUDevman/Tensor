@@ -3,6 +3,7 @@ package dev.tensor.feature.managers;
 import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.PluginEntryPoint;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
@@ -38,7 +39,8 @@ public final class CommandManager implements Manager {
         });
     }
 
-    private void addCommand(Command command) {
+    @PluginEntryPoint
+    public void addCommand(Command command) {
         this.commandArrayList.add(command);
     }
 

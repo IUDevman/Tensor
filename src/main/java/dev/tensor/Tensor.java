@@ -29,6 +29,7 @@ public final class Tensor implements ModInitializer {
 
     public CommandManager COMMAND_MANAGER;
     public ModuleManager MODULE_MANAGER;
+    public PluginManager PLUGIN_MANAGER;
     public SettingManager SETTING_MANAGER;
     public EventManager EVENT_MANAGER;
     public CapeManager CAPE_MANAGER;
@@ -53,6 +54,8 @@ public final class Tensor implements ModInitializer {
         this.COMMAND_MANAGER = returnLoadedManager(new CommandManager());
 
         this.MODULE_MANAGER = returnLoadedManager(new ModuleManager());
+
+        this.PLUGIN_MANAGER = returnLoadedManager(new PluginManager());
 
         this.SETTING_MANAGER = returnLoadedManager(new SettingManager());
 
