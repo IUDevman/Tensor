@@ -21,12 +21,10 @@ public final class PluginManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("PluginManager");
 
-        FabricLoader.getInstance().getEntrypointContainers(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT), Plugin.class).forEach(pluginEntrypointContainer -> {
-
-            Plugin plugin = pluginEntrypointContainer.getEntrypoint();
+        FabricLoader.getInstance().getEntrypoints(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT), Plugin.class).forEach(plugin -> {
 
             if (plugin.getClass().isAnnotationPresent(Plugin.Info.class)) {
-                this.plugins.add(pluginEntrypointContainer.getEntrypoint());
+                this.plugins.add(plugin);
             }
         });
 
