@@ -3,6 +3,7 @@ package dev.tensor.misc.event;
 import dev.tensor.Tensor;
 import dev.tensor.misc.event.imp.Event;
 import dev.tensor.misc.event.imp.Priority;
+import dev.tensor.misc.plugin.PluginEntryPoint;
 
 import java.io.Serial;
 import java.lang.reflect.InvocationTargetException;
@@ -26,6 +27,7 @@ public final class EventHandler {
         Tensor.INSTANCE.LOGGER.info("EventHandler");
     }
 
+    @PluginEntryPoint
     public void register(Object object) {
         for (final Method method : object.getClass().getDeclaredMethods()) {
             if (!isMethodBad(method)) {
@@ -34,6 +36,7 @@ public final class EventHandler {
         }
     }
 
+    @PluginEntryPoint
     public void unregister(Object object) {
         for (final List<MethodData> dataList : this.REGISTRY_MAP.values()) {
             dataList.removeIf(data -> data.getSource().equals(object));
@@ -43,6 +46,7 @@ public final class EventHandler {
     }
 
     @SuppressWarnings("UnusedReturnValue")
+    @PluginEntryPoint
     public Event call(final Event event) {
         List<MethodData> dataList = this.REGISTRY_MAP.get(event.getClass());
 
