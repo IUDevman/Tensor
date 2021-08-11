@@ -22,7 +22,7 @@ public abstract class Plugin implements Global, ClassLoader, Methods {
         String version();
     }
 
-    public Info getInfo() {
+    private Info getInfo() {
         return getClass().getAnnotation(Info.class);
     }
 
