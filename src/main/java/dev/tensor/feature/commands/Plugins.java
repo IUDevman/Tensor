@@ -4,8 +4,6 @@ import dev.tensor.Tensor;
 import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
-import java.util.ArrayList;
-
 /**
  * @author IUDevman
  * @since 08-06-2021
