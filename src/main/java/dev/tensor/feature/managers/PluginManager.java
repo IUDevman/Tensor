@@ -32,7 +32,7 @@ public final class PluginManager implements Manager {
 
         this.plugins.forEach(plugin -> {
             plugin.load();
-            Tensor.INSTANCE.LOGGER.info("Loading plugin: " + plugin.getName() + " " + plugin.getVersion() + "!");
+            Tensor.INSTANCE.LOGGER.info("Loaded plugin: " + plugin.getName() + " " + plugin.getVersion() + "!");
         });
     }
 
