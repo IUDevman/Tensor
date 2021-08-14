@@ -39,7 +39,7 @@ public final class BlockMixin implements Global {
         NoGlitchBlock noGlitchBlock = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoGlitchBlock.class);
 
         if (noGlitchBlock != null && noGlitchBlock.isEnabled()) {
-            getNetwork().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.UP));
+            this.getNetwork().sendPacket(new PlayerActionC2SPacket(PlayerActionC2SPacket.Action.STOP_DESTROY_BLOCK, pos, Direction.UP));
         }
     }
 }
