@@ -11,6 +11,7 @@ import java.lang.annotation.*;
  * @since 08-10-2021
  */
 
+@SuppressWarnings("EmptyMethod")
 public abstract class Plugin implements Global, ClassLoader, Methods {
 
     @Documented
