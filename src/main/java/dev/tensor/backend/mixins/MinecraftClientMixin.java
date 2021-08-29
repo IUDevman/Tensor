@@ -4,9 +4,11 @@ import dev.tensor.Tensor;
 import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.ClientTickEvent;
 import dev.tensor.backend.events.DisconnectEvent;
+import dev.tensor.feature.modules.UnfocusedCPU;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
@@ -19,6 +21,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(value = MinecraftClient.class, priority = MixinPriority.VALUE)
 public final class MinecraftClientMixin implements Global {
+
+    @Shadow
+    private boolean windowFocused;
+
+    @Inject(method = "getFramerateLimit", at = @At("HEAD"), cancellable = true)
+    public void getFramerateLimit(CallbackInfoReturnable<Integer> cir) {
+        UnfocusedCPU unfocusedCPU = Tensor.INSTANCE.MODULE_MANAGER.getModule(UnfocusedCPU.class);
+
+        if (unfocusedCPU != null && unfocusedCPU.isEnabled() && !this.windowFocused) {
+            cir.setReturnValue(1);
+        }
+    }
 
     @Inject(method = "getWindowTitle", at = @At("RETURN"), cancellable = true)
     public void getWindowTitle(CallbackInfoReturnable<String> cir) {
