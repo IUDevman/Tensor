@@ -2,7 +2,7 @@ package dev.tensor.backend.mixins;
 
 import dev.tensor.Tensor;
 import dev.tensor.backend.MixinPriority;
-import dev.tensor.backend.events.BeginRenderTickEvent;
+import dev.tensor.feature.modules.Timer;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.render.RenderTickCounter;
 import org.objectweb.asm.Opcodes;
@@ -25,10 +25,10 @@ public final class RenderTickCounterMixin implements Global {
 
     @Inject(method = "beginRenderTick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/render/RenderTickCounter;prevTimeMillis:J", opcode = Opcodes.PUTFIELD))
     public void beginRenderTick(long timeMillis, CallbackInfoReturnable<Integer> cir) {
-        BeginRenderTickEvent beginRenderTickEvent = new BeginRenderTickEvent();
+        Timer timer = Tensor.INSTANCE.MODULE_MANAGER.getModule(Timer.class);
 
-        Tensor.INSTANCE.EVENT_HANDLER.call(beginRenderTickEvent);
-
-        if (beginRenderTickEvent.getMultiplier() != 1.00) lastFrameDuration *= beginRenderTickEvent.getMultiplier();
+        if (timer != null && timer.isEnabled()) {
+            this.lastFrameDuration *= timer.multiplier.getValue();
+        }
     }
 }
