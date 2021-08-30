@@ -48,6 +48,16 @@ public final class CommandManager implements Manager {
         return this.commandArrayList;
     }
 
+    public String getPrefix() {
+        return this.prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        if (prefix.length() > 1) return;
+
+        this.prefix = prefix;
+    }
+
     public void dispatchCommands(String message) {
         String[] splitMessage = message.split("\\s");
 
@@ -64,15 +74,5 @@ public final class CommandManager implements Manager {
         if (!foundMessage.get()) {
             this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + getPrefix() + "commands" + Formatting.GRAY + " to see a full list of commands!", 666, true);
         }
-    }
-
-    public String getPrefix() {
-        return this.prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        if (prefix.length() > 1) return;
-
-        this.prefix = prefix;
     }
 }
