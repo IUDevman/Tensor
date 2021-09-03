@@ -5,7 +5,6 @@ import dev.tensor.backend.MixinPriority;
 import dev.tensor.backend.events.BlockInteractEvent;
 import dev.tensor.feature.modules.Freecam;
 import dev.tensor.feature.modules.NoBreakDelay;
-import dev.tensor.feature.modules.Reach;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.ClientPlayerInteractionManager;
 import net.minecraft.entity.Entity;
@@ -44,13 +43,6 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
     @Inject(method = "breakBlock", at = @At("HEAD"))
     public void breakBlockHead(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
         Tensor.INSTANCE.EVENT_HANDLER.call(new BlockInteractEvent(BlockInteractEvent.Type.Break, pos));
-    }
-
-    @Inject(method = "getReachDistance", at = @At("HEAD"), cancellable = true)
-    public void getReachDistance(CallbackInfoReturnable<Float> cir) {
-        Reach reach = Tensor.INSTANCE.MODULE_MANAGER.getModule(Reach.class);
-
-        if (reach != null && reach.isEnabled()) cir.setReturnValue(reach.distance.getValue().floatValue());
     }
 
     @Inject(method = "attackEntity", at = @At("HEAD"), cancellable = true)
