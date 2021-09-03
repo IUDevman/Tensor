@@ -48,6 +48,10 @@ public final class CommandManager implements Manager {
         return this.commandArrayList;
     }
 
+    public Command getCommand(String name) {
+        return this.commandArrayList.stream().filter(command -> command.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+    }
+
     public String getPrefix() {
         return this.prefix;
     }

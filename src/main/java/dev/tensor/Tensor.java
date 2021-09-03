@@ -34,7 +34,7 @@ public final class Tensor implements ModInitializer {
     public EventManager EVENT_MANAGER;
     public CapeManager CAPE_MANAGER;
     public FriendManager FRIEND_MANAGER;
-    public ClickGUIManager GUI_MANAGER;
+    public GUIManager GUI_MANAGER;
     public ConfigManager CONFIG_MANAGER;
 
     @Override
@@ -65,7 +65,7 @@ public final class Tensor implements ModInitializer {
 
         this.FRIEND_MANAGER = returnLoadedManager(new FriendManager());
 
-        this.GUI_MANAGER = returnLoadedManager(new ClickGUIManager());
+        this.GUI_MANAGER = returnLoadedManager(new GUIManager());
 
         this.CONFIG_MANAGER = returnLoadedManager(new ConfigManager());
     }
