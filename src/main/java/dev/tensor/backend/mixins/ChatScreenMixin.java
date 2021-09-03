@@ -34,7 +34,7 @@ public final class ChatScreenMixin extends Screen implements Global {
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta, CallbackInfo callbackInfo) {
         Commands commands = Tensor.INSTANCE.MODULE_MANAGER.getModule(Commands.class);
 
-        if (commands != null && commands.preview.getValue()) {
+        if (commands != null && commands.isEnabled() && commands.preview.getValue()) {
             Tensor.INSTANCE.GUI_MANAGER.getTensorChatGUI().render(matrices, this.chatField.getText(), 2, this.height - 14, this.width - 2, this.height - 2);
         }
     }
