@@ -56,7 +56,7 @@ public final class Help implements Command {
 
         this.sendClientMessage(this.getMarker() + "Welcome to " + Tensor.INSTANCE.MOD_NAME + " (" + Formatting.GREEN + Tensor.INSTANCE.MOD_VERSION + Formatting.GRAY + "):", true);
         this.sendClientMessage("The current ClickGUI bind is " + Formatting.YELLOW + bind, true);
-        this.sendClientMessage("The current Command bind is " + Formatting.YELLOW + Tensor.INSTANCE.COMMAND_MANAGER.getPrefix(), true);
+        this.sendClientMessage("The current command prefix is " + Formatting.YELLOW + Tensor.INSTANCE.COMMAND_MANAGER.getPrefix(), true);
         this.sendClientMessage("Use " + Formatting.YELLOW + Tensor.INSTANCE.COMMAND_MANAGER.getPrefix() + "commands" + Formatting.GRAY + " to see a list of commands", true);
     }
 }
