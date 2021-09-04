@@ -27,15 +27,7 @@ public final class Modules implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "modules",
-                "modulelist"
-        };
+        return "{name}";
     }
 
     @Override

@@ -23,16 +23,7 @@ public final class Ping implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [player]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "ping",
-                "latency",
-                "pong"
-        };
+        return "{name} [player]";
     }
 
     @Override

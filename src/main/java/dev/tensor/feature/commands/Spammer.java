@@ -28,16 +28,7 @@ public final class Spammer implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [file.txt]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "spammer",
-                "spam",
-                "spamfile"
-        };
+        return "{name} [file.txt]";
     }
 
     @Override

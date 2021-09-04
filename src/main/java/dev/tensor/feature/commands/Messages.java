@@ -24,17 +24,7 @@ public final class Messages implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "messages",
-                "message",
-                "msgs",
-                "msg"
-        };
+        return "{name} [module]";
     }
 
     @Override

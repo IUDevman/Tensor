@@ -27,15 +27,7 @@ public final class Help implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "help",
-                "info"
-        };
+        return "{name}";
     }
 
     @Override

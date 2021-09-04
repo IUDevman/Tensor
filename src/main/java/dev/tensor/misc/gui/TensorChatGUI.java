@@ -66,7 +66,7 @@ public final class TensorChatGUI implements Global {
                 DrawableHelper.drawTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(commandList.get()), startX, startY, this.textColor.getRGB());
 
             } else if (command != null) {
-                String commandSyntax = command.getSyntax().replace("{alias}", Formatting.YELLOW + command.getName() + Formatting.RESET);
+                String commandSyntax = command.getSyntax().replace("{name}", Formatting.YELLOW + command.getName() + Formatting.RESET);
 
                 int startX = x1 + this.getMinecraft().textRenderer.getWidth(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix());
                 int startY = y1 - this.getMinecraft().textRenderer.fontHeight - 3;

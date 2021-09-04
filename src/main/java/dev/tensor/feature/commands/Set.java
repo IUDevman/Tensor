@@ -33,16 +33,7 @@ public final class Set implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module] [setting_name] [value] (r_g_b for color settings)";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "set",
-                "setting",
-                "setvalue"
-        };
+        return "{name} [module] [setting_name] [value] (r_g_b for color settings)";
     }
 
     @Override

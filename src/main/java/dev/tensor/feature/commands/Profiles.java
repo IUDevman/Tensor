@@ -12,11 +12,11 @@ import java.util.Locale;
  * @since 07-13-2021
  */
 
-public final class Profile implements Command {
+public final class Profiles implements Command {
 
     @Override
     public String getName() {
-        return "Profile";
+        return "Profiles";
     }
 
     @Override
@@ -26,16 +26,7 @@ public final class Profile implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [current/list/clear/add/remove/set] [name]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "profile",
-                "profiles",
-                "setprofile"
-        };
+        return "{name} [current/list/clear/add/remove/set] [name]";
     }
 
     @Override

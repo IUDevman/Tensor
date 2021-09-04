@@ -28,16 +28,7 @@ public final class Bind implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module] [key/none]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "bind",
-                "binds",
-                "setbind"
-        };
+        return "{name} [module] [key/none]";
     }
 
     @Override

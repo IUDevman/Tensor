@@ -23,15 +23,7 @@ public final class Reload implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "reload",
-                "restart"
-        };
+        return "{name}";
     }
 
     @Override

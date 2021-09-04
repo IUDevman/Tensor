@@ -25,16 +25,7 @@ public final class Reset implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "reset",
-                "default",
-                "clear"
-        };
+        return "{name} [module]";
     }
 
     @Override

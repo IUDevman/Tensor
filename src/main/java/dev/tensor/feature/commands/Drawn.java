@@ -24,15 +24,7 @@ public final class Drawn implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "drawn",
-                "setdrawn"
-        };
+        return "{name} [module]";
     }
 
     @Override

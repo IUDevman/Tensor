@@ -24,17 +24,7 @@ public final class Toggle implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [module]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "toggle",
-                "enable",
-                "disable",
-                "togglemodule"
-        };
+        return "{name} [module]";
     }
 
     @Override

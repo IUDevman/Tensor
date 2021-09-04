@@ -22,16 +22,7 @@ public final class VClip implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [value]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "vclip",
-                "up",
-                "yclip"
-        };
+        return "{name} [value]";
     }
 
     @Override

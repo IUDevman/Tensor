@@ -23,15 +23,7 @@ public final class Plugins implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias}";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "plugins",
-                "plugin"
-        };
+        return "{name}";
     }
 
     @Override

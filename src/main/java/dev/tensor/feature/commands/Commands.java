@@ -5,7 +5,6 @@ import dev.tensor.misc.imp.Command;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * @author IUDevman
@@ -26,17 +25,7 @@ public final class Commands implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [page]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "commands",
-                "command",
-                "listcommands",
-                "syntax"
-        };
+        return "{name} [page]";
     }
 
     @Override
@@ -74,16 +63,14 @@ public final class Commands implements Command {
 
             if (i >= commands.size()) {
                 this.removeReplaceableClientMessage(this.getID() - count);
-                this.removeReplaceableClientMessage(this.getID() - (count * 5));
                 continue;
             }
 
             Command command = commands.get(i);
 
-            String syntax = command.getName() + ": " + command.getSyntax().replace("{alias}", Formatting.YELLOW + "aliases" + Formatting.GRAY);
+            String syntax = command.getName() + ": " + command.getSyntax().replace("{name}", Formatting.YELLOW + command.getName() + Formatting.GRAY);
 
             this.sendReplaceableClientMessage(syntax, this.getID() - count, true);
-            this.sendReplaceableClientMessage(Formatting.YELLOW + "Aliases: " + Formatting.GRAY + Arrays.toString(command.getAliases()), this.getID() - (count * 5), true);
         }
     }
 }

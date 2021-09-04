@@ -8,14 +8,14 @@ import java.util.Locale;
 
 /**
  * @author IUDevman
- * @since 05-26-2021
+ * @since 05-20-2021
  */
 
-public final class Cape implements Command {
+public final class Friends implements Command {
 
     @Override
     public String getName() {
-        return "Cape";
+        return "Friends";
     }
 
     @Override
@@ -25,21 +25,12 @@ public final class Cape implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [list/clear/add/remove] [name]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "cape",
-                "capes",
-                "capelist"
-        };
+        return "{name} [list/clear/add/remove] [name]";
     }
 
     @Override
     public int getID() {
-        return 679;
+        return 675;
     }
 
     @Override
@@ -55,17 +46,17 @@ public final class Cape implements Command {
 
         switch (argument.toLowerCase(Locale.ROOT)) {
             case "list": {
-                if (Tensor.INSTANCE.CAPE_MANAGER.getCapes().size() == 0) {
-                    this.sendReplaceableClientMessage(this.getMarker() + "No caped players!", this.getID(), true);
+                if (Tensor.INSTANCE.FRIEND_MANAGER.getFriends().size() == 0) {
+                    this.sendReplaceableClientMessage(this.getMarker() + "No friends!", this.getID(), true);
                     return;
                 }
 
-                this.sendReplaceableClientMessage(this.getMarker() + "Caped players: " + Tensor.INSTANCE.CAPE_MANAGER.getCapes() + "!", this.getID(), true);
+                this.sendReplaceableClientMessage(this.getMarker() + "Friends: " + Tensor.INSTANCE.FRIEND_MANAGER.getFriends() + "!", this.getID(), true);
                 break;
             }
             case "clear": {
-                Tensor.INSTANCE.CAPE_MANAGER.clearCapes();
-                this.sendReplaceableClientMessage(this.getMarker() + "Cleared caped players!", this.getID(), true);
+                Tensor.INSTANCE.FRIEND_MANAGER.clearFriends();
+                this.sendReplaceableClientMessage(this.getMarker() + "Cleared friends!", this.getID(), true);
                 break;
             }
             case "add": {
@@ -76,13 +67,13 @@ public final class Cape implements Command {
 
                 String name = message[2];
 
-                if (Tensor.INSTANCE.CAPE_MANAGER.hasCape(name)) {
-                    this.sendReplaceableClientMessage(this.getMarker() + "Already a caped player (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
+                if (Tensor.INSTANCE.FRIEND_MANAGER.isFriend(name)) {
+                    this.sendReplaceableClientMessage(this.getMarker() + "Already a friend (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                Tensor.INSTANCE.CAPE_MANAGER.addCape(name);
-                this.sendReplaceableClientMessage(this.getMarker() + "Added caped players (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
+                Tensor.INSTANCE.FRIEND_MANAGER.addFriend(name);
+                this.sendReplaceableClientMessage(this.getMarker() + "Added friend (" + Formatting.GREEN + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
             case "remove": {
@@ -93,13 +84,13 @@ public final class Cape implements Command {
 
                 String name = message[2];
 
-                if (!Tensor.INSTANCE.CAPE_MANAGER.hasCape(name)) {
-                    this.sendReplaceableClientMessage(this.getMarker() + "No caped players matching (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
+                if (!Tensor.INSTANCE.FRIEND_MANAGER.isFriend(name)) {
+                    this.sendReplaceableClientMessage(this.getMarker() + "No friends matching (" + Formatting.YELLOW + name + Formatting.GRAY + ")!", this.getID(), true);
                     return;
                 }
 
-                Tensor.INSTANCE.CAPE_MANAGER.removeCape(name);
-                this.sendReplaceableClientMessage(this.getMarker() + "Removed caped player (" + Formatting.RED + name + Formatting.GRAY + ")!", this.getID(), true);
+                Tensor.INSTANCE.FRIEND_MANAGER.removeFriend(name);
+                this.sendReplaceableClientMessage(this.getMarker() + "Removed friend (" + Formatting.RED + name + Formatting.GRAY + ")!", this.getID(), true);
                 break;
             }
             default: {

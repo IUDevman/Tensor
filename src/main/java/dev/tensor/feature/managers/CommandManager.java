@@ -7,7 +7,6 @@ import dev.tensor.misc.plugin.PluginEntryPoint;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -67,13 +66,12 @@ public final class CommandManager implements Manager {
 
         AtomicBoolean foundMessage = new AtomicBoolean(false);
 
-        getCommands().forEach(command -> Arrays.stream(command.getAliases()).forEach(alias -> {
-            if (splitMessage[0].equalsIgnoreCase(alias)) {
-
+        getCommands().forEach(command -> {
+            if (command.getName().equalsIgnoreCase(splitMessage[0])) {
                 foundMessage.set(true);
                 command.onCommand(splitMessage);
             }
-        }));
+        });
 
         if (!foundMessage.get()) {
             this.sendReplaceableClientMessage("Invalid command! Type " + Formatting.YELLOW + getPrefix() + "commands" + Formatting.GRAY + " to see a full list of commands!", 666, true);

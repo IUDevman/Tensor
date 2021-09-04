@@ -25,16 +25,7 @@ public final class Config implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [save/reload]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "config",
-                "configuration",
-                "file"
-        };
+        return "{name} [save/reload]";
     }
 
     @Override

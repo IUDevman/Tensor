@@ -13,8 +13,6 @@ public interface Command extends Global, Methods {
 
     String getSyntax();
 
-    String[] getAliases();
-
     int getID();
 
     void onCommand(String[] message);

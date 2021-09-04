@@ -23,17 +23,7 @@ public final class Prefix implements Command {
 
     @Override
     public String getSyntax() {
-        return "{alias} [char]";
-    }
-
-    @Override
-    public String[] getAliases() {
-        return new String[]{
-                "prefix",
-                "setprefix",
-                "bindprefix",
-                "commandprefix"
-        };
+        return "{name} [char]";
     }
 
     @Override
