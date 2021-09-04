@@ -68,7 +68,11 @@ public final class Commands implements Command {
 
             Command command = commands.get(i);
 
-            String syntax = command.getName() + ": " + command.getSyntax().replace("{name}", Formatting.YELLOW + command.getName() + Formatting.GRAY);
+            String syntax = command.getSyntax().replace("{name}", Formatting.YELLOW + command.getName() + Formatting.GRAY + ":");
+
+            if (command.getSyntax().equalsIgnoreCase("{name}")) {
+                syntax += " none";
+            }
 
             this.sendReplaceableClientMessage(syntax, this.getID() - count, true);
         }
