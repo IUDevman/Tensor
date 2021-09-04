@@ -20,5 +20,5 @@ public interface Element extends Global {
 
     void render(MatrixStack matrixStack, int x, int y);
 
-    void onClick(double mouseX, double mouseY, int button);
+    void onClick(double mouseX, double mouseY);
 }
