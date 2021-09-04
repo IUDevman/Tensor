@@ -52,7 +52,11 @@ public final class Commands implements Command {
             }
         }
 
-        if (startingPage <= 0 || startingPage > commandPages) startingPage = 1;
+        if (startingPage <= 0 ) {
+            startingPage = 1;
+        } else if (startingPage > commandPages) {
+            startingPage = commandPages;
+        }
 
         this.sendReplaceableClientMessage(this.getMarker() + "Available commands (" + Formatting.GREEN + commands.size() + Formatting.GRAY + " total, page " + Formatting.YELLOW + startingPage + "/" + commandPages + Formatting.GRAY + "):", this.getID(), true);
 
