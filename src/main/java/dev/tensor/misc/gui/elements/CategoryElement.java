@@ -91,6 +91,6 @@ public final class CategoryElement implements Element {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        if (button == 0) this.setSelected(true);
+        this.setSelected(true);
     }
 }

@@ -102,9 +102,9 @@ public final class ModuleElement implements Element {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        if (button == 0) this.setViewed(true);
+        if(button == 0) this.setViewed(true);
 
-        if (button == 1) {
+        if(button == 1) {
             this.setViewed(true);
             this.module.toggle();
         }

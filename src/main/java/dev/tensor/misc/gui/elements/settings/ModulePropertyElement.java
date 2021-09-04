@@ -75,7 +75,7 @@ public final class ModulePropertyElement extends SettingElement {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        if (button == 0) {
+        if(button == 0) {
             if (mouseY > this.getPosY() + 15) {
                 if (isSearching()) setSearching(false);
 
