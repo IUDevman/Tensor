@@ -43,7 +43,7 @@ public final class TensorChatGUI implements Global {
             Command command = Tensor.INSTANCE.COMMAND_MANAGER.getCommand(words[0]);
 
             if (words.length == 1 && command == null) {
-                ArrayList<Command> parsedCommands = Tensor.INSTANCE.COMMAND_MANAGER.getCommands().stream().filter(command1 -> command1.getName().toLowerCase(Locale.ROOT).startsWith(parsedMessage)).sorted(Comparator.comparing(command1 -> command1.getName().length())).collect(Collectors.toCollection(ArrayList::new));
+                ArrayList<Command> parsedCommands = Tensor.INSTANCE.COMMAND_MANAGER.getCommands().stream().filter(command1 -> command1.getName().toLowerCase(Locale.ROOT).startsWith(parsedMessage)).collect(Collectors.toCollection(ArrayList::new));
 
                 if (parsedCommands.size() == 0) return;
 
