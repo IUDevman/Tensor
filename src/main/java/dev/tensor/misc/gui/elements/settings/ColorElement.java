@@ -82,7 +82,7 @@ public final class ColorElement extends SettingElement {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        if(button == 0) {
+        if (button == 0) {
             if (mouseY > getPosY() + 15 && mouseY <= getPosY() + 30) {
                 this.searchingR = !this.searchingR;
                 this.searchingG = false;

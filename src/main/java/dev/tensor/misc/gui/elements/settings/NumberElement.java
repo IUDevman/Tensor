@@ -72,7 +72,7 @@ public final class NumberElement extends SettingElement {
 
     @Override
     public void onClick(double mouseX, double mouseY, int button) {
-        if(button == 0) setSearching(!isSearching());
+        if (button == 0) setSearching(!isSearching());
     }
 
     public void onKeyPressed(int key) {
