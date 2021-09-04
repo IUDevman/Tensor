@@ -66,7 +66,7 @@ public final class PropertyElement implements Element {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
+    public void onClick(double mouseX, double mouseY, int button) {
         if (mouseY > this.getPosY() && mouseY < this.getPosY() + 15) {
             module.toggle();
         } else if (mouseY > this.getPosY() + 15 && mouseY < this.getPosY() + 30) {

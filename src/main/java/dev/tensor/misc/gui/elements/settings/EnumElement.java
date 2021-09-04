@@ -56,7 +56,7 @@ public final class EnumElement extends SettingElement {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        getEnumSetting().increment();
+    public void onClick(double mouseX, double mouseY, int button) {
+        if(button == 0) getEnumSetting().increment();
     }
 }

@@ -74,17 +74,19 @@ public final class ModulePropertyElement extends SettingElement {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        if (mouseY > this.getPosY() + 15) {
-            if (isSearching()) setSearching(false);
+    public void onClick(double mouseX, double mouseY, int button) {
+        if(button == 0) {
+            if (mouseY > this.getPosY() + 15) {
+                if (isSearching()) setSearching(false);
 
-            module.reset();
+                module.reset();
 
-            Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(Setting::reset);
-            return;
+                Tensor.INSTANCE.SETTING_MANAGER.getSettingsForModule(module).forEach(Setting::reset);
+                return;
+            }
+
+            setSearching(!isSearching());
         }
-
-        setSearching(!isSearching());
     }
 
     public void onKeyPressed(int key) {

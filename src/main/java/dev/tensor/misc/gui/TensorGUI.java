@@ -188,47 +188,45 @@ public final class TensorGUI extends Screen implements Global {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        if (button == 0) {
 
             this.categoryElements.forEach(categoryElement -> {
 
-                if (isHovered(categoryElement, mouseX, mouseY)) {
-                    categoryElement.onClick(mouseX, mouseY);
-                    triggerHovered(categoryElement);
+            if (isHovered(categoryElement, mouseX, mouseY)) {
+                categoryElement.onClick(mouseX, mouseY, button);
+                triggerHovered(categoryElement);
+                return;
+            }
+
+            if (categoryElement.isSelected()) {
+
+                if (mouseY < this.y.getValue().intValue() + 22 || mouseY > this.y.getValue().intValue() + this.guiHeight) {
                     return;
                 }
 
-                if (categoryElement.isSelected()) {
-
-                    if (mouseY < this.y.getValue().intValue() + 22 || mouseY > this.y.getValue().intValue() + this.guiHeight) {
+                categoryElement.getModuleElements().forEach(moduleElement -> {
+                    if (isHovered(moduleElement, mouseX, mouseY)) {
+                        moduleElement.onClick(mouseX, mouseY, button);
+                        triggerView(moduleElement, categoryElement);
                         return;
                     }
 
-                    categoryElement.getModuleElements().forEach(moduleElement -> {
-                        if (isHovered(moduleElement, mouseX, mouseY)) {
-                            moduleElement.onClick(mouseX, mouseY);
-                            triggerView(moduleElement, categoryElement);
+                    if (moduleElement.isViewed()) {
+                        if (isHovered(moduleElement.getPropertyElement(), mouseX, mouseY)) {
+                            moduleElement.getPropertyElement().onClick(mouseX, mouseY, button);
+                            triggerSetting(null);
                             return;
                         }
 
-                        if (moduleElement.isViewed()) {
-                            if (isHovered(moduleElement.getPropertyElement(), mouseX, mouseY)) {
-                                moduleElement.getPropertyElement().onClick(mouseX, mouseY);
-                                triggerSetting(null);
-                                return;
+                        moduleElement.getSettingElements().forEach(settingElement -> {
+                            if (isHovered(settingElement, mouseX, mouseY)) {
+                                settingElement.onClick(mouseX, mouseY, button);
+                                triggerSetting(settingElement);
                             }
-
-                            moduleElement.getSettingElements().forEach(settingElement -> {
-                                if (isHovered(settingElement, mouseX, mouseY)) {
-                                    settingElement.onClick(mouseX, mouseY);
-                                    triggerSetting(settingElement);
-                                }
-                            });
-                        }
-                    });
-                }
-            });
-        }
+                        });
+                    }
+                });
+            }
+        });
 
         return true;
     }

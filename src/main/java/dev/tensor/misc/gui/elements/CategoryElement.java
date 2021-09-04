@@ -90,7 +90,7 @@ public final class CategoryElement implements Element {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
+    public void onClick(double mouseX, double mouseY, int button) {
         this.setSelected(true);
     }
 }

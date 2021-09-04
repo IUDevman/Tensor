@@ -81,21 +81,23 @@ public final class ColorElement extends SettingElement {
     }
 
     @Override
-    public void onClick(double mouseX, double mouseY) {
-        if (mouseY > getPosY() + 15 && mouseY <= getPosY() + 30) {
-            this.searchingR = !this.searchingR;
-            this.searchingG = false;
-            this.searchingB = false;
-        } else if (mouseY > getPosY() + 30 && mouseY <= getPosY() + 45) {
-            this.searchingR = false;
-            this.searchingG = !this.searchingG;
-            this.searchingB = false;
-        } else if (mouseY > getPosY() + 45 && mouseY <= getPosY() + 60) {
-            this.searchingR = false;
-            this.searchingG = false;
-            this.searchingB = !this.searchingB;
-        } else {
-            clearSearching();
+    public void onClick(double mouseX, double mouseY, int button) {
+        if(button == 0) {
+            if (mouseY > getPosY() + 15 && mouseY <= getPosY() + 30) {
+                this.searchingR = !this.searchingR;
+                this.searchingG = false;
+                this.searchingB = false;
+            } else if (mouseY > getPosY() + 30 && mouseY <= getPosY() + 45) {
+                this.searchingR = false;
+                this.searchingG = !this.searchingG;
+                this.searchingB = false;
+            } else if (mouseY > getPosY() + 45 && mouseY <= getPosY() + 60) {
+                this.searchingR = false;
+                this.searchingG = false;
+                this.searchingB = !this.searchingB;
+            } else {
+                clearSearching();
+            }
         }
     }
 
