@@ -52,7 +52,7 @@ public final class Commands implements Command {
             }
         }
 
-        if (startingPage <= 0 ) {
+        if (startingPage <= 0) {
             startingPage = 1;
         } else if (startingPage > commandPages) {
             startingPage = commandPages;
