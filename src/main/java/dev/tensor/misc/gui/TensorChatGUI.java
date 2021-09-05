@@ -21,15 +21,15 @@ import java.util.stream.Collectors;
 
 public final class TensorChatGUI implements Global {
 
-    private final Color color = new Color(62, 11, 10, 200);
+    private final Color outlineColor = new Color(62, 11, 10, 200);
     private final Color textColor = new Color(255, 255, 255, 255);
 
     public void render(MatrixStack matrixStack, String message, int x1, int y1, int x2, int y2) {
         if (message.startsWith(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix())) {
-            DrawableHelper.fill(matrixStack, x1, y1 - 1, x2, y1, this.color.getRGB());
-            DrawableHelper.fill(matrixStack, x1, y2, x2, y2 + 1, this.color.getRGB());
-            DrawableHelper.fill(matrixStack, x1 - 1, y1 - 1, x1, y2 + 1, this.color.getRGB());
-            DrawableHelper.fill(matrixStack, x2, y1 - 1, x2 + 1, y2 + 1, this.color.getRGB());
+            DrawableHelper.fill(matrixStack, x1, y1 - 1, x2, y1, this.outlineColor.getRGB());
+            DrawableHelper.fill(matrixStack, x1, y2, x2, y2 + 1, this.outlineColor.getRGB());
+            DrawableHelper.fill(matrixStack, x1 - 1, y1 - 1, x1, y2 + 1, this.outlineColor.getRGB());
+            DrawableHelper.fill(matrixStack, x2, y1 - 1, x2 + 1, y2 + 1, this.outlineColor.getRGB());
 
             String parsedMessage = message.replaceFirst(Tensor.INSTANCE.COMMAND_MANAGER.getPrefix(), "");
 
@@ -58,9 +58,9 @@ public final class TensorChatGUI implements Global {
                 int startY = y1 - this.getMinecraft().textRenderer.fontHeight - 3;
 
                 DrawableHelper.fill(matrixStack, startX - 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 2, y1 - 1, this.getMinecraft().options.getTextBackgroundColor(-2147483648));
-                DrawableHelper.fill(matrixStack, startX - 3, startY - 3, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 3, startY - 2, this.color.getRGB());
-                DrawableHelper.fill(matrixStack, startX - 3, startY - 2, startX - 2, y1 - 1, this.color.getRGB());
-                DrawableHelper.fill(matrixStack, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 3, y1 - 1, this.color.getRGB());
+                DrawableHelper.fill(matrixStack, startX - 3, startY - 3, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 3, startY - 2, this.outlineColor.getRGB());
+                DrawableHelper.fill(matrixStack, startX - 3, startY - 2, startX - 2, y1 - 1, this.outlineColor.getRGB());
+                DrawableHelper.fill(matrixStack, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandList.get()) + 3, y1 - 1, this.outlineColor.getRGB());
 
                 DrawableHelper.drawTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(commandList.get()), startX, startY, this.textColor.getRGB());
 
@@ -71,9 +71,9 @@ public final class TensorChatGUI implements Global {
                 int startY = y1 - this.getMinecraft().textRenderer.fontHeight - 3;
 
                 DrawableHelper.fill(matrixStack, startX - 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 2, y1 - 1, this.getMinecraft().options.getTextBackgroundColor(-2147483648));
-                DrawableHelper.fill(matrixStack, startX - 3, startY - 3, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 3, startY - 2, this.color.getRGB());
-                DrawableHelper.fill(matrixStack, startX - 3, startY - 2, startX - 2, y1 - 1, this.color.getRGB());
-                DrawableHelper.fill(matrixStack, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 3, y1 - 1, this.color.getRGB());
+                DrawableHelper.fill(matrixStack, startX - 3, startY - 3, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 3, startY - 2, this.outlineColor.getRGB());
+                DrawableHelper.fill(matrixStack, startX - 3, startY - 2, startX - 2, y1 - 1, this.outlineColor.getRGB());
+                DrawableHelper.fill(matrixStack, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 2, startY - 2, startX + this.getMinecraft().textRenderer.getWidth(commandSyntax) + 3, y1 - 1, this.outlineColor.getRGB());
 
                 DrawableHelper.drawTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(commandSyntax), startX, startY, this.textColor.getRGB());
             }
