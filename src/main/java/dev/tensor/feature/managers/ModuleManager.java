@@ -49,6 +49,10 @@ public final class ModuleManager implements Manager {
         return this.modules.stream().filter(module -> module.getCategory().equals(category)).collect(Collectors.toCollection(ArrayList::new));
     }
 
+    public ArrayList<Module> getEnabledModules() {
+        return this.modules.stream().filter(Module::isEnabled).collect(Collectors.toCollection(ArrayList::new));
+    }
+
     @SuppressWarnings("unchecked")
     public <T extends Module> T getModule(Class<T> aClass) {
         return (T) this.modules.stream().filter(module -> module.getClass().equals(aClass)).findFirst().orElse(null);

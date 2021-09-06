@@ -12,6 +12,7 @@ import dev.tensor.misc.event.imp.Priority;
 import dev.tensor.misc.gui.TensorGUI;
 import dev.tensor.misc.imp.HUDComponent;
 import dev.tensor.misc.imp.Manager;
+import dev.tensor.misc.imp.Module;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.network.packet.c2s.play.ChatMessageC2SPacket;
 
@@ -30,21 +31,17 @@ public final class EventManager implements Manager {
     @SuppressWarnings("unused")
     @EventTarget(Priority.HIGHEST)
     public void onClientTick(ClientTickEvent event) {
-        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
-            if (module.isEnabled()) module.onTick();
-        });
+        Tensor.INSTANCE.MODULE_MANAGER.getEnabledModules().forEach(Module::onTick);
     }
 
     @SuppressWarnings("unused")
     @EventTarget(Priority.HIGH)
     public void onClientRender(ClientRenderEvent event) {
-        Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
-            if (module.isEnabled()) {
-                if (event.getType().equals(ClientRenderEvent.Type.World)) {
-                    module.onRender3D();
-                } else if (event.getType().equals(ClientRenderEvent.Type.HUD) && module instanceof HUDComponent && shouldRender2D()) {
-                    ((HUDComponent) module).onRender2D(new MatrixStack());
-                }
+        Tensor.INSTANCE.MODULE_MANAGER.getEnabledModules().forEach(module -> {
+            if (event.getType().equals(ClientRenderEvent.Type.World)) {
+                module.onRender3D();
+            } else if (event.getType().equals(ClientRenderEvent.Type.HUD) && module instanceof HUDComponent && shouldRender2D()) {
+                ((HUDComponent) module).onRender2D(new MatrixStack());
             }
         });
     }
