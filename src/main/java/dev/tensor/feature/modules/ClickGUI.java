@@ -11,7 +11,7 @@ import org.lwjgl.glfw.GLFW;
  * @since 05-03-2021
  */
 
-@Module.Info(name = "ClickGUI", category = Category.Client, bind = GLFW.GLFW_KEY_RIGHT_SHIFT)
+@Module.Info(name = "ClickGUI", category = Category.Client, bind = GLFW.GLFW_KEY_RIGHT_SHIFT, drawn = false)
 public final class ClickGUI extends Module {
 
     public final BooleanSetting showHUDComponents = new BooleanSetting("Show HUD Components", true);

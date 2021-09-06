@@ -17,6 +17,7 @@
     "ClientPlayerEntityMixin",
     "ClientPlayerInteractionManagerMixin",
     "CobWebBlockMixin",
+    "CrashReportMixin",
     "DimensionTypeMixin",
     "EnchantingTableBlockEntityRendererMixin",
     "EntityMixin",
