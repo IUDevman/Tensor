@@ -24,6 +24,10 @@ public final class ModulePropertyElement extends SettingElement {
     private final Module module;
     private boolean searching = false;
 
+    private final Color hoveredColor = new Color(30, 30, 30, 150);
+    private final Color fillColor = new Color(0, 0, 0, 150);
+    private final Color textColor = new Color(255, 255, 255, 255);
+
     public ModulePropertyElement(Module module, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         super(x, y, scrollY, posX, posY);
 
@@ -64,13 +68,13 @@ public final class ModulePropertyElement extends SettingElement {
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y) {
-        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 15, this.isSearching() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + 15, x + this.getWidth(), y + this.getHeight(), new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 15, this.isSearching() ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 15, x + this.getWidth(), y + this.getHeight(), this.fillColor.getRGB());
 
         String text = "Keybind : " + Formatting.GRAY + (this.isSearching() ? "..." : InputUtil.Type.KEYSYM.createFromCode(getModule().getBind()).getTranslationKey().replace("key.keyboard.", "").replace("unknown", "none").toUpperCase(Locale.ROOT));
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, text, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, text, x + 3, y + 3, this.textColor.getRGB());
 
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, Formatting.GRAY + "Reset", x + 3, y + 18, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, Formatting.GRAY + "Reset", x + 3, y + 18, this.textColor.getRGB());
     }
 
     @Override

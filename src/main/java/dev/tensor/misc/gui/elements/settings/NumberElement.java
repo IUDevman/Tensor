@@ -23,6 +23,10 @@ public final class NumberElement extends SettingElement {
     private boolean searching = false;
     private String value = "";
 
+    private final Color hoveredColor = new Color(30, 30, 30, 150);
+    private final Color fillColor = new Color(0, 0, 0, 150);
+    private final Color textColor = new Color(255, 255, 255, 255);
+
     public NumberElement(NumberSetting numberSetting, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         super(x, y, scrollY, posX, posY);
         this.numberSetting = numberSetting;
@@ -63,11 +67,11 @@ public final class NumberElement extends SettingElement {
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y) {
-        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), this.isSearching() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + this.getHeight(), this.isSearching() ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
 
         String value = this.numberSetting.getName() + " (" + adjustForDecimals(this.numberSetting.getMin()) + " -> " + adjustForDecimals(this.numberSetting.getMax()) + ") : " + Formatting.GRAY + (this.isSearching() ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : adjustForDecimals(this.numberSetting.getValue()));
 
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, value, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, value, x + 3, y + 3, this.textColor.getRGB());
     }
 
     @Override

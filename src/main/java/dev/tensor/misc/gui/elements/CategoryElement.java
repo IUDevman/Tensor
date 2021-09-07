@@ -26,6 +26,12 @@ public final class CategoryElement implements Element {
     private final int posY;
     private boolean selected = false;
 
+    private final Color hoveredColor = new Color(30, 30, 30, 150);
+    private final Color fillColor = new Color(0, 0, 0, 150);
+    private final Color outlineColor = new Color(130, 130, 130, 150);
+    private final Color textColor = new Color(255, 255, 255, 255);
+    private final Color selectedTextColor = new Color(255, 255, 0, 255);
+
     public CategoryElement(Category category, NumberSetting x, NumberSetting y, int posX, int posY) {
         this.category = category;
         this.x = x;
@@ -80,13 +86,13 @@ public final class CategoryElement implements Element {
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y) {
-        DrawableHelper.fill(matrixStack, x + 1, y + 1, x + this.getWidth() - 1, y + this.getHeight() - 1, this.isSelected() ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 1, new Color(130, 130, 130, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + this.getHeight() - 1, x + this.getWidth(), y + this.getHeight(), new Color(130, 130, 130, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, new Color(130, 130, 130, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x + 1, y + 1, x + this.getWidth() - 1, y + this.getHeight() - 1, this.isSelected() ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 1, this.outlineColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + this.getHeight() - 1, x + this.getWidth(), y + this.getHeight(), this.outlineColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 1, x + 1, y + this.getHeight() - 1, this.outlineColor.getRGB());
+        DrawableHelper.fill(matrixStack, x + this.getWidth() - 1, y + 1, x + this.getWidth(), y + this.getHeight() - 1, this.outlineColor.getRGB());
 
-        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(this.getName()).asOrderedText(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), this.isSelected() ? new Color(255, 255, 0, 255).getRGB() : new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(this.getName()).asOrderedText(), x + (this.getWidth() / 2), y + ((this.getHeight() - getMinecraft().textRenderer.fontHeight) / 2), this.isSelected() ? this.selectedTextColor.getRGB() : this.textColor.getRGB());
     }
 
     @Override

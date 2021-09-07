@@ -26,6 +26,10 @@ public final class ColorElement extends SettingElement {
     private boolean searchingB = false;
     private String value = "";
 
+    private final Color hoveredColor = new Color(30, 30, 30, 150);
+    private final Color fillColor = new Color(0, 0, 0, 150);
+    private final Color textColor = new Color(255, 255, 255, 255);
+
     public ColorElement(ColorSetting colorSetting, NumberSetting x, NumberSetting y, NumberSetting scrollY, int posX, int posY) {
         super(x, y, scrollY, posX, posY);
         this.colorSetting = colorSetting;
@@ -64,20 +68,20 @@ public final class ColorElement extends SettingElement {
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y) {
-        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 15, new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + 15, x + this.getWidth(), y + 30, this.searchingR ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + 30, x + this.getWidth(), y + 45, this.searchingG ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
-        DrawableHelper.fill(matrixStack, x, y + 45, x + this.getWidth(), y + 60, this.searchingB ? new Color(30, 30, 30, 150).getRGB() : new Color(0, 0, 0, 150).getRGB());
+        DrawableHelper.fill(matrixStack, x, y, x + this.getWidth(), y + 15, this.fillColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 15, x + this.getWidth(), y + 30, this.searchingR ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 30, x + this.getWidth(), y + 45, this.searchingG ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
+        DrawableHelper.fill(matrixStack, x, y + 45, x + this.getWidth(), y + 60, this.searchingB ? this.hoveredColor.getRGB() : this.fillColor.getRGB());
 
         String name = getColorSetting().getName() + " : ";
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, name, x + 3, y + 3, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, name, x + 3, y + 3, this.textColor.getRGB());
 
         String rgb = "(" + getColorSetting().getValue().getRed() + ", " + getColorSetting().getValue().getGreen() + ", " + getColorSetting().getValue().getBlue() + ")";
         DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, rgb, x + 3 + this.getMinecraft().textRenderer.getWidth(name), y + 3, getColorSetting().getValue().getRGB());
 
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Red (0 -> 255) : " + Formatting.GRAY + (this.searchingR ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getRed()), x + 3, y + 18, new Color(255, 255, 255, 255).getRGB());
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Green (0 -> 255) : " + Formatting.GRAY + (this.searchingG ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getGreen()), x + 3, y + 33, new Color(255, 255, 255, 255).getRGB());
-        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Blue (0 -> 255) : " + Formatting.GRAY + (this.searchingB ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getBlue()), x + 3, y + 48, new Color(255, 255, 255, 255).getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Red (0 -> 255) : " + Formatting.GRAY + (this.searchingR ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getRed()), x + 3, y + 18, this.textColor.getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Green (0 -> 255) : " + Formatting.GRAY + (this.searchingG ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getGreen()), x + 3, y + 33, this.textColor.getRGB());
+        DrawableHelper.drawStringWithShadow(matrixStack, this.getMinecraft().textRenderer, "  > Blue (0 -> 255) : " + Formatting.GRAY + (this.searchingB ? (this.value.equalsIgnoreCase("") ? "..." : this.value) : getColorSetting().getValue().getBlue()), x + 3, y + 48, this.textColor.getRGB());
     }
 
     @Override
