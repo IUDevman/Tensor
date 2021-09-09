@@ -7,6 +7,7 @@ import dev.tensor.misc.plugin.PluginEntryPoint;
 import net.minecraft.util.Formatting;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
@@ -18,7 +19,7 @@ public final class CommandManager implements Manager {
 
     private String prefix = "-";
 
-    private final ArrayList<Command> commandArrayList = new ArrayList<>();
+    private final ArrayList<Command> commands = new ArrayList<>();
 
     @Override
     public void load() {
@@ -36,19 +37,25 @@ public final class CommandManager implements Manager {
                 }
             }
         });
+
+        this.postSortCommands();
+    }
+
+    public void postSortCommands() {
+        this.commands.sort(Comparator.comparing(Command::getName));
     }
 
     @PluginEntryPoint
     public void addCommand(Command command) {
-        this.commandArrayList.add(command);
+        this.commands.add(command);
     }
 
     public ArrayList<Command> getCommands() {
-        return this.commandArrayList;
+        return this.commands;
     }
 
     public Command getCommand(String name) {
-        return this.commandArrayList.stream().filter(command -> command.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
+        return this.commands.stream().filter(command -> command.getName().equalsIgnoreCase(name)).findFirst().orElse(null);
     }
 
     public String getPrefix() {

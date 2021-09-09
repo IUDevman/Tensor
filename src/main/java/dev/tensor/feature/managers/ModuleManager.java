@@ -7,6 +7,7 @@ import dev.tensor.misc.imp.Module;
 import dev.tensor.misc.plugin.PluginEntryPoint;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.stream.Collectors;
 
 /**
@@ -34,6 +35,12 @@ public final class ModuleManager implements Manager {
                 }
             }
         });
+
+        this.postSortModules();
+    }
+
+    public void postSortModules() {
+        this.modules.sort(Comparator.comparing(Module::getName));
     }
 
     @PluginEntryPoint

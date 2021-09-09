@@ -17,7 +17,7 @@ import java.util.LinkedHashMap;
 
 public final class SettingManager implements Manager {
 
-    private final LinkedHashMap<Setting<?>, Module> settingModuleLinkedHashMap = new LinkedHashMap<>();
+    private final LinkedHashMap<Setting<?>, Module> moduleSettings = new LinkedHashMap<>();
 
     @Override
     public void load() {
@@ -30,7 +30,7 @@ public final class SettingManager implements Manager {
 
                 try {
                     Setting<?> setting = (Setting<?>) field.get(module);
-                    this.settingModuleLinkedHashMap.put(setting, module);
+                    this.moduleSettings.put(setting, module);
 
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
@@ -40,13 +40,13 @@ public final class SettingManager implements Manager {
     }
 
     public Collection<Setting<?>> getSettings() {
-        return this.settingModuleLinkedHashMap.keySet();
+        return this.moduleSettings.keySet();
     }
 
     public ArrayList<Setting<?>> getSettingsForModule(Module module) {
         ArrayList<Setting<?>> settings = new ArrayList<>();
 
-        this.settingModuleLinkedHashMap.forEach((setting, module1) -> {
+        this.moduleSettings.forEach((setting, module1) -> {
             if (module1.equals(module)) settings.add(setting);
         });
 

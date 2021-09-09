@@ -28,10 +28,15 @@ public final class PluginManager implements Manager {
             }
         });
 
+        if (this.plugins.size() == 0) return;
+
         this.plugins.forEach(plugin -> {
             plugin.load();
             Tensor.INSTANCE.LOGGER.info("Loaded plugin: " + plugin.getName() + " " + plugin.getVersion() + "!");
         });
+
+        Tensor.INSTANCE.COMMAND_MANAGER.postSortCommands();
+        Tensor.INSTANCE.MODULE_MANAGER.postSortModules();
     }
 
     public void save() {
