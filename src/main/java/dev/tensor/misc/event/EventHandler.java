@@ -108,7 +108,7 @@ public final class EventHandler {
     private void sortListValue(Class<? extends Event> indexClass) {
         List<MethodData> sortedList = new CopyOnWriteArrayList<>();
 
-        for (final byte priority : Priority.VALUE_ARRAY) {
+        for (final byte priority : Priority.STANDARD_VALUES) {
             for (final MethodData data : this.REGISTRY_MAP.get(indexClass)) {
                 if (data.getPriority() == priority) {
                     sortedList.add(data);
