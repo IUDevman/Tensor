@@ -7,6 +7,7 @@ import dev.tensor.backend.events.DisconnectEvent;
 import dev.tensor.feature.modules.UnfocusedCPU;
 import dev.tensor.misc.imp.Global;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.util.profiler.Profiler;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
@@ -20,10 +21,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = MinecraftClient.class, priority = MixinPriority.VALUE)
-public final class MinecraftClientMixin implements Global {
+public abstract class MinecraftClientMixin implements Global {
 
     @Shadow
     private boolean windowFocused;
+
+    @Shadow
+    public abstract Profiler getProfiler();
 
     @Inject(method = "getFramerateLimit", at = @At("HEAD"), cancellable = true)
     public void getFramerateLimit(CallbackInfoReturnable<Integer> cir) {
@@ -39,11 +43,13 @@ public final class MinecraftClientMixin implements Global {
         cir.setReturnValue(Tensor.INSTANCE.MOD_NAME + " " + Tensor.INSTANCE.MOD_VERSION + " (" + cir.getReturnValue() + ")");
     }
 
-    @Inject(method = "tick", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/profiler/Profiler;pop()V", ordinal = 0, shift = At.Shift.AFTER))
+    @Inject(method = "tick", at = @At("HEAD"))
     public void tick(CallbackInfo callbackInfo) {
         if (this.isNull()) return;
 
+        this.getProfiler().push(Tensor.INSTANCE.MOD_NAME);
         Tensor.INSTANCE.EVENT_HANDLER.call(new ClientTickEvent());
+        this.getProfiler().pop();
     }
 
     @Inject(method = "stop", at = @At("HEAD"))
