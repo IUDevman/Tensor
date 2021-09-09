@@ -35,7 +35,7 @@ public final class EventManager implements Manager {
     }
 
     @SuppressWarnings("unused")
-    @EventTarget(Priority.HIGH)
+    @EventTarget(Priority.HIGHEST)
     public void onClientRender(ClientRenderEvent event) {
         Tensor.INSTANCE.MODULE_MANAGER.getEnabledModules().forEach(module -> {
             if (event.getType().equals(ClientRenderEvent.Type.World)) {
@@ -47,7 +47,7 @@ public final class EventManager implements Manager {
     }
 
     @SuppressWarnings("unused")
-    @EventTarget
+    @EventTarget(Priority.HIGHEST)
     public void onKeyPressed(KeyPressedEvent event) {
         Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
             if (module.getBind() == event.getBind()) module.toggle();
@@ -55,7 +55,7 @@ public final class EventManager implements Manager {
     }
 
     @SuppressWarnings("unused")
-    @EventTarget
+    @EventTarget(Priority.HIGHEST)
     public void onPacket(PacketEvent event) {
         if (!event.getType().equals(PacketEvent.Type.Send)) return;
 
