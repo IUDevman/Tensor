@@ -1,6 +1,6 @@
 # Tensor
 
-	All rights reserved (ARR)
+	All Rights Reserved (ARR)
 	Copyright (c) 2021 IUDevman
 
 	Do not redistribute!
