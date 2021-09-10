@@ -11,7 +11,7 @@ import net.minecraft.util.math.Vec3d;
 
 /**
  * @author wagyourtail#3826
- * Added with explicit permission, thanks! :D
+ * @since 06-02-2020
  */
 
 @SuppressWarnings("EntityConstructor")

@@ -4,7 +4,7 @@ import net.minecraft.client.input.Input;
 
 /**
  * @author wagyourtail#3826
- * Added with explicit permission, thanks! :D
+ * @since 06-02-2020
  */
 
 public final class DummyInput extends Input {
