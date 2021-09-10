@@ -67,7 +67,7 @@ public final class Spammer extends Module {
                 }
 
             } catch (IOException ignored) {
-                Tensor.INSTANCE.LOGGER.info("Failed to load spammer file!");
+                Tensor.INSTANCE.LOGGER.warn("Failed to load spammer file!");
             }
         }
     }

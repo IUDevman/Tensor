@@ -47,8 +47,8 @@ public final class ConfigManager implements Manager {
 
             this.currentProfile.load();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to load config!");
         }
     }
 
@@ -90,8 +90,8 @@ public final class ConfigManager implements Manager {
             outputStreamWriter.write(jsonString);
             outputStreamWriter.close();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to save config!");
         }
     }
 
@@ -118,20 +118,20 @@ public final class ConfigManager implements Manager {
                 try {
                     Files.delete(file1.toPath());
 
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException ignored) {
+                    Tensor.INSTANCE.LOGGER.warn("Failed to delete file!");
                 }
             });
 
-        } catch (NullPointerException e) {
-            e.printStackTrace();
+        } catch (NullPointerException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to delete file!");
         }
 
         try {
             Files.delete(file.toPath());
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to delete file!");
         }
     }
 

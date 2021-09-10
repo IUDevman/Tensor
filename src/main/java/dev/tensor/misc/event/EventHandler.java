@@ -100,8 +100,8 @@ public final class EventHandler {
     private void invoke(MethodData data, Event argument) {
         try {
             data.getTarget().invoke(data.getSource(), argument);
-        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-            e.printStackTrace();
+        } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to invoke event!");
         }
     }
 

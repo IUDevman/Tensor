@@ -30,8 +30,8 @@ public final class ModuleManager implements Manager {
                     Module module = (Module) aClass.getDeclaredConstructor().newInstance();
                     addModule(module);
 
-                } catch (ReflectiveOperationException e) {
-                    e.printStackTrace();
+                } catch (ReflectiveOperationException ignored) {
+                    Tensor.INSTANCE.LOGGER.warn("Failed to load modules!");
                 }
             }
         });

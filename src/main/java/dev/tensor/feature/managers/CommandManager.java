@@ -32,8 +32,8 @@ public final class CommandManager implements Manager {
                     Command command = (Command) aClass.getDeclaredConstructor().newInstance();
                     addCommand(command);
 
-                } catch (ReflectiveOperationException e) {
-                    e.printStackTrace();
+                } catch (ReflectiveOperationException ignored) {
+                    Tensor.INSTANCE.LOGGER.warn("Failed to load commands!");
                 }
             }
         });

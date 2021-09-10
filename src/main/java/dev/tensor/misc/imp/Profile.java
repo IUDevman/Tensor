@@ -68,7 +68,7 @@ public final class Profile {
             loadClickGUI();
 
         } catch (Exception ignored) {
-            Tensor.INSTANCE.LOGGER.info("Failed to load profile (" + this.name + ")!");
+            Tensor.INSTANCE.LOGGER.warn("Failed to load profile (" + this.name + ")!");
         }
 
         Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
@@ -111,8 +111,8 @@ public final class Profile {
 
                 module.setEnabled(jsonObject.get("Enabled").getAsBoolean());
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ignored) {
+                Tensor.INSTANCE.LOGGER.warn("Failed to load profile (" + this.name + ")!");
             }
         });
     }
@@ -169,8 +169,8 @@ public final class Profile {
             saveCapes();
             saveClickGUI();
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
+            Tensor.INSTANCE.LOGGER.warn("Failed to save profile (" + this.name + ")!");
         }
 
         Tensor.INSTANCE.MODULE_MANAGER.getModules().forEach(module -> {
@@ -200,8 +200,8 @@ public final class Profile {
 
                 createAndWrite(path, jsonObject);
 
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException ignored) {
+                Tensor.INSTANCE.LOGGER.warn("Failed to save profile (" + this.name + ")!");
             }
         });
     }

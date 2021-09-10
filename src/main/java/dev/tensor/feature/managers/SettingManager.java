@@ -32,8 +32,8 @@ public final class SettingManager implements Manager {
                     Setting<?> setting = (Setting<?>) field.get(module);
                     this.moduleSettings.put(setting, module);
 
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
+                } catch (IllegalAccessException ignored) {
+                    Tensor.INSTANCE.LOGGER.warn("Failed to load settings!");
                 }
             }
         }));

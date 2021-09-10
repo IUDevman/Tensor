@@ -52,7 +52,7 @@ public final class CapeManager implements Manager {
             Tensor.INSTANCE.LOGGER.info("Downloaded cape!");
 
         } catch (IOException ignored) {
-            Tensor.INSTANCE.LOGGER.info("Failed to download cape!");
+            Tensor.INSTANCE.LOGGER.warn("Failed to download cape!");
         }
     }
 
@@ -93,7 +93,7 @@ public final class CapeManager implements Manager {
                     this.cape = this.getMinecraft().getTextureManager().registerDynamicTexture("666cape666", new NativeImageBackedTexture(NativeImage.read(inputStream)));
 
                 } catch (IOException ignored) {
-                    Tensor.INSTANCE.LOGGER.info("Failed to load cape!");
+                    Tensor.INSTANCE.LOGGER.warn("Failed to load cape!");
                 }
             }
 

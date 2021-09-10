@@ -11,5 +11,6 @@ import dev.tensor.misc.imp.settings.BooleanSetting;
 
 @Module.Info(name = "Commands", category = Category.Client, drawn = false, enabled = true)
 public final class Commands extends Module {
+
     public final BooleanSetting preview = new BooleanSetting("Preview", true);
 }
