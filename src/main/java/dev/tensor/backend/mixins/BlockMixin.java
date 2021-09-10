@@ -35,7 +35,7 @@ public final class BlockMixin implements Global {
     }
 
     @Inject(method = "onBroken", at = @At("RETURN"))
-    public void onBroken(WorldAccess world, BlockPos pos, BlockState state, CallbackInfo callbackInfo) {
+    public void onBroken(WorldAccess world, BlockPos pos, BlockState state, CallbackInfo ci) {
         NoGlitchBlock noGlitchBlock = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoGlitchBlock.class);
 
         if (noGlitchBlock != null && noGlitchBlock.isEnabled()) {

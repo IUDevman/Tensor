@@ -28,17 +28,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public final class WorldRendererMixin implements Global {
 
     @Inject(method = "renderWeather", at = @At("HEAD"), cancellable = true)
-    public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo callbackInfo) {
+    public void renderWeather(LightmapTextureManager manager, float f, double d, double e, double g, CallbackInfo ci) {
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather != null && noWeather.isEnabled()) callbackInfo.cancel();
+        if (noWeather != null && noWeather.isEnabled()) ci.cancel();
     }
 
     @Inject(method = "tickRainSplashing", at = @At("HEAD"), cancellable = true)
-    public void tickRainSplashing(Camera camera, CallbackInfo callbackInfo) {
+    public void tickRainSplashing(Camera camera, CallbackInfo ci) {
         NoWeather noWeather = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoWeather.class);
 
-        if (noWeather != null && noWeather.isEnabled()) callbackInfo.cancel();
+        if (noWeather != null && noWeather.isEnabled()) ci.cancel();
     }
 
     @Inject(method = "spawnParticle(Lnet/minecraft/particle/ParticleEffect;ZZDDDDDD)Lnet/minecraft/client/particle/Particle;", at = @At("HEAD"), cancellable = true)

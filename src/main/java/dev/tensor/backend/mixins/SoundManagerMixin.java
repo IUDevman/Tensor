@@ -20,18 +20,18 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class SoundManagerMixin implements Global {
 
     @Inject(method = "play(Lnet/minecraft/client/sound/SoundInstance;)V", at = @At("HEAD"), cancellable = true)
-    public void playNoDelay(SoundInstance sound, CallbackInfo callbackInfo) {
+    public void playNoDelay(SoundInstance sound, CallbackInfo ci) {
         PlaySoundEvent playSoundEvent = new PlaySoundEvent(sound);
 
         Tensor.INSTANCE.EVENT_HANDLER.call(playSoundEvent);
-        if (playSoundEvent.isCancelled()) callbackInfo.cancel();
+        if (playSoundEvent.isCancelled()) ci.cancel();
     }
 
     @Inject(method = "play(Lnet/minecraft/client/sound/SoundInstance;I)V", at = @At("HEAD"), cancellable = true)
-    public void playWithDelay(SoundInstance sound, int delay, CallbackInfo callbackInfo) {
+    public void playWithDelay(SoundInstance sound, int delay, CallbackInfo ci) {
         PlaySoundEvent playSoundEvent = new PlaySoundEvent(sound);
 
         Tensor.INSTANCE.EVENT_HANDLER.call(playSoundEvent);
-        if (playSoundEvent.isCancelled()) callbackInfo.cancel();
+        if (playSoundEvent.isCancelled()) ci.cancel();
     }
 }

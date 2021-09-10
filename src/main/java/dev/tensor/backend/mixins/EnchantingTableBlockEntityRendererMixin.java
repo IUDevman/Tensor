@@ -19,9 +19,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class EnchantingTableBlockEntityRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public void render(CallbackInfo callbackInfo) {
+    public void render(CallbackInfo ci) {
         NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
-        if (noRender != null && noRender.isEnabled() && noRender.enchantBooks.getValue()) callbackInfo.cancel();
+        if (noRender != null && noRender.isEnabled() && noRender.enchantBooks.getValue()) ci.cancel();
     }
 }

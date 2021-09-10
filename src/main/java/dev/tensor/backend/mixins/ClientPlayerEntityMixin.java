@@ -23,10 +23,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public final class ClientPlayerEntityMixin implements Global {
 
     @Inject(method = "updateNausea", at = @At("HEAD"), cancellable = true)
-    public void updateNausea(CallbackInfo callbackInfo) {
+    public void updateNausea(CallbackInfo ci) {
         NoPortalEffect noPortalEffect = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPortalEffect.class);
 
-        if (noPortalEffect != null && noPortalEffect.isEnabled()) callbackInfo.cancel();
+        if (noPortalEffect != null && noPortalEffect.isEnabled()) ci.cancel();
     }
 
     @Inject(method = "shouldSlowDown", at = @At("HEAD"), cancellable = true)
@@ -37,7 +37,7 @@ public final class ClientPlayerEntityMixin implements Global {
     }
 
     @Inject(method = "tickMovement", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/network/ClientPlayerEntity;isUsingItem()Z"))
-    public void tickMovement(CallbackInfo callbackInfo) {
+    public void tickMovement(CallbackInfo ci) {
         if (this.isNull()) return;
 
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
@@ -49,10 +49,10 @@ public final class ClientPlayerEntityMixin implements Global {
     }
 
     @Inject(method = "pushOutOfBlocks", at = @At("HEAD"), cancellable = true)
-    public void pushOutOfBlocks(double x, double d, CallbackInfo callbackInfo) {
+    public void pushOutOfBlocks(double x, double d, CallbackInfo ci) {
         NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
-        if (noPush != null && noPush.isEnabled() && noPush.blocks.getValue()) callbackInfo.cancel();
+        if (noPush != null && noPush.isEnabled() && noPush.blocks.getValue()) ci.cancel();
     }
 
     @Inject(method = "isCamera", at = @At("HEAD"), cancellable = true)

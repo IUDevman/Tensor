@@ -22,13 +22,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class PlayerEntityRendererMixin implements Global {
 
     @Inject(method = "renderRightArm", at = @At("HEAD"), cancellable = true)
-    public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo callbackInfo) {
+    public void renderRightArm(MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, AbstractClientPlayerEntity player, CallbackInfo ci) {
         if (this.isNull() || player != this.getPlayer()) return;
 
         ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);
 
         if (viewModel != null && viewModel.isEnabled() && !viewModel.renderEmptyMainHand.getValue()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 }

@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class HeldItemRendererMixin implements Global {
 
     @Inject(method = "renderFirstPersonItem", at = @At("HEAD"))
-    public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo callbackInfo) {
+    public void renderFirstPersonItem(AbstractClientPlayerEntity player, float tickDelta, float pitch, Hand hand, float swingProgress, ItemStack item, float equipProgress, MatrixStack matrices, VertexConsumerProvider vertexConsumers, int light, CallbackInfo ci) {
         if (this.isNull() || player != this.getPlayer()) return;
 
         ViewModel viewModel = Tensor.INSTANCE.MODULE_MANAGER.getModule(ViewModel.class);

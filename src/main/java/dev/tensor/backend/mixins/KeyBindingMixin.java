@@ -20,7 +20,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class KeyBindingMixin implements Global {
 
     @Inject(method = "onKeyPressed", at = @At("HEAD"))
-    private static void onKeyPressed(InputUtil.Key key, CallbackInfo callbackInfo) {
+    private static void onKeyPressed(InputUtil.Key key, CallbackInfo ci) {
         Tensor.INSTANCE.EVENT_HANDLER.call(new KeyPressedEvent(key.getCode()));
     }
 }

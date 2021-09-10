@@ -46,11 +46,11 @@ public final class ClientPlayerInteractionManagerMixin implements Global {
     }
 
     @Inject(method = "attackEntity", at = @At("HEAD"), cancellable = true)
-    public void attackEntity(PlayerEntity player, Entity target, CallbackInfo callbackInfo) {
+    public void attackEntity(PlayerEntity player, Entity target, CallbackInfo ci) {
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
 
         if (freecam != null && (target.equals(player) || target.equals(freecam.getCameraEntity()))) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 

@@ -23,34 +23,34 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public final class GameRendererMixin implements Global {
 
     @Inject(method = "render", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/gui/hud/InGameHud;render(Lnet/minecraft/client/util/math/MatrixStack;F)V"))
-    public void render(CallbackInfo callbackInfo) {
+    public void render(CallbackInfo ci) {
         if (this.isNull()) return;
 
         Tensor.INSTANCE.EVENT_HANDLER.call(new ClientRenderEvent(ClientRenderEvent.Type.HUD));
     }
 
     @Inject(method = "renderHand", at = @At("HEAD"))
-    public void renderHand(CallbackInfo callbackInfo) {
+    public void renderHand(CallbackInfo ci) {
         if (this.isNull()) return;
 
         Tensor.INSTANCE.EVENT_HANDLER.call(new ClientRenderEvent(ClientRenderEvent.Type.World));
     }
 
     @Inject(method = "bobView", at = @At("HEAD"), cancellable = true)
-    public void bobView(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
+    public void bobView(MatrixStack matrixStack, float f, CallbackInfo ci) {
         NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
         if (noViewBob != null && noViewBob.isEnabled() && !noViewBob.hurtOnly.getValue()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 
     @Inject(method = "bobViewWhenHurt", at = @At("HEAD"), cancellable = true)
-    public void bobViewWhenHurt(MatrixStack matrixStack, float f, CallbackInfo callbackInfo) {
+    public void bobViewWhenHurt(MatrixStack matrixStack, float f, CallbackInfo ci) {
         NoViewBob noViewBob = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoViewBob.class);
 
         if (noViewBob != null && noViewBob.isEnabled()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 

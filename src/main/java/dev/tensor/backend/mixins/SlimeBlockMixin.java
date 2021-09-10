@@ -23,11 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class SlimeBlockMixin implements Global {
 
     @Inject(method = "onSteppedOn", at = @At("HEAD"), cancellable = true)
-    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo callbackInfo) {
+    public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity, CallbackInfo ci) {
         if (this.isNull() || entity != this.getPlayer()) return;
 
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue()) callbackInfo.cancel();
+        if (noSlow != null && noSlow.isEnabled() && noSlow.blocks.getValue()) ci.cancel();
     }
 }

@@ -23,22 +23,22 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class ClientConnectionMixin implements Global {
 
     @Inject(method = "send(Lnet/minecraft/network/Packet;Lio/netty/util/concurrent/GenericFutureListener;)V", at = @At("HEAD"), cancellable = true)
-    public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo callbackInfo) {
+    public void send(Packet<?> packet, GenericFutureListener<? extends Future<? super Void>> callback, CallbackInfo ci) {
         if (this.isNull()) return;
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Send, packet);
 
         Tensor.INSTANCE.EVENT_HANDLER.call(packetEvent);
-        if (packetEvent.isCancelled()) callbackInfo.cancel();
+        if (packetEvent.isCancelled()) ci.cancel();
     }
 
     @Inject(method = "channelRead0", at = @At("HEAD"), cancellable = true)
-    public void receive(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo callbackInfo) {
+    public void receive(ChannelHandlerContext channelHandlerContext, Packet<?> packet, CallbackInfo ci) {
         if (this.isNull()) return;
 
         PacketEvent packetEvent = new PacketEvent(PacketEvent.Type.Receive, packet);
 
         Tensor.INSTANCE.EVENT_HANDLER.call(packetEvent);
-        if (packetEvent.isCancelled()) callbackInfo.cancel();
+        if (packetEvent.isCancelled()) ci.cancel();
     }
 }

@@ -21,9 +21,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class InGameOverlayRendererMixin implements Global {
 
     @Inject(method = "renderOverlays", at = @At("HEAD"), cancellable = true)
-    private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo callbackInfo) {
+    private static void renderOverlays(MinecraftClient minecraftClient, MatrixStack matrixStack, CallbackInfo ci) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay != null && noOverlay.isEnabled()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled()) ci.cancel();
     }
 }

@@ -44,7 +44,7 @@ public abstract class MinecraftClientMixin implements Global {
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    public void tick(CallbackInfo callbackInfo) {
+    public void tick(CallbackInfo ci) {
         if (this.isNull()) return;
 
         this.getProfiler().push(Tensor.INSTANCE.MOD_NAME);
@@ -53,17 +53,17 @@ public abstract class MinecraftClientMixin implements Global {
     }
 
     @Inject(method = "stop", at = @At("HEAD"))
-    public void stop(CallbackInfo callbackInfo) {
+    public void stop(CallbackInfo ci) {
         Tensor.INSTANCE.CONFIG_MANAGER.save();
     }
 
     @Inject(method = "cleanUpAfterCrash", at = @At("HEAD"))
-    public void cleanUpAfterCrash(CallbackInfo callbackInfo) {
+    public void cleanUpAfterCrash(CallbackInfo ci) {
         Tensor.INSTANCE.CONFIG_MANAGER.save();
     }
 
     @Inject(method = "disconnect()V", at = @At("HEAD"))
-    public void disconnect(CallbackInfo callbackInfo) {
+    public void disconnect(CallbackInfo ci) {
         Tensor.INSTANCE.EVENT_HANDLER.call(new DisconnectEvent());
     }
 }

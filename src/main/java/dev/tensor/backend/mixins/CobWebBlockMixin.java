@@ -23,11 +23,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class CobWebBlockMixin implements Global {
 
     @Inject(method = "onEntityCollision", at = @At("HEAD"), cancellable = true)
-    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo callbackInfo) {
+    public void onEntityCollision(BlockState state, World world, BlockPos pos, Entity entity, CallbackInfo ci) {
         if (this.isNull() || entity != this.getPlayer()) return;
 
         NoSlow noSlow = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoSlow.class);
 
-        if (noSlow != null && noSlow.isEnabled() && noSlow.sticky.getValue()) callbackInfo.cancel();
+        if (noSlow != null && noSlow.isEnabled() && noSlow.sticky.getValue()) ci.cancel();
     }
 }

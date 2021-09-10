@@ -20,11 +20,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class BackgroundRendererMixin implements Global {
 
     @Inject(method = "applyFog", at = @At("HEAD"), cancellable = true)
-    private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo callbackInfo) {
+    private static void applyFog(Camera camera, BackgroundRenderer.FogType fogType, float viewDistance, boolean thickFog, CallbackInfo ci) {
         NoFog noFog = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoFog.class);
 
         if (noFog != null && noFog.isEnabled()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 }

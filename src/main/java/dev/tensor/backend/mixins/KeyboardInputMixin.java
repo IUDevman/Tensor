@@ -24,7 +24,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class KeyboardInputMixin extends Input implements Global {
 
     @Inject(method = "tick", at = @At("HEAD"), cancellable = true)
-    public void tickHead(boolean slowDown, CallbackInfo callbackInfo) {
+    public void tickHead(boolean slowDown, CallbackInfo ci) {
         if (this.isNull()) return;
 
         AutoWalk autoWalk = Tensor.INSTANCE.MODULE_MANAGER.getModule(AutoWalk.class);
@@ -59,12 +59,12 @@ public final class KeyboardInputMixin extends Input implements Global {
                 this.movementSideways = (float) ((double) this.movementSideways * 0.3D);
             }
 
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 
     @Inject(method = "tick", at = @At("RETURN"), cancellable = true)
-    public void tickReturn(boolean slowDown, CallbackInfo callbackInfo) {
+    public void tickReturn(boolean slowDown, CallbackInfo ci) {
         AutoWalk autoWalk = Tensor.INSTANCE.MODULE_MANAGER.getModule(AutoWalk.class);
 
         if (autoWalk != null && autoWalk.isEnabled()) {

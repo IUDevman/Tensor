@@ -22,9 +22,9 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class ArmorFeatureRendererMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public <T extends LivingEntity> void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo callbackInfo) {
+    public <T extends LivingEntity> void render(MatrixStack matrixStack, VertexConsumerProvider vertexConsumerProvider, int i, T livingEntity, float f, float g, float h, float j, float k, float l, CallbackInfo ci) {
         NoRender noRender = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoRender.class);
 
-        if (noRender != null && noRender.isEnabled() && noRender.armor.getValue()) callbackInfo.cancel();
+        if (noRender != null && noRender.isEnabled() && noRender.armor.getValue()) ci.cancel();
     }
 }

@@ -20,11 +20,11 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public final class BossBarHudMixin implements Global {
 
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    public void render(MatrixStack matrices, CallbackInfo callbackInfo) {
+    public void render(MatrixStack matrices, CallbackInfo ci) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay != null && noOverlay.isEnabled() && noOverlay.bossBar.getValue()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 }

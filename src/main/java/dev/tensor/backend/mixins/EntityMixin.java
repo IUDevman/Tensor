@@ -42,13 +42,13 @@ public abstract class EntityMixin implements Global {
     private int id;
 
     @Inject(method = "pushAwayFrom", at = @At("HEAD"), cancellable = true)
-    public void pushAwayFrom(Entity entity, CallbackInfo callbackInfo) {
+    public void pushAwayFrom(Entity entity, CallbackInfo ci) {
         if (this.isNull() || id != this.getPlayer().getId()) return;
 
         NoPush noPush = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoPush.class);
 
         if (noPush != null && noPush.isEnabled() && noPush.collisions.getValue()) {
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 
@@ -113,7 +113,7 @@ public abstract class EntityMixin implements Global {
     }
 
     @Inject(method = "changeLookDirection", at = @At("HEAD"), cancellable = true)
-    public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo callbackInfo) {
+    public void changeLookDirection(double cursorDeltaX, double cursorDeltaY, CallbackInfo ci) {
         if (this.isNull() || id != this.getPlayer().getId()) return;
 
         Freecam freecam = Tensor.INSTANCE.MODULE_MANAGER.getModule(Freecam.class);
@@ -121,7 +121,7 @@ public abstract class EntityMixin implements Global {
         if (freecam != null && freecam.isEnabled() && freecam.getCameraEntity() != null) {
             freecam.getCameraEntity().changeLookDirection(cursorDeltaX, cursorDeltaY);
             freecam.getCameraEntity().setHeadYaw(freecam.getCameraEntity().getYaw());
-            callbackInfo.cancel();
+            ci.cancel();
         }
     }
 }

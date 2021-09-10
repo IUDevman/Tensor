@@ -35,28 +35,28 @@ public final class InGameHudMixin implements Global {
     private static Identifier POWDER_SNOW_OUTLINE;
 
     @Inject(method = "renderOverlay", at = @At("HEAD"), cancellable = true)
-    public void renderOverlay(Identifier texture, float opacity, CallbackInfo callbackInfo) {
+    public void renderOverlay(Identifier texture, float opacity, CallbackInfo ci) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
         if (noOverlay != null && noOverlay.isEnabled()) {
             if ((noOverlay.pumpkin.getValue() && texture == PUMPKIN_BLUR) || (noOverlay.powderedSnow.getValue() && texture == POWDER_SNOW_OUTLINE)) {
-                callbackInfo.cancel();
+                ci.cancel();
             }
         }
     }
 
     @Inject(method = "renderStatusEffectOverlay", at = @At("HEAD"), cancellable = true)
-    public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo callbackInfo) {
+    public void renderStatusEffectOverlay(MatrixStack matrices, CallbackInfo ci) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.status.getValue()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.status.getValue()) ci.cancel();
     }
 
     @Inject(method = "renderVignetteOverlay", at = @At("HEAD"), cancellable = true)
-    public void renderVignetteOverlay(Entity entity, CallbackInfo callbackInfo) {
+    public void renderVignetteOverlay(Entity entity, CallbackInfo ci) {
         NoOverlay noOverlay = Tensor.INSTANCE.MODULE_MANAGER.getModule(NoOverlay.class);
 
-        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.vignette.getValue()) callbackInfo.cancel();
+        if (noOverlay != null && noOverlay.isEnabled() && noOverlay.vignette.getValue()) ci.cancel();
     }
 
     @Inject(method = "getCameraPlayer", at = @At("HEAD"), cancellable = true)
