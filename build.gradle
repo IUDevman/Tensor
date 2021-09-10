@@ -32,7 +32,7 @@ java {
 }
 
 jar {
-    from("LICENSE") {
-        rename { "${it}_${project.archivesBaseName}" }
+    from("COPYING.md") {
+        rename { "META-INF/${it}" }
     }
 }
