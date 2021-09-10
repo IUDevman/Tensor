@@ -27,10 +27,6 @@ tasks.withType(JavaCompile).configureEach {
     it.options.encoding = "UTF-8"
 }
 
-java {
-    withSourcesJar()
-}
-
 jar {
     from("COPYING.md") {
         rename { "META-INF/${it}" }
