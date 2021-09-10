@@ -10,7 +10,7 @@ import net.minecraft.client.world.ClientWorld;
 import net.minecraft.util.math.Vec3d;
 
 /**
- * @author wagyourtail#3826
+ * @author wagyourtail
  * @since 06-02-2020
  */
 

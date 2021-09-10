@@ -3,7 +3,7 @@ package dev.tensor.misc.freecam;
 import net.minecraft.client.input.Input;
 
 /**
- * @author wagyourtail#3826
+ * @author wagyourtail
  * @since 06-02-2020
  */
 
