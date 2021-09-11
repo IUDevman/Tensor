@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import dev.tensor.Tensor;
 import dev.tensor.backend.MixinPriority;
 import dev.tensor.feature.modules.Capes;
+import dev.tensor.misc.imp.Global;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
@@ -20,7 +21,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 
 @Mixin(value = AbstractClientPlayerEntity.class, priority = MixinPriority.VALUE)
-public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity {
+public abstract class AbstractClientPlayerEntityMixin extends PlayerEntity implements Global {
 
     public AbstractClientPlayerEntityMixin(World world, BlockPos pos, float yaw, GameProfile profile) {
         super(world, pos, yaw, profile);
