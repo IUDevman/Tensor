@@ -121,6 +121,8 @@ public final class TensorGUI extends Screen implements Global {
 
     @Override
     public void render(MatrixStack matrixStack, int x, int y, float delta) {
+        matrixStack.push();
+
         final AtomicInteger guiHeight = new AtomicInteger(0);
         final AtomicInteger moduleHeight = new AtomicInteger(22);
         final AtomicInteger settingHeight = new AtomicInteger(22);
@@ -187,6 +189,8 @@ public final class TensorGUI extends Screen implements Global {
 
         String name = Tensor.INSTANCE.MOD_NAME + " (" + Formatting.YELLOW + Tensor.INSTANCE.MOD_VERSION + Formatting.RESET + ")";
         DrawableHelper.drawCenteredTextWithShadow(matrixStack, this.getMinecraft().textRenderer, new LiteralText(name).asOrderedText(), this.x.getValue().intValue() + 62 + ((guiWidth - 62) / 2), this.y.getValue().intValue() + 2 + ((18 - getMinecraft().textRenderer.fontHeight) / 2), this.textColor.getRGB());
+
+        matrixStack.pop();
     }
 
     @Override

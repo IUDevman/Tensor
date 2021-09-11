@@ -41,7 +41,11 @@ public final class EventManager implements Manager {
             if (event.getType().equals(ClientRenderEvent.Type.World)) {
                 module.onRender3D();
             } else if (event.getType().equals(ClientRenderEvent.Type.HUD) && module instanceof HUDComponent && shouldRender2D()) {
-                ((HUDComponent) module).onRender2D(new MatrixStack());
+                MatrixStack matrixStack = new MatrixStack();
+
+                matrixStack.push();
+                ((HUDComponent) module).onRender2D(matrixStack);
+                matrixStack.pop();
             }
         });
     }
