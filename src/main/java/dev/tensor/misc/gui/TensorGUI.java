@@ -1,5 +1,6 @@
 package dev.tensor.misc.gui;
 
+import com.mojang.blaze3d.systems.RenderSystem;
 import dev.tensor.Tensor;
 import dev.tensor.misc.gui.elements.CategoryElement;
 import dev.tensor.misc.gui.elements.ModuleElement;
@@ -18,7 +19,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
 import org.lwjgl.glfw.GLFW;
-import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -144,8 +144,7 @@ public final class TensorGUI extends Screen implements Global {
         int xScaled = (int) (posX * scale);
         int yScaled = (int) (posY * scale);
 
-        GL11.glScissor(xScaled, windowHeight - yScaled - heightScaled, widthScaled, heightScaled);
-        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        RenderSystem.enableScissor(xScaled, windowHeight - yScaled - heightScaled, widthScaled, heightScaled);
 
         this.categoryElements.forEach(categoryElement -> {
             if (categoryElement.isSelected()) {
@@ -175,7 +174,7 @@ public final class TensorGUI extends Screen implements Global {
             DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + this.sScrollY.getValue().intValue() + settingHeight.get(), this.x.getValue().intValue() + guiWidth, this.y.getValue().intValue() + guiHeight.get(), this.fillColor.getRGB());
         }
 
-        GL11.glDisable(GL11.GL_SCISSOR_TEST);
+        RenderSystem.disableScissor();
 
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 60, this.y.getValue().intValue(), this.x.getValue().intValue() + 62, this.y.getValue().intValue() + guiHeight.get(), this.outlineColor.getRGB());
         DrawableHelper.fill(matrixStack, this.x.getValue().intValue() + 182, this.y.getValue().intValue() + 22, this.x.getValue().intValue() + 184, this.y.getValue().intValue() + guiHeight.get(), this.outlineColor.getRGB());
