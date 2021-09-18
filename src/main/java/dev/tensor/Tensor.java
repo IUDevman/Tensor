@@ -3,7 +3,7 @@ package dev.tensor;
 import dev.tensor.feature.managers.*;
 import dev.tensor.misc.event.EventHandler;
 import dev.tensor.misc.imp.Manager;
-import net.fabricmc.api.ModInitializer;
+import net.fabricmc.api.ClientModInitializer;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
  * @since 04-12-2021
  */
 
-public final class Tensor implements ModInitializer {
+public final class Tensor implements ClientModInitializer {
 
     public static Tensor INSTANCE;
 
@@ -38,7 +38,7 @@ public final class Tensor implements ModInitializer {
     public ConfigManager CONFIG_MANAGER;
 
     @Override
-    public void onInitialize() {
+    public void onInitializeClient() {
         long startTime = System.currentTimeMillis();
         this.LOGGER.info("Initializing " + this.MOD_NAME + " " + this.MOD_VERSION + "!");
 

@@ -35,7 +35,7 @@ public final class Reload implements Command {
     public void onCommand(String[] message) {
         Tensor.INSTANCE.CONFIG_MANAGER.save();
 
-        Tensor.INSTANCE.onInitialize();
+        Tensor.INSTANCE.onInitializeClient();
 
         this.sendReplaceableClientMessage(this.getMarker() + "Reloaded client!", this.getID(), true);
     }

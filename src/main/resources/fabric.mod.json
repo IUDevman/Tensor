@@ -14,7 +14,7 @@
   "license": "ARR",
   "environment": "*",
   "entrypoints": {
-    "main": [
+    "client": [
       "dev.tensor.Tensor"
     ]
   },
