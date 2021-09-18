@@ -89,23 +89,23 @@ public final class NumberElement extends SettingElement {
 
         if (key == GLFW.GLFW_KEY_ENTER) {
 
-            if (value.equals("")) {
+            if (this.value.equals("")) {
                 setSearching(false);
                 return;
             }
 
             try {
-                double value1 = Double.parseDouble(value);
+                double value1 = Double.parseDouble(this.value);
 
                 if (value1 > getNumberSetting().getMax()) value1 = getNumberSetting().getMax();
                 else if (value1 < getNumberSetting().getMin()) value1 = getNumberSetting().getMin();
 
                 getNumberSetting().setValue(Double.parseDouble(this.adjustForDecimals(value1)));
-                value = "";
+                this.value = "";
                 setSearching(false);
 
             } catch (NullPointerException | NumberFormatException ignored) {
-                value = "";
+                this.value = "";
                 setSearching(false);
                 return;
             }
@@ -116,12 +116,12 @@ public final class NumberElement extends SettingElement {
         }
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
-            if (value.length() < 1) return;
-            value = value.substring(0, value.length() - 1);
+            if (this.value.length() < 1) return;
+            this.value = this.value.substring(0, this.value.length() - 1);
             return;
         }
 
-        value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "").replace("period", ".").replace("minus", "-");
+        this.value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "").replace("period", ".").replace("minus", "-");
     }
 
     private String adjustForDecimals(double value) {

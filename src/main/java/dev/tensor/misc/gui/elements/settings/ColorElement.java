@@ -113,19 +113,19 @@ public final class ColorElement extends SettingElement {
 
         if (key == GLFW.GLFW_KEY_ENTER) {
 
-            if (value.equals("")) {
+            if (this.value.equals("")) {
                 clearSearching();
                 return;
             }
 
-            int value1 = Integer.parseInt(value);
+            int value1 = Integer.parseInt(this.value);
 
             if (value1 > 255) value1 = 255;
             else if (value1 < 0) value1 = 0;
 
             setValue(value1);
 
-            value = "";
+            this.value = "";
             clearSearching();
         }
 
@@ -136,12 +136,12 @@ public final class ColorElement extends SettingElement {
         if (key == GLFW.GLFW_KEY_PERIOD || key == GLFW.GLFW_KEY_MINUS) return;
 
         if (key == GLFW.GLFW_KEY_BACKSPACE) {
-            if (value.length() < 1) return;
-            value = value.substring(0, value.length() - 1);
+            if (this.value.length() < 1) return;
+            this.value = this.value.substring(0, this.value.length() - 1);
             return;
         }
 
-        value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "");
+        this.value += InputUtil.Type.KEYSYM.createFromCode(key).getTranslationKey().replace("key.keyboard.", "");
     }
 
     private void setValue(int value) {

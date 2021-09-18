@@ -60,6 +60,6 @@ public final class BooleanElement extends SettingElement {
 
     @Override
     public void onClick(double mouseX, double mouseY) {
-        booleanSetting.setValue(!booleanSetting.getValue());
+        this.booleanSetting.setValue(!this.booleanSetting.getValue());
     }
 }
