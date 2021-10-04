@@ -84,7 +84,7 @@ public abstract class EntityMixin implements Global {
             Vec3d vec3d = this.getCameraPosVec(tickDelta);
             Vec3d vec3d2 = this.getRotationVec(tickDelta);
             Vec3d vec3d3 = vec3d.add(vec3d2.getX() * maxDistance, vec3d2.getY() * maxDistance, vec3d2.getZ() * maxDistance);
-            cir.setReturnValue(getWorld().raycast(new RaycastContext(vec3d, vec3d3, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.ANY, this.getMinecraft().getCameraEntity())));
+            cir.setReturnValue(this.getWorld().raycast(new RaycastContext(vec3d, vec3d3, RaycastContext.ShapeType.OUTLINE, RaycastContext.FluidHandling.ANY, this.getMinecraft().getCameraEntity())));
         }
     }
 
