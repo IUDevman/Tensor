@@ -23,7 +23,7 @@ public final class Tensor implements ClientModInitializer {
     public final String MOD_NAME = "Tensor";
     public final String MOD_VERSION = "1.0.0-SNAPSHOT";
 
-    public final Logger LOGGER = LogManager.getLogger(MOD_NAME);
+    public final Logger LOGGER = LogManager.getLogger(this.MOD_NAME);
 
     public EventHandler EVENT_HANDLER;
 
