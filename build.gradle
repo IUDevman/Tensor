@@ -28,7 +28,7 @@ tasks.withType(JavaCompile).configureEach {
 }
 
 java {
-	withSourcesJar()
+    withSourcesJar()
 }
 
 jar {
