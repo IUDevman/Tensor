@@ -12,7 +12,7 @@ version = "1.0.0-SNAPSHOT"
 dependencies {
     minecraft "com.mojang:minecraft:1.17.1"
     mappings "net.fabricmc:yarn:1.17.1+build.63:v2"
-    modImplementation "net.fabricmc:fabric-loader:0.12.5"
+    modImplementation "net.fabricmc:fabric-loader:0.12.9"
 }
 
 processResources {
