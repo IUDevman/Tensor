@@ -83,10 +83,6 @@ public final class ModuleManager implements Manager {
 
     @PluginEntryPoint
     public void addModule(Module module) {
-        if (!module.getClass().isAnnotationPresent(Module.Info.class)) {
-            return;
-        }
-
         this.modules.add(module);
     }
 
