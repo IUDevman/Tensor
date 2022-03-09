@@ -1,6 +1,7 @@
 package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
+import dev.tensor.feature.modules.*;
 import dev.tensor.misc.imp.Category;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.imp.Module;
@@ -23,18 +24,55 @@ public final class ModuleManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("ModuleManager");
 
-        this.findClassesForPath("dev.tensor.feature.modules").forEach(aClass -> {
-
-            if (Module.class.isAssignableFrom(aClass) && aClass.isAnnotationPresent(Module.Info.class)) {
-                try {
-                    Module module = (Module) aClass.getDeclaredConstructor().newInstance();
-                    addModule(module);
-
-                } catch (ReflectiveOperationException ignored) {
-                    Tensor.INSTANCE.LOGGER.warn("Failed to load modules!");
-                }
-            }
-        });
+        this.addModule(new AntiNarrator());
+        this.addModule(new AutoRespawn());
+        this.addModule(new AutoTool());
+        this.addModule(new AutoWalk());
+        this.addModule(new CameraClip());
+        this.addModule(new Capes());
+        this.addModule(new ChatSuffix());
+        this.addModule(new ClickGUI());
+        this.addModule(new Commands());
+        this.addModule(new Coordinates());
+        this.addModule(new Criticals());
+        this.addModule(new DeathDebug());
+        this.addModule(new DebugReport());
+        this.addModule(new Disconnect());
+        this.addModule(new ElytraFlight());
+        this.addModule(new FakePlayer());
+        this.addModule(new Flight());
+        this.addModule(new Freecam());
+        this.addModule(new FullBright());
+        this.addModule(new InventoryMove());
+        this.addModule(new Jesus());
+        this.addModule(new LiquidInteract());
+        this.addModule(new MiddleClickFriend());
+        this.addModule(new MiddleClickPearl());
+        this.addModule(new NoBreakDelay());
+        this.addModule(new NoFog());
+        this.addModule(new NoGlitchBlock());
+        this.addModule(new NoOverlay());
+        this.addModule(new NoParticles());
+        this.addModule(new NoPlaceDelay());
+        this.addModule(new NoPortalEffect());
+        this.addModule(new NoPush());
+        this.addModule(new NoRender());
+        this.addModule(new NoSlow());
+        this.addModule(new NoViewBob());
+        this.addModule(new NoWeather());
+        this.addModule(new OnGround());
+        this.addModule(new SafeWalk());
+        this.addModule(new Sneak());
+        this.addModule(new Spammer());
+        this.addModule(new Sprint());
+        this.addModule(new Timer());
+        this.addModule(new UnfocusedCPU());
+        this.addModule(new VanillaSpoof());
+        this.addModule(new Velocity());
+        this.addModule(new ViewModel());
+        this.addModule(new VisualRange());
+        this.addModule(new Watermark());
+        this.addModule(new XCarry());
 
         this.postSortModules();
     }
@@ -45,6 +83,10 @@ public final class ModuleManager implements Manager {
 
     @PluginEntryPoint
     public void addModule(Module module) {
+        if (!module.getClass().isAnnotationPresent(Module.Info.class)) {
+            return;
+        }
+
         this.modules.add(module);
     }
 

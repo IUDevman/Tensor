@@ -1,6 +1,7 @@
 package dev.tensor.feature.managers;
 
 import dev.tensor.Tensor;
+import dev.tensor.feature.commands.*;
 import dev.tensor.misc.imp.Command;
 import dev.tensor.misc.imp.Manager;
 import dev.tensor.misc.plugin.PluginEntryPoint;
@@ -25,18 +26,26 @@ public final class CommandManager implements Manager {
     public void load() {
         Tensor.INSTANCE.LOGGER.info("CommandManager");
 
-        this.findClassesForPath("dev.tensor.feature.commands").forEach(aClass -> {
-
-            if (Command.class.isAssignableFrom(aClass)) {
-                try {
-                    Command command = (Command) aClass.getDeclaredConstructor().newInstance();
-                    addCommand(command);
-
-                } catch (ReflectiveOperationException ignored) {
-                    Tensor.INSTANCE.LOGGER.warn("Failed to load commands!");
-                }
-            }
-        });
+        this.addCommand(new Bind());
+        this.addCommand(new Capes());
+        this.addCommand(new Clear());
+        this.addCommand(new Commands());
+        this.addCommand(new Config());
+        this.addCommand(new Drawn());
+        this.addCommand(new Friends());
+        this.addCommand(new Help());
+        this.addCommand(new Messages());
+        this.addCommand(new Modules());
+        this.addCommand(new Ping());
+        this.addCommand(new Plugins());
+        this.addCommand(new Prefix());
+        this.addCommand(new Profiles());
+        this.addCommand(new Reload());
+        this.addCommand(new Reset());
+        this.addCommand(new Set());
+        this.addCommand(new Spammer());
+        this.addCommand(new Toggle());
+        this.addCommand(new VClip());
 
         this.postSortCommands();
     }

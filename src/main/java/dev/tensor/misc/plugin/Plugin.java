@@ -1,6 +1,5 @@
 package dev.tensor.misc.plugin;
 
-import dev.tensor.misc.imp.ClassLoader;
 import dev.tensor.misc.imp.Global;
 import dev.tensor.misc.imp.Methods;
 
@@ -12,7 +11,7 @@ import java.lang.annotation.*;
  */
 
 @SuppressWarnings("EmptyMethod")
-public abstract class Plugin implements Global, ClassLoader, Methods {
+public abstract class Plugin implements Global, Methods {
 
     @Documented
     @Retention(RetentionPolicy.RUNTIME)

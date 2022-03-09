@@ -6,7 +6,7 @@ package dev.tensor.misc.imp;
  */
 
 @FunctionalInterface
-public interface Manager extends Global, ClassLoader, Methods {
+public interface Manager extends Global, Methods {
 
     void load();
 }
