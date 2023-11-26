@@ -35,7 +35,10 @@ public final class CapeManager implements Manager {
 
         Path path = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/Cape.png");
 
-        if (Files.exists(path)) return;
+        if (Files.exists(path)) {
+            Tensor.INSTANCE.LOGGER.info("Already downloaded cape!");
+            return;
+        }
 
         try {
             Path configPath = Paths.get(Tensor.INSTANCE.MOD_NAME.toLowerCase(Locale.ROOT) + "/");
