@@ -46,7 +46,12 @@ public abstract class Module implements Global, Methods {
         this.bind = getInfo().bind();
         this.drawn = getInfo().drawn();
         this.messages = getInfo().messages();
-        this.enabled = getInfo().enabled();
+
+        if (this.enabled) {
+            this.disable();
+        }
+
+        this.setEnabled(getInfo().enabled());
     }
 
     public String getName() {
